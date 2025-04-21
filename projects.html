@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topher Rasmussen - Projects</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        .project-section {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .project-card {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .project-card-reverse {
+            grid-template-columns: 2fr 1fr;
+        }
+
+        .project-image {
+            overflow: hidden;
+            border-radius: 4px;
+            height: 300px;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.05);
+        }
+
+        .project-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .project-info .subtitle {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .project-info p {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .project-links {
+            margin-top: var(--spacing-md);
+        }
+
+        .project-links a {
+            margin-right: var(--spacing-sm);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            margin-top: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            border-radius: 4px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-md);
+        }
+
+        .gallery-item {
+            height: 200px;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .project-card, .project-card-reverse {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="cv.html">CV</a></li>
+                    <li><a href="projects.html" class="active">Projects</a></li>
+                    <li><a href="writing.html">Writing</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section class="hero">
+                <div class="hero-text">
+                    <h1>Featured Projects</h1>
+                    <p class="subtitle">Selected works across media production, clinical research, and performance</p>
+                </div>
+            </section>
+
+            <section class="project-section" id="cost-of-care">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="images/cost-of-care.jpg" alt="The Cost of Care Podcast">
+                    </div>
+                    <div class="project-info">
+                        <h3>The Cost of Care</h3>
+                        <p class="subtitle">Associate Producer, Season 2 (2023-2024)</p>
+                        <p>A podcast series exploring the complexities of the healthcare system through personal stories and expert insights. Season 2 delved into topics including end-of-life care, medical debt, mental healthcare access, and innovative care models.</p>
+                        <p>As Associate Producer, I managed recording sessions, edited audio content, conducted research, coordinated with guests, and developed promotional materials. Each episode required meticulous attention to narrative flow, audio quality, and educational value.</p>
+                        <div class="video-container">
+                            <iframe src="https://www.youtube.com/embed/YOUTUBE_EMBED_ID" title="The Cost of Care Season 2 Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://costofcarepodcast.com" target="_blank" class="btn">Visit Website</a>
+                            <a href="https://podcasts.apple.com/us/podcast/the-cost-of-care/id1547735305" target="_blank" class="btn">Listen on Apple Podcasts</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="project-section" id="research">
+                <div class="project-card project-card-reverse">
+                    <div class="project-info">
+                        <h3>Mindfulness-Oriented Recovery Enhancement Research</h3>
+                        <p class="subtitle">University of Utah, C-MIIND (2022-2024)</p>
+                        <p>Contributed to NIH-funded research on integrating Motivational Interviewing with Mindfulness-Oriented Recovery Enhancement (MORE) for substance use disorder treatment. The research aimed to understand neural mechanisms through which mindfulness practices can address chronic pain and reduce opioid misuse.</p>
+                        <p>My role involved collecting psychophysiological data through Near-Infrared Spectroscopy (NIRS), Electroencephalogram (EEG), and heart rate variability measurements, conducting diagnostic interviews, and coordinating research participants.</p>
+                        <p>This research has significant implications for developing non-pharmacological approaches to addiction treatment and pain management, with particular relevance to addressing the opioid crisis.</p>
+                        <div class="project-links">
+                            <a href="https://medicine.utah.edu/psychiatry/research/labs/mindfulness-intervention/current-research-projects" target="_blank" class="btn">Research Lab</a>
+                            <a href="https://drericgarland.com/more/" target="_blank" class="btn">MORE Intervention</a>
+                        </div>
+                    </div>
+                    <div class="project-image">
+                        <img src="images/research.jpg" alt="Mindfulness Research">
+                    </div>
+                </div>
+            </section>
+
+            <section class="project-section" id="acting">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="images/acting.jpg" alt="Theatre Performance">
+                    </div>
+                    <div class="project-info">
+                        <h3>Acting Portfolio</h3>
+                        <p class="subtitle">Selected Professional Performances (2009-2023)</p>
+                        <p>Over a decade of professional stage acting experience across multiple theatre companies in Salt Lake City, exploring contemporary plays, classic works, and new play development. Key performances include roles in "Egress," "Fun Home," "Harbur Gate," and "The Ice Front."</p>
+                        <p>My approach to acting draws from Michael Chekhov's technique while incorporating elements of mindfulness and somatic awareness. I'm particularly interested in vulnerable, truthful performances that connect audiences to complex emotional experiences.</p>
+                        <div class="gallery">
+                            <div class="gallery-item">
+                                <img src="images/performance1.jpg" alt="Theatre Performance 1">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="images/performance2.jpg" alt="Theatre Performance 2">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="images/performance3.jpg" alt="Theatre Performance 3">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="images/performance4.jpg" alt="Theatre Performance 4">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="images/performance5.jpg" alt="Theatre Performance 5">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="images/performance6.jpg" alt="Theatre Performance 6">
+                            </div>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://www.saltlakeactingcompany.org" target="_blank" class="btn">Salt Lake Acting Company</a>
+                            <a href="https://planbtheatre.org" target="_blank" class="btn">Plan-B Theatre</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="project-section" id="education">
+                <div class="project-card project-card-reverse">
+                    <div class="project-info">
+                        <h3>Title I Arts Education Program</h3>
+                        <p class="subtitle">Salt Lake Acting Company (2019-2024)</p>
+                        <p>Led the fundraising and execution of this initiative that brought professional musical theatre experiences to thousands of underserved K-2 schoolchildren through free field trips. The program aimed to introduce theatre arts to children who might otherwise never experience live performance.</p>
+                        <p>During the pandemic, I spearheaded the program's pivot to virtual delivery and subsequently guided its return to in-person implementation. This required developing innovative approaches to engage young audiences through different media while maintaining educational value.</p>
+                        <p>The program included comprehensive educational materials for teachers, interactive elements for students, and curriculum connections to enhance classroom learning through arts integration.</p>
+                        <div class="project-links">
+                            <a href="https://www.saltlakeactingcompany.org/about/education" target="_blank" class="btn">Education Programs</a>
+                        </div>
+                    </div>
+                    <div class="project-image">
+                        <img src="images/education.jpg" alt="Arts Education Program">
+                    </div>
+                </div>
+            </section>
+            
+            <section class="project-section" id="communications">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="images/communications.jpg" alt="Communications Work">
+                    </div>
+                    <div class="project-info">
+                        <h3>AI-Powered Design & Communications</h3>
+                        <p class="subtitle">Third Horizon (2024-Present)</p>
+                        <p>Leading AI research, experimentation, and implementation to advance healthcare communications. This work involves developing innovative approaches to conveying complex healthcare concepts through visual design, content creation, and multimedia strategies.</p>
+                        <p>Projects include designing UI interfaces for healthcare applications, creating infographics and visual aids for white papers, producing video content explaining healthcare policy, and developing strategies to make healthcare information more accessible and engaging.</p>
+                        <p>This interdisciplinary work draws on my background in theater, psychology, and social work to create human-centered designs that effectively communicate complex ideas while maintaining empathy for diverse audiences.</p>
+                        <div class="project-links">
+                            <a href="https://www.thirdhorizonstrategies.com" target="_blank" class="btn">Third Horizon</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/topherrasmussen" target="_blank">LinkedIn</a>
+                <a href="mailto:topher416@gmail.com">Email</a>
+            </div>
+            <p>&copy; 2025 Topher Rasmussen. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
