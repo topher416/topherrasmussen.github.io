@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topher Rasmussen - Writing</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        .writing-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .writing-item {
+            margin-bottom: var(--spacing-lg);
+            transition: transform 0.3s ease;
+        }
+        
+        .writing-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .writing-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .writing-item .date {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            margin-bottom: var(--spacing-sm);
+            display: block;
+        }
+        
+        .writing-item p {
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .writing-item .excerpt {
+            font-style: italic;
+            margin: var(--spacing-sm) 0;
+            padding-left: var(--spacing-sm);
+            border-left: 2px solid var(--light-gray);
+        }
+        
+        .writing-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: var(--spacing-sm);
+        }
+        
+        .writing-tag {
+            background-color: var(--light-gray);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        
+        .writing-content {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        
+        .writing-content p {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .writing-content h2 {
+            margin-top: var(--spacing-lg);
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.8rem;
+        }
+        
+        .writing-content h3 {
+            margin-top: var(--spacing-md);
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.4rem;
+        }
+        
+        .writing-content blockquote {
+            margin: var(--spacing-md) 0;
+            padding: var(--spacing-md);
+            background-color: var(--light-gray);
+            border-left: 4px solid var(--accent-color);
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .writing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="cv.html">CV</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="writing.html" class="active">Writing</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <section class="hero">
+                <div class="hero-text">
+                    <h1>Writing & Reflections</h1>
+                    <p class="subtitle">Essays, poetry, and explorations of ideas across disciplines</p>
+                </div>
+            </section>
+
+            <section class="writing-grid">
+                <div class="writing-item full-width">
+                    <h3>Who I Am (An Attempted Self-Portrait)</h3>
+                    <span class="date">April 2024</span>
+                    <p>A personal essay on identity formation, creative development, and navigating the intersections of art, mental health, and professional identity.</p>
+                    <div class="excerpt">
+                        "I am not a scientist. A scientist would hypothesize and experiment and verify and analyze and eventually prove something. A scientist's thinking would be methodical and rigorous and sharp. Instead, I am someone who gets lost in the labyrinth of my own mind, who can spend hours following threads of thought until they tangle into knots I can't unravel."
+                    </div>
+                    <div class="writing-tags">
+                        <span class="writing-tag">Identity</span>
+                        <span class="writing-tag">Reflection</span>
+                        <span class="writing-tag">Career Transition</span>
+                    </div>
+                    <p><a href="writing/self-portrait.html" class="btn">Read Full Essay</a></p>
+                </div>
+                
+                <div class="writing-item">
+                    <h3>COVID Sutra</h3>
+                    <span class="date">April 2020</span>
+                    <p>A poem structured in the Gāyatrī form, exploring the early pandemic experience through a contemplative lens that draws on Buddhist philosophy.</p>
+                    <div class="excerpt">
+                        "The virus is not a poem.<br>
+                        How can a person have the right<br>
+                        to call a crisis beautiful?"
+                    </div>
+                    <div class="writing-tags">
+                        <span class="writing-tag">Poetry</span>
+                        <span class="writing-tag">Pandemic</span>
+                        <span class="writing-tag">Buddhism</span>
+                    </div>
+                    <p><a href="writing/covid-sutra.html" class="btn">Read Full Poem</a></p>
+                </div>
+                
+                <div class="writing-item">
+                    <h3>Analytic Introspections from an Actor's Perspective</h3>
+                    <span class="date">April 2020</span>
+                    <p>My undergraduate thesis exploring the intersections between acting theory and psychoanalytic theory, using a combination of personal narrative and critical analysis.</p>
+                    <div class="excerpt">
+                        "On a beach in Southern California when I was four years old I remember watching the tide recede around my ankles and then a wave slammed into me suddenly and it was so loud and the wind was knocked out of me and I could only see churning water and sand and I couldn't breathe and I didn't know what was happening but I thought I was dying."
+                    </div>
+                    <div class="writing-tags">
+                        <span class="writing-tag">Academic</span>
+                        <span class="writing-tag">Theatre</span>
+                        <span class="writing-tag">Psychology</span>
+                    </div>
+                    <p><a href="writing/analytic-introspections.html" class="btn">Read Excerpt</a></p>
+                </div>
+                
+                <div class="writing-item">
+                    <h3>An Anxious Cartography</h3>
+                    <span class="date">June 2019</span>
+                    <p>An essay exploring the structure of anxiety through the philosophical framework of Deleuze and Guattari's rhizome concept, written for a course on the technological singularity.</p>
+                    <div class="excerpt">
+                        "When deliberating on what kind of final essay I should write for a course focused on the technological singularity and the future of humanity, I became overwhelmed by the prospect of reducing my multiple contradictory perspectives on the various issues at hand to a single argument or focused thesis statement."
+                    </div>
+                    <div class="writing-tags">
+                        <span class="writing-tag">Philosophy</span>
+                        <span class="writing-tag">Technology</span>
+                        <span class="writing-tag">Mental Health</span>
+                    </div>
+                    <p><a href="writing/anxious-cartography.html" class="btn">Read Full Essay</a></p>
+                </div>
+                
+                <div class="writing-item">
+                    <h3>Notes on Performed Intelligence</h3>
+                    <span class="date">January 2024</span>
+                    <p>A framework examining the intersection of performance, intelligence, and technological mediation in the age of artificial intelligence.</p>
+                    <div class="excerpt">
+                        "The performance of intelligence is not a flaw to be fixed but a structure to be understood. The goal is not to eliminate performance but to perform consciously, to choose our stages and audiences with awareness."
+                    </div>
+                    <div class="writing-tags">
+                        <span class="writing-tag">AI</span>
+                        <span class="writing-tag">Performance</span>
+                        <span class="writing-tag">Identity</span>
+                    </div>
+                    <p><a href="writing/performed-intelligence.html" class="btn">Read Full Notes</a></p>
+                </div>
+                
+                <div class="writing-item">
+                    <h3>Psychodynamic Social Work Practice</h3>
+                    <span class="date">Spring 2024</span>
+                    <p>A series of reflective essays written for an independent study course exploring psychodynamic theory in clinical social work practice.</p>
+                    <div class="excerpt">
+                        "At times, I find the experience of being a person utterly baffling. There is so much I don't know, so much I don't understand. I am grateful to have encountered a field—psychodynamic thinking—in which the bare fact of the unconscious is valued, even revered."
+                    </div>
+                    <div class="writing-tags">
+                        <span class="writing-tag">Clinical</span>
+                        <span class="writing-tag">Psychodynamic</span>
+                        <span class="writing-tag">Reflection</span>
+                    </div>
+                    <p><a href="writing/psychodynamic-reflections.html" class="btn">Read Excerpts</a></p>
+                </div>
+                
+                <div class="writing-item">
+                    <h3>Hamlet and Ophelia Go Swimming</h3>
+                    <span class="date">2014</span>
+                    <p>An original play exploring existential questions through reimagined Shakespearean characters. Performed at the Edinburgh Fringe Festival.</p>
+                    <div class="excerpt">
+                        "OPHELIA: What do you think happens to you after you die?<br><br>
+                        HAMLET: Hmm. Well, if you were good, you go to heaven. And if you were bad you go to hell.<br><br>
+                        OPHELIA: Really?<br><br>
+                        HAMLET: Well, yeah. I mean, that's what happens."
+                    </div>
+                    <div class="writing-tags">
+                        <span class="writing-tag">Theatre</span>
+                        <span class="writing-tag">Play</span>
+                        <span class="writing-tag">Existentialism</span>
+                    </div>
+                    <p><a href="writing/hamlet-ophelia.html" class="btn">Read Excerpt</a></p>
+                </div>
+            </section>
+
+            <section class="writing-section">
+                <h2>Featured Writing: COVID Sutra</h2>
+                <div class="writing-content">
+                    <p>Written during the early weeks of the COVID-19 pandemic in 2020, this poem emerged during a period of profound uncertainty and change. Using the Sanskrit Gāyatrī form (three lines of eight syllables per stanza), the poem attempts to make meaning from chaos while honoring the Buddhist principles that inform my worldview.</p>
+                    
+                    <h3>COVID Sutra</h3>
+                    
+                    <p>
+                        The virus is not a poem.<br>
+                        How can a person have the right<br>
+                        to call a crisis beautiful?<br><br>
+                        
+                        Start with what appears before you,<br>
+                        Sheltering in place to practice<br>
+                        Being still; sleeping and waking;<br><br>
+                        
+                        Watching the air go in and out;<br>
+                        Lungs expanding and contracting;<br>
+                        Life beginning and life ending<br><br>
+                        
+                        A transition of consciousness.<br>
+                        To protect your respiration,<br>
+                        And the global breathing function,<br><br>
+                        
+                        Sequester voluntarily.<br>
+                        Notice what happens on its own.<br>
+                        Spend time stopping. Try non-doing.<br><br>
+                        
+                        But who am I to give advice?<br>
+                        And who are you to follow it?<br>
+                        What is a person anyway?<br><br>
+                        
+                        Somewhere within your thinking mind<br>
+                        Beneath and behind your ideas<br>
+                        What your face looked like before birth<br><br>
+                        
+                        not after death; but in between<br>
+                        Yes, this is happening right now<br>
+                        With no beginning and no end.<br><br>
+                    </p>
+                    
+                    <p><a href="writing/covid-sutra.html" class="btn">Read Full Poem</a></p>
+                    
+                    <p>This poem was written during a particularly difficult period when multiple crises converged—the pandemic, an earthquake in Salt Lake City, and the cancellation of artistic projects including a play I had been cast in. In this context, Sarah Ruhl (the playwright of that canceled production) read an early version of this poem, which led to a meaningful connection during an otherwise isolating time.</p>
+                    
+                    <p>The form of this poem is significant: in Vedic studies, the number 24 is considered harmonious because it is the product of all numbers between one and four (1 × 2 × 3 × 4 = 24). Each verse contains eight stanzas of three lines of eight syllables—24 syllables per stanza, 24 lines per verse.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/topherrasmussen" target="_blank">LinkedIn</a>
+                <a href="mailto:topher416@gmail.com">Email</a>
+            </div>
+            <p>&copy; 2025 Topher Rasmussen. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
