@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guestbook - Topher Rasmussen</title>
+    <style>
+        body {
+            font-family: Georgia, Times, 'Times New Roman', serif;
+            line-height: 1.6;
+            margin: 40px auto;
+            max-width: 650px;
+            background-color: #E6E6FA; /* Lavender */
+            color: #483D8B; /* Dark Slate Blue */
+        }
+        a {
+            color: #8B008B; /* Dark Magenta */
+            text-decoration: underline;
+        }
+        a:visited {
+            color: #9932CC; /* Dark Orchid */
+        }
+        .navbar {
+            background-color: #9370DB; /* Medium Purple */
+            border: 2px outset #8A2BE2; /* Blue Violet */
+            padding: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .navbar a {
+            margin: 0 10px;
+            text-decoration: none;
+            font-weight: bold;
+            color: #FFFFFF;
+        }
+        .counter {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            color: #666666;
+        }
+        .guestbook-form {
+            background-color: #DCD0FF; /* Light Lavender */
+            padding: 15px;
+            border: 1px solid #9370DB; /* Medium Purple */
+            margin-bottom: 30px;
+        }
+        .guestbook-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .guestbook-form input,
+        .guestbook-form textarea {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+            font-family: 'Courier New', Courier, monospace;
+            border: 2px inset #9370DB;
+        }
+        .guestbook-form button {
+            background-color: #9370DB;
+            color: white;
+            border: 2px outset #8A2BE2;
+            padding: 5px 15px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .guestbook-entries {
+            margin-top: 30px;
+        }
+        .entry {
+            border-bottom: 1px dotted #9370DB;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+        .entry-header {
+            font-weight: bold;
+        }
+        .entry-date {
+            font-style: italic;
+            font-size: 0.9em;
+            color: #8B008B;
+        }
+        .webring {
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: #DCD0FF; /* Light Lavender */
+            border: 1px solid #9370DB; /* Medium Purple */
+        }
+        .webring h3 {
+            margin-top: 0;
+            font-size: 14px;
+        }
+        .last-updated {
+            font-size: 11px;
+            text-align: center;
+            margin-top: 20px;
+            font-style: italic;
+        }
+        .construction {
+            text-align: center;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html">Home</a> |
+        <a href="essay.html">Essay</a> |
+        <a href="guestbook.html">Guestbook</a> |
+        <a href="mailto:topher416@gmail.com">Contact</a>
+    </div>
+    
+    <header>
+        <h1>Sign My Guestbook</h1>
+        <p>Leave your mark on my little corner of the web!</p>
+    </header>
+    
+    <main>
+        <div class="construction">
+            <img src="https://web.archive.org/web/20091027004348/http://www.geocities.com/Heartland/Acres/2801/const.gif" alt="Under Construction" width="100">
+            <p><i>Some parts of this page are still under construction!</i></p>
+        </div>
+        
+        <div class="guestbook-form">
+            <h2>Sign the Guestbook</h2>
+            <form id="guestbook-form" onsubmit="return false;">
+                <div>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email">
+                </div>
+                <div>
+                    <label for="website">Website:</label>
+                    <input type="url" id="website" name="website" placeholder="http://">
+                </div>
+                <div>
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" onclick="alert('Thanks for signing my guestbook! Your message will appear after I approve it. :)')">Sign Guestbook</button>
+            </form>
+        </div>
+        
+        <div class="guestbook-entries">
+            <h2>Recent Guestbook Entries</h2>
+            
+            <div class="entry">
+                <p class="entry-header">Sarah from Michigan</p>
+                <p class="entry-date">April 30, 2025</p>
+                <p>Love your essay! Really made me think about the relationship between humans and AI in a new way. Looking forward to more of your work!</p>
+            </div>
+            
+            <div class="entry">
+                <p class="entry-header">John D.</p>
+                <p class="entry-date">April 28, 2025</p>
+                <p>Cool website! Reminds me of the good old days of the internet. Keep the retro vibe alive!</p>
+            </div>
+            
+            <div class="entry">
+                <p class="entry-header">Alex from WritersCollective.net</p>
+                <p class="entry-date">April 25, 2025</p>
+                <p>Found your site through the web ring. Great thoughts on machine-assisted authorship. I've added you to my bookmarks!</p>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="webring">
+            <h3>Web Ring</h3>
+            <p>Proud member of the Writers & Thinkers Web Ring</p>
+            <a href="#">&lt;&lt; Previous</a> | 
+            <a href="#">Ring Home</a> | 
+            <a href="#">Random Site</a> | 
+            <a href="#">Next &gt;&gt;</a>
+        </div>
+        
+        <p><a href="index.html">Back to home</a></p>
+        <p>&copy; 2025 Topher Rasmussen</p>
+        
+        <div class="counter">
+            <p>You are visitor number:</p>
+            <div class="counter-display" style="font-family: 'Courier New', Courier, monospace; font-weight: bold; background-color: #000; color: #0f0; padding: 5px; display: inline-block; border: 2px inset #999;">00000372</div>
+            <p><small>Best viewed in Netscape Navigator 4.0 or Internet Explorer 5.5</small></p>
+        </div>
+        
+        <div class="last-updated">
+            Last updated: May 3, 2025
+        </div>
+    </footer>
+
+    <style>
+        @keyframes rainbow-border {
+            0% { border-color: red; }
+            14% { border-color: orange; }
+            28% { border-color: yellow; }
+            42% { border-color: green; }
+            56% { border-color: blue; }
+            70% { border-color: indigo; }
+            85% { border-color: violet; }
+            100% { border-color: red; }
+        }
+        
+        .counter-display {
+            animation: rainbow-border 3s linear infinite;
+            border-width: 3px !important;
+            border-style: ridge !important;
+        }
+    </style>
+
+    <script>
+        // Simple script to show an alert when the form is submitted
+        document.getElementById('guestbook-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thanks for signing my guestbook! Your message will appear after I approve it. :)');
+            this.reset();
+        });
+        
+        // Array of color schemes - each has background, text, navbar, links, accent colors
+        const colorSchemes = [
+            // Purple theme (original)
+            {
+                background: '#E6E6FA', // Lavender
+                text: '#483D8B',       // Dark Slate Blue
+                navbar: '#9370DB',     // Medium Purple
+                navbarBorder: '#8A2BE2', // Blue Violet
+                link: '#8B008B',       // Dark Magenta
+                visited: '#9932CC',    // Dark Orchid
+                accent: '#DCD0FF'      // Light Lavender
+            },
+            // Blue theme
+            {
+                background: '#E0F8FF', // Light Cyan
+                text: '#00008B',       // Dark Blue
+                navbar: '#4682B4',     // Steel Blue
+                navbarBorder: '#0000CD', // Medium Blue
+                link: '#006400',       // Dark Green
+                visited: '#4B0082',    // Indigo
+                accent: '#ADD8E6'      // Light Blue
+            },
+            // Green theme
+            {
+                background: '#F0FFF0', // Honeydew
+                text: '#006400',       // Dark Green
+                navbar: '#2E8B57',     // Sea Green
+                navbarBorder: '#008000', // Green
+                link: '#8B0000',       // Dark Red
+                visited: '#800080',    // Purple
+                accent: '#CCFFCC'      // Very Light Green
+            },
+            // Pink theme
+            {
+                background: '#FFF0F5', // Lavender Blush
+                text: '#8B0000',       // Dark Red
+                navbar: '#FF69B4',     // Hot Pink
+                navbarBorder: '#C71585', // Medium Violet Red
+                link: '#4B0082',       // Indigo
+                visited: '#800080',    // Purple
+                accent: '#FFE4E1'      // Misty Rose
+            },
+            // Amber theme
+            {
+                background: '#FFFACD', // Lemon Chiffon
+                text: '#8B4513',       // Saddle Brown
+                navbar: '#DAA520',     // Goldenrod
+                navbarBorder: '#B8860B', // Dark Goldenrod
+                link: '#800000',       // Maroon
+                visited: '#4B0082',    // Indigo
+                accent: '#FFDEAD'      // Navajo White
+            }
+        ];
+        
+        // Pick a random color scheme
+        const randomScheme = colorSchemes[Math.floor(Math.random() * colorSchemes.length)];
+        
+        // Apply the color scheme
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.style.backgroundColor = randomScheme.background;
+            document.body.style.color = randomScheme.text;
+            
+            // Update navbar
+            const navbar = document.querySelector('.navbar');
+            if (navbar) {
+                navbar.style.backgroundColor = randomScheme.navbar;
+                navbar.style.borderColor = randomScheme.navbarBorder;
+            }
+            
+            // Update all links
+            const links = document.getElementsByTagName('a');
+            for (let i = 0; i < links.length; i++) {
+                // Don't change navbar link colors
+                if (!links[i].closest('.navbar')) {
+                    links[i].style.color = randomScheme.link;
+                }
+            }
+            
+            // Update form background
+            const form = document.querySelector('.guestbook-form');
+            if (form) {
+                form.style.backgroundColor = randomScheme.accent;
+                form.style.borderColor = randomScheme.navbar;
+            }
+            
+            // Update form button
+            const button = document.querySelector('.guestbook-form button');
+            if (button) {
+                button.style.backgroundColor = randomScheme.navbar;
+                button.style.borderColor = randomScheme.navbarBorder;
+            }
+            
+            // Update entry dates
+            const dates = document.querySelectorAll('.entry-date');
+            dates.forEach(date => {
+                date.style.color = randomScheme.link;
+            });
+            
+            // Update webring background
+            const webring = document.querySelector('.webring');
+            if (webring) {
+                webring.style.backgroundColor = randomScheme.accent;
+                webring.style.borderColor = randomScheme.navbar;
+            }
+        });
+    </script>
+</body>
+</html>
