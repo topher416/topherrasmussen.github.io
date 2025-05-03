@@ -154,37 +154,40 @@
     </style>
     <script>
     // Define some color palettes
-    const colorSchemes = [
+const colorSchemes = [
     {
-        background: "#1E1E1E",
-        text: "#FFFFFF",
-        navbar: "#333333",
-        headerBorder: "#FFFFFF",
-        link: "#FFD700"
+        title: "Dark Mode",
+        background: "#1E1E1E", // Eerie Black
+        text: "#FFFFFF", // White
+        navbar: "#333333", // Dark Gray
+        headerBorder: "#FFFFFF", // White
+        link: "#FFD700" // Gold
     },
     {
-        background: "#FFFFFF",
-        text: "#000000",
-        navbar: "#D3D3D3",
-        headerBorder: "#000000",
-        link: "#0000FF"
+        title: "Light Mode",
+        background: "#FFFFFF", // White
+        text: "#000000", // Black
+        navbar: "#D3D3D3", // Light Gray
+        headerBorder: "#000000", // Black
+        link: "#0000FF" // Blue
     },
     {
-        background: "#F5F5F5",
-        text: "#333333",
-        navbar: "#FF4500",
-        headerBorder: "#FF4500",
-        link: "#32CD32"
+        title: "Soft Contrast",
+        background: "#F5F5F5", // White Smoke
+        text: "#333333", // Dark Gray
+        navbar: "#D3D3D3", // Light Gray
+        headerBorder: "#D3D3D3", // Light Gray
+        link: "#32CD32" // Lime Green
     },
     {
-        background: "#EAEAEA",
-        text: "#2F4F4F",
-        navbar: "#B0C4DE",
-        headerBorder: "#2F4F4F",
-        link: "#4682B4"
+        title: "Cool Tones",
+        background: "#EAEAEA", // Gainsboro
+        text: "#2F4F4F", // Dark Slate Gray
+        navbar: "#B0C4DE", // Light Steel Blue
+        headerBorder: "#2F4F4F", // Dark Slate Gray
+        link: "#4682B4" // Steel Blue
     }
 ];
-    ];
 
     // Pick a random scheme
     const scheme = colorSchemes[Math.floor(Math.random() * colorSchemes.length)];
