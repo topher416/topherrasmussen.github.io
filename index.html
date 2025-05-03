@@ -122,5 +122,40 @@
             border-style: ridge !important;
         }
     </style>
+
+    <script>
+        // Define some color palettes
+        const colorSchemes = [
+            {
+                background: "#E6E6FA", // Lavender
+                text: "#483D8B",       // Dark Slate Blue
+                navbar: "#9370DB",     // Medium Purple
+            },
+            {
+                background: "#FFF8DC", // Cornsilk
+                text: "#8B4513",       // Saddle Brown
+                navbar: "#DEB887",     // Burly Wood
+            },
+            {
+                background: "#F0FFF0", // Honeydew
+                text: "#2E8B57",       // Sea Green
+                navbar: "#20B2AA",     // Light Sea Green
+            },
+            {
+                background: "#FFF0F5", // Lavender Blush
+                text: "#C71585",       // Medium Violet Red
+                navbar: "#DB7093",     // Pale Violet Red
+            }
+        ];
+
+        // Pick a random scheme
+        const scheme = colorSchemes[Math.floor(Math.random() * colorSchemes.length)];
+
+        // Apply the colors
+        document.body.style.backgroundColor = scheme.background;
+        document.body.style.color = scheme.text;
+        const navbar = document.querySelector('.navbar');
+        if (navbar) navbar.style.backgroundColor = scheme.navbar;
+    </script>
 </body>
 </html>
