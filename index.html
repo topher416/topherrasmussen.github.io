@@ -99,18 +99,19 @@
 <div id="visitorCounter">Visitors: <span id="count">Loading...</span></div>
 
 <script>
-  // Function that will be called by the JSONP response
-  function displayCount(count) {
-    document.getElementById('count').textContent = count;
-  }
-  
-  // Create and append a script tag to request the count
-  document.addEventListener('DOMContentLoaded', function() {
-    const scriptTag = document.createElement('script');
-    const timestamp = new Date().getTime(); // Prevent caching
-    scriptTag.src = 'https://script.google.com/macros/s/AKfycbwOYJRKO_zOwkLpCR4U_ENMiD7bgPtuWmXVe6ZTuT913aTHJ0c5Op3OEdfzJQAGUHdv/exec?action=increment&callback=displayCount&t=' + timestamp;
-    document.body.appendChild(scriptTag);
-  });
+function displayCount(count) {
+  // Format the count to be 8 digits with leading zeros
+  const formattedCount = count.toString().padStart(8, '0');
+  document.querySelector('.counter-display').textContent = formattedCount;
+}
+
+// Create and append a script tag to request the count
+document.addEventListener('DOMContentLoaded', function() {
+  const scriptTag = document.createElement('script');
+  const timestamp = new Date().getTime(); // Prevent caching
+  scriptTag.src = 'https://script.google.com/macros/s/AKfycbwOYJRKO_zOwkLpCR4U_ENMiD7bgPtuWmXVe6ZTuT913aTHJ0c5Op3OEdfzJQAGUHdv/exec?action=increment&callback=displayCount&t=' + timestamp;
+  document.body.appendChild(scriptTag);
+});
 </script>
     <style>
         @keyframes rainbow-border {
