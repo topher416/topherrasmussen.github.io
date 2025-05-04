@@ -319,5 +319,60 @@
             }
         });
     </script>
+<script>
+    document.getElementById('guestbook-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        // Collect form data
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const website = document.getElementById('website').value;
+        const message = document.getElementById('message').value;
+
+        // Google Apps Script Web App URL
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbxpTfbjMQBLt2HCYiZ519DMvYDQ0KW2aZV8oTAedjBzDZDoC-72ITs2nTO-5A_IW_jsFQ/exec';
+
+        // Send the data to the Google Sheet
+        const response = await fetch(scriptURL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({
+                name: name,
+                email: email,
+                website: website,
+                message: message
+            })
+        });
+
+        if (response.ok) {
+            alert('Thanks for signing the guestbook! Your message has been submitted.');
+            this.reset();
+        } else {
+            alert('Something went wrong. Please try again.');
+        }
+    });
+</script>
+    <script>
+async function loadGuestbookEntries() {
+    const response = await fetch('https://script.google.com/macros/s/AKfycbxpTfbjMQBLt2HCYiZ519DMvYDQ0KW2aZV8oTAedjBzDZDoC-72ITs2nTO-5A_IW_jsFQ/exec');
+    const entries = await response.json();
+
+    const entriesContainer = document.querySelector('.guestbook-entries');
+    entriesContainer.innerHTML = '';
+
+    entries.forEach(entry => {
+        const entryDiv = document.createElement('div');
+        entryDiv.classList.add('entry');
+        entryDiv.innerHTML = `
+            <p class="entry-header">${entry.name}</p>
+            <p class="entry-date">${new Date(entry.date).toLocaleDateString()}</p>
+            <p>${entry.message}</p>
+        `;
+        entriesContainer.appendChild(entryDiv);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', loadGuestbookEntries);
+</script>
 </body>
 </html>
