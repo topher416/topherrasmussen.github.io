@@ -96,7 +96,29 @@
             Last updated: May 3, 2025
         </div>
     </footer>
+<div id="visitorCounter">Visitors: <span id="count">Loading...</span></div>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // First get the current count
+    fetch('https://script.google.com/macros/s/AKfycbwOYJRKO_zOwkLpCR4U_ENMiD7bgPtuWmXVe6ZTuT913aTHJ0c5Op3OEdfzJQAGUHdv/exec?action=get')
+      .then(response => response.text())
+      .then(count => {
+        document.getElementById('count').textContent = count;
+        
+        // Then increment the count
+        return fetch('https://script.google.com/macros/s/AKfycbwOYJRKO_zOwkLpCR4U_ENMiD7bgPtuWmXVe6ZTuT913aTHJ0c5Op3OEdfzJQAGUHdv/exec?action=increment');
+      })
+      .then(response => response.text())
+      .then(newCount => {
+        document.getElementById('count').textContent = newCount;
+      })
+      .catch(error => {
+        console.error('Error updating visitor count:', error);
+        document.getElementById('count').textContent = 'Error loading count';
+      });
+  });
+</script>
     <style>
         @keyframes rainbow-border {
             0% { border-color: red; }
