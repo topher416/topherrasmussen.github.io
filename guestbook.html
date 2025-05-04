@@ -126,25 +126,25 @@
         
         <div class="guestbook-form">
             <h2>Sign the Guestbook</h2>
-            <form id="guestbook-form" onsubmit="return false;">
-                <div>
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div>
-                    <label for="email">Email:</label>
-                    <input type="email" id="email" name="email">
-                </div>
-                <div>
-                    <label for="website">Website:</label>
-                    <input type="url" id="website" name="website" placeholder="http://">
-                </div>
-                <div>
-                    <label for="message">Message:</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-                </div>
-                <button type="submit" onclick="alert('Thanks for signing my guestbook! Your message will appear after I approve it. :)')">Sign Guestbook</button>
-            </form>
+            <form id="guestbook-form" method="POST" action="https://script.google.com/macros/s/AKfycbxpTfbjMQBLt2HCYiZ519DMvYDQ0KW2aZV8oTAedjBzDZDoC-72ITs2nTO-5A_IW_jsFQ/exec">
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+    </div>
+    <div>
+        <label for="website">Website:</label>
+        <input type="url" id="website" name="website" placeholder="http://">
+    </div>
+    <div>
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+    </div>
+    <button type="submit">Sign Guestbook</button>
+</form>
         </div>
         
         <div class="guestbook-entries">
