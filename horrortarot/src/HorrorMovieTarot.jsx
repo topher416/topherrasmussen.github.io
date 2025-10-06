@@ -105,12 +105,6 @@ const HorrorMovieTarot = () => {
         ];
 
         const playChords = () => {
-          if (!isPlaying) return;
-
-          // Clear any existing timeouts
-          timeoutIdsRef.current.forEach(id => clearTimeout(id));
-          timeoutIdsRef.current = [];
-
           chords.forEach((chord, i) => {
             // Play chord
             const id = setTimeout(() => {
@@ -132,7 +126,9 @@ const HorrorMovieTarot = () => {
             });
           });
 
-          const loopId = setTimeout(playChords, chords.length * 4000);
+          const loopId = setTimeout(() => {
+            if (isPlaying) playChords();
+          }, chords.length * 4000);
           timeoutIdsRef.current.push(loopId);
         };
 
