@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ElectricBorder from './ElectricBorder';
-import { Shuffle, Eye, Star, Calendar, Skull, Moon, Ghost, Crown, Sparkles, Music, VolumeX } from 'lucide-react';
+import { Shuffle, Eye, Star, Skull, Moon, Ghost, Crown, Sparkles, Music, VolumeX } from 'lucide-react';
 import * as Tone from 'tone';
 import './custom.css';
 
@@ -56,6 +56,8 @@ const useTiltEffect = (enabled) => {
 };
 
 const HorrorMovieTarot = () => {
+  // Feature flags
+  const SHOW_WATCH_PROVIDERS = false; // Temporarily disable providers UI
   const [horrorMovies, setHorrorMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState(null);
@@ -63,10 +65,33 @@ const HorrorMovieTarot = () => {
   useEffect(() => {
     const loadMovieData = async () => {
       try {
-        const response = await fetch('/horrortarot/movies.json');
-        if (!response.ok) throw new Error(`Failed to load movie data: ${response.status}`);
-        const movieData = await response.json();
-        setHorrorMovies(movieData);
+        const base = (import.meta?.env?.BASE_URL || '/').replace(/\/$/, '/')
+        const originBase = `${window.location.origin}${base}`;
+        const candidates = [
+          `${base}movies.json`,
+          `${originBase}movies.json`,
+          '/movies.json',
+          'movies.json',
+          './movies.json',
+        ].filter(Boolean);
+
+        let data = null;
+        let lastStatus = null;
+        for (const url of candidates) {
+          try {
+            const res = await fetch(url);
+            lastStatus = res.status;
+            if (res.ok) {
+              data = await res.json();
+              break;
+            }
+          } catch (_) {
+            // try next
+          }
+        }
+
+        if (!data) throw new Error(`Failed to load movie data: ${lastStatus ?? 'network error'}`);
+        setHorrorMovies(data);
       } catch (error) {
         setLoadError(error.message);
       } finally {
@@ -695,9 +720,7 @@ const HorrorMovieTarot = () => {
                 right: -16,
                 bottom: -16,
                 zIndex: 5,
-                backgroundImage: drawnCard.posterUrl
-                  ? `linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.85) 70%, rgba(0,0,0,0.95) 100%), url(${drawnCard.posterUrl})`
-                  : 'linear-gradient(135deg, rgba(20, 20, 30, 0.95), rgba(30, 20, 40, 0.95))',
+                backgroundImage: 'linear-gradient(135deg, rgba(20, 20, 30, 0.95), rgba(30, 20, 40, 0.95))',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 backdropFilter: 'blur(10px)',
@@ -705,59 +728,62 @@ const HorrorMovieTarot = () => {
                 border: '2px solid rgba(255, 255, 255, 0.3)',
                 boxShadow: 'inset 0 0 60px rgba(0, 0, 0, 0.5)',
                 padding: '24px',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'flex-start',
+                gap: 12,
+                minHeight: 0,
                 transform: cardTransition
                   ? `translateX(${slideDirection === 'left' ? '-120%' : '120%'}) rotate(${slideDirection === 'left' ? '-15deg' : '15deg'})`
                   : 'translateX(0) rotate(0deg)',
                 transition: 'transform 0.25s cubic-bezier(0.4, 0, 0.2, 1)'
               }}>
-                {/* Header row with score and year */}
-                <div className="flex items-center justify-between mb-3">
-                  <div className="flex items-center gap-2">
-                    {typeof drawnCard.score === 'number' ? (
-                      <>
-                        <Star className={`w-5 h-5 ${getScoreColor(drawnCard.score)}`} />
-                        <span className={`text-sm font-semibold ${getScoreColor(drawnCard.score)}`}>{drawnCard.score}</span>
-                      </>
-                    ) : (
-                      <>
-                        <Skull className="w-5 h-5 text-red-400" />
-                        <span className="text-sm font-semibold text-red-400">{drawnCard.score}</span>
-                      </>
-                    )}
+                {/* Top bar: title left, year right (no rating, no type) */}
+                <div className="flex items-center justify-between" style={{
+                  padding: '8px 12px',
+                  background: 'linear-gradient(to bottom, rgba(12,12,18,0.85), rgba(25,15,35,0.55))',
+                  border: '1px solid rgba(255,255,255,0.2)',
+                  borderRadius: 10
+                }}>
+                  <div className="flex-1 pr-3">
+                    <h2 className="font-serif text-lg md:text-xl text-white leading-tight" style={{
+                      margin: 0,
+                      whiteSpace: 'normal',
+                      wordBreak: 'break-word'
+                    }}>
+                      {drawnCard.title}
+                    </h2>
                   </div>
-                  <div className="flex items-center gap-2 text-white/80">
-                    <Calendar className="w-4 h-4" />
-                    <span className="text-sm font-mono">{drawnCard.year}</span>
+                  <div className="text-white/85 text-xs font-mono">{drawnCard.year}</div>
+                </div>
+
+                
+                {/* Poster fills card width; bottom gradient overlay hosts blurb + icon */}
+                {drawnCard.posterUrl && (
+                  <div style={{ position: 'relative', flex: '1 1 auto', borderRadius: 12, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.25)', boxShadow: '0 6px 18px rgba(0,0,0,0.45), inset 0 0 32px rgba(0,0,0,0.25)' }}>
+                    <img
+                      src={drawnCard.posterUrl}
+                      alt={`${drawnCard.title} poster`}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                      loading="lazy"
+                    />
+                    {/* Gradient overlay at bottom for text readability */}
+                    <div style={{ position: 'absolute', left: 0, right: 0, bottom: 0, padding: 16, background: 'linear-gradient(to top, rgba(0,0,0,0.94) 0%, rgba(0,0,0,0.85) 70%, rgba(0,0,0,0.4) 90%, rgba(0,0,0,0) 100%)' }}>
+                      <div className="text-xs md:text-sm leading-relaxed text-white/95 font-serif italic" style={{ paddingRight: 44, maxHeight: '26vh', overflow: 'auto' }}>
+                        {drawnCard.blurb}
+                      </div>
+                      {/* Rarity icon pinned to bottom-right over poster */}
+                      <div style={{ position: 'absolute', right: 12, bottom: 12 }}>
+                        {React.createElement(getRarityStyle(drawnCard.rarity).icon, {
+                          className: `w-6 h-6 ${getRarityStyle(drawnCard.rarity).text}`,
+                        })}
+                      </div>
+                    </div>
                   </div>
-                </div>
+                )}
 
-                {/* Title */}
-                <h2 className="text-center text-2xl md:text-3xl font-serif mb-3 text-white">{drawnCard.title}</h2>
-
-                {/* Type badge */}
-                <div className="flex justify-center mb-4">
-                  <span className="px-4 py-1.5 rounded-full border border-white/30 text-xs tracking-wider uppercase bg-white/5">
-                    {drawnCard.type}
-                  </span>
-                </div>
-
-                {/* Divider line */}
-                <div className="w-full h-px bg-gradient-to-r from-transparent via-white/30 to-transparent mb-4"></div>
-
-                {/* Blurb - takes remaining space */}
-                <div className="text-sm md:text-base leading-relaxed text-white/95 font-serif italic overflow-auto flex-1 px-2">
-                  {drawnCard.blurb}
-                </div>
-
-                {/* Divider line */}
-                <div className="w-full h-px bg-gradient-to-r from-transparent via-white/30 to-transparent mt-4 mb-3"></div>
-
-                {/* Rarity icon at bottom */}
-                <div className="flex justify-end">
-                  {React.createElement(getRarityStyle(drawnCard.rarity).icon, {
-                    className: `w-6 h-6 ${getRarityStyle(drawnCard.rarity).text}`,
-                  })}
-                </div>
+                {/* Bottom section: blurb + divider + icon row */}
+                {/* Optional providers (hidden) - section removed from bottom overlay version */}
               </div>
               </div>
 

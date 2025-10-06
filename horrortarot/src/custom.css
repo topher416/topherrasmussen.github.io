@@ -7,8 +7,8 @@
 }
 
 .main-content-wrapper {
-  width: 90%;
-  max-width: 600px;
+  width: 92%;
+  max-width: 760px;
   margin: 0 auto;
   padding-top: 2vh;
 }
@@ -77,8 +77,8 @@
 
 /* --- Tarot Card Frame Constraint (Crucial) --- */
 .tarot-card-frame {
-  max-height: 400px;
-  aspect-ratio: 1 / 1.7;
+  max-height: min(70vh, 720px);
+  aspect-ratio: 1 / 1.5; /* slightly wider card */
   margin: 30px auto;
   border: 1px solid rgba(255, 255, 255, 0.2);
   overflow: hidden;
