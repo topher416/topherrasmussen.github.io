@@ -47,6 +47,9 @@ const HorrorMovieTarot = () => {
   const singleBackRef = useRef(null);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [deckPosition, setDeckPosition] = useState(0);
+  const [currentCardIndex, setCurrentCardIndex] = useState(0);
+  const [cardTransition, setCardTransition] = useState(false);
+  const [slideDirection, setSlideDirection] = useState(null); // 'left' or 'right'
   const [audioEnabled, setAudioEnabled] = useState(false);
   const synthRef = useRef(null);
   const arpSynthRef = useRef(null);
@@ -59,111 +62,175 @@ const HorrorMovieTarot = () => {
     if (horrorMovies.length > 0) setShuffledDeck(fisherYatesShuffle(horrorMovies));
   }, [horrorMovies]);
 
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (phase !== 'revealed') return;
+      if (e.key === 'ArrowLeft') navigateCard('prev');
+      if (e.key === 'ArrowRight') navigateCard('next');
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [phase, currentCardIndex, shuffledDeck]);
+
+  // Swipe navigation
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (phase !== 'revealed') return;
+    const swipeDistance = touchStartX.current - touchEndX.current;
+    const minSwipeDistance = 50;
+
+    if (Math.abs(swipeDistance) > minSwipeDistance) {
+      if (swipeDistance > 0) {
+        // Swiped left - next card
+        navigateCard('next');
+      } else {
+        // Swiped right - previous card
+        navigateCard('prev');
+      }
+    }
+  };
+
   useEffect(() => {
     // Keep ref in sync with state
     isPlayingRef.current = isPlaying;
 
     const initAudio = async () => {
       if (audioEnabled && !synthRef.current) {
-        // More reverb for haunting effect
-        reverbRef.current = new Tone.Reverb(8).toDestination();
-        // More echo with longer delay
-        const delayRef = new Tone.FeedbackDelay('8n', 0.6).connect(reverbRef.current);
+        console.log('[Audio] Initializing audio synths');
+        // Very long reverb for bell-like quality
+        reverbRef.current = new Tone.Reverb(15).toDestination();
+        // Long echo with high feedback for extended tail
+        const delayRef = new Tone.FeedbackDelay('8n', 0.75).connect(reverbRef.current);
 
-        // Chord synth
+        // Chord synth - bell/chime-like with sine waves and long decay
         synthRef.current = new Tone.PolySynth(Tone.Synth, {
-          oscillator: { type: 'sawtooth' },
-          envelope: { attack: 0.3, decay: 0.6, sustain: 0.5, release: 4 },
-          filter: { frequency: 120, rolloff: -24 },
+          oscillator: { type: 'sine' },
+          envelope: { attack: 2.5, decay: 4.0, sustain: 0.2, release: 8 },
         }).connect(delayRef);
+        synthRef.current.volume.value = -14; // Quieter, more ambient
 
-        // Arpeggio synth - higher pitched, quieter
+        // Arpeggio synth - more prominent melody
         arpSynthRef.current = new Tone.Synth({
           oscillator: { type: 'sine' },
           envelope: { attack: 0.05, decay: 0.2, sustain: 0.1, release: 1 },
         }).connect(delayRef);
-        arpSynthRef.current.volume.value = -12; // Quieter than chords
+        arpSynthRef.current.volume.value = -12; // Quieter
 
-        // All chords down one octave for darker, more haunting sound
-        const chords = [
-          ['D2', 'F2', 'A2'],
-          ['A1', 'C2', 'E2'],
-          ['G1', 'Bb1', 'D2'],
-          ['F1', 'Ab1', 'C2'],
-          ['Bb1', 'Db2', 'F2'],
-          ['C2', 'Eb2', 'G2'],
-          ['E1', 'G1', 'B1'],
-          ['D1', 'F1', 'A1'],
-        ];
-
-        // Arpeggio patterns - notes from the chords played one at a time
-        const arps = [
-          ['D4', 'F4', 'A4', 'F4', 'D4', 'A4'],
-          ['A3', 'C4', 'E4', 'C4', 'A3', 'E4'],
-          ['G3', 'Bb3', 'D4', 'Bb3', 'G3', 'D4'],
-          ['F3', 'Ab3', 'C4', 'Ab3', 'F3', 'C4'],
-          ['Bb3', 'Db4', 'F4', 'Db4', 'Bb3', 'F4'],
-          ['C4', 'Eb4', 'G4', 'Eb4', 'C4', 'G4'],
-          ['E3', 'G3', 'B3', 'G3', 'E3', 'B3'],
-          ['D3', 'F3', 'A3', 'F3', 'D3', 'A3'],
-        ];
-
-        const playChords = () => {
-          chords.forEach((chord, i) => {
-            // Play chord
-            const id = setTimeout(() => {
-              if (synthRef.current && isPlayingRef.current) {
-                synthRef.current.triggerAttackRelease(chord, '2n');
-              }
-            }, i * 4000);
-            timeoutIdsRef.current.push(id);
-
-            // Play arpeggio over the chord
-            const arp = arps[i];
-            arp.forEach((note, noteIdx) => {
-              const arpId = setTimeout(() => {
-                if (arpSynthRef.current && isPlayingRef.current) {
-                  arpSynthRef.current.triggerAttackRelease(note, '16n');
-                }
-              }, i * 4000 + noteIdx * 350);
-              timeoutIdsRef.current.push(arpId);
-            });
-          });
-
-          const loopId = setTimeout(() => {
-            if (isPlayingRef.current) playChords();
-          }, chords.length * 4000);
-          timeoutIdsRef.current.push(loopId);
-        };
-
-        if (isPlayingRef.current) playChords();
+        console.log('[Audio] Synths initialized, starting playback');
+        // Start playback now that synths are ready
+        if (isPlayingRef.current) {
+          playChords();
+        }
       }
+    };
+
+    // All chords down one octave for darker, more haunting sound
+    const chordPool = [
+      ['D2', 'F2', 'A2'],
+      ['A1', 'C2', 'E2'],
+      ['G1', 'Bb1', 'D2'],
+      ['F1', 'Ab1', 'C2'],
+      ['Bb1', 'Db2', 'F2'],
+      ['C2', 'Eb2', 'G2'],
+      ['E1', 'G1', 'B1'],
+      ['D1', 'F1', 'A1'],
+    ];
+
+    // Arpeggio patterns - spanning multiple octaves for variety
+    const arpPool = [
+      ['D3', 'F4', 'A5', 'F3', 'D4', 'A4', 'F5', 'A3', 'D5', 'F4', 'A4', 'D4'],
+      ['A2', 'C4', 'E5', 'C3', 'A4', 'E4', 'C5', 'E3', 'A5', 'C4', 'E4', 'A3'],
+      ['G3', 'Bb4', 'D5', 'Bb3', 'G4', 'D4', 'Bb5', 'D3', 'G5', 'Bb4', 'D4', 'G3'],
+      ['F2', 'Ab4', 'C5', 'Ab3', 'F4', 'C4', 'Ab5', 'C3', 'F5', 'Ab4', 'C4', 'F3'],
+      ['Bb3', 'Db5', 'F5', 'Db4', 'Bb4', 'F4', 'Db6', 'F3', 'Bb5', 'Db4', 'F4', 'Bb3'],
+      ['C3', 'Eb4', 'G5', 'Eb3', 'C4', 'G4', 'Eb5', 'G3', 'C5', 'Eb4', 'G4', 'C4'],
+      ['E3', 'G4', 'B5', 'G3', 'E4', 'B4', 'G5', 'B3', 'E5', 'G4', 'B4', 'E3'],
+      ['D2', 'F4', 'A5', 'F3', 'D4', 'A4', 'F5', 'A3', 'D5', 'F4', 'A3', 'D3'],
+    ];
+
+    const playChords = () => {
+      console.log('[Audio] playChords called, isPlayingRef:', isPlayingRef.current);
+
+      // Randomize chord order
+      const shuffledIndices = [...Array(chordPool.length).keys()].sort(() => Math.random() - 0.5);
+
+      shuffledIndices.forEach((chordIdx, i) => {
+        const chord = chordPool[chordIdx];
+        const arp = arpPool[chordIdx];
+
+        // Play chord
+        const id = setTimeout(() => {
+          console.log('[Audio] Chord timeout fired, isPlayingRef:', isPlayingRef.current);
+          if (synthRef.current && isPlayingRef.current) {
+            synthRef.current.triggerAttackRelease(chord, '2n');
+          }
+        }, i * 4000);
+        timeoutIdsRef.current.push(id);
+
+        // Play arpeggio over the chord - randomize order within the arp
+        const shuffledArp = [...arp].sort(() => Math.random() - 0.5);
+        shuffledArp.forEach((note, noteIdx) => {
+          const arpId = setTimeout(() => {
+            if (arpSynthRef.current && isPlayingRef.current) {
+              arpSynthRef.current.triggerAttackRelease(note, '16n');
+            }
+          }, i * 4000 + noteIdx * 300);
+          timeoutIdsRef.current.push(arpId);
+        });
+      });
+
+      const loopId = setTimeout(() => {
+        console.log('[Audio] Loop timeout fired, isPlayingRef:', isPlayingRef.current);
+        if (isPlayingRef.current) playChords();
+      }, shuffledIndices.length * 4000);
+      timeoutIdsRef.current.push(loopId);
+      console.log('[Audio] Scheduled', timeoutIdsRef.current.length, 'total timeouts');
     };
 
     if (audioEnabled) {
       Tone.start().then(initAudio);
     }
 
-    // Cleanup: stop all scheduled notes when isPlaying becomes false
-    if (!isPlaying) {
+    // Start or stop playback based on isPlaying (only if synths already exist)
+    if (isPlaying && synthRef.current && audioEnabled) {
+      console.log('[Audio] Starting playback (synths already initialized)');
+      playChords();
+    } else if (!isPlaying) {
+      console.log('[Audio] Stopping - clearing', timeoutIdsRef.current.length, 'timeouts');
       timeoutIdsRef.current.forEach(id => clearTimeout(id));
       timeoutIdsRef.current = [];
       if (synthRef.current) {
         synthRef.current.releaseAll();
+        console.log('[Audio] Released all synth notes');
       }
       if (arpSynthRef.current) {
         arpSynthRef.current.triggerRelease();
+        console.log('[Audio] Released arp notes');
       }
     }
   }, [audioEnabled, isPlaying]);
 
   const toggleAudio = async () => {
+    console.log('[Audio] Toggle clicked, current isPlaying:', isPlaying);
     try {
       if (Tone.context.state !== 'running') await Tone.start();
       if (!audioEnabled) {
+        console.log('[Audio] First time - enabling audio');
         setAudioEnabled(true);
         setIsPlaying(true);
       } else {
+        console.log('[Audio] Toggling isPlaying from', isPlaying, 'to', !isPlaying);
         setIsPlaying(!isPlaying);
       }
     } catch (_) {}
@@ -245,9 +312,14 @@ const HorrorMovieTarot = () => {
     setPhase('revealing');
     setFlyAway(true); // others fly away via CSS
     setTimeout(() => setFlipping(true), 150); // flip selected
+
+    // Pick a random card from the shuffled deck
+    const randomIndex = Math.floor(Math.random() * shuffledDeck.length);
+    setCurrentCardIndex(randomIndex);
+
     // Safety fallback: ensure reveal even if WAAPI onfinish doesn't fire
     const safetyTimer = setTimeout(() => {
-      setDrawnCard(shuffledDeck[deckPosition]);
+      setDrawnCard(shuffledDeck[randomIndex]);
       setDeckPosition(deckPosition + 1);
       setPhase('revealed');
       setFlyAway(false);
@@ -275,7 +347,7 @@ const HorrorMovieTarot = () => {
             { duration: 450, easing: 'cubic-bezier(0.2, 0, 0, 1)', fill: 'forwards' }
           ).onfinish = () => {
             clearTimeout(safetyTimer);
-            setDrawnCard(shuffledDeck[deckPosition]);
+            setDrawnCard(shuffledDeck[randomIndex]);
             setDeckPosition(deckPosition + 1);
             setPhase('revealed');
             setFlyAway(false);
@@ -286,12 +358,33 @@ const HorrorMovieTarot = () => {
       }
       // Fallback if WAAPI fails
       clearTimeout(safetyTimer);
-      setDrawnCard(shuffledDeck[deckPosition]);
+      setDrawnCard(shuffledDeck[randomIndex]);
       setDeckPosition(deckPosition + 1);
       setPhase('revealed');
       setFlyAway(false);
       setFlipping(false);
     }, 900);
+  };
+
+  const navigateCard = (direction) => {
+    if (phase !== 'revealed') return;
+
+    setSlideDirection(direction === 'next' ? 'left' : 'right');
+    setCardTransition(true);
+
+    setTimeout(() => {
+      const newIndex = direction === 'next'
+        ? (currentCardIndex + 1) % shuffledDeck.length
+        : (currentCardIndex - 1 + shuffledDeck.length) % shuffledDeck.length;
+
+      setCurrentCardIndex(newIndex);
+      setDrawnCard(shuffledDeck[newIndex]);
+
+      setTimeout(() => {
+        setCardTransition(false);
+        setSlideDirection(null);
+      }, 50);
+    }, 200);
   };
 
   const drawCard = () => {
@@ -371,10 +464,11 @@ const HorrorMovieTarot = () => {
           font-weight: 900;
           letter-spacing: 0.15em;
           text-transform: uppercase;
-          background: linear-gradient(145deg, #ff6b6b, #a855f7, #3b82f6);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+          color: white !important;
+          background: none !important;
+          -webkit-background-clip: unset !important;
+          -webkit-text-fill-color: white !important;
+          background-clip: unset !important;
           margin: 0;
           padding: 0;
         }
@@ -419,8 +513,7 @@ const HorrorMovieTarot = () => {
           onClick={toggleAudio}
           className="btn-secondary audio-control-corner"
         >
-          {isPlaying ? <VolumeX className="w-5 h-5" /> : <Music className="w-5 h-5" />}
-          {isPlaying ? 'Silence the Organ' : '🎵 Summon Dark Organ'}
+          {isPlaying ? 'Silence the Organ' : 'Summon Dark Organ'}
         </button>
 
         <div className="main-content-wrapper">
@@ -439,11 +532,6 @@ const HorrorMovieTarot = () => {
             </div>
           </div>
 
-        {/* Status text */}
-        <div className="text-center text-sm text-white/70 mb-4">
-          {allCards.length - deckPosition} cards remain in the ethereal deck
-        </div>
-
         {/* Core deck controls: 3-button group */}
         <div className="button-row button-row-spaced">
           <button
@@ -451,8 +539,7 @@ const HorrorMovieTarot = () => {
             disabled={phase === 'shuffling' || phase === 'revealing'}
             className="btn-primary" style={{ flex: 1, opacity: (phase === 'shuffling' || phase === 'revealing') ? 0.6 : 1, pointerEvents: (phase === 'shuffling' || phase === 'revealing') ? 'none' : 'auto' }}
           >
-            <Shuffle className="w-5 h-5" />
-            ⊗ SHUFFLE DECK ⊗
+            SHUFFLE DECK
           </button>
 
           <button
@@ -460,8 +547,7 @@ const HorrorMovieTarot = () => {
             disabled={deckPosition >= shuffledDeck.length || phase !== 'ready'}
             className="btn-primary" style={{ flex: 1, opacity: (deckPosition >= shuffledDeck.length || phase !== 'ready') ? 0.6 : 1, pointerEvents: (deckPosition >= shuffledDeck.length || phase !== 'ready') ? 'none' : 'auto', boxShadow: phase === 'ready' ? '0 0 12px rgba(255,255,255,0.2)' : 'none' }}
           >
-            <Eye className="w-5 h-5" />
-            👁 DRAW CARD ♢
+            DRAW CARD
           </button>
 
           <button
@@ -469,8 +555,7 @@ const HorrorMovieTarot = () => {
             disabled={phase !== 'revealed'}
             className="btn-ghost" style={{ flex: 1, opacity: (phase !== 'revealed') ? 0.6 : 1, pointerEvents: (phase !== 'revealed') ? 'none' : 'auto' }}
           >
-            <Moon className="w-5 h-5" />
-            ☽ RESET ♢
+            RESET
           </button>
         </div>
 
@@ -511,16 +596,54 @@ const HorrorMovieTarot = () => {
 
           {/* Revealed content fills frame */}
           {phase === 'revealed' && drawnCard && (
-            <div style={{ position: 'absolute', inset: 0 }}>
-              {/* Electric border sits slightly outside the frame */}
-              <div style={{ position: 'absolute', top: -16, left: -16, right: -16, bottom: -16, zIndex: 1, pointerEvents: 'none' }}>
-                <ElectricBorder color="#6d28d9" speed={1} chaos={0.7} thickness={5} style={{ borderRadius: 18, width: '100%', height: '100%' }}>
-                  <div style={{ width: '100%', height: '100%' }} />
-                </ElectricBorder>
-              </div>
+            <div
+              style={{ position: 'absolute', inset: 0 }}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+            >
+              {/* Overflow container for cards only */}
+              <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
+              {/* Next card behind (peek) */}
+              {!cardTransition && (
+                <div className="absolute flex flex-col" style={{
+                  top: -16,
+                  left: slideDirection === 'right' ? -20 : 'auto',
+                  right: slideDirection === 'left' ? -20 : 'auto',
+                  bottom: -16,
+                  width: 'calc(100% + 32px)',
+                  zIndex: 3,
+                  background: 'linear-gradient(135deg, rgba(15, 15, 25, 0.6), rgba(25, 15, 35, 0.6))',
+                  borderRadius: '12px',
+                  border: '1px solid rgba(255, 255, 255, 0.15)',
+                  opacity: 0.3,
+                  pointerEvents: 'none'
+                }} />
+              )}
 
-              {/* Content above border */}
-              <div className="absolute inset-0 p-5 flex flex-col" style={{ zIndex: 5 }}>
+              {/* Current card */}
+              <div className="absolute flex flex-col" style={{
+                top: -16,
+                left: -16,
+                right: -16,
+                bottom: -16,
+                zIndex: 5,
+                backgroundImage: drawnCard.posterUrl
+                  ? `linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.85) 70%, rgba(0,0,0,0.95) 100%), url(${drawnCard.posterUrl})`
+                  : 'linear-gradient(135deg, rgba(20, 20, 30, 0.95), rgba(30, 20, 40, 0.95))',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backdropFilter: 'blur(10px)',
+                borderRadius: '12px',
+                border: '2px solid rgba(255, 255, 255, 0.3)',
+                boxShadow: 'inset 0 0 60px rgba(0, 0, 0, 0.5)',
+                padding: '24px',
+                transform: cardTransition
+                  ? `translateX(${slideDirection === 'left' ? '-120%' : '120%'}) rotate(${slideDirection === 'left' ? '-15deg' : '15deg'})`
+                  : 'translateX(0) rotate(0deg)',
+                transition: 'transform 0.25s cubic-bezier(0.4, 0, 0.2, 1)'
+              }}>
+                {/* Header row with score and year */}
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
                     {typeof drawnCard.score === 'number' ? (
@@ -540,20 +663,42 @@ const HorrorMovieTarot = () => {
                     <span className="text-sm font-mono">{drawnCard.year}</span>
                   </div>
                 </div>
-                <h2 className="text-center text-xl md:text-2xl font-serif mb-2">{drawnCard.title}</h2>
-                <div className="flex justify-center mb-3">
-                  <span className="px-3 py-1 rounded-full border border-white/20 text-xs tracking-wide">
+
+                {/* Title */}
+                <h2 className="text-center text-2xl md:text-3xl font-serif mb-3 text-white">{drawnCard.title}</h2>
+
+                {/* Type badge */}
+                <div className="flex justify-center mb-4">
+                  <span className="px-4 py-1.5 rounded-full border border-white/30 text-xs tracking-wider uppercase bg-white/5">
                     {drawnCard.type}
                   </span>
                 </div>
-                <div className="mt-1 text-sm leading-relaxed text-white/90 font-serif italic overflow-auto">
+
+                {/* Divider line */}
+                <div className="w-full h-px bg-gradient-to-r from-transparent via-white/30 to-transparent mb-4"></div>
+
+                {/* Blurb - takes remaining space */}
+                <div className="text-sm md:text-base leading-relaxed text-white/95 font-serif italic overflow-auto flex-1 px-2">
                   {drawnCard.blurb}
                 </div>
-                <div className="mt-auto flex justify-end">
+
+                {/* Divider line */}
+                <div className="w-full h-px bg-gradient-to-r from-transparent via-white/30 to-transparent mt-4 mb-3"></div>
+
+                {/* Rarity icon at bottom */}
+                <div className="flex justify-end">
                   {React.createElement(getRarityStyle(drawnCard.rarity).icon, {
-                    className: `w-5 h-5 ${getRarityStyle(drawnCard.rarity).text}`,
+                    className: `w-6 h-6 ${getRarityStyle(drawnCard.rarity).text}`,
                   })}
                 </div>
+              </div>
+              </div>
+
+              {/* Electric border on top - outside overflow container */}
+              <div style={{ position: 'absolute', top: -16, left: -16, right: -16, bottom: -16, zIndex: 10, pointerEvents: 'none' }}>
+                <ElectricBorder color="#6d28d9" speed={1} chaos={0.7} thickness={5} style={{ borderRadius: 18, width: '100%', height: '100%' }}>
+                  <div style={{ width: '100%', height: '100%' }} />
+                </ElectricBorder>
               </div>
             </div>
           )}
