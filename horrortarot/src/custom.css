@@ -1,0 +1,196 @@
+/* --- Core Layout & Constraints --- */
+/* FORCE REBUILD */
+.app-container {
+  position: relative;
+  z-index: 10;
+  color: white;
+}
+
+.main-content-wrapper {
+  width: 90%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding-top: 2vh;
+}
+
+/* --- Header Styling --- */
+.horror-tarot-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.horror-tarot-title {
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: linear-gradient(145deg, #ff6b6b, #a855f7, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(255, 107, 107, 0.5);
+  margin: 0;
+  padding: 0;
+}
+
+.header-subtitle {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+  letter-spacing: 0.05em;
+  margin-top: 8px;
+}
+
+/* --- Audio Control Corner --- */
+.audio-control-corner {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (max-width: 767px) {
+  .horror-tarot-title {
+    font-size: 2rem;
+  }
+  .header-subtitle {
+    font-size: 0.85rem;
+  }
+  .audio-control-corner {
+    top: 10px;
+    right: 10px;
+    font-size: 0.85rem;
+    padding: 8px 12px;
+  }
+}
+
+/* --- Tarot Card Frame Constraint (Crucial) --- */
+.tarot-card-frame {
+  max-height: 400px;
+  aspect-ratio: 1 / 1.7;
+  margin: 30px auto;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  position: relative;
+  border-radius: 12px;
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(2px);
+}
+
+.no-frame-border { border: none !important; }
+
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.button-row-spaced {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+/* Responsive: stack buttons on small screens */
+@media (max-width: 767px) {
+  .button-row { flex-direction: column; }
+}
+
+/* Buttons */
+.btn-primary {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.btn-primary:hover { background: rgba(255,255,255,0.18); }
+.btn-secondary {
+  background: transparent;
+  border: 1px solid rgba(168, 85, 247, 0.6);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.06); }
+.btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+/* Card back grid + animations */
+.card-grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 8px;
+  padding: 12px;
+}
+.card-back {
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 10px;
+  background: linear-gradient(145deg, rgba(74,25,72,0.4), rgba(0,77,64,0.35));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.85);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+}
+.card-back::before {
+  content: '⟡';
+  font-size: 22px;
+}
+
+@keyframes mix-jitter {
+  0% { transform: translate3d(0,0,0) rotate(0deg); }
+  25% { transform: translate3d(-3px,2px,0) rotate(3deg); }
+  50% { transform: translate3d(2px,-3px,0) rotate(-4deg) scale(0.98); }
+  75% { transform: translate3d(3px,3px,0) rotate(2deg) scale(1.02); }
+  100% { transform: translate3d(0,0,0) rotate(0deg); }
+}
+.mixing .card-back { animation: mix-jitter 0.5s linear infinite; }
+
+.highlight { outline: 2px solid rgba(255,255,255,0.9); box-shadow: 0 0 12px rgba(255,255,255,0.6); }
+
+@keyframes fly-away {
+  to { transform: translate3d(0,-60px,0) scale(0.8); opacity: 0; }
+}
+.fly-away { animation: fly-away 400ms ease forwards; }
+
+/* Flip */
+.flip {
+  transform-style: preserve-3d;
+  animation: flipY 700ms ease forwards;
+}
+@keyframes flipY {
+  0% { transform: rotateY(0deg); }
+  50% { transform: rotateY(90deg); }
+  100% { transform: rotateY(180deg); }
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+}
+.card-face.back { transform: rotateY(0deg); }
+.card-face.front { transform: rotateY(180deg); }

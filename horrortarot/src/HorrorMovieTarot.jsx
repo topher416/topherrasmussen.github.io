@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import ElectricBorder from './ElectricBorder';
 import { Shuffle, Eye, Star, Calendar, Skull, Moon, Ghost, Crown, Sparkles, Music, VolumeX } from 'lucide-react';
 import * as Tone from 'tone';
+import './custom.css';
 
 const HorrorMovieTarot = () => {
   const [horrorMovies, setHorrorMovies] = useState([]);
@@ -289,31 +290,91 @@ const HorrorMovieTarot = () => {
   }
 
   return (
-    <div className="min-h-screen text-white">
-      {/* Summon Dark Organ - top right corner */}
-      <button
-        onClick={toggleAudio}
-        className="btn-secondary audio-control-corner"
-      >
-        {isPlaying ? <VolumeX className="w-5 h-5" /> : <Music className="w-5 h-5" />}
-        {isPlaying ? 'Silence the Organ' : '🎵 Summon Dark Organ'}
-      </button>
+    <>
+      <style>{`
+        .horror-tarot-header {
+          text-align: center;
+          margin-bottom: 30px;
+        }
+        .header-icons {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 16px;
+          margin-bottom: 12px;
+        }
+        .horror-tarot-title {
+          font-size: 3rem;
+          font-weight: 900;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          background: linear-gradient(145deg, #ff6b6b, #a855f7, #3b82f6);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          margin: 0;
+          padding: 0;
+        }
+        .header-subtitle {
+          font-size: 0.95rem;
+          color: rgba(255, 255, 255, 0.6);
+          font-style: italic;
+          letter-spacing: 0.05em;
+          margin-top: 8px;
+        }
+        .audio-control-corner {
+          position: fixed;
+          top: 15px;
+          right: 15px;
+          z-index: 100;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+        .button-row-spaced {
+          margin-top: 15px;
+          margin-bottom: 15px;
+        }
+        @media (max-width: 767px) {
+          .horror-tarot-title {
+            font-size: 2rem;
+          }
+          .header-subtitle {
+            font-size: 0.85rem;
+          }
+          .audio-control-corner {
+            top: 10px;
+            right: 10px;
+            font-size: 0.85rem;
+            padding: 8px 12px;
+          }
+        }
+      `}</style>
+      <div className="min-h-screen text-white">
+        {/* Summon Dark Organ - top right corner */}
+        <button
+          onClick={toggleAudio}
+          className="btn-secondary audio-control-corner"
+        >
+          {isPlaying ? <VolumeX className="w-5 h-5" /> : <Music className="w-5 h-5" />}
+          {isPlaying ? 'Silence the Organ' : '🎵 Summon Dark Organ'}
+        </button>
 
-      <div className="main-content-wrapper">
-        {/* Stylized Header */}
-        <div className="horror-tarot-header">
-          <div className="header-icons">
-            <Moon className="w-5 h-5 text-white/80" />
-            <Skull className="w-6 h-6 text-red-400" />
-            <Ghost className="w-5 h-5 text-blue-400" />
+        <div className="main-content-wrapper">
+          {/* Stylized Header */}
+          <div className="horror-tarot-header">
+            <div className="header-icons">
+              <Moon className="w-5 h-5 text-white/80" />
+              <Skull className="w-6 h-6 text-red-400" />
+              <Ghost className="w-5 h-5 text-blue-400" />
+            </div>
+            <h1 className="horror-tarot-title">
+              ☠ HORROR TAROT ☠
+            </h1>
+            <div className="header-subtitle">
+              Draw your fate from the cinema of screams
+            </div>
           </div>
-          <h1 className="horror-tarot-title">
-            ☠ HORROR TAROT ☠
-          </h1>
-          <div className="header-subtitle">
-            Draw your fate from the cinema of screams
-          </div>
-        </div>
 
         {/* Status text */}
         <div className="text-center text-sm text-white/70 mb-4">
@@ -436,6 +497,7 @@ const HorrorMovieTarot = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
