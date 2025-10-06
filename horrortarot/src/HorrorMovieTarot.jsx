@@ -7,16 +7,7 @@ import './custom.css';
 // Custom hook for tilt effect
 const useTiltEffect = (enabled) => {
   const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0 });
-  const [isMobile, setIsMobile] = useState(false);
   const cardRef = useRef(null);
-
-  useEffect(() => {
-    // Detect if device supports orientation
-    const checkMobile = () => {
-      setIsMobile('ontouchstart' in window && window.DeviceOrientationEvent);
-    };
-    checkMobile();
-  }, []);
 
   useEffect(() => {
     if (!enabled) {
@@ -24,20 +15,10 @@ const useTiltEffect = (enabled) => {
       return;
     }
 
-    if (isMobile) {
-      // Mobile: use device orientation
-      const handleOrientation = (event) => {
-        if (event.beta !== null && event.gamma !== null) {
-          // beta: front-back tilt (-180 to 180), gamma: left-right tilt (-90 to 90)
-          const rotateX = Math.max(-15, Math.min(15, event.beta - 45)); // Adjust for typical viewing angle
-          const rotateY = Math.max(-15, Math.min(15, event.gamma));
-          setTilt({ rotateX: -rotateX / 2, rotateY: rotateY / 2 });
-        }
-      };
+    // Only use mouse movement on desktop (not touch devices)
+    const isTouchDevice = 'ontouchstart' in window;
 
-      window.addEventListener('deviceorientation', handleOrientation);
-      return () => window.removeEventListener('deviceorientation', handleOrientation);
-    } else {
+    if (!isTouchDevice) {
       // Desktop: use mouse movement
       const handleMouseMove = (e) => {
         if (!cardRef.current) return;
@@ -68,7 +49,8 @@ const useTiltEffect = (enabled) => {
         };
       }
     }
-  }, [enabled, isMobile]);
+    // For mobile, skip tilt effect for now to avoid issues
+  }, [enabled]);
 
   return { tilt, cardRef };
 };
