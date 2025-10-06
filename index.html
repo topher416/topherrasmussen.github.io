@@ -66,12 +66,13 @@
     <div class="navbar">
         <a href="index.html">Home</a> |
         <a href="essay.html">Essay</a> |
+        <a href="horrortarot.html">Horror Tarot</a> |
         <a href="mailto:topher416@gmail.com">Contact</a>
     </div>
     
     <header>
         <h1>Topher Rasmussen</h1>
-        <p>writer | neurotic | vibe coder</p>
+        <p>neurotic, vibe coder, trying to learn how to write</p>
     </header>
     
     <main>
@@ -81,14 +82,7 @@
     </main>
     
     <footer>
-        <div class="webring">
-            <h3>Web Ring</h3>
-            <p>Proud member of the Writers & Thinkers Web Ring</p>
-            <a href="#">&lt;&lt; Previous</a> | 
-            <a href="#">Ring Home</a> | 
-            <a href="#">Random Site</a> | 
-            <a href="#">Next &gt;&gt;</a>
-        </div>
+
         
         <p><a href="mailto:topher416@gmail.com">Email</a> | <a href="https://www.linkedin.com/in/topherrasmussen">LinkedIn</a> | <a href="guestbook.html">Sign My Guestbook</a></p>
         <p>&copy; 2025 Topher Rasmussen</p>
@@ -96,14 +90,30 @@
         <div class="counter">
             <p>You are visitor number:</p>
             <div class="counter-display" style="font-family: 'Courier New', Courier, monospace; font-weight: bold; background-color: #000; color: #0f0; padding: 5px; display: inline-block; border: 2px inset #999;">00000372</div>
-            <p><small>Best viewed in Netscape Navigator 4.0 or Internet Explorer 5.5</small></p>
+            <p><small>I don't have any idea what I'm doing</small></p>
         </div>
         
         <div class="last-updated">
             Last updated: May 3, 2025
         </div>
     </footer>
+<div id="visitorCounter">Visitors: <span id="count">Loading...</span></div>
 
+<script>
+function displayCount(count) {
+  // Format the count to be 8 digits with leading zeros
+  const formattedCount = count.toString().padStart(8, '0');
+  document.querySelector('.counter-display').textContent = formattedCount;
+}
+
+// Create and append a script tag to request the count
+document.addEventListener('DOMContentLoaded', function() {
+  const scriptTag = document.createElement('script');
+  const timestamp = new Date().getTime(); // Prevent caching
+  scriptTag.src = 'https://script.google.com/macros/s/AKfycbwOYJRKO_zOwkLpCR4U_ENMiD7bgPtuWmXVe6ZTuT913aTHJ0c5Op3OEdfzJQAGUHdv/exec?action=increment&callback=displayCount&t=' + timestamp;
+  document.body.appendChild(scriptTag);
+});
+</script>
     <style>
         @keyframes rainbow-border {
             0% { border-color: red; }
@@ -123,39 +133,55 @@
         }
     </style>
 
-    <script>
-        // Define some color palettes
-        const colorSchemes = [
-            {
-                background: "#E6E6FA", // Lavender
-                text: "#483D8B",       // Dark Slate Blue
-                navbar: "#9370DB",     // Medium Purple
-            },
-            {
-                background: "#FFF8DC", // Cornsilk
-                text: "#8B4513",       // Saddle Brown
-                navbar: "#DEB887",     // Burly Wood
-            },
-            {
-                background: "#F0FFF0", // Honeydew
-                text: "#2E8B57",       // Sea Green
-                navbar: "#20B2AA",     // Light Sea Green
-            },
-            {
-                background: "#FFF0F5", // Lavender Blush
-                text: "#C71585",       // Medium Violet Red
-                navbar: "#DB7093",     // Pale Violet Red
-            }
-        ];
+<script>
+    // Define some color palettes
+   const colorSchemes = [
+    {
+        background: "#1E1E1E",
+        text: "#FFFFFF",
+        navbar: "#333333",
+        headerBorder: "#FFFFFF",
+        link: "#FFD700"
+    },
+    {
+        background: "#FFFFFF",
+        text: "#000000",
+        navbar: "#D3D3D3",
+        headerBorder: "#000000",
+        link: "#0000FF"
+    },
+    {
+        background: "#F5F5F5",
+        text: "#333333",
+        navbar: "#FF4500",
+        headerBorder: "#FF4500",
+        link: "#32CD32"
+    },
+    {
+        background: "#EAEAEA",
+        text: "#2F4F4F",
+        navbar: "#B0C4DE",
+        headerBorder: "#2F4F4F",
+        link: "#4682B4"
+    }
+];
+    // Pick a random scheme
+    const scheme = colorSchemes[Math.floor(Math.random() * colorSchemes.length)];
 
-        // Pick a random scheme
-        const scheme = colorSchemes[Math.floor(Math.random() * colorSchemes.length)];
+    // Apply the colors
+    document.body.style.backgroundColor = scheme.background;
+    document.body.style.color = scheme.text;
 
-        // Apply the colors
-        document.body.style.backgroundColor = scheme.background;
-        document.body.style.color = scheme.text;
-        const navbar = document.querySelector('.navbar');
-        if (navbar) navbar.style.backgroundColor = scheme.navbar;
-    </script>
+    const navbar = document.querySelector('.navbar');
+    if (navbar) navbar.style.backgroundColor = scheme.navbar;
+
+    const header = document.querySelector('header');
+    if (header) header.style.borderBottom = `2px solid ${scheme.headerBorder}`;
+
+    const links = document.querySelectorAll('a');
+    links.forEach(link => {
+        link.style.color = scheme.link;
+    });
+</script>
 </body>
 </html>
