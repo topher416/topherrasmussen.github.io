@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Shuffle, Eye, Star, Calendar, Skull, Moon, Zap, Flame, Ghost, Crown, Sparkles, Music, VolumeX } from 'lucide-react';
 import * as Tone from 'tone';
+import LiquidEther from './LiquidEther';
 
 const HorrorMovieTarot = () => {
   const [horrorMovies, setHorrorMovies] = useState([]);
@@ -273,12 +274,31 @@ const HorrorMovieTarot = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 via-red-900 to-black p-6 overflow-hidden relative">
-      {/* Animated background stripes */}
-      <div className="fixed inset-0 opacity-10">
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-500 to-transparent transform skew-y-12 animate-pulse"></div>
-        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-red-500 to-transparent transform -skew-y-12 animate-pulse delay-1000"></div>
+    <div className="min-h-screen p-6 overflow-hidden relative">
+      {/* Liquid Ether Background */}
+      <div className="fixed inset-0 z-0">
+        <LiquidEther
+          colors={['#5227FF', '#FF9FFC', '#B19EEF']}
+          mouseForce={20}
+          cursorSize={100}
+          isViscous={false}
+          viscous={30}
+          iterationsViscous={32}
+          iterationsPoisson={32}
+          resolution={0.5}
+          isBounce={false}
+          autoDemo={true}
+          autoSpeed={0.5}
+          autoIntensity={2.2}
+          takeoverDuration={0.25}
+          autoResumeDelay={3000}
+          autoRampDuration={0.6}
+          style={{ width: '100%', height: '100%' }}
+        />
       </div>
+      
+      {/* Dark overlay for readability */}
+      <div className="fixed inset-0 bg-black/30 z-10"></div>
 
       {/* Floating particles */}
       {particles.map(particle => (
@@ -290,7 +310,7 @@ const HorrorMovieTarot = () => {
             top: particle.y,
             opacity: particle.life / particle.maxLife,
             fontSize: '20px',
-            zIndex: 1
+            zIndex: 15
           }}
         >
           {particle.symbol}
@@ -303,7 +323,7 @@ const HorrorMovieTarot = () => {
              style={{ animationDuration: '0.1s' }}></div>
       </div>
 
-      <div className="max-w-6xl mx-auto relative z-10">
+      <div className="max-w-6xl mx-auto relative z-20">
         {/* Header with holographic effect - mobile optimized */}
         <div className="text-center mb-8 md:mb-12 relative px-4">
           <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-500 to-blue-500 blur-3xl opacity-20 animate-pulse"></div>
