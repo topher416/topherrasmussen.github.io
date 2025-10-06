@@ -290,12 +290,29 @@ const HorrorMovieTarot = () => {
 
   return (
     <div className="min-h-screen text-white">
+      {/* Summon Dark Organ - top right corner */}
+      <button
+        onClick={toggleAudio}
+        className="btn-secondary audio-control-corner"
+      >
+        {isPlaying ? <VolumeX className="w-5 h-5" /> : <Music className="w-5 h-5" />}
+        {isPlaying ? 'Silence the Organ' : '🎵 Summon Dark Organ'}
+      </button>
+
       <div className="main-content-wrapper">
-        {/* Top header icons */}
-        <div className="flex items-center justify-center gap-4 mb-6">
-          <Moon className="w-5 h-5 text-white/80" />
-          <Skull className="w-6 h-6 text-red-400" />
-          <Ghost className="w-5 h-5 text-blue-400" />
+        {/* Stylized Header */}
+        <div className="horror-tarot-header">
+          <div className="header-icons">
+            <Moon className="w-5 h-5 text-white/80" />
+            <Skull className="w-6 h-6 text-red-400" />
+            <Ghost className="w-5 h-5 text-blue-400" />
+          </div>
+          <h1 className="horror-tarot-title">
+            ☠ HORROR TAROT ☠
+          </h1>
+          <div className="header-subtitle">
+            Draw your fate from the cinema of screams
+          </div>
         </div>
 
         {/* Status text */}
@@ -303,19 +320,8 @@ const HorrorMovieTarot = () => {
           {allCards.length - deckPosition} cards remain in the ethereal deck
         </div>
 
-        {/* Isolated sound control */}
-        <div className="mb-8">
-          <button
-            onClick={toggleAudio}
-            className="btn-secondary w-full"
-          >
-            {isPlaying ? <VolumeX className="w-5 h-5" /> : <Music className="w-5 h-5" />}
-            {isPlaying ? 'Silence the Organ' : '🎵 Summon Dark Organ'}
-          </button>
-        </div>
-
         {/* Core deck controls: 3-button group */}
-        <div className="button-row mb-10">
+        <div className="button-row button-row-spaced">
           <button
             onClick={shuffleDeck}
             disabled={phase === 'shuffling' || phase === 'revealing'}

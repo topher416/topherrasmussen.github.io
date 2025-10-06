@@ -21,7 +21,69 @@ body { background: #000; color: #fff; }
   width: 90%;
   max-width: 600px;
   margin: 0 auto;
-  padding-top: 5vh;
+  padding-top: 2vh;
+}
+
+/* --- Header Styling --- */
+.horror-tarot-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.horror-tarot-title {
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: linear-gradient(145deg, #ff6b6b, #a855f7, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(255, 107, 107, 0.5);
+  margin: 0;
+  padding: 0;
+}
+
+.header-subtitle {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-style: italic;
+  letter-spacing: 0.05em;
+  margin-top: 8px;
+}
+
+/* --- Audio Control Corner --- */
+.audio-control-corner {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@media (max-width: 767px) {
+  .horror-tarot-title {
+    font-size: 2rem;
+  }
+  .header-subtitle {
+    font-size: 0.85rem;
+  }
+  .audio-control-corner {
+    top: 10px;
+    right: 10px;
+    font-size: 0.85rem;
+    padding: 8px 12px;
+  }
 }
 
 /* --- Tarot Card Frame Constraint (Crucial) --- */
@@ -43,6 +105,11 @@ body { background: #000; color: #fff; }
   display: flex;
   justify-content: space-between;
   gap: 12px;
+  margin-bottom: 15px;
+}
+
+.button-row-spaced {
+  margin-top: 15px;
   margin-bottom: 15px;
 }
 
