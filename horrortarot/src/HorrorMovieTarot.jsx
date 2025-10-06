@@ -52,6 +52,7 @@ const HorrorMovieTarot = () => {
   const arpSynthRef = useRef(null);
   const reverbRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const isPlayingRef = useRef(false);
   const timeoutIdsRef = useRef([]);
 
   useEffect(() => {
@@ -59,6 +60,9 @@ const HorrorMovieTarot = () => {
   }, [horrorMovies]);
 
   useEffect(() => {
+    // Keep ref in sync with state
+    isPlayingRef.current = isPlaying;
+
     const initAudio = async () => {
       if (audioEnabled && !synthRef.current) {
         // More reverb for haunting effect
@@ -108,7 +112,7 @@ const HorrorMovieTarot = () => {
           chords.forEach((chord, i) => {
             // Play chord
             const id = setTimeout(() => {
-              if (synthRef.current && isPlaying) {
+              if (synthRef.current && isPlayingRef.current) {
                 synthRef.current.triggerAttackRelease(chord, '2n');
               }
             }, i * 4000);
@@ -118,7 +122,7 @@ const HorrorMovieTarot = () => {
             const arp = arps[i];
             arp.forEach((note, noteIdx) => {
               const arpId = setTimeout(() => {
-                if (arpSynthRef.current && isPlaying) {
+                if (arpSynthRef.current && isPlayingRef.current) {
                   arpSynthRef.current.triggerAttackRelease(note, '16n');
                 }
               }, i * 4000 + noteIdx * 350);
@@ -127,12 +131,12 @@ const HorrorMovieTarot = () => {
           });
 
           const loopId = setTimeout(() => {
-            if (isPlaying) playChords();
+            if (isPlayingRef.current) playChords();
           }, chords.length * 4000);
           timeoutIdsRef.current.push(loopId);
         };
 
-        if (isPlaying) playChords();
+        if (isPlayingRef.current) playChords();
       }
     };
 
