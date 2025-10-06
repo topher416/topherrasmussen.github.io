@@ -51,6 +51,7 @@ const HorrorMovieTarot = () => {
   const synthRef = useRef(null);
   const reverbRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const timeoutIdsRef = useRef([]);
 
   useEffect(() => {
     if (horrorMovies.length > 0) setShuffledDeck(fisherYatesShuffle(horrorMovies));
@@ -59,39 +60,65 @@ const HorrorMovieTarot = () => {
   useEffect(() => {
     const initAudio = async () => {
       if (audioEnabled && !synthRef.current) {
-        reverbRef.current = new Tone.Reverb(6).toDestination();
-        const delayRef = new Tone.FeedbackDelay('8n', 0.4).connect(reverbRef.current);
+        // More reverb for haunting effect
+        reverbRef.current = new Tone.Reverb(8).toDestination();
+        // More echo with longer delay
+        const delayRef = new Tone.FeedbackDelay('8n', 0.6).connect(reverbRef.current);
         synthRef.current = new Tone.PolySynth(Tone.Synth, {
           oscillator: { type: 'sawtooth' },
-          envelope: { attack: 0.8, decay: 0.4, sustain: 0.6, release: 3 },
-          filter: { frequency: 150, rolloff: -24 },
+          // Shorter attack for more haunting, immediate sound
+          envelope: { attack: 0.3, decay: 0.6, sustain: 0.5, release: 4 },
+          filter: { frequency: 120, rolloff: -24 },
         }).connect(delayRef);
 
+        // All chords down one octave for darker, more haunting sound
         const chords = [
-          ['D3', 'F3', 'A3'],
-          ['A2', 'C3', 'E3'],
-          ['G2', 'Bb2', 'D3'],
-          ['F2', 'Ab2', 'C3'],
-          ['Bb2', 'Db3', 'F3'],
-          ['C3', 'Eb3', 'G3'],
-          ['E2', 'G2', 'B2'],
           ['D2', 'F2', 'A2'],
+          ['A1', 'C2', 'E2'],
+          ['G1', 'Bb1', 'D2'],
+          ['F1', 'Ab1', 'C2'],
+          ['Bb1', 'Db2', 'F2'],
+          ['C2', 'Eb2', 'G2'],
+          ['E1', 'G1', 'B1'],
+          ['D1', 'F1', 'A1'],
         ];
 
         const playChords = () => {
           if (!isPlaying) return;
+
+          // Clear any existing timeouts
+          timeoutIdsRef.current.forEach(id => clearTimeout(id));
+          timeoutIdsRef.current = [];
+
           chords.forEach((chord, i) => {
-            setTimeout(() => {
-              if (synthRef.current && isPlaying) synthRef.current.triggerAttackRelease(chord, '2n');
+            const id = setTimeout(() => {
+              if (synthRef.current && isPlaying) {
+                synthRef.current.triggerAttackRelease(chord, '2n');
+              }
             }, i * 4000);
+            timeoutIdsRef.current.push(id);
           });
-          setTimeout(playChords, chords.length * 4000);
+
+          const loopId = setTimeout(playChords, chords.length * 4000);
+          timeoutIdsRef.current.push(loopId);
         };
 
         if (isPlaying) playChords();
       }
     };
-    if (audioEnabled) Tone.start().then(initAudio);
+
+    if (audioEnabled) {
+      Tone.start().then(initAudio);
+    }
+
+    // Cleanup: stop all scheduled notes when isPlaying becomes false
+    if (!isPlaying) {
+      timeoutIdsRef.current.forEach(id => clearTimeout(id));
+      timeoutIdsRef.current = [];
+      if (synthRef.current) {
+        synthRef.current.releaseAll();
+      }
+    }
   }, [audioEnabled, isPlaying]);
 
   const toggleAudio = async () => {
