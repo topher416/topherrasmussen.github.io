@@ -4,6 +4,75 @@ import { Shuffle, Eye, Star, Calendar, Skull, Moon, Ghost, Crown, Sparkles, Musi
 import * as Tone from 'tone';
 import './custom.css';
 
+// Custom hook for tilt effect
+const useTiltEffect = (enabled) => {
+  const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0 });
+  const [isMobile, setIsMobile] = useState(false);
+  const cardRef = useRef(null);
+
+  useEffect(() => {
+    // Detect if device supports orientation
+    const checkMobile = () => {
+      setIsMobile('ontouchstart' in window && window.DeviceOrientationEvent);
+    };
+    checkMobile();
+  }, []);
+
+  useEffect(() => {
+    if (!enabled) {
+      setTilt({ rotateX: 0, rotateY: 0 });
+      return;
+    }
+
+    if (isMobile) {
+      // Mobile: use device orientation
+      const handleOrientation = (event) => {
+        if (event.beta !== null && event.gamma !== null) {
+          // beta: front-back tilt (-180 to 180), gamma: left-right tilt (-90 to 90)
+          const rotateX = Math.max(-15, Math.min(15, event.beta - 45)); // Adjust for typical viewing angle
+          const rotateY = Math.max(-15, Math.min(15, event.gamma));
+          setTilt({ rotateX: -rotateX / 2, rotateY: rotateY / 2 });
+        }
+      };
+
+      window.addEventListener('deviceorientation', handleOrientation);
+      return () => window.removeEventListener('deviceorientation', handleOrientation);
+    } else {
+      // Desktop: use mouse movement
+      const handleMouseMove = (e) => {
+        if (!cardRef.current) return;
+        const rect = cardRef.current.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        const mouseX = e.clientX - centerX;
+        const mouseY = e.clientY - centerY;
+
+        const rotateY = (mouseX / rect.width) * 20; // Max 20 degrees
+        const rotateX = -(mouseY / rect.height) * 20;
+
+        setTilt({ rotateX, rotateY });
+      };
+
+      const handleMouseLeave = () => {
+        setTilt({ rotateX: 0, rotateY: 0 });
+      };
+
+      const card = cardRef.current;
+      if (card) {
+        card.addEventListener('mousemove', handleMouseMove);
+        card.addEventListener('mouseleave', handleMouseLeave);
+        return () => {
+          card.removeEventListener('mousemove', handleMouseMove);
+          card.removeEventListener('mouseleave', handleMouseLeave);
+        };
+      }
+    }
+  }, [enabled, isMobile]);
+
+  return { tilt, cardRef };
+};
+
 const HorrorMovieTarot = () => {
   const [horrorMovies, setHorrorMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -53,6 +122,9 @@ const HorrorMovieTarot = () => {
   const [audioEnabled, setAudioEnabled] = useState(false);
   const synthRef = useRef(null);
   const arpSynthRef = useRef(null);
+
+  // Tilt effect for revealed card
+  const { tilt, cardRef: tiltCardRef } = useTiltEffect(phase === 'revealed');
   const reverbRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const isPlayingRef = useRef(false);
@@ -597,13 +669,26 @@ const HorrorMovieTarot = () => {
           {/* Revealed content fills frame */}
           {phase === 'revealed' && drawnCard && (
             <div
-              style={{ position: 'absolute', inset: 0 }}
+              ref={tiltCardRef}
+              style={{
+                position: 'absolute',
+                inset: 0,
+                perspective: '1000px',
+                transformStyle: 'preserve-3d'
+              }}
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
             >
               {/* Overflow container for cards only */}
-              <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
+              <div style={{
+                position: 'absolute',
+                inset: 0,
+                overflow: 'hidden',
+                transform: `rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
+                transition: 'transform 0.1s ease-out',
+                transformStyle: 'preserve-3d'
+              }}>
               {/* Next card behind (peek) */}
               {!cardTransition && (
                 <div className="absolute flex flex-col" style={{
