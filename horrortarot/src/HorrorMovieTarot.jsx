@@ -525,7 +525,7 @@ const HorrorMovieTarot = () => {
               <Ghost className="w-5 h-5 text-blue-400" />
             </div>
             <h1 className="horror-tarot-title">
-              ☠ HORROR TAROT ☠
+              HORROR TAROT
             </h1>
             <div className="header-subtitle">
               Draw your fate from the cinema of screams
