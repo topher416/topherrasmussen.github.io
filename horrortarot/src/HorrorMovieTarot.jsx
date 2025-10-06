@@ -49,6 +49,7 @@ const HorrorMovieTarot = () => {
   const [deckPosition, setDeckPosition] = useState(0);
   const [audioEnabled, setAudioEnabled] = useState(false);
   const synthRef = useRef(null);
+  const arpSynthRef = useRef(null);
   const reverbRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const timeoutIdsRef = useRef([]);
@@ -64,12 +65,20 @@ const HorrorMovieTarot = () => {
         reverbRef.current = new Tone.Reverb(8).toDestination();
         // More echo with longer delay
         const delayRef = new Tone.FeedbackDelay('8n', 0.6).connect(reverbRef.current);
+
+        // Chord synth
         synthRef.current = new Tone.PolySynth(Tone.Synth, {
           oscillator: { type: 'sawtooth' },
-          // Shorter attack for more haunting, immediate sound
           envelope: { attack: 0.3, decay: 0.6, sustain: 0.5, release: 4 },
           filter: { frequency: 120, rolloff: -24 },
         }).connect(delayRef);
+
+        // Arpeggio synth - higher pitched, quieter
+        arpSynthRef.current = new Tone.Synth({
+          oscillator: { type: 'sine' },
+          envelope: { attack: 0.05, decay: 0.2, sustain: 0.1, release: 1 },
+        }).connect(delayRef);
+        arpSynthRef.current.volume.value = -12; // Quieter than chords
 
         // All chords down one octave for darker, more haunting sound
         const chords = [
@@ -83,6 +92,18 @@ const HorrorMovieTarot = () => {
           ['D1', 'F1', 'A1'],
         ];
 
+        // Arpeggio patterns - notes from the chords played one at a time
+        const arps = [
+          ['D4', 'F4', 'A4', 'F4', 'D4', 'A4'],
+          ['A3', 'C4', 'E4', 'C4', 'A3', 'E4'],
+          ['G3', 'Bb3', 'D4', 'Bb3', 'G3', 'D4'],
+          ['F3', 'Ab3', 'C4', 'Ab3', 'F3', 'C4'],
+          ['Bb3', 'Db4', 'F4', 'Db4', 'Bb3', 'F4'],
+          ['C4', 'Eb4', 'G4', 'Eb4', 'C4', 'G4'],
+          ['E3', 'G3', 'B3', 'G3', 'E3', 'B3'],
+          ['D3', 'F3', 'A3', 'F3', 'D3', 'A3'],
+        ];
+
         const playChords = () => {
           if (!isPlaying) return;
 
@@ -91,12 +112,24 @@ const HorrorMovieTarot = () => {
           timeoutIdsRef.current = [];
 
           chords.forEach((chord, i) => {
+            // Play chord
             const id = setTimeout(() => {
               if (synthRef.current && isPlaying) {
                 synthRef.current.triggerAttackRelease(chord, '2n');
               }
             }, i * 4000);
             timeoutIdsRef.current.push(id);
+
+            // Play arpeggio over the chord
+            const arp = arps[i];
+            arp.forEach((note, noteIdx) => {
+              const arpId = setTimeout(() => {
+                if (arpSynthRef.current && isPlaying) {
+                  arpSynthRef.current.triggerAttackRelease(note, '16n');
+                }
+              }, i * 4000 + noteIdx * 350);
+              timeoutIdsRef.current.push(arpId);
+            });
           });
 
           const loopId = setTimeout(playChords, chords.length * 4000);
@@ -117,6 +150,9 @@ const HorrorMovieTarot = () => {
       timeoutIdsRef.current = [];
       if (synthRef.current) {
         synthRef.current.releaseAll();
+      }
+      if (arpSynthRef.current) {
+        arpSynthRef.current.triggerRelease();
       }
     }
   }, [audioEnabled, isPlaying]);
