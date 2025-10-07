@@ -808,9 +808,12 @@ const HorrorMovieTarot = () => {
                       </div>
                       {/* Rarity icon pinned to bottom-right over poster */}
                       <div style={{ position: 'absolute', right: 12, bottom: 12 }}>
-                        {React.createElement(getRarityStyle(drawnCard.rarity).icon, {
-                          className: `w-6 h-6 ${getRarityStyle(drawnCard.rarity).text}`,
-                        })}
+                        {(() => {
+                          const rarityStyle = getRarityStyle(drawnCard.rarity);
+                          return React.createElement(rarityStyle.icon, {
+                            className: `w-6 h-6 ${rarityStyle.text}`,
+                          });
+                        })()}
                       </div>
                     </div>
                   </div>
