@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ElectricBorder from './ElectricBorder';
-import { Shuffle, Eye, Star, Skull, Moon, Ghost, Crown, Sparkles, Music, VolumeX } from 'lucide-react';
+import { Shuffle, Eye, Star, Skull, Moon, Ghost, Crown, Sparkles, Music, VolumeX, ChevronLeft, ChevronRight } from 'lucide-react';
 import * as Tone from 'tone';
 import './custom.css';
 
@@ -153,53 +153,6 @@ const HorrorMovieTarot = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [phase, currentCardIndex, shuffledDeck]);
 
-  // Swipe navigation
-  const touchStartX = useRef(0);
-  const touchEndX = useRef(0);
-  const touchStartY = useRef(0);
-  const touchEndY = useRef(0);
-  const touchMoved = useRef(false);
-
-  const handleTouchStart = (e) => {
-    touchStartX.current = e.touches[0].clientX;
-    touchStartY.current = e.touches[0].clientY;
-    touchMoved.current = false;
-  };
-
-  const handleTouchMove = (e) => {
-    touchEndX.current = e.touches[0].clientX;
-    touchEndY.current = e.touches[0].clientY;
-    
-    const moveX = Math.abs(touchStartX.current - touchEndX.current);
-    const moveY = Math.abs(touchStartY.current - touchEndY.current);
-    
-    if (moveX > 10 || moveY > 10) {
-      touchMoved.current = true;
-      e.preventDefault();
-    }
-  };
-
-  const handleTouchEnd = (e) => {
-    if (phase !== 'revealed') return;
-    
-    const swipeDistanceX = touchStartX.current - touchEndX.current;
-    const swipeDistanceY = touchStartY.current - touchEndY.current;
-    const minSwipeDistance = 50;
-    
-    e.preventDefault();
-    
-    if (touchMoved.current && Math.abs(swipeDistanceX) > minSwipeDistance && Math.abs(swipeDistanceY) < 100) {
-      if (swipeDistanceX > 0) {
-        navigateCard('next');
-      } else {
-        navigateCard('prev');
-      }
-    } else if (!touchMoved.current) {
-      if (e.target.tagName !== 'A' && !e.target.closest('a')) {
-        setIsFlipped(!isFlipped);
-      }
-    }
-  };
 
   useEffect(() => {
     // Keep ref in sync with state
@@ -703,10 +656,8 @@ const HorrorMovieTarot = () => {
             <div
               ref={tiltCardRef}
               onClick={(e) => {
-                const isTouchDevice = 'ontouchstart' in window;
-                if (isTouchDevice) return;
-                
-                if (e.target.tagName !== 'A' && !e.target.closest('a')) {
+                if (e.target.tagName !== 'A' && !e.target.closest('a') && 
+                    !e.target.closest('button')) {
                   e.stopPropagation();
                   setIsFlipped(!isFlipped);
                 }
@@ -718,9 +669,6 @@ const HorrorMovieTarot = () => {
                 transformStyle: 'preserve-3d',
                 cursor: 'pointer'
               }}
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
             >
               {/* Overflow container for cards only */}
               <div style={{
@@ -1050,6 +998,65 @@ const HorrorMovieTarot = () => {
                   <div style={{ width: '100%', height: '100%' }} />
                 </ElectricBorder>
               </div>
+
+              {/* Navigation buttons - mobile only */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigateCard('prev');
+                }}
+                className="md:hidden"
+                style={{
+                  position: 'absolute',
+                  left: -8,
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  zIndex: 20,
+                  width: 48,
+                  height: 48,
+                  borderRadius: '50%',
+                  background: 'rgba(139, 92, 246, 0.9)',
+                  border: '2px solid rgba(255, 255, 255, 0.3)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
+                  transition: 'all 0.2s ease'
+                }}
+                onTouchStart={(e) => e.stopPropagation()}
+              >
+                <ChevronLeft className="w-6 h-6 text-white" />
+              </button>
+
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigateCard('next');
+                }}
+                className="md:hidden"
+                style={{
+                  position: 'absolute',
+                  right: -8,
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  zIndex: 20,
+                  width: 48,
+                  height: 48,
+                  borderRadius: '50%',
+                  background: 'rgba(139, 92, 246, 0.9)',
+                  border: '2px solid rgba(255, 255, 255, 0.3)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
+                  transition: 'all 0.2s ease'
+                }}
+                onTouchStart={(e) => e.stopPropagation()}
+              >
+                <ChevronRight className="w-6 h-6 text-white" />
+              </button>
             </div>
           )}
         </div>
