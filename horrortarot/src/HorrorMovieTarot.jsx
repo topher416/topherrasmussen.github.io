@@ -156,27 +156,47 @@ const HorrorMovieTarot = () => {
   // Swipe navigation
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
+  const touchStartY = useRef(0);
+  const touchEndY = useRef(0);
+  const touchMoved = useRef(false);
 
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+    touchMoved.current = false;
   };
 
   const handleTouchMove = (e) => {
     touchEndX.current = e.touches[0].clientX;
+    touchEndY.current = e.touches[0].clientY;
+    
+    const moveX = Math.abs(touchStartX.current - touchEndX.current);
+    const moveY = Math.abs(touchStartY.current - touchEndY.current);
+    
+    if (moveX > 10 || moveY > 10) {
+      touchMoved.current = true;
+      e.preventDefault();
+    }
   };
 
-  const handleTouchEnd = () => {
+  const handleTouchEnd = (e) => {
     if (phase !== 'revealed') return;
-    const swipeDistance = touchStartX.current - touchEndX.current;
+    
+    const swipeDistanceX = touchStartX.current - touchEndX.current;
+    const swipeDistanceY = touchStartY.current - touchEndY.current;
     const minSwipeDistance = 50;
-
-    if (Math.abs(swipeDistance) > minSwipeDistance) {
-      if (swipeDistance > 0) {
-        // Swiped left - next card
+    
+    e.preventDefault();
+    
+    if (touchMoved.current && Math.abs(swipeDistanceX) > minSwipeDistance && Math.abs(swipeDistanceY) < 100) {
+      if (swipeDistanceX > 0) {
         navigateCard('next');
       } else {
-        // Swiped right - previous card
         navigateCard('prev');
+      }
+    } else if (!touchMoved.current) {
+      if (e.target.tagName !== 'A' && !e.target.closest('a')) {
+        setIsFlipped(!isFlipped);
       }
     }
   };
@@ -683,7 +703,9 @@ const HorrorMovieTarot = () => {
             <div
               ref={tiltCardRef}
               onClick={(e) => {
-                // Only flip if clicking directly on the card, not on links or buttons
+                const isTouchDevice = 'ontouchstart' in window;
+                if (isTouchDevice) return;
+                
                 if (e.target.tagName !== 'A' && !e.target.closest('a')) {
                   e.stopPropagation();
                   setIsFlipped(!isFlipped);
