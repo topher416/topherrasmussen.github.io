@@ -424,10 +424,11 @@ const HorrorMovieTarot = () => {
 
   const navigateCard = (direction) => {
     if (phase !== 'revealed') return;
+    if (isFlipped) return;
 
     setSlideDirection(direction === 'next' ? 'left' : 'right');
     setCardTransition(true);
-    setIsFlipped(false); // Reset flip when changing cards
+    setIsFlipped(false);
 
     setTimeout(() => {
       const newIndex = direction === 'next'
@@ -1005,6 +1006,7 @@ const HorrorMovieTarot = () => {
                   e.stopPropagation();
                   navigateCard('prev');
                 }}
+                disabled={isFlipped}
                 className="md:hidden"
                 style={{
                   position: 'absolute',
@@ -1015,14 +1017,15 @@ const HorrorMovieTarot = () => {
                   width: 48,
                   height: 48,
                   borderRadius: '50%',
-                  background: 'rgba(139, 92, 246, 0.9)',
+                  background: isFlipped ? 'rgba(139, 92, 246, 0.3)' : 'rgba(139, 92, 246, 0.9)',
                   border: '2px solid rgba(255, 255, 255, 0.3)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  cursor: 'pointer',
+                  cursor: isFlipped ? 'not-allowed' : 'pointer',
                   boxShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
-                  transition: 'all 0.2s ease'
+                  transition: 'all 0.2s ease',
+                  opacity: isFlipped ? 0.4 : 1
                 }}
                 onTouchStart={(e) => e.stopPropagation()}
               >
@@ -1034,6 +1037,7 @@ const HorrorMovieTarot = () => {
                   e.stopPropagation();
                   navigateCard('next');
                 }}
+                disabled={isFlipped}
                 className="md:hidden"
                 style={{
                   position: 'absolute',
@@ -1044,14 +1048,15 @@ const HorrorMovieTarot = () => {
                   width: 48,
                   height: 48,
                   borderRadius: '50%',
-                  background: 'rgba(139, 92, 246, 0.9)',
+                  background: isFlipped ? 'rgba(139, 92, 246, 0.3)' : 'rgba(139, 92, 246, 0.9)',
                   border: '2px solid rgba(255, 255, 255, 0.3)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  cursor: 'pointer',
+                  cursor: isFlipped ? 'not-allowed' : 'pointer',
                   boxShadow: '0 4px 12px rgba(0, 0, 0, 0.5)',
-                  transition: 'all 0.2s ease'
+                  transition: 'all 0.2s ease',
+                  opacity: isFlipped ? 0.4 : 1
                 }}
                 onTouchStart={(e) => e.stopPropagation()}
               >
