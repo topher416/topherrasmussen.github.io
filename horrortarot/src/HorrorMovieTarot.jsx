@@ -129,9 +129,10 @@ const HorrorMovieTarot = () => {
   const [audioEnabled, setAudioEnabled] = useState(false);
   const synthRef = useRef(null);
   const arpSynthRef = useRef(null);
+  const [isFlipped, setIsFlipped] = useState(false);
 
-  // Tilt effect for revealed card
-  const { tilt, cardRef: tiltCardRef } = useTiltEffect(phase === 'revealed');
+  // Tilt effect for revealed card (disabled when flipped)
+  const { tilt, cardRef: tiltCardRef } = useTiltEffect(phase === 'revealed' && !isFlipped);
   const reverbRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const isPlayingRef = useRef(false);
@@ -403,6 +404,7 @@ const HorrorMovieTarot = () => {
       setPhase('revealed');
       setFlyAway(false);
       setFlipping(false);
+      setIsFlipped(false); // Reset to front side
     }, 1300);
 
     setTimeout(() => {
@@ -431,6 +433,7 @@ const HorrorMovieTarot = () => {
             setPhase('revealed');
             setFlyAway(false);
             setFlipping(false);
+            setIsFlipped(false); // Reset to front side
           };
           return;
         } catch (_) {}
@@ -442,6 +445,7 @@ const HorrorMovieTarot = () => {
       setPhase('revealed');
       setFlyAway(false);
       setFlipping(false);
+      setIsFlipped(false); // Reset to front side
     }, 900);
   };
 
@@ -450,6 +454,7 @@ const HorrorMovieTarot = () => {
 
     setSlideDirection(direction === 'next' ? 'left' : 'right');
     setCardTransition(true);
+    setIsFlipped(false); // Reset flip when changing cards
 
     setTimeout(() => {
       const newIndex = direction === 'next'
@@ -677,11 +682,19 @@ const HorrorMovieTarot = () => {
           {phase === 'revealed' && drawnCard && (
             <div
               ref={tiltCardRef}
+              onClick={(e) => {
+                // Only flip if clicking directly on the card, not on links or buttons
+                if (e.target.tagName !== 'A' && !e.target.closest('a')) {
+                  e.stopPropagation();
+                  setIsFlipped(!isFlipped);
+                }
+              }}
               style={{
                 position: 'absolute',
                 inset: 0,
                 perspective: '1000px',
-                transformStyle: 'preserve-3d'
+                transformStyle: 'preserve-3d',
+                cursor: 'pointer'
               }}
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
@@ -713,31 +726,52 @@ const HorrorMovieTarot = () => {
                 }} />
               )}
 
-              {/* Current card */}
-              <div className="absolute flex flex-col" style={{
-                top: -16,
-                left: -16,
-                right: -16,
-                bottom: -16,
-                zIndex: 5,
-                backgroundImage: 'linear-gradient(135deg, rgba(20, 20, 30, 0.95), rgba(30, 20, 40, 0.95))',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backdropFilter: 'blur(10px)',
-                borderRadius: '12px',
-                border: '2px solid rgba(255, 255, 255, 0.3)',
-                boxShadow: 'inset 0 0 60px rgba(0, 0, 0, 0.5)',
-                padding: '24px',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'flex-start',
-                gap: 12,
-                minHeight: 0,
-                transform: cardTransition
-                  ? `translateX(${slideDirection === 'left' ? '-120%' : '120%'}) rotate(${slideDirection === 'left' ? '-15deg' : '15deg'})`
-                  : 'translateX(0) rotate(0deg)',
-                transition: 'transform 0.25s cubic-bezier(0.4, 0, 0.2, 1)'
-              }}>
+              {/* Current card - with flip container */}
+              <div
+                className="absolute"
+                style={{
+                  top: -16,
+                  left: -16,
+                  right: -16,
+                  bottom: -16,
+                  zIndex: 15,
+                  transformStyle: 'preserve-3d',
+                  perspective: '1000px',
+                  transform: cardTransition
+                    ? `translateX(${slideDirection === 'left' ? '-120%' : '120%'}) rotate(${slideDirection === 'left' ? '-15deg' : '15deg'})`
+                    : 'translateX(0) rotate(0deg)',
+                  transition: 'transform 0.25s cubic-bezier(0.4, 0, 0.2, 1)'
+                }}
+              >
+                <div style={{
+                  position: 'relative',
+                  width: '100%',
+                  height: '100%',
+                  transformStyle: 'preserve-3d',
+                  transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
+                  transition: 'transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1)'
+                }}>
+                  {/* FRONT SIDE - Movie poster */}
+                  <div className="flex flex-col" style={{
+                    position: 'absolute',
+                    top: 16,
+                    left: 16,
+                    right: 16,
+                    bottom: 16,
+                    backfaceVisibility: 'hidden',
+                    WebkitBackfaceVisibility: 'hidden',
+                    pointerEvents: isFlipped ? 'none' : 'auto',
+                    backgroundImage: 'linear-gradient(135deg, rgba(20, 20, 30, 0.95), rgba(30, 20, 40, 0.95))',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    backdropFilter: 'blur(10px)',
+                    borderRadius: '12px',
+                    boxShadow: 'inset 0 0 60px rgba(0, 0, 0, 0.5)',
+                    padding: '20px',
+                    gap: 12,
+                    minHeight: 0,
+                    overflow: 'hidden'
+                  }}>
                 {/* Top bar: title left, year right (no rating, no type) */}
                 <div className="flex items-center justify-between" style={{
                   padding: '8px 12px',
@@ -757,7 +791,7 @@ const HorrorMovieTarot = () => {
                   <div className="text-white/85 text-xs font-mono">{drawnCard.year}</div>
                 </div>
 
-                
+
                 {/* Poster fills card width; bottom gradient overlay hosts blurb + icon */}
                 {drawnCard.posterUrl && (
                   <div style={{ position: 'relative', flex: '1 1 auto', borderRadius: 12, overflow: 'hidden', border: '1px solid rgba(255,255,255,0.25)', boxShadow: '0 6px 18px rgba(0,0,0,0.45), inset 0 0 32px rgba(0,0,0,0.25)' }}>
@@ -784,6 +818,204 @@ const HorrorMovieTarot = () => {
 
                 {/* Bottom section: blurb + divider + icon row */}
                 {/* Optional providers (hidden) - section removed from bottom overlay version */}
+                  </div>
+
+                  {/* BACK SIDE - Details & Links */}
+                  <div className="flex flex-col" style={{
+                    position: 'absolute',
+                    top: 16,
+                    left: 16,
+                    right: 16,
+                    bottom: 16,
+                    backfaceVisibility: 'hidden',
+                    WebkitBackfaceVisibility: 'hidden',
+                    pointerEvents: isFlipped ? 'auto' : 'none',
+                    transform: 'rotateY(180deg)',
+                    backgroundImage: 'linear-gradient(135deg, rgba(15, 10, 20, 0.98), rgba(25, 15, 30, 0.98))',
+                    backdropFilter: 'blur(10px)',
+                    borderRadius: '12px',
+                    boxShadow: 'inset 0 0 80px rgba(139, 92, 246, 0.15)',
+                    padding: '20px',
+                    gap: 12,
+                    overflow: 'auto'
+                  }}>
+                    {/* Header */}
+                    <div style={{
+                      textAlign: 'center',
+                      padding: '12px',
+                      background: 'linear-gradient(to bottom, rgba(139, 92, 246, 0.15), rgba(139, 92, 246, 0.05))',
+                      border: '1px solid rgba(139, 92, 246, 0.3)',
+                      borderRadius: 8
+                    }}>
+                      <h3 className="font-serif text-xl text-white/95" style={{ margin: 0 }}>
+                        {drawnCard.title}
+                      </h3>
+                      <div className="text-sm text-white/60 mt-1">
+                        {drawnCard.director} • {drawnCard.year}
+                      </div>
+                    </div>
+
+                    {/* Links section */}
+                    <div style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      gap: 12,
+                      padding: '16px',
+                      background: 'rgba(0, 0, 0, 0.3)',
+                      borderRadius: 8,
+                      border: '1px solid rgba(255, 255, 255, 0.1)'
+                    }}>
+                      <div className="text-sm text-white/50 uppercase tracking-wider mb-2" style={{ letterSpacing: '0.1em' }}>
+                        More Information
+                      </div>
+
+                      {drawnCard.imdbId && (
+                        <a
+                          href={`https://www.imdb.com/title/${drawnCard.imdbId}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            window.open(`https://www.imdb.com/title/${drawnCard.imdbId}`, '_blank');
+                          }}
+                          style={{
+                            padding: '12px 16px',
+                            background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(79, 70, 229, 0.1))',
+                            border: '1px solid rgba(139, 92, 246, 0.3)',
+                            borderRadius: 6,
+                            textDecoration: 'none',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 8,
+                            fontSize: '0.9rem',
+                            color: 'rgba(255, 255, 255, 0.9)',
+                            transition: 'all 0.2s',
+                            cursor: 'pointer'
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.color = 'rgb(192, 132, 252)';
+                            e.currentTarget.style.boxShadow = '0 0 20px rgba(192, 132, 252, 0.6)';
+                            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(79, 70, 229, 0.3))';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.color = 'rgba(255, 255, 255, 0.9)';
+                            e.currentTarget.style.boxShadow = 'none';
+                            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(79, 70, 229, 0.1))';
+                          }}
+                        >
+                          <Eye className="w-4 h-4" />
+                          <span>View on IMDb</span>
+                        </a>
+                      )}
+
+                      <a
+                        href={drawnCard.wikipediaUrl || `https://en.wikipedia.org/wiki/${encodeURIComponent(drawnCard.title)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          e.preventDefault();
+                          window.open(drawnCard.wikipediaUrl || `https://en.wikipedia.org/wiki/${encodeURIComponent(drawnCard.title)}`, '_blank');
+                        }}
+                        style={{
+                          padding: '12px 16px',
+                          background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(79, 70, 229, 0.1))',
+                          border: '1px solid rgba(139, 92, 246, 0.3)',
+                          borderRadius: 6,
+                          textDecoration: 'none',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 8,
+                          fontSize: '0.9rem',
+                          color: 'rgba(255, 255, 255, 0.9)',
+                          transition: 'all 0.2s',
+                          cursor: 'pointer'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.color = 'rgb(192, 132, 252)';
+                          e.currentTarget.style.boxShadow = '0 0 20px rgba(192, 132, 252, 0.6)';
+                          e.currentTarget.style.background = 'linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(79, 70, 229, 0.3))';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.color = 'rgba(255, 255, 255, 0.9)';
+                          e.currentTarget.style.boxShadow = 'none';
+                          e.currentTarget.style.background = 'linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(79, 70, 229, 0.1))';
+                        }}
+                      >
+                        <span style={{ fontSize: '1rem' }}>📖</span>
+                        <span>Read on Wikipedia</span>
+                      </a>
+                    </div>
+
+                    {/* Watch providers */}
+                    {drawnCard.watchProviders && (drawnCard.watchProviders.flatrate?.length > 0 || drawnCard.watchProviders.rent?.length > 0) && (
+                      <div style={{
+                        padding: '16px',
+                        background: 'rgba(0, 0, 0, 0.3)',
+                        borderRadius: 8,
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                        flex: 1,
+                        overflow: 'auto'
+                      }}>
+                        <div className="text-sm text-white/50 uppercase tracking-wider mb-3" style={{ letterSpacing: '0.1em' }}>
+                          Where to Watch
+                        </div>
+
+                        {drawnCard.watchProviders.flatrate?.length > 0 && (
+                          <div style={{ marginBottom: 16 }}>
+                            <div className="text-xs text-white/40 mb-2">STREAMING</div>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                              {drawnCard.watchProviders.flatrate.slice(0, 6).map((provider, idx) => (
+                                <div key={idx} style={{
+                                  padding: '6px 12px',
+                                  background: 'rgba(139, 92, 246, 0.15)',
+                                  border: '1px solid rgba(139, 92, 246, 0.3)',
+                                  borderRadius: 4,
+                                  fontSize: '0.75rem',
+                                  color: 'rgba(255, 255, 255, 0.85)'
+                                }}>
+                                  {provider.name}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        {drawnCard.watchProviders.rent?.length > 0 && (
+                          <div>
+                            <div className="text-xs text-white/40 mb-2">RENT/BUY</div>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                              {drawnCard.watchProviders.rent.slice(0, 4).map((provider, idx) => (
+                                <div key={idx} style={{
+                                  padding: '6px 12px',
+                                  background: 'rgba(139, 92, 246, 0.1)',
+                                  border: '1px solid rgba(139, 92, 246, 0.2)',
+                                  borderRadius: 4,
+                                  fontSize: '0.75rem',
+                                  color: 'rgba(255, 255, 255, 0.7)'
+                                }}>
+                                  {provider.name}
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    )}
+
+                    {/* Hint to flip back */}
+                    <div style={{
+                      textAlign: 'center',
+                      padding: '8px',
+                      color: 'rgba(255, 255, 255, 0.3)',
+                      fontSize: '0.75rem',
+                      fontStyle: 'italic'
+                    }}>
+                      Click to return
+                    </div>
+                  </div>
+                </div>
               </div>
               </div>
 

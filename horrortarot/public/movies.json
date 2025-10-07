@@ -11,7 +11,8 @@
     "imdbId": "tt0055018",
     "backdropUrl": "https://image.tmdb.org/t/p/w500/oog0DJtSuPnWoSTYM7cKmAFbeuU.jpg",
     "tmdbId": 16372,
-    "watchProviders": null
+    "watchProviders": null,
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Innocents_(1961_film)"
   },
   {
     "title": "Hereditary",
@@ -81,7 +82,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Hereditary"
   },
   {
     "title": "The Wailing",
@@ -183,7 +185,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Wailing"
   },
   {
     "title": "The Orphanage",
@@ -227,7 +230,8 @@
         }
       ],
       "buy": []
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Orphanage_(2007_film)"
   },
   {
     "title": "Lake Mungo",
@@ -269,7 +273,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Lake_Mungo_(film)"
   },
   {
     "title": "The Lighthouse",
@@ -347,7 +352,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Lighthouse_%282019_film%29"
   },
   {
     "title": "Kairo (Pulse)",
@@ -421,7 +427,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Pulse_(2001_film)"
   },
   {
     "title": "Get Out",
@@ -495,7 +502,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Get_Out_%282017_film%29"
   },
   {
     "title": "The Autopsy of Jane Doe",
@@ -505,7 +513,7 @@
     "blurb": "Single-location supernatural mystery in morgue. Father-son coroners uncover witchcraft secrets through exceptional atmospheric tension without gore reliance.",
     "rarity": "rare",
     "posterUrl": "https://image.tmdb.org/t/p/w500/6K0wjP8kPCiPYy9PtXBGuypyt5I.jpg",
-    "director": "André Øvredal",
+    "director": "Andr\u00e9 \u00d8vredal",
     "imdbId": "tt3289956",
     "backdropUrl": "https://image.tmdb.org/t/p/w500/7GEi50BH2gjWuhoAx55Mmb0f7Vj.jpg",
     "tmdbId": 397243,
@@ -573,7 +581,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Autopsy_of_Jane_Doe"
   },
   {
     "title": "A Tale of Two Sisters",
@@ -601,7 +610,8 @@
       ],
       "rent": [],
       "buy": []
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/A_Tale_of_Two_Sisters_%28film%29"
   },
   {
     "title": "Ringu",
@@ -707,7 +717,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ring_(film)"
   },
   {
     "title": "The Night House",
@@ -777,7 +788,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Night_House"
   },
   {
     "title": "His House",
@@ -805,7 +817,8 @@
       ],
       "rent": [],
       "buy": []
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/His_House"
   },
   {
     "title": "Crimson Peak",
@@ -875,7 +888,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Crimson_Peak"
   },
   {
     "title": "The Ritual",
@@ -903,7 +917,8 @@
       ],
       "rent": [],
       "buy": []
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Ritual_%282017_film%29"
   },
   {
     "title": "Insidious",
@@ -973,7 +988,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Insidious_(film)"
   },
   {
     "title": "Midsommar",
@@ -1051,7 +1067,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Midsommar"
   },
   {
     "title": "A Dark Song",
@@ -1145,7 +1162,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/A_Dark_Song"
   },
   {
     "title": "The Blackcoat's Daughter",
@@ -1210,7 +1228,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Blackcoat%27s_Daughter"
   },
   {
     "title": "Ghost Stories",
@@ -1304,7 +1323,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ghost_Stories_(2017_film)"
   },
   {
     "title": "Noroi: The Curse",
@@ -1314,7 +1334,7 @@
     "blurb": "Japanese found footage documentary style about paranormal investigator. Complex mythology and authentic presentation create deeply unsettling experience.",
     "rarity": "common",
     "posterUrl": "https://image.tmdb.org/t/p/w500/yjXTmyLaOqljI5pFNbrEZ213dSW.jpg",
-    "director": "Kôji Shiraishi",
+    "director": "K\u00f4ji Shiraishi",
     "imdbId": "tt0930083",
     "backdropUrl": "https://image.tmdb.org/t/p/w500/9f29yseBYdoBUp5sFPElpeHVlck.jpg",
     "tmdbId": 21506,
@@ -1398,7 +1418,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Noroi%3A_The_Curse"
   },
   {
     "title": "Personal Shopper",
@@ -1472,7 +1493,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Personal_Shopper"
   },
   {
     "title": "Relic",
@@ -1554,7 +1576,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Relic_(2020_film)"
   },
   {
     "title": "The Lodge",
@@ -1615,7 +1638,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Lodge_(film)"
   },
   {
     "title": "The Empty Man",
@@ -1685,7 +1709,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Empty_Man_(film)"
   },
   {
     "title": "Ju-On: The Grudge",
@@ -1730,7 +1755,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Ju-On%3A_The_Grudge"
   },
   {
     "title": "Us",
@@ -1800,7 +1826,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Us_%282019_film%29"
   },
   {
     "title": "The Invitation",
@@ -1874,7 +1901,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Invitation_%282015_film%29"
   },
   {
     "title": "Dark Water",
@@ -1936,7 +1964,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Dark_Water_(2002_film)"
   },
   {
     "title": "Mama",
@@ -2014,7 +2043,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Mama_%282013_film%29"
   },
   {
     "title": "The Skeleton Key",
@@ -2088,7 +2118,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Skeleton_Key"
   },
   {
     "title": "In the Mouth of Madness",
@@ -2154,7 +2185,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/In_the_Mouth_of_Madness_%281994_film%29"
   },
   {
     "title": "The Blair Witch Project",
@@ -2220,7 +2252,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Blair_Witch_Project"
   },
   {
     "title": "Candyman",
@@ -2302,7 +2335,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Candyman_%281992_film%29"
   },
   {
     "title": "Candyman",
@@ -2384,7 +2418,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Candyman_%282021_film%29"
   },
   {
     "title": "The Ninth Gate",
@@ -2454,7 +2489,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Ninth_Gate"
   },
   {
     "title": "Angel Heart",
@@ -2532,7 +2568,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Angel_Heart"
   },
   {
     "title": "Jacob's Ladder",
@@ -2598,7 +2635,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Jacob%27s_Ladder_%281990_film%29"
   },
   {
     "title": "The Gift",
@@ -2680,7 +2718,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Gift_%282000_film%29"
   },
   {
     "title": "Shutter",
@@ -2709,7 +2748,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Shutter_%282004_film%29"
   },
   {
     "title": "The Eye",
@@ -2733,7 +2773,8 @@
       ],
       "rent": [],
       "buy": []
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Eye_%282002_film%29"
   },
   {
     "title": "REC",
@@ -2743,7 +2784,7 @@
     "blurb": "Spanish found footage in quarantined apartment building. Reporter trapped with infected residents creates claustrophobic supernatural infection horror.",
     "rarity": "common",
     "posterUrl": "https://image.tmdb.org/t/p/w500/hgyJR4sgMsee6xMFM3xYiG6cDCh.jpg",
-    "director": "Jaume Balagueró",
+    "director": "Jaume Balaguer\u00f3",
     "imdbId": "tt1038988",
     "backdropUrl": "https://image.tmdb.org/t/p/w500/xfrguTH6maYiGsC8FXiQ9N3lZXw.jpg",
     "tmdbId": 8329,
@@ -2803,7 +2844,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rec_(film)"
   },
   {
     "title": "The Mist",
@@ -2889,7 +2931,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Mist_%282007_film%29"
   },
   {
     "title": "Apostle",
@@ -2917,7 +2960,8 @@
       ],
       "rent": [],
       "buy": []
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Apostle_(film)"
   },
   {
     "title": "The Endless",
@@ -3011,7 +3055,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Endless_(film)"
   },
   {
     "title": "A Ghost Story",
@@ -3085,7 +3130,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/A_Ghost_Story"
   },
   {
     "title": "I Am the Pretty Thing That Lives in the House",
@@ -3113,7 +3159,8 @@
       ],
       "rent": [],
       "buy": []
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/I_Am_the_Pretty_Thing_That_Lives_in_the_House"
   },
   {
     "title": "The Little Stranger",
@@ -3191,7 +3238,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Little_Stranger_%28film%29"
   },
   {
     "title": "Kill List",
@@ -3281,7 +3329,8 @@
           "logo": "https://image.tmdb.org/t/p/original/pTnn5JwWr4p3pG8H6VrpiQo7Vs0.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Kill_List"
   },
   {
     "title": "The Haunting",
@@ -3351,7 +3400,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Haunting_%281963_film%29"
   },
   {
     "title": "The Sixth Sense",
@@ -3433,7 +3483,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Sixth_Sense"
   },
   {
     "title": "The Others",
@@ -3443,7 +3494,7 @@
     "blurb": "Nicole Kidman anchors this candlelit Gothic mansion ghost story that builds dread through isolation and suggestion. Elegance personified in supernatural terror.",
     "rarity": "epic",
     "posterUrl": "https://image.tmdb.org/t/p/w500/p8g1vlTvpM6nr2hMMiZ1fUlKF0D.jpg",
-    "director": "Alejandro Amenábar",
+    "director": "Alejandro Amen\u00e1bar",
     "imdbId": "tt0230600",
     "backdropUrl": "https://image.tmdb.org/t/p/w500/y5hbHJbERDFurustaqcVamN84Y0.jpg",
     "tmdbId": 1933,
@@ -3527,7 +3578,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Others_%282001_film%29"
   },
   {
     "title": "The Witch",
@@ -3597,7 +3649,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Witch_%282015_film%29"
   },
   {
     "title": "Rosemary's Baby",
@@ -3683,14 +3736,15 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Rosemary%27s_Baby"
   },
   {
     "title": "Nosferatu",
     "year": 2024,
     "score": 94,
     "type": "Film",
-    "blurb": "Eggers' Gothic vampire remake with meticulous period craftsmanship. Bill Skarsgård and exceptional production design create atmospheric masterpiece.",
+    "blurb": "Eggers' Gothic vampire remake with meticulous period craftsmanship. Bill Skarsg\u00e5rd and exceptional production design create atmospheric masterpiece.",
     "rarity": "epic",
     "posterUrl": "https://image.tmdb.org/t/p/w500/5qGIxdEO841C0tdY8vOdLoRVrr0.jpg",
     "director": "Robert Eggers",
@@ -3777,7 +3831,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Nosferatu_%282024_film%29"
   },
   {
     "title": "Don't Look Now",
@@ -3838,7 +3893,8 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/Don%27t_Look_Now_%281973_film%29"
   },
   {
     "title": "The Ring",
@@ -3924,6 +3980,7 @@
           "logo": "https://image.tmdb.org/t/p/original/19fkcOz0xeUgCVW8tO85uOYnYK9.jpg"
         }
       ]
-    }
+    },
+    "wikipediaUrl": "https://en.wikipedia.org/wiki/The_Ring_(2002_film)"
   }
 ]
