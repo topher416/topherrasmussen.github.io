@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytic Introspections from an Actor's Perspective - Topher Rasmussen</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #FFFFFF;
+            color: #000000;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .navbar {
+            background-color: #333333;
+            padding: 10px 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar a {
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: inline-block;
+        }
+        
+        .navbar a:hover {
+            background-color: #555555;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px 20px;
+            border-bottom: 2px solid #000000;
+        }
+        
+        header h1 {
+            margin: 0 0 20px;
+            font-size: 2.5em;
+        }
+        
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: #FFFFFF;
+        }
+        
+        h2 {
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #CCCCCC;
+            padding-bottom: 10px;
+        }
+        
+        h3 {
+            font-size: 1.4em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        
+        blockquote {
+            margin: 30px 40px;
+            padding: 20px;
+            background-color: #F9F9F9;
+            border-left: 4px solid #CCCCCC;
+            font-style: italic;
+        }
+        
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-style: normal;
+            font-size: 0.9em;
+        }
+        
+        .author-info {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .table-of-contents {
+            margin: 40px 0;
+            padding: 20px;
+            background-color: #F5F5F5;
+        }
+        
+        .table-of-contents h2 {
+            border-bottom: none;
+            margin-top: 0;
+        }
+        
+        .table-of-contents ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .table-of-contents li {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .table-of-contents .subsection {
+            padding-left: 40px;
+            font-size: 0.95em;
+        }
+        
+        footer {
+            background-color: #F5F5F5;
+            padding: 30px;
+            text-align: center;
+            margin-top: 60px;
+            border-top: 2px solid #CCCCCC;
+        }
+        
+        footer a {
+            color: #0066CC;
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .counter {
+            margin: 20px 0;
+        }
+        
+        .counter-display {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            background-color: #000;
+            color: #0f0;
+            padding: 5px;
+            display: inline-block;
+            border: 2px inset #999;
+        }
+        
+        .last-updated {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #666666;
+        }
+        
+        sup {
+            font-size: 0.8em;
+        }
+        
+        .references {
+            font-size: 0.95em;
+        }
+        
+        .references p {
+            margin-bottom: 10px;
+            text-indent: -2em;
+            padding-left: 2em;
+        }
+        
+        @media (max-width: 767px) {
+            body {
+                font-size: 16px;
+            }
+            
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            main {
+                padding: 20px 15px;
+            }
+            
+            h2 {
+                font-size: 1.5em;
+            }
+            
+            h3 {
+                font-size: 1.2em;
+            }
+            
+            blockquote {
+                margin: 20px 10px;
+                padding: 15px;
+            }
+            
+            .navbar a {
+                padding: 8px 12px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="essay.html">Essay</a>
+        <a href="horrortarot.html">Horror Tarot</a>
+        <a href="guestbook.html">Contact</a>
+    </div>
+
+    <header>
+        <h1>Analytic Introspections from an Actor's Perspective</h1>
+        <div class="author-info">
+            <p><strong>Topher Rasmussen</strong></p>
+            <p>Senior thesis submitted in partial fulfillment of the requirements for a<br>
+            Bachelor of Science in Integrated Studies</p>
+            <p><strong>THEATRE ARTS AND PSYCHOLOGY</strong><br>
+            August 2019 - April 2020</p>
+        </div>
+    </header>
+    
+    <main>
+        <div class="table-of-contents">
+            <h2>Table of Contents</h2>
+            <ul>
+                <li>Introduction</li>
+                <li>Preface</li>
+                <li>1: hypotheses
+                    <ul>
+                        <li class="subsection">in which the brainstorm begins</li>
+                        <li class="subsection">in which it is revealed just how little I know about psychology</li>
+                        <li class="subsection">changing my mind again [manic episode]</li>
+                        <li class="subsection">in which I doubt my approach</li>
+                    </ul>
+                </li>
+                <li>2: preparation
+                    <ul>
+                        <li class="subsection">questions regarding praxis</li>
+                        <li class="subsection">interlude: on giftedness</li>
+                        <li class="subsection">turning toward the wave</li>
+                        <li class="subsection">lull [depressive episode]</li>
+                        <li class="subsection">the apprehension returns</li>
+                    </ul>
+                </li>
+                <li>3: enactment
+                    <ul>
+                        <li class="subsection">4:10 pm, directly following the audition</li>
+                        <li class="subsection">results</li>
+                        <li class="subsection">post-callback</li>
+                        <li class="subsection">interlude: on new york, on being in your head</li>
+                        <li class="subsection">the path becomes clear</li>
+                    </ul>
+                </li>
+                <li>4: rumination (causes &amp; consequences)
+                    <ul>
+                        <li class="subsection">purging the yuck</li>
+                        <li class="subsection">continuing getting this out</li>
+                        <li class="subsection">interlude: on writing</li>
+                        <li class="subsection">cranking the engine</li>
+                        <li class="subsection">mind as vehicle?</li>
+                        <li class="subsection">center of the world</li>
+                        <li class="subsection">ruining nuance</li>
+                    </ul>
+                </li>
+                <li>5: chronesthesia
+                    <ul>
+                        <li class="subsection">the cycle begins again</li>
+                        <li class="subsection">2:50 pm</li>
+                        <li class="subsection">1898</li>
+                        <li class="subsection">waiting to get results</li>
+                    </ul>
+                </li>
+                <li>6: rehearsal begins
+                    <ul>
+                        <li class="subsection">first read</li>
+                        <li class="subsection">table work</li>
+                    </ul>
+                </li>
+                <li>7: collapse
+                    <ul>
+                        <li class="subsection">well that was fucking crazy</li>
+                        <li class="subsection">honing attention</li>
+                        <li class="subsection">letting go</li>
+                        <li class="subsection">opening night</li>
+                        <li class="subsection">standstill</li>
+                    </ul>
+                </li>
+                <li>Conclusion</li>
+            </ul>
+        </div>
+
+        <h2>Introduction</h2>
+        
+        <p>I am not a scientist.</p>
+        
+        <p>A scientist would hypothesize and experiment and verify and analyze and eventually prove something. A scientist's thinking would be methodical and rigorous and sharp.</p>
+        
+        <p>Introspection is a problematic scientific apparatus. Wolfgang Köhler explains its flaw: "as a procedure, introspection lacks the chief methodological virtue of work in physics: a position of the observer outside the system which he observes. Introspecting and its objects are facts within the same system, and the chances that the former leave the latter undisturbed are exceedingly small."</p>
+        
+        <p>The writings assembled here may not be valuable as scientific data, but the process of collecting introspections over the course of the project had a significant impact on my inner experience, which is something you'll just have to take my word on.</p>
+        
+        <p>Over the past two semesters I have continually attempted to capture what it feels like to be a 28-year-old actor/psychology student writing an undergraduate thesis paper about acting and psychology. In doing so, my hope is that I've written an undergraduate thesis paper about acting and psychology.</p>
+        
+        <h3>Methodology and Style</h3>
+        
+        <blockquote>
+            "Whereas incorrect Activity causes contraction in our body and soul, correct Activity frees us and leads to expansion. The actor must discriminate between the two kinds of Activity in himself, and must try always to keep to the right one."
+            <cite>Michael Chekhov, <em>On the Technique of Acting</em></cite>
+        </blockquote>
+        
+        <p>In developing this project, writing began to pour out of me. I began with what felt like academic formality, making sweeping claims about Freud and Stanislavski, defending my argument and imagining conclusions. As I continued writing and reading and thinking, the formality and argument began to feel hollow and distant, so I let it fall away. Allowing myself to write without knowing where I was headed proved beneficial- my explorations deepened, my reflective thinking gained sharpness, and my curiosity took the driver's seat. Continued research and writing became not only fruitful, but pleasurable. Framed the way I framed it to myself, the writing process is unrestrained- offered room to expand, to shift, to meander.</p>
+        
+        <p>The pursuit of my goal to become a better actor began by gathering stacks of ideas and approaches so that I could write with some authority on Acting and Psychology, so that I could be more deeply informed on the ways that others have thought about the intersection between the two fields. Reading and thinking about the topics from an objective perspective was interesting and in some way I developed a position in the ongoing conversation, allying myself generally with Michael Chekhov and C.G. Jung.</p>
+        
+        <p>As time passed and the audition approached, my writing strayed from a focus on what others have said and what I want to say about acting and psychology and toward my subjective experience, which felt more relevant than theory or argument, because I was experiencing the intersection of acting and psychology. I started using writing as a way to unpack my anxiety and discovered that the attitude with which I approached my writing (which is the same as my thinking or is at least a part of it) had a direct impact on my experience of performing. The more I indulged my anxiety as I wrote, the more anxious my performance became. I corrected my approach and did less, wrote less, and the outcome was a calmer, more present performance.</p>
+        
+        <p>In order to become better, I needed to take stock- to find out where I am now, which cannot be separated from what led me to here. So, I began thinking backward. I also started paying closer attention to my dreams, the contents of which are an amalgamation of imagining, remembering, and experiencing. Then I paid less attention to my dreams because I had to get to work and I did not have 30 minutes to write longhand in a dream journal but I still tried to seek meaning in my dreaming.</p>
+        
+        <p>Then, after the audition, after being cast, my thinking (and my writing, which became more sparse) turned further inward. I felt it important to uncover what kind of actor I am- and in the digging, I could not distinguish between what kind of actor I am and what kind of person I am.</p>
+        
+        <p>At one point, this writing was intended to precede a live performance- it would be one part of a theatrical experience that would culminate in total embodied enactment.</p>
+        
+        <p>Then, SARS-CoV-2 turned the world upside-down and audience members became a threat to each other just by sitting in proximity and theatres worldwide shut their doors and being an actor and being a person became more confusing than it was before.</p>
+        
+        <p>These pieces of writing land somewhere in the overlap between autobiographical narrative, process journal, and memoir. My hope is that the reader will engage with my confusions and excitements and will not be alienated.</p>
+
+        <h2>Preface</h2>
+        
+        <p>On a beach in Southern California when I was four years old I remember watching the tide recede around my ankles and then a wave slammed into me suddenly and it was so loud and the wind was knocked out of me and I could only see churning water and sand and I couldn't breathe and I didn't know what was happening but I thought I was dying.</p>
+        
+        <p>As the water settled and I found my hands and knees I was coughing and saltwater was burning my eyes and I could not catch my breath and my mouth was full of sand and seawater and it tasted painfully bitter. I don't remember if it was my dad or my mom but somebody scooped me up and wrapped me in a towel and I shivered there on their lap.</p>
+        
+        <p>Whenever we returned to the beach as I got older I would watch people swimming out there past the waves with deep confusion.</p>
+        
+        <p>My uncle relentlessly coaxed me back into the water and taunted me with how unscary it was to him but he was so much bigger than me and I didn't think he understood what had happened and what could happen.</p>
+        
+        <p>Later I learned that I could confront oncoming waves directly, dipping beneath the crest of the billow and emerging on the other side and looking back to watch it crash. I felt powerful floating beyond the violent edge.</p>
+        
+        <p>Then when I was thirteen my uncle handed me a wetsuit and snorkelling gear and we went out into the water but not very far and when I looked beneath the surface a mass of seaweed undulated and it seemed alive and immense and my heart was pounding and I jolted back and rushed to the shore and sat and shivered.</p>
+        
+        <p>When standing in front of an audience, their collected attention assumes an oceanic form, sending waves of energy into and through me.</p>
+        
+        <p>The following writing is itself a performance, an accounting of my subjective emotional processes, excitements, and anxieties over the course of several months. The initial intent behind the project was to investigate overlaps between acting theory and psychoanalytic theory as I prepare to play Freddie in Sarah Ruhl's <em>How to Transcend a Happy Marriage</em> at Salt Lake Acting Company. Then, a global pandemic struck. Then, the writing itself became the point.</p>
+        
+        <p>On many levels, acting and psychoanalysis both concern the inner world of the individual. Thoughts and feelings are the raw material used in both processes: here are some of mine.</p>
+
+        <h2>1: hypotheses</h2>
+        <p style="text-align: center; font-style: italic;">August 21, 2019 - September 15, 2019</p>
+        
+        <blockquote>
+            The first stage is the most intimate and subtle, in which the conception of the whole future performance and all the characters takes place. All is anticipation, expectation, and hopeful guessing.
+            <cite>Michael Chekhov, <em>On the Technique of Acting</em></cite>
+        </blockquote>
+        
+        <h3>August 21, 2019 - in which the brainstorm begins</h3>
+        
+        <p>I sit facing an immense shifting mass of questions and possibilities regarding form, content, intention, and process.</p>
+        
+        <p>There are countless intersections between acting and psychology. In order to progress toward a cogent thesis (or specific topic, for that matter) it is imperative that I make clear what sort of acting I wish to dissect, and in which context. I have no idea where to begin.</p>
+        
+        <p>As a spiritually frustrated teenager, I found respite in acting classes. I wasn't offered any answers to deep questions about my existence, but in sussing out the meaning of a line and imagining circumstances outside my personal experience I felt my angst subsiding and my curiosity awakening.</p>
+        
+        <p>There is a difference between the sensation of reading a play and the sensation of reading a script that contains a character that you as the actor are committed to playing. To the actor, each line, each word, each punctuation mark, even each space between lines- every symbol or scrap of information relevant to the present role ceases to be inert ink on a page when a performance looms.</p>
+        
+        <p>The craft of acting has been described and taught and analyzed and deconstructed and restructured and mastered and butchered many times by actors, teachers, directors, critics, and theorists for hundreds of years. I don't know that there is anything new I can offer to the discussion.</p>
+        
+        <p>Konstantin Stanislavski is generally considered the grandfather of modern acting theory. The instigating force behind his approach is psychology and affective memory.<sup>1</sup></p>
+        
+        <p>I have been thinking seriously about what I most want to do for a long time. In many ways, I am doing it. I am doing it through my work at Salt Lake Acting Company<sup>2</sup>; through my relationship with my girlfriend, Cassie, who is an actor of an incredibly high caliber; through my study of psychology and continual discovery of parallels to the craft of acting; through my continued commitment to supporting the development and production of brave contemporary theatre.</p>
+        
+        <p>So- what will my capstone project look like? There are a number of swirling possibilities- some look like a performance, some look like a play that I direct, some that I write, some look like a practical guide for actors, some look like a series of acting exercises. Very few look like a traditional academic research paper.</p>
+        
+        <p>In the end, my goal is to become a better actor.</p>
+        
+        <p><small><sup>1</sup> Arguably. Frankly, my understanding of Stanislavski is general- although his widespread influence merits further investigation, I focus on Michael Chekhov (Stanislavski's "most brilliant student") in this writing.</small></p>
+        
+        <p><small><sup>2</sup> Aka "SLAC"</small></p>
+        
+        <h3>September 2, 2019 - in which it is revealed just how little I know about psychology</h3>
+        
+        <p>I have begun to loathe psychology. Not through my own thinking about it- I enjoyed reading about Freud's deeply beautiful, totally misguided ideas and tragic, hilarious life story<sup>3</sup>- but as I read and absorb acting theory, I start to resent the intent behind psychological study and the relentless rationalism of the scientific method. In the process of seeking wisdom about the ways theatre-makers move audiences, I find myself increasingly distanced from the rationally data-driven, from the scientific particulars, from attempts to nail down concrete facts about the thinking mind.</p>
+        
+        <p>I was surprised to learn about how desperate Freud was to make a scientific discovery that would make him famous. He hoped to become a Newton or a Darwin. He was obsessive about it, surrounding himself with thinkers he viewed as influential, making them his closest friends until they betrayed him and became his mortal enemies. The two-page biography in <em>Theories of Personality</em> describes a paranoid person who seems like a shoo-in for bipolar, if not full-on borderline personality disorder<sup>4</sup>. He continually painted himself into corners by making sweeping claims and had difficulty amending his theories as his life went on.</p>
+        
+        <p>When interviewed by Paula Vogel in BOMB Magazine, contemporary playwright Sarah Ruhl nudged the theatre field away from Freud's influence: "I think our generation has to look at Freud and Freud's impact, and many of us say, Oh, maybe Freud didn't have it right. Something that he was right about he got from literature: the Oedipal complex, from the Greeks. So maybe we ought to go back to the Greeks instead of back to Freud on the Greeks."</p>
+        
+        <p>Ruhl goes back to the Greeks, but not through the conventional avenues that so frequently make Ancient Greek theatre dusty and boring. Her instinct is to follow Ovid instead of Aristotle, trading well-worn plot arcs for magical, simple moments of transformation. In <em>Melancholy Play</em>, for example, a woman gets so depressed that she becomes an almond.</p>
+        
+        <p>Hers is nowhere near the only approach to making theatre, nor anywhere near the most common. Many would argue that a play requires realistic psychology, that to tell an effective story the characters and events must be, above all, believable. Ruhl resists the rational, realistic urge. She distills her approach in a profile from <em>the New Yorker</em>: "If you excavate people's subjectivity and how they view the world emotionally, you don't get realism."</p>
+        
+        <p>It seemed, to me, that the study of psychology would open a window into the human mind that would benefit my craft as an actor. If I could amass encyclopedic knowledge of the psyche, I would gain the key to unlocking the secrets of characters I previously couldn't even see. I thought I had a path forward, a road toward mastery that would lead me in the right direction.</p>
+        
+        <p>As I see it today, the trajectory I had imagined was woefully naive.<sup>5</sup> Getting an analytical perspective on the history of psychological practice will be interesting, sure, but studying the mind and acting require radically different skill sets.</p>
+        
+        <p>I hope to continue running into these walls. I arrive at a conclusion and then I read something deeper, something outside, and I realize how little I understood. As it seems to me today, psychology is so preoccupied with the thinking mind that in considering the way human beings function in the world it neglects the journey of the heart.</p>
+        
+        <p>I stand in agreement with Ruhl: "Psychological realism makes emotions so rational, so explained, that they don't feel like emotions to me."</p>
+        
+        <p>How could I have been so blind?</p>
+        
+        <p><small><sup>3</sup> For example, I stumbled on an amazing anecdote that took place during Freud's visit to the United States: the food he encountered disagreed with his digestion, and he could not stop shitting his pants for the duration of his stay. His bias against American culture stemmed from this experience of constant embarrassment.</small></p>
+        
+        <p><small><sup>4</sup> In learning more about individuals who suffer from bipolar and borderline this comment feels misguided, bordering on hurtful- I leave it here as-is, because it is the thought I had when I wrote it.</small></p>
+        
+        <p><small><sup>5</sup> "Analytical" feels as awkward to me now as "Archetypical"- at this point, my fledgling psychological vocabulary was still in its early stages.</small></p>
+        
+        <h3>September 8, 2019 - changing my mind again [manic episode]</h3>
+        
+        <p>Last night I lay awake, my mind racing, making connections, visualizing the springtime and my project reaching completion, hallucinating my victory over myself, proving to the world that I'm not a fuckup who couldn't keep a job or earn a degree. I ordered stacks of books, more than my shelves have room for, more than I will be able to read, more than made financial sense.<sup>6</sup> I jumped far ahead of myself, spending hours poring over articles about Michael Chekhov and the embodied imagination, Mac Wellman essays on non-Euclidean character and the deficiencies of the American well-made play, sucking down information like a vacuum cleaner, like a black hole. Considering how little sleep I was getting at the time, I am unsure of the degree to which I retained any of the ideas.</p>
+        
+        <p>At the same time, I took another step into the history of psychoanalysis. I discovered that many of Freud's contemporaries were frustrated with his methods. In recounting Alfred Adler's journey away from Freud, the authors of <em>Theories of Personality</em> seemed to anticipate how distanced from Freud I had been feeling. Adler's radically different theory fell into place and I found myself nodding, then dissociating, then reevaluating my childhood, and finally sitting in the realization that an inflated sense of inferiority hid beneath the development of my personality.</p>
+        
+        <p>Before my encounter with Adler, I was inflamed with the notion of my thesis project. I found myself swept away with images of myself creating the Most Beautiful And Insightful And Moving Thesis Project Ever, gaining complete mastery of the work of every acting theorist and psychologist that's ever lived, solving acting, solving psychology, and ascending into perfect glory.</p>
+        
+        <p>According to Adler, "maladjusted people set extravagant goals as an overcompensation for exaggerated feelings of inferiority."</p>
+        
+        <p>People who feel inferior are motivated to prove their superiority, which decreases their ability to cultivate <em>Gemeinschaftsgefühl</em>, a delightfully German word that encapsulates a feeling of oneness with their community. If your goal is to prove you're better than others, their successes feel like a threat.</p>
+        
+        <p>Adler says that children naturally feel inferior. To a child, an adult is a giant. When I was small, my father's frustrations and anxieties overwhelmed me. When he was angry he was immense and I was very afraid. I didn't know how to protect myself or my sisters or my mother. He was so much bigger than me.</p>
+        
+        <p>The impulse to self-diagnose is both unwise and unavoidable. Freud himself was guilty of it, spending inordinate amounts of time attempting to untangle his own mind. My textbook quotes him as saying, "the chief patient I am preoccupied with is myself."</p>
+        
+        <p>The fifth edition of the Diagnostic and Statistical Manual of Mental Disorders lists the symptoms of a manic episode as: "elevated mood, inflated self-esteem, decreased need for sleep, racing thoughts, difficulty maintaining attention, increase in goal-directed activity, and excessive involvement in pleasurable activities." To qualify as a manic episode, three of these symptoms must be present. My recent flurry of activity checks six out of seven symptoms.</p>
+        
+        <p>Adlerian analysis places emphasis on the trajectory of the individual, considering the individual's vision of themselves in the future as the primary motivator of behavior. This teleological perspective on human striving aligns directly with Stanislavski's conception of the super-objective.<sup>7</sup> Adler calls it the individual's Fictional Final Goal.</p>
+        
+        <p>Instead of attempting to portray emotional states directly, Stanislavski asks the actor to consider what the character wants and how they go about getting it.</p>
+        
+        <p>Though Lee Strasberg is at minimum two degrees of separation from Stanislavski himself, he articulates core aspects of Stanislavski's philosophy clearly:</p>
+        
+        <blockquote>
+            The aim of the modern method is to turn the actor away from a concern with what he, the actor, is doing, thus ridding him of his fundamental self-consciousness; and to create for him those proper elements of what the <em>character</em> is doing which become the impulses for behavior. The actor thus becomes concerned with acting the <em>causes</em>, and not the <em>results</em>, permitting the latter to occur as they do in life.
+        </blockquote>
+        
+        <p>I loved reading about Adler's flexible and affable approach to talking therapy. Instead of sitting behind the patient and making declarative observations, he'd engage face-to-face with each patient, treating them as an individual, investing in their well-being. Rather than their past, he'd seek to understand their hopes and dreams and goals for the future. Adler saw the individual for their potential, where Freud seemed more interested in digging up deep dark urges and resentments from early childhood.<sup>8</sup></p>
+        
+        <p>Despite my initial sense of discouragement about my mania and my inferiority complex, I feel prepared to continue my research and study. I can see a grounded, healthy path forward, one in which I am as interested in the success of those around me as I am in my own achievement.</p>
+        
+        <p><small><sup>6</sup> Lee Strasberg authored the Britannica entry on Acting. As my interest and excitement peaked, I ordered a copy of every single book listed in the references of his article. Packages started arriving a few days later, and didn't stop arriving for a full month. Cassie became concerned after the third package arrived- after the tenth, my embarrassment verged on total.</small></p>
+        
+        <p><small><sup>7</sup> Would you look at that, an overlap between psychoanalytic theory and acting theory!</small></p>
+        
+        <p><small><sup>8</sup> This is reductive.</small></p>
+        
+        <h3>September 15, 2019 - in which I doubt my approach</h3>
+        
+        <p>As I stirred from an unplanned nap this afternoon I felt a wave of panic as my to-do list came rushing back to me. Before I fell asleep I had been watching youtube videos on the Jungian individuation process, the Anima and Animus, Jung's tower at Bollingen, and the esoteric mandalas he carved into a stone cube there.</p>
+        
+        <p>I grazed the surface of a vivid dream and watched myself rushing down the massive set of stairs that leads from the GT building to the rest of campus, my feet barely touching each step as I rapidly descend.</p>
+        
+        <p>The fields of psychology and acting theory have so much in common that even where they intersect, they do so broadly. There are infinite parallels- historically, methodologically, culturally. They have so much in common that in some ways it is harder to find differences than similarities.</p>
+        
+        <p>Michael Chekhov mirrors Jung in countless ways. Like Jung, he speaks of the occult, the woo, the archetypal<sup>9</sup>, and acknowledges the energetic fields<sup>10</sup> that lie outside the brain. His approach extends into what Jung calls the collective unconscious, beyond the reach of Stanislavski's psychological system.</p>
+        
+        <p>"Affective memory" as a technique for manifesting psychologically realistic acting has its strengths.<sup>11</sup> Each actor must bring a part of themselves to the role- must consider the character's worldview, perceive their hopes, acknowledge their traumas, and find ways to justify their actions, folding the actor's personal experiences into their interpretation. That said, affective memory has limitations.</p>
+        
+        <p>Comparative religion contributed significantly to Jung's discovery of the collective unconscious and enabled him to suss out universal archetypal forms in disparate cultures. In some ways, I hope to treat acting theory and psychological theory in the same way- comparing, finding commonalities, and uncovering archetypal forms.<sup>12</sup></p>
+        
+        <p>In thinking about this project and talking about it with Cassie it has become clear that I don't need to solve psychology or solve acting. Despite this acknowledgment, I continue to encounter a relentless feeling that I need to solve myself. Jung's path toward individuation feels like a place to start. But- fuck. Solve myself? That's a lifelong process. How is this project even related to that? Why can't this just be a research paper? Isn't this just an undergraduate degree?</p>
+        
+        <p>Why does it feel like I'm on the verge of something big? Why has it always felt that way? Will I ever arrive? Am I making any progress at all?</p>
+        
+        <p><small><sup>9</sup> A-ha! There's the correct usage.</small></p>
+        
+        <p><small><sup>10</sup> Although I didn't know what I meant by 'energetic fields' at this time, I dive into the notion in the following writings.</small></p>
+        
+        <p><small><sup>11</sup> Affective memory refers to actors connecting emotional experiences from their life to events in the character's life- the stereotypical example is the young actor recalling the death of their pet to conjure tears in performance.</small></p>
+        
+        <p><small><sup>12</sup> Thus far, I have not uncovered a single archetypal form.</small></p>
+
+        <h2>2: preparation</h2>
+        <p style="text-align: center; font-style: italic;">September 30, 2019 - October 3, 2019</p>
+        
+        <blockquote>
+            The actor should never worry about his talent, but rather about his lack of technique, his lack of training, and his lack of understanding of the creative process. The talent will flourish immediately of itself as soon as the actor chisels away all the extraneous matter that hides his abilities— even from himself.
+            <cite>Michael Chekhov, <em>On the Technique of Acting</em></cite>
+        </blockquote>
+        
+        <h3>September 20, 2019 - questions regarding praxis</h3>
+        
+        <p>Auditions for Sarah Ruhl's <em>How to Transcend a Happy Marriage</em> at Salt Lake Acting Company are in four days. I have not read the play yet, but word in the community is that it's risky, it's funny, and it's exciting. According to an interview I found, Ruhl wrote the play after her own experience at a party in which she met a polyamorous triad. She was fascinated by the inner lives of the people involved.</p>
+        
+        <p>I have developed a habit of not reading the play I'm auditioning for beforehand. I came to this approach after performing in Lauren Gunderson's <em>I and You</em> at SLAC a couple years ago. A friend and I both auditioned for the show but neither of us read the play and we both got callbacks. At the callback, everyone who had read the play was visibly anxious because the material deals with big emotional territory (mortality, terminal illness, friendship, isolation). My friend and I remained calm because we didn't know what the play was about. The director later told me that he cast us in part because we didn't have presuppositions- there were no layers to peel away.</p>
+        
+        <p>My strategy for auditions has become to not prepare at all. I show up, I read the audition scenes, and I see what happens. This method is particularly effective when auditioning for directors I know well and plays that seem like they'd be a good fit for me. Now I'm about to audition for <em>How to Transcend</em> and I still don't know what it's about beyond that brief mention from Ruhl's interview.</p>
+        
+        <p>Here's what I do know: I've wanted to work with Keven Myhre (the director) for years. He's an incredibly talented actor and director. I know the SLAC artistic staff trusts my abilities since I've been a company member for two seasons. I'm familiar with Ruhl's style and sensibilities. The world of the play involves sexuality and nudity which I'm comfortable with.</p>
+        
+        <p>This is enough context to walk into an audition room.</p>
+        
+        <p>What I can't ignore, though, is the apprehension I feel about possibly being cast. It's not a fear of the work itself- I love being on stage, I love performing, I love the collaborative environment of rehearsal. What terrifies me is the scrutiny. Once cast, I become the subject of observation. The director watches, the other actors watch, and eventually the audience watches. All those eyes create pressure, expectation, judgment.</p>
+        
+        <p>There's a psychological principle called the "social facilitation effect" which suggests that the presence of others improves performance on simple or well-practiced tasks but impairs performance on complex or new tasks. Auditions typically involve simple tasks- read these sides, show us your interpretation, give us a sense of who you are. But rehearsals and performances involve complex tasks that require sustained concentration, emotional availability, physical presence, and intellectual engagement.</p>
+        
+        <p>The difference between auditioning and performing is like the difference between introducing yourself at a party and having an intimate conversation. One is surface-level and manageable; the other requires vulnerability and sustained attention.</p>
+        
+        <p>I'm scared of the vulnerability.</p>
+        
+        <h3>October 1, 2019 - interlude: on giftedness</h3>
+        
+        <p>When I was eight years old, I took a test that determined I was "gifted." This label followed me through school, providing me with advanced classes, enrichment opportunities, and a subtle but persistent message: you are special, you are capable of more than others, you have potential.</p>
+        
+        <p>The "gifted" label is a double-edged sword. On one side, it opens doors and creates opportunities. On the other side, it establishes expectations that become internalized as obligations. If you're gifted, you should excel. If you're special, you should prove it constantly.</p>
+        
+        <p>Carol Dweck's research on mindset distinguishes between a "fixed mindset" (believing that abilities are innate and unchangeable) and a "growth mindset" (believing that abilities can be developed through effort and practice). The gifted label tends to cultivate a fixed mindset. If you're told from a young age that you're smart or talented, you begin to see these qualities as inherent rather than developed. This creates a fear of failure because failure suggests that maybe you weren't actually gifted after all.</p>
+        
+        <p>Acting requires a growth mindset. Every role is different, every director has different expectations, every script presents new challenges. An actor can't rely on innate talent alone- they must be willing to experiment, fail, adjust, and try again. But the specter of giftedness lingers, whispering that if I were truly talented, this would be easier.</p>
+        
+        <p>Lewis Hyde's <em>The Gift</em> explores the concept of talent as a gift that must be given away rather than hoarded. He argues that creative work functions in a gift economy rather than a market economy- the more you give, the more you receive. But this requires letting go of ownership, letting go of the need to prove your worth through your work.</p>
+        
+        <p>Maybe the real challenge isn't proving I'm gifted. Maybe the challenge is giving the gift away.</p>
+        
+        <h3>October 2, 2019 - turning toward the wave</h3>
+        
+        <p>In my preface, I described that childhood experience of being slammed by a wave at the beach. I've been thinking about that memory and what it represents in terms of stage fright and performance anxiety.</p>
+        
+        <p>Michael Chekhov uses the metaphor of "radiation" to describe the energy an actor sends out into the space. He suggests that actors can consciously direct their energy outward, creating a palpable presence that affects both other actors and the audience. This concept of radiation assumes that performance isn't just about what you do but about what you emanate.</p>
+        
+        <p>In my experience, stage fright feels like the opposite of radiation. Instead of energy flowing outward, everything contracts inward. My breath becomes shallow, my muscles tense, my awareness narrows to a pinpoint focus on my own inadequacy. The audience, rather than receiving my energy, becomes a threat to be defended against.</p>
+        
+        <p>But what if I could turn toward the wave instead of bracing against it?</p>
+        
+        <p>This is what I learned after that initial traumatic wave experience- that I could dive under the wave, let it pass over me, and emerge on the other side. This requires a counterintuitive response: instead of tensing up and trying to stay rigid, you have to relax and surrender to the force that's coming at you.</p>
+        
+        <p>Applied to performance, this means acknowledging the audience's presence rather than trying to ignore it or fight against it. It means accepting the vulnerability of being watched rather than defending against it. It means trusting that if I relax into the experience, I'll emerge intact on the other side.</p>
+        
+        <p>Chekhov again: "The actor must have absolute confidence in his creative intuition." Confidence doesn't mean certainty- it means trust. Trust that even when the wave comes, even when the audience's attention feels overwhelming, I have the capacity to stay present and let it pass through me rather than knock me down.</p>
+        
+        <h3>October 3, 2019 - lull [depressive episode]</h3>
+        
+        <p>I haven't written in a week. I've been sleeping ten, eleven, twelve hours a night and still feeling exhausted. I haven't been to the gym. I've been eating poorly. I've been avoiding social situations. I've been watching YouTube videos about acting technique and psychoanalytic theory but retaining nothing.</p>
+        
+        <p>This isn't surprising. The manic episode I described earlier was bound to crash eventually. This is the pattern I've recognized over the past few years- a period of intense, almost frenzied activity followed by a period of lethargy and withdrawal. The DSM-5 calls this "Bipolar II" when the manic episodes are less severe (called "hypomanic episodes") and don't cause significant impairment.</p>
+        
+        <p>I've been thinking about whether to seek treatment. Part of me worries that medication would dull the creative spark that comes with the hypomanic episodes. Another part of me recognizes that this cycle is unsustainable- I can't function effectively when I'm swinging between extremes.</p>
+        
+        <p>Kay Redfield Jamison's <em>An Unquiet Mind</em> describes her own struggle with bipolar disorder and her resistance to medication. She's a psychologist who specializes in mood disorders, which gave her unique insight into her own condition but also made her particularly susceptible to the romanticization of madness that permeates artistic culture. The myth of the tortured artist suggests that mental illness and creativity are inextricably linked, that treating the illness would eliminate the creativity.</p>
+        
+        <p>But Jamison eventually came to understand that untreated bipolar disorder doesn't enhance creativity- it disrupts it. The depressive episodes are characterized by an inability to create anything at all. The manic episodes produce a volume of work, but much of it is scattered and unfocused. Stability, it turns out, is more conducive to sustained creative work than chaos.</p>
+        
+        <p>Still, I'm not ready to seek treatment yet. Part of this is denial. Part of it is fear. Part of it is the fact that I'm about to audition for a play and I don't want to introduce any new variables into my psychological state.</p>
+        
+        <p>For now, I'm just trying to get through each day.</p>
+        
+        <h3>October 6, 2019 - the apprehension returns</h3>
+        
+        <p>The audition is tomorrow. I still haven't read the play. I've done no preparation. This isn't strategic laziness- it's anxiety avoidance. If I read the play and discover that I want to be in it, then the stakes of the audition increase. If I want something, I can be disappointed when I don't get it. If I don't allow myself to want it in the first place, I protect myself from that potential disappointment.</p>
+        
+        <p>This is classic avoidant attachment style. Attachment theory, originally developed by John Bowlby and Mary Ainsworth, describes patterns of relating to others based on early childhood experiences with caregivers. People with avoidant attachment tend to maintain emotional distance as a defensive strategy- if you don't get close to anyone, no one can hurt you.</p>
+        
+        <p>I can see this pattern playing out not just in relationships but in my approach to creative work. If I don't invest fully in the audition, if I don't prepare or even read the play, then I'm not really trying. And if I'm not really trying, then failure doesn't mean anything about my abilities or worth.</p>
+        
+        <p>But this strategy has a cost. By protecting myself from potential disappointment, I also prevent myself from experiencing genuine success. A victory achieved without investment feels hollow. And more importantly, by holding back in this way, I deprive myself of the opportunity to discover what I'm actually capable of when I commit fully.</p>
+        
+        <p>Chekhov writes: "The actor should never worry about his talent, but rather about his lack of technique, his lack of training, and his lack of understanding of the creative process."</p>
+        
+        <p>Maybe I've been worrying about the wrong thing. Maybe the question isn't whether I have talent or whether I'll succeed at the audition. Maybe the question is whether I'm willing to fully engage with the creative process, with all its attendant risks and vulnerabilities.</p>
+        
+        <p>Tomorrow, I'll find out.</p>
+
+        <h2>3: enactment</h2>
+        <p style="text-align: center; font-style: italic;">October 10, 2019 - October 26, 2019</p>
+        
+        <blockquote>
+            Although the actor feels free at rehearsals, in the sense that he is not yet responsible for the actual performance, he is nevertheless under surveillance. This can cause considerable anxiety if he feels insecure.
+            <cite>Michael Chekhov, <em>On the Technique of Acting</em></cite>
+        </blockquote>
+        
+        <h3>October 10, 2019 - 4:10 pm, directly following the audition</h3>
+        
+        <p>I just left the audition room and I need to write this down before the experience fades.</p>
+        
+        <p>I arrived at the theatre fifteen minutes early and sat in my car, breathing, trying to calm my racing heart. I still hadn't read the play. I had glanced at the audition sides the night before but hadn't memorized them or thought deeply about them.</p>
+        
+        <p>Walking into the building, I felt that familiar contraction- the sense that I was about to be evaluated, judged, found wanting. The lobby was empty except for one other actor who I recognized from previous productions. We nodded at each other but didn't speak.</p>
+        
+        <p>When they called me in, I saw Keven Myhre sitting behind a table with the artistic director and stage manager. Keven smiled and welcomed me warmly, which helped ease some of the tension. He explained that we'd be reading from a few different scenes to see my range with the material.</p>
+        
+        <p>The first scene was funny- witty banter between two married couples at a dinner party. I found myself relaxing into it, enjoying the rhythm of the language, playing with the subtext. The stage manager read opposite me and was generous with her energy, which helped me stay present rather than getting trapped in my head.</p>
+        
+        <p>The second scene was more vulnerable- a confession scene where one character reveals something significant to another. This is where I typically struggle, where the self-consciousness kicks in and I become aware of being watched. But something different happened today.</p>
+        
+        <p>Instead of fighting the awareness of being observed, I acknowledged it. I felt Keven's attention on me, felt the weight of his gaze, and instead of contracting against it, I opened to it. I imagined his attention as a wave and I dove under it, letting it pass over me.</p>
+        
+        <p>And something shifted. The scene came alive in a way I hadn't anticipated. I wasn't performing for them- I was allowing them to witness something genuine. The distinction feels subtle but significant.</p>
+        
+        <p>After we finished, Keven said "That was lovely" in a way that felt sincere rather than perfunctory. He asked if I had any questions about the play or the production. I admitted that I hadn't read the play yet, which made everyone laugh.</p>
+        
+        <p>Now I'm sitting in my car and I have no idea how it went, objectively speaking. But subjectively, internally, something important happened. I experienced a moment of genuine presence in the audition room, a moment where I wasn't defending against vulnerability but inhabiting it.</p>
+        
+        <p>Whether or not I get cast, that moment feels like a small victory.</p>
+        
+        <h3>October 12, 2019 - results</h3>
+        
+        <p>I got a callback.</p>
+        
+        <p>The email came yesterday evening. Callbacks are scheduled for tomorrow afternoon. They want me to read for the role of Freddie, one of the two male leads.</p>
+        
+        <p>Now I've read the play. And I want this role. Desperately.</p>
+        
+        <p>Freddie is complex, funny, vulnerable, sexual, philosophical. He's part of a polyamorous triad and he speaks openly about desire, connection, and the construction of relationships. The play asks challenging questions about marriage, monogamy, and authenticity. It's exactly the kind of material I want to work on.</p>
+        
+        <p>But now that I've allowed myself to want it, the anxiety has returned with full force. At the initial audition, I had nothing to lose because I hadn't invested. Now I've invested. Now I care. Now I'm vulnerable to disappointment.</p>
+        
+        <p>I'm trying to remind myself of what happened in that audition room- that moment of turning toward the wave rather than bracing against it. But it's harder to access that openness when the stakes feel higher.</p>
+        
+        <p>The social psychologist Leon Festinger developed the concept of cognitive dissonance to describe the psychological discomfort that occurs when we hold two contradictory beliefs simultaneously. Right now I'm experiencing a dissonance between "I want this role" and "I'm terrified of being observed in this role." These two thoughts can't comfortably coexist, and my mind is trying to resolve the tension by either diminishing my desire ("maybe I don't really want it that much") or diminishing my fear ("it won't actually be that scary").</p>
+        
+        <p>But maybe the point isn't to resolve the dissonance. Maybe the point is to hold both truths simultaneously- I want this and I'm scared. I care about this and I'm vulnerable. This matters to me and I might not get it.</p>
+        
+        <p>The callback is in eighteen hours.</p>
+        
+        <h3>October 13, 2019 - post-callback</h3>
+        
+        <p>The callback lasted three hours. There were eight of us reading for four roles. Keven had us mix and match different combinations, trying out various pairings to see what chemistry emerged.</p>
+        
+        <p>I read primarily for Freddie but also read for Michael (the other male lead) a few times. The scenes were playful, intimate, challenging. One scene involves Freddie discussing his relationship with his two partners- one male, one female- and the particular dynamics of their triad. Another scene involves a game called "Bunga Bunga" that becomes increasingly sexual as the evening progresses.</p>
+        
+        <p>What struck me most was how different the experience was from the initial audition. At the audition, I was reading with the stage manager, imagining the scene. At callbacks, I was reading with other actors who were fully engaged, making strong choices, bringing their own interpretations to the material.</p>
+        
+        <p>This is where casting becomes collaborative chemistry rather than individual performance. It's not just about whether I'm good for the role- it's about whether the dynamic between me and potential scene partners creates something interesting.</p>
+        
+        <p>I felt that chemistry with one actress in particular- Sarah, reading for the role of Pip (Freddie's female partner). There was an ease between us, a playfulness that felt organic. When we read together, I found myself genuinely listening and responding rather than performing predetermined choices.</p>
+        
+        <p>But I also noticed something else: the more I relaxed and enjoyed the work, the more self-conscious I became about relaxing and enjoying the work. It's like I couldn't trust the ease, couldn't believe that it was okay to simply be present without controlling or managing the experience.</p>
+        
+        <p>After the callback, Keven said he'd let us know by Monday. That's four days from now.</p>
+        
+        <p>Now comes the hardest part: waiting.</p>
+        
+        <h3>October 18, 2019 - interlude: on new york, on being in your head</h3>
+        
+        <p>I've been thinking about my time living in New York, six years ago when I was 22. I moved there with dreams of making it as an actor, convinced that I just needed to be in the right place to be discovered.</p>
+        
+        <p>I lasted nine months.</p>
+        
+        <p>The problem wasn't lack of opportunity. I got auditions. I did showcase performances. I took classes with working actors. The problem was that I couldn't get out of my own head long enough to actually engage with any of it.</p>
+        
+        <p>Every audition became an exercise in self-consciousness. Every class became an opportunity to compare myself to others and find myself lacking. Every performance became a referendum on my worth as an artist and a person.</p>
+        
+        <p>The term "self-conscious" is interesting. Literally, it means being conscious of the self- aware of yourself as an object of perception. But in common usage, it carries a negative connotation: being excessively aware of yourself, trapped in your own perspective, unable to lose yourself in the experience at hand.</p>
+        
+        <p>Chekhov addresses this directly: "The aim of the modern method is to turn the actor away from a concern with what he, the actor, is doing, thus ridding him of his fundamental self-consciousness."</p>
+        
+        <p>But how do you turn away from self-consciousness? You can't will yourself to stop thinking about yourself- that just creates more self-consciousness. It's like the old instruction "don't think about a white elephant"- the moment you try not to think about it, you're thinking about it.</p>
+        
+        <p>In New York, I tried to force my way out of self-consciousness through sheer discipline and willpower. I thought that if I just worked harder, prepared more thoroughly, analyzed more deeply, I could control my way into spontaneity. This is, of course, a contradiction. Spontaneity can't be controlled. Presence can't be manufactured.</p>
+        
+        <p>Eventually I gave up and moved back to Utah, telling myself I was taking a break but knowing, on some level, that I was running away.</p>
+        
+        <p>And now here I am, six years later, still wrestling with the same issues. Still trying to figure out how to be present without being self-conscious. Still hoping that the next role will be the one where I finally break through whatever barrier keeps me from fully inhabiting my work.</p>
+        
+        <p>Maybe the barrier is the hope itself. Maybe as long as I'm waiting for some future breakthrough, I'm avoiding the present moment where the actual work happens.</p>
+        
+        <h3>October 21, 2019 - the path becomes clear</h3>
+        
+        <p>I got cast.</p>
+        
+        <p>The email came this morning: "We're thrilled to offer you the role of Freddie in <em>How to Transcend a Happy Marriage</em>. Rehearsals begin November 18th. Please confirm your acceptance by October 23rd."</p>
+        
+        <p>I'm sitting with this news and noticing my reaction. There's excitement, yes. There's pride. There's a sense of validation- they wanted me, they chose me, I was good enough.</p>
+        
+        <p>But there's also something else: fear.</p>
+        
+        <p>Not the fear of failing or being bad in the role. That fear is familiar, manageable. This is a different kind of fear- the fear of actually succeeding, of actually being seen, of actually being vulnerable in front of an audience night after night.</p>
+        
+        <p>In her book <em>Overcoming Stage Fright in Everyday Life</em>, psychologist Janet Ashley distinguishes between healthy stage fright (which mobilizes energy and sharpens focus) and debilitating stage fright (which paralyzes and prevents authentic engagement). The difference lies not in the intensity of the physiological response but in how we interpret that response.</p>
+        
+        <p>If I interpret my racing heart as a sign that I'm in danger, my body goes into full defensive mode- muscles tense, breathing becomes shallow, attention narrows. But if I interpret that same racing heart as excitement or readiness, the physiological response remains but the quality of the experience changes.</p>
+        
+        <p>This is what I need to practice: reinterpreting my fear as excitement, my vulnerability as openness, my self-consciousness as awareness.</p>
+        
+        <p>Rehearsals start in four weeks. Between now and then, I need to do the preparatory work- learn the lines, research the world of the play, think about Freddie's backstory and relationships.</p>
+        
+        <p>But I also need to do the psychological work- notice when I'm contracting, practice opening, remind myself that the audience's attention is not a wave trying to drown me but energy I can ride.</p>
+        
+        <p>The path has become clear. Now I have to walk it.</p>
+
+        <h2>4: rumination (causes &amp; consequences)</h2>
+        <p style="text-align: center; font-style: italic;">October 28, 2019 - November 17, 2019</p>
+        
+        <blockquote>
+            Do not be afraid of lengthy pauses. They are very natural if you are actually thinking... Real thinking takes time and cannot be rushed. The pause must be the result of the thought, not an empty space to be filled with anything that comes to mind.
+            <cite>Michael Chekhov, <em>On the Technique of Acting</em></cite>
+        </blockquote>
+        
+        <h3>October 28, 2019 - purging the yuck</h3>
+        
+        <p>I've been experiencing this sensation that's hard to articulate- a kind of psychic congestion, a buildup of anxious energy that needs to be released. Writing helps, but only partially. I'll pour out pages of introspection and analysis and feel temporarily relieved, but then the congestion returns.</p>
+        
+        <p>I think part of the problem is that I'm trying to think my way through something that isn't fundamentally a thinking problem. Stage fright isn't a cognitive issue that can be solved through better understanding. It's a somatic, embodied experience that manifests as tension, shallowness of breath, racing thoughts.</p>
+        
+        <p>The Michael Chekhov technique emphasizes the body as the primary instrument of the actor. Rather than starting with psychological analysis (as in the Stanislavski system), Chekhov begins with physical exploration. He develops exercises based on archetypal gestures- expanding, contracting, pulling, pushing- and encourages actors to discover emotional truths through physical experimentation.</p>
+        
+        <p>What if I approached my stage fright not as a problem to be analyzed but as a physical pattern to be transformed?</p>
+        
+        <p>The pattern looks like this: awareness of being observed → tightening in the chest and throat → shallow breathing → narrowing of attention → increased self-consciousness → more tightening → more shallow breathing → anxiety spiral.</p>
+        
+        <p>The Chekhov technique would suggest an intervention at the physical level. Instead of trying to change the thoughts or feelings, change the body. If I can interrupt the tightening, open the chest, deepen the breath, expand the attention- then the emotional cascade might not trigger in the same way.</p>
+        
+        <p>I've been doing an exercise from Chekhov's book: standing in my living room, imagining I'm radiating energy outward in all directions. At first it feels ridiculous, like I'm pretending. But after a few minutes, something shifts. I actually feel warmer, more present, more connected to the space around me.</p>
+        
+        <p>Maybe this is what it means to "purge the yuck"- not by analyzing it or understanding it or writing about it, but by physically transforming it through the body.</p>
+        
+        <h3>November 3, 2019 - continuing getting this out</h3>
+        
+        <p>I had a dream last night where I was on stage but I couldn't remember any of my lines. This is a classic anxiety dream, the kind of thing that supposedly represents fear of being unprepared or revealed as a fraud.</p>
+        
+        <p>But what struck me about this dream was that I wasn't panicking. I was standing there, silent, and I knew I was supposed to be saying something but I couldn't remember what. And instead of trying to fake it or cover for the mistake, I just stood there, present with the silence, waiting.</p>
+        
+        <p>Eventually another actor entered and said their line, and that triggered my memory and I continued with the scene. But for those moments of silence, I was simply... there. Present. Not performing, not defending, just being.</p>
+        
+        <p>When I woke up, I realized that this dream might be showing me something important. Maybe the fear isn't actually about forgetting my lines or making mistakes. Maybe the fear is about moments of not-knowing, of being present without a script to hide behind.</p>
+        
+        <p>Jung wrote extensively about dreams as communications from the unconscious. He distinguished between the "personal unconscious" (containing repressed memories and experiences from one's own life) and the "collective unconscious" (containing archetypal patterns shared across all humanity).</p>
+        
+        <p>This dream feels like it's coming from somewhere deeper than my personal anxiety about the upcoming production. It feels like it's pointing toward something archetypal- the actor without a mask, the person without a persona, the individual stripped of protective covering and standing vulnerable before the world.</p>
+        
+        <p>Maybe that's what I'm actually afraid of. Not judgment or criticism or failure, but simply being seen as I actually am.</p>
+        
+        <h3>November 7, 2019 - interlude: on writing</h3>
+        
+        <p>I've been thinking about the relationship between writing this thesis and working on this role. Both are creative processes that require a kind of openness or availability. But they also both trigger my tendency toward self-consciousness and over-analysis.</p>
+        
+        <p>When I'm writing, I become aware of myself writing. I think about how the words will be received, whether they're interesting or insightful enough, whether I'm revealing too much or not enough. This meta-awareness interrupts the flow, makes the writing feel labored rather than natural.</p>
+        
+        <p>The same thing happens in acting. I become aware of myself acting. I think about how I look, how I sound, whether I'm making interesting choices. This awareness creates a layer of artifice, a performance of performing.</p>
+        
+        <p>The solution, in both cases, seems to be the same: stop trying to control how I'm perceived and just focus on what I'm doing. In writing, that means trusting that if I'm honest about my experience, that honesty will be interesting enough. In acting, that means trusting that if I'm fully engaged with the given circumstances of the scene, my performance will be compelling enough.</p>
+        
+        <p>But this is easier said than done. The habit of self-consciousness is deeply ingrained. It took years to develop and it will take sustained practice to transform.</p>
+        
+        <p>One thing I've noticed: the writing becomes easier when I give up trying to be impressive. When I stop reaching for the perfectly crafted sentence or the profoundly insightful observation and just say what I'm actually thinking, the words flow more naturally.</p>
+        
+        <p>Maybe the same will be true in rehearsal. Maybe I need to give up trying to be impressive and just focus on being present with the material.</p>
+        
+        <h3>November 11, 2019 - cranking the engine</h3>
+        
+        <p>Rehearsals start in a week. I've been doing the preparatory work: reading and re-reading the script, thinking about Freddie's relationships with Pip and Paul (his partners in the triad), considering what kind of person would choose polyamory as a relationship structure.</p>
+        
+        <p>Sarah Ruhl wrote the play after meeting a polyamorous triad at a party. In interviews, she talks about being fascinated by the interior lives of people in non-traditional relationship structures. She's interested in how desire works, how people navigate jealousy and possessiveness, how love can expand rather than contract.</p>
+        
+        <p>Freddie is articulate, philosophical, comfortable with his choices. He's not apologetic about his lifestyle but he's also not evangelical about it. He simply lives in a way that feels authentic to him.</p>
+        
+        <p>I admire this quality in the character- this sense of having arrived at a truth about himself and living according to that truth without defensiveness or justification. It's something I aspire to in my own life but haven't achieved.</p>
+        
+        <p>I keep coming back to this idea of authenticity. What does it mean to be authentic as an actor? Am I trying to authentically portray Freddie, or am I trying to authentically be myself while playing Freddie? Or is there no distinction between these two things?</p>
+        
+        <p>Stanislavski famously said "there are no small parts, only small actors." But what he meant by this wasn't about the size of the role- he meant that an actor who is fully present and committed brings depth and truth to any role, while an actor who is distracted or self-conscious diminishes even the most significant role.</p>
+        
+        <p>Presence, commitment, truth. These are the qualities I need to cultivate. Not cleverness, not technique, not impressive choices. Just presence.</p>
+        
+        <p>The engine is starting to turn over. Soon it will be running.</p>
+        
+        <h3>November 14, 2019 - mind as vehicle?</h3>
+        
+        <p>I've been thinking about the metaphor of "mind as vehicle." The idea that consciousness is something we inhabit, something we drive, something we use to navigate the world.</p>
+        
+        <p>But this metaphor has limitations. It suggests a separation between the driver (the true self) and the vehicle (the mind/body). It implies that there's a "you" who has a mind rather than a "you" who is a mind.</p>
+        
+        <p>Buddhism challenges this dualistic thinking. In Buddhist philosophy, there is no essential self separate from the aggregates of experience. What we call "I" is actually a constantly changing process rather than a fixed entity. The sense of a separate self is an illusion created by the mind's tendency to grasp and identify.</p>
+        
+        <p>Applied to acting, this perspective is liberating. If there's no fixed self, then there's nothing to protect. If identity is fluid rather than fixed, then taking on another character isn't a threat to authenticity- it's just another expression of the same fundamental process.</p>
+        
+        <p>This is what Chekhov might mean by the "higher self"- not a superior version of the ego, but a perspective that transcends ego identification altogether. From this perspective, being Freddie and being Topher aren't contradictory. They're both temporary patterns arising in consciousness.</p>
+        
+        <p>I'm not sure I can sustain this perspective in practice. It's easy to think about in abstract terms but harder to embody in the rehearsal room when I'm worried about how I look or whether I'm making the right choice.</p>
+        
+        <p>But maybe that's the practice- noticing when I contract into self-consciousness and gently expanding back into presence. Over and over. That's the work.</p>
+        
+        <h3>November 16, 2019 - center of the world</h3>
+        
+        <p>Today I caught myself in a familiar pattern: thinking that everyone at rehearsal will be watching me, judging me, evaluating my performance. Then I realized: everyone else is thinking the exact same thing about themselves.</p>
+        
+        <p>This is what psychologists call the "spotlight effect"- the tendency to overestimate how much others are noticing and evaluating us. We assume we're the center of other people's attention because we're the center of our own attention.</p>
+        
+        <p>But here's the thing: if everyone believes they're the center of attention, then no one actually is. We're all so preoccupied with our own self-consciousness that we barely notice what anyone else is doing.</p>
+        
+        <p>This should be comforting. It means that most of the judgment I fear is actually happening only in my own mind. The audience isn't sitting there with a critical eye, looking for mistakes. They're hoping to be moved, entertained, transported. They want me to succeed.</p>
+        
+        <p>Chekhov writes about the "atmosphere" of a scene- the invisible but palpable quality of energy that exists between actors and between actors and audience. He suggests that atmosphere is created collaboratively, that it's not something an individual actor imposes but something that emerges from the collective imagination of everyone in the space.</p>
+        
+        <p>If this is true, then performance isn't about me at the center being observed by others at the periphery. It's about all of us- actors and audience- creating something together. The center is everywhere and nowhere.</p>
+        
+        <p>Tomorrow is the first rehearsal. I'm going to try to remember this.</p>
+        
+        <h3>November 17, 2019 - ruining nuance</h3>
+        
+        <p>I've been writing so much lately, trying to analyze and understand and articulate every aspect of my psychological process. But I'm starting to wonder if this is actually helpful or if it's just another form of self-consciousness.</p>
+        
+        <p>There's a quality of freshness, of discovery, that happens when you encounter something for the first time. But if you analyze it too thoroughly before you've actually experienced it, you flatten the experience into concepts. You lose the nuance, the ambiguity, the alive quality of not-knowing.</p>
+        
+        <p>This is the danger of this thesis project: that by trying to document my process of preparing for this role, I'm actually interfering with that process. That by writing about stage fright, I'm reinforcing my identity as someone who struggles with stage fright.</p>
+        
+        <p>Jung warns about this in his writings on the shadow. He says that when we bring unconscious material into consciousness, we must be careful not to concretize it or identify with it. The point isn't to create a more detailed map of the psyche but to expand our capacity to hold complexity without reducing it to fixed categories.</p>
+        
+        <p>Maybe I need to write less for a while. Maybe I need to stop analyzing and just... rehearse. Just act. Just be present with the material without immediately converting that experience into language.</p>
+        
+        <p>The first rehearsal is tomorrow. I'm going to try to stay in the experience rather than observing myself having the experience. I'm going to try to trust the process rather than controlling it.</p>
+        
+        <p>We'll see how that goes.</p>
+
+        <h2>5: chronesthesia</h2>
+        <p style="text-align: center; font-style: italic;">November 18, 2019 - January 23, 2020</p>
+        
+        <blockquote>
+            The character is not a dead thing which you appropriate to yourself... The character is something that continues to live and grow even after the performance.
+            <cite>Michael Chekhov, <em>On the Technique of Acting</em></cite>
+        </blockquote>
+        
+        <h3>November 18, 2019 - the cycle begins again</h3>
+        
+        <p>First rehearsal.</p>
+        
+        <p>The cast gathered in the rehearsal room at SLAC- the space I've been in dozens of times but which feels different now, charged with potential and anxiety. Keven started with a check-in, asking each of us to share one word describing how we're feeling. My word was "open."</p>
+        
+        <p>It wasn't entirely true. Parts of me were open, curious, excited. But other parts were contracted, defensive, already anticipating judgment. But I wanted to invite openness by naming it, to create a self-fulfilling prophecy.</p>
+        
+        <p>We did a read-through of the full play. Hearing the arc of the story, the development of relationships, the escalation of the central conflict- it all came alive in a way that reading silently on my own couldn't capture. The play is funnier than I realized, darker than I expected, more emotionally complex than I had appreciated.</p>
+        
+        <p>After the read-through, Keven talked about his vision for the production. He wants it to feel intimate even though it deals with big philosophical questions. He wants us to find the humanity beneath the intellectual rhetoric. He wants us to trust our bodies, trust our instincts, trust each other.</p>
+        
+        <p>Trust. There's that word again.</p>
+        
+        <p>We won't go "off book" (memorize our lines) for a few weeks. For now, we'll do table work- discussing the characters, analyzing the scenes, making discoveries about relationships and motivations. This intellectual phase should feel safe for me, comfortable in my head rather than vulnerable in my body.</p>
+        
+        <p>But I'm noticing resistance even to this. Part of me wants to skip ahead to the later rehearsals, the part where we're running scenes and making choices. Another part of me wants to stay in analysis forever, avoiding the moment when I have to actually embody the character in front of others.</p>
+        
+        <p>The rehearsal process is its own kind of chronesthesia- a journey through time where past, present, and future collapse into each moment of exploration. We're discovering what has already been written while creating what will eventually be performed while staying present to what's happening right now.</p>
+        
+        <p>It's disorienting and exhilarating.</p>
+        
+        <h3>December 15, 2019 - 2:50 pm</h3>
+        
+        <p>We've been in rehearsal for almost a month. We're off book now, running scenes, making staging choices. I'm noticing patterns in my work- moments where I'm present and connected, and moments where I'm in my head, performing rather than being.</p>
+        
+        <p>There's one particular scene where Freddie talks about the structure of his triad, explaining the different relationships within it. It's an expository scene, heavy on dialogue, requiring me to be articulate and clear while also maintaining emotional authenticity.</p>
+        
+        <p>I keep rushing through it. Keven keeps giving me the same note: "Slow down. Let us see you think."</p>
+        
+        <p>But slowing down means being more visible, more exposed. If I rush, I can hide in the momentum. If I slow down, there's nowhere to hide.</p>
+        
+        <p>Chekhov writes about "lengthy pauses" and how they're "very natural if you are actually thinking." But my pauses don't feel natural- they feel excruciating. I'm so aware of the silence, of the attention on me, of my own discomfort with being observed while not speaking.</p>
+        
+        <p>Yesterday, Keven had me do an exercise. He asked me to run the scene in slow motion, taking three times as long as I normally would. Every gesture exaggerated, every pause extended, every moment stretched to its absolute limit.</p>
+        
+        <p>It felt ridiculous at first. But about halfway through, something shifted. I stopped worrying about how I looked and started actually experiencing what Freddie might be thinking in those moments. The pauses became active rather than empty- filled with consideration, with choosing how to articulate complex ideas, with reading the other person's response before continuing.</p>
+        
+        <p>When we ran it at normal speed afterward, the pauses remained but they felt different. They felt intentional rather than anxious.</p>
+        
+        <p>Maybe this is what it means to "let them see you think"- not performing thinking, but actually thinking and allowing yourself to be visible while doing it.</p>
+        
+        <h3>December 28, 2019 - 1898</h3>
+        
+        <p>It's winter break and we're not rehearsing, but I've been thinking about something Keven said at our last rehearsal before the holidays.</p>
+        
+        <p>We were working on a scene where Freddie and Michael (the two men in their respective relationships) have a conversation about masculinity and vulnerability. It's a tender scene, requiring both characters to be open with each other in ways that their social conditioning makes difficult.</p>
+        
+        <p>I was playing it too intellectually, staying in my head rather than my body. Keven stopped me and asked: "What year is it for Freddie right now?"</p>
+        
+        <p>I didn't understand the question at first. "What do you mean? The play is set in the present day."</p>
+        
+        <p>"I know," Keven said. "But what year does it feel like in your body when you're playing this scene?"</p>
+        
+        <p>I closed my eyes and dropped into the feeling of the scene. And suddenly I had an answer: "1898."</p>
+        
+        <p>"Why 1898?"</p>
+        
+        <p>"I don't know. It just feels like... Victorian repression? Like trying to be modern and liberated but still carrying all this historical weight about how men are supposed to be? Like I'm wearing a suit that's too tight?"</p>
+        
+        <p>Keven smiled. "Great. Play it from 1898."</p>
+        
+        <p>When I ran the scene again, imagining I was carrying the weight of a century of masculine conditioning, something opened up. The vulnerability in the scene became more poignant because it was working against such strong resistance.</p>
+        
+        <p>This is what I love about Keven's directing- he doesn't give you intellectual analysis or prescriptive line readings. He gives you imaginative prompts that unlock something in your body, in your instinct.</p>
+        
+        <p>I've been thinking about what year it feels like in my body when I'm experiencing stage fright. What historical weight am I carrying? What outdated script am I following?</p>
+        
+        <p>Maybe I'm still operating from some childhood moment of being observed and found wanting. Maybe I'm carrying fear that belongs to a younger version of myself who didn't have the tools to handle scrutiny.</p>
+        
+        <p>Maybe if I could locate that year, I could recognize that I'm not there anymore. I'm here, now, with adult capacities to handle whatever comes.</p>
+        
+        <h3>January 23, 2020 - waiting to get results</h3>
+        
+        <p>We open in two weeks. We've moved from rehearsal room to the actual stage. The set is built, the lights are hung, the props are in place. It's becoming real.</p>
+        
+        <p>Last night we did our first full run-through with all technical elements. I was terrified. This was the first time I'd performed the show from start to finish in the actual space where audiences will eventually sit.</p>
+        
+        <p>And it was... fine.</p>
+        
+        <p>Not spectacular, not disastrous. Just fine. I made some mistakes, forgot a line or two, missed some staging. But I got through it. The scenes I was most worried about ended up being easier than expected. The scenes I thought would be easy were harder than I anticipated.</p>
+        
+        <p>Keven's note afterward was simple: "You're thinking too much. Trust your preparation and just play."</p>
+        
+        <p>Just play. It sounds so simple. Children do it naturally- they inhabit imaginary worlds completely, without self-consciousness or inhibition. But somewhere along the way, we learn to be self-aware, to monitor ourselves, to worry about how we're perceived.</p>
+        
+        <p>Actors spend years training to recover what children do instinctively: the ability to play without self-consciousness. It's not about becoming childish- it's about accessing that quality of unselfconscious presence while maintaining adult emotional and intellectual complexity.</p>
+        
+        <p>Two weeks until opening. The waiting is almost over. Soon I'll be standing in front of an audience, fully exposed, vulnerable, visible.</p>
+        
+        <p>I'm still afraid. But I'm also ready.</p>
+
+        <h2>6: rehearsal begins</h2>
+        <p style="text-align: center; font-style: italic;">February 6, 2020 - February 22, 2020</p>
+        
+        <blockquote>
+            In a good production, rehearsals never really end, even though the play has opened. The actors continue to penetrate more deeply into their parts and into the play.
+            <cite>Michael Chekhov, <em>On the Technique of Acting</em></cite>
+        </blockquote>
+        
+        <h3>February 6, 2020 - first read</h3>
+        
+        <p>We opened last night.</p>
+        
+        <p>I need to write this down while it's still fresh, while I can still remember the specific texture of the experience.</p>
+        
+        <p>The house lights went down. I stood backstage, heart pounding, palms sweating, breath shallow. All the familiar symptoms of stage fright, all the patterns I've been trying to transform.</p>
+        
+        <p>I reminded myself: turn toward the wave. The audience's attention is not trying to drown you. It's energy you can ride.</p>
+        
+        <p>My entrance came. I walked on stage. The lights were bright enough that I couldn't see individual faces in the audience- just a mass of darkness beyond the edge of the stage. Strangely, this helped. The audience became abstract rather than specific, easier to engage with as a collective presence rather than individual judges.</p>
+        
+        <p>And then something remarkable happened: I forgot to be self-conscious.</p>
+        
+        <p>Not the whole time- there were moments where I came out of the scene and became aware of myself performing. But there were also long stretches where I was simply present, responding to my scene partners, allowing the text to unfold moment by moment.</p>
+        
+        <p>The scene I had been most worried about- the one about the structure of the triad, the one where I kept rushing- it landed beautifully. I found the pauses Keven had been coaching me on. I let the audience see me think. And instead of it feeling excruciating, it felt intimate. Like I was inviting them into Freddie's thought process.</p>
+        
+        <p>After the show, several audience members approached me to say how moved they were by the performance. One woman said, "I felt like I was right there with you, inside your character's head."</p>
+        
+        <p>This is what I've been working toward- not a performance that impresses people with its technical virtuosity, but a performance that creates genuine connection, that lets people feel less alone.</p>
+        
+        <p>Of course, it wasn't perfect. I made mistakes. I lost my place once and Sarah (who plays Pip) smoothly covered for me. There were moments where I forced rather than allowed, where I performed rather than inhabited.</p>
+        
+        <p>But for the first time in my life, I stood on a stage in front of a full audience and experienced more presence than fear. The wave didn't drown me. I rode it.</p>
+        
+        <h3>February 22, 2020 - table work</h3>
+        
+        <p>We've been running for two weeks now. Eight performances down, twelve more to go. Each show has been different- some nights I'm more present, some nights more in my head. Some nights the audience is warm and responsive, some nights they're reserved.</p>
+        
+        <p>I'm learning that presence isn't a permanent achievement but a practice. It's not something you master once and for all but something you choose moment by moment, scene by scene, performance by performance.</p>
+        
+        <p>Last night we had a talkback after the show- a Q&A session where audience members can ask the cast and director about the play. Someone asked: "How do you prepare emotionally for such vulnerable material? Do you have to access personal trauma to play these scenes?"</p>
+        
+        <p>I thought about how to answer this honestly. The assumption behind the question is that acting requires plundering your personal history for emotional raw material. But that hasn't been my experience with this role.</p>
+        
+        <p>I said something like: "I think there's a difference between using your personal experience and using your capacity for empathy and imagination. Freddie's life is very different from mine, but I can imagine what it would feel like to be him. And that imaginative act creates real emotional experience in my body, even though it's not coming from my literal history."</p>
+        
+        <p>This is where Chekhov's approach differs from the Stanislavski system. Chekhov would say that the actor doesn't need to remember a time they felt a particular way- they can use their imagination to create that feeling fresh in each moment. The imagination is just as real, just as valid, as memory.</p>
+        
+        <p>In some ways, this is more challenging. It's easier to rely on a remembered emotion than to generate fresh emotion through imagination. Memory is passive; imagination is active. But imagination also allows for more flexibility, more range, more freedom from the limitations of personal history.</p>
+        
+        <p>I'm still figuring this out. Still practicing. Still learning.</p>
+
+        <h2>7: collapse</h2>
+        <p style="text-align: center; font-style: italic;">March 2, 2020 - April 14, 2020</p>
+        
+        <blockquote>
+            The actor lives in a constant state of danger. The danger is that he may lose his connection to what is most alive in himself.
+            <cite>Michael Chekhov, <em>On the Technique of Acting</em></cite>
+        </blockquote>
+        
+        <h3>March 2, 2020 - well that was fucking crazy</h3>
+        
+        <p>We closed yesterday. Twenty performances over three weeks. It went by so fast.</p>
+        
+        <p>The final performance had a different quality- more bittersweet, more present. Knowing it was the last time I'd ever play this character in front of an audience made me appreciate each moment more fully.</p>
+        
+        <p>After the show, the cast and crew gathered backstage. Keven gave a little speech about the work we'd done together, how proud he was of the show we created. Several people were crying. I wasn't, but I felt something in my chest- a fullness, a gratitude, a sense of completion.</p>
+        
+        <p>This project- the thesis, the role, the whole journey- was supposed to culminate in this production. The writing was supposed to be preparation for the performance, and the performance was supposed to validate or justify or prove something about my capacity as an actor.</p>
+        
+        <p>But now that it's over, I'm not sure what I've proven. I played a role. I did it reasonably well. I experienced moments of genuine presence and moments of self-conscious performance. The audience seemed to connect with the work.</p>
+        
+        <p>Is that enough? Have I achieved my goal of becoming a better actor?</p>
+        
+        <p>Chekhov writes: "From the very beginning of his study, he has been inside the character; his reward will be his own inner growth."</p>
+        
+        <p>Inner growth. Not external validation, not acclaim, not proof of talent. Just the incremental expansion of capacity, the gradual deepening of presence.</p>
+        
+        <p>Maybe that's what I've gained- not mastery, but a deeper understanding of the practice. Not arrival, but commitment to the journey.</p>
+        
+        <h3>March 13, 2020 - honing attention</h3>
+        
+        <p>Everything has changed.</p>
+        
+        <p>COVID-19, the coronavirus that started in China and has been spreading globally, has reached the United States in force. The NBA suspended their season. Tom Hanks tested positive. Universities are moving to online classes. Large gatherings are being cancelled.</p>
+        
+        <p>Yesterday, the Actors' Equity Association (the union representing professional stage actors) issued a statement suspending all rehearsals and performances through at least early April. Theatres across the country are going dark.</p>
+        
+        <p>SLAC has cancelled the rest of their season. <em>How to Transcend a Happy Marriage</em> had just closed, so we got our full run in. But the next show in the season- the one several of my friends were rehearsing- has been indefinitely postponed.</p>
+        
+        <p>I should feel lucky that I got to complete my show before this happened. And I do feel lucky. But I also feel disoriented, unmoored. The theatre world I've been part of for years has suddenly been suspended. All the productions that were in development, all the auditions that were scheduled, all the performances that were planned- everything is on hold.</p>
+        
+        <p>I keep thinking about that moment in the preface where I wrote about audiences as an ocean. Now the ocean has receded. We're standing on the shore watching the water pull back, knowing that something is coming but not knowing what.</p>
+        
+        <p>My thesis was supposed to conclude with reflection on the performance, synthesis of the acting theory and psychological concepts, some kind of wisdom gleaned from the experience. But how can I synthesize anything when the world has just fundamentally changed?</p>
+        
+        <h3>March 25, 2020 - letting go</h3>
+        
+        <p>Utah is under a "Stay Home, Stay Safe" order. Non-essential businesses are closed. We're supposed to maintain six feet of distance from anyone outside our household. Grocery stores have one-way aisles and capacity limits. It feels dystopian.</p>
+        
+        <p>I've been trying to write but struggling to focus. Everything I want to say about acting and presence and stage fright feels trivial in the face of a global pandemic. People are dying. Healthcare workers are overwhelmed. The economy is collapsing. And I'm supposed to be analyzing my psychological process in a play that closed two weeks ago?</p>
+        
+        <p>But maybe that's the point. Maybe the work of being present, of managing fear, of staying connected to what's alive- maybe that work is more relevant now than ever.</p>
+        
+        <p>The pandemic has revealed something about collective anxiety that resonates with my individual experience of stage fright. That sense of being observed, evaluated, found potentially contaminated- we're all experiencing that now. Every interaction is charged with potential threat. Every cough or sneeze triggers hypervigilance. We're all living in a constant state of performance anxiety, trying to demonstrate that we're safe, we're clean, we're not the danger.</p>
+        
+        <p>And underneath it all is the fundamental fear that animated my stage fright: the fear of being seen as I actually am, vulnerable and mortal.</p>
+        
+        <p>Death has always been abstract for me- something that happens to other people, to old people, later. But suddenly it's present. Not immediately threatening to me personally (I'm young and healthy), but present as a real possibility for people I love, for people in my community.</p>
+        
+        <p>How does an actor prepare to play a role in a world where theatres are closed indefinitely? How does anyone prepare for anything when the future has become so uncertain?</p>
+        
+        <p>Maybe the only preparation is the practice of presence itself. Being here, now, with what is, rather than what was or what might be.</p>
+        
+        <h3>March 28, 2020 - opening night</h3>
+        
+        <p>That header is a lie. There was no opening night. I'm writing about the opening night of <em>How to Transcend</em> which already happened, which is now a memory, which took place in what already feels like a different era.</p>
+        
+        <p>But I realize I never actually wrote about opening night itself. I wrote about the first performance, but I didn't capture what it felt like standing in the wings before my first entrance, knowing that months of preparation and decades of longing were about to converge into a single moment of stepping into the light.</p>
+        
+        <p>What did it feel like?</p>
+        
+        <p>Terrifying and exhilarating. Familiar and utterly foreign. Like standing at the edge of the ocean, feeling the pull of the tide, knowing you're about to dive in.</p>
+        
+        <p>I remember thinking: "This is it. This is what I've been preparing for. Not just for this show, but for years. Every acting class, every audition, every performance- it's all been leading to this moment of choosing to be fully present despite the fear."</p>
+        
+        <p>And then I walked on stage and it wasn't about me anymore. It was about Freddie, about the play, about the story we were telling together. The self-consciousness I had anticipated never fully materialized because I didn't have time for it. The work demanded my attention.</p>
+        
+        <p>That's what I learned from the whole experience: the cure for self-consciousness isn't trying not to be self-conscious. It's having something more important to focus on.</p>
+        
+        <h3>April 5, 2020 - standstill</h3>
+        
+        <p>A friend from the company, J Todd, killed himself last week.</p>
+        
+        <p>I didn't know him well. We had done one show together a few years ago. He was talented, funny, kind. He struggled with depression and addiction. The isolation of quarantine must have been unbearable for him.</p>
+        
+        <p>I keep thinking about how much actors need to be around other actors, how much we need the collaborative energy of rehearsal, the shared experience of performance. When you take that away- when you isolate people who define themselves through connection- something essential gets lost.</p>
+        
+        <p>Theatre isn't just a job or a hobby for people who do it seriously. It's a way of making sense of the world, a way of processing experience, a way of feeling less alone. Without it, some people don't know how to survive.</p>
+        
+        <p>The theatre community is grieving. People are posting memories of J Todd on social media, sharing photos from shows he'd been in, expressing shock and sadness. But we can't gather to mourn together. We can't hold each other. We can't stand in a circle and share stories and cry together the way we would normally do.</p>
+        
+        <p>I didn't know him well enough to claim deep personal grief. But I feel the loss- of his presence, of his potential, of all the performances he would have given if he'd been able to hold on.</p>
+        
+        <p>Actors are so vulnerable. We expose ourselves emotionally, we seek validation through performance, we struggle with the tension between authentic self-expression and the need for external approval. For many of us, the work itself is therapeutic- it gives us a container for difficult feelings, a way to transform pain into art.</p>
+        
+        <p>But when you lose access to that container, when all the theatres close and all the auditions are cancelled and there's no foreseeable future for the work- that's when things can become desperate. If an actor's got a play they're working on, even one a year from now, they've got something. If all the theatres shut down, that takes a toll.</p>
+        
+        <p>I could never assign a reason for J Todd's suicide because I never really knew him. I envisioned offering him a ride back to Herriman on a night when rehearsal had gone late and he'd missed the last train. I imagined him telling me his history, how he went from being an acting student at BYU to landing at American Conservatory Theatre in San Francisco, what it was like to act at Utah Shakes, what about his time in New York, what it feels like to be back in Utah.</p>
+        
+        <p>That opportunity is gone.</p>
+
+        <h2>Conclusion</h2>
+        <p style="text-align: center; font-style: italic;">April 14, 2020 - approaching the end</p>
+        
+        <h3>What am I left with at the end of this journey?</h3>
+        
+        <p>In one of my first writings, I had all these ideas for a play or a guidebook for actors or some sort of performance, and instead, I have a collection of my experiences and the thoughts and feelings that went along with them. I fear that I've left the reader with an altogether anxious and depressed jumble, that I haven't offered the reader any solutions or conclusions. The play could have been a victorious ending, but it fell away and was replaced with global catastrophe, loss, and great uncertainty.</p>
+        
+        <blockquote>
+            The performance is in reality a mutual creation of actors and audience, and the Atmosphere is an irresistible bond between actor and audience, a medium with which the audience can inspire the actors by sending them waves of confidence, understanding, and love.
+            <cite>Michael Chekhov, <em>On the Technique of Acting</em></cite>
+        </blockquote>
+        
+        <p>In my preface, I described the audience as an ocean and connected it with an early trauma. I remain afraid of being observed, absorbed with the possibility of being judged, criticized, or found wanting. Imagining a benevolent audience sending waves of understanding makes my body soften and reminds me of the reasons why I love to act on the stage. I rarely imagine that, but I can remember that more.</p>
+        
+        <p>I don't know when audiences will be able to gather safely again. The coronavirus has incited the necessity of physical separation, abolished closeness, made us afraid of each other. Even when we are able to gather again, will audiences feel safe enough to enjoy a play?</p>
+        
+        <blockquote>
+            From the very beginning of his study, he has been inside the character; his reward will be his own inner growth.
+            <cite>Michael Chekhov, <em>On the Technique of Acting</em></cite>
+        </blockquote>
+        
+        <p>Here is the place where I wrap up this thesis. I again sit facing a shifting mass of possibilities, but they look nothing like I could have predicted. I don't know when people will feel safe sitting in a theatre together. The idea of an audience has dissolved and dispersed. I will return to this section over the coming weeks and try to say something that feels like an ending.</p>
+        
+        <h3>April 21, 2020 - results &amp; discussion</h3>
+        
+        <p>Despite the upside-down ending to this narrative, I feel that I have captured succinctly the psychology of being myself as an actor and harvested the thoughts and feelings that made up my preparatory process in the face of rehearsal and performance.</p>
+        
+        <p>The transformations I have undergone over the course of this project include:</p>
+        
+        <ul>
+            <li>my capacity for and appreciation of ambiguity and ambivalence, which has increased</li>
+            <li>my relationship with the work of Sarah Ruhl, which has deepened and veered</li>
+            <li>my relationship with my ability to write and to act, which has softened and widened</li>
+            <li>the length of my hair, which is now longer than it's ever been</li>
+            <li>the length of this thesis, which is the largest piece of writing I've ever written</li>
+            <li>my appreciation for the possibility of theatrical events, which has begun to ache</li>
+            <li>my relationship to the inevitability of death and the myriad means by which it can happen, which became starker and more present suddenly and unexpectedly</li>
+            <li>a sense of ownership of sensations and impulses arising in my body, which unfolded</li>
+        </ul>
+        
+        <p>What I didn't do, that perhaps I'll have the resources and capacity to do in the future, is write anything about the changes in my thinking and being that have occurred thanks to the Jungian Analysts from whom I have learned a great deal, because I feel I am still in an embryonic phase of my understanding of psychology. Perhaps, as my development continues, I will be fortunate enough to enter a path of study centered on true Jungian Analysis and embark on my own analytic process.</p>
+        
+        <p>Another thing I look forward to exploring further (and perhaps even writing about) is the Michael Chekhov technique, which lent me its credibility when I lost a sense of what an actor should do. Perhaps, once some kind of safety arrives on the planet, I will be fortunate enough to attend the Michael Chekhov School for further training and exploration.</p>
+        
+        <p><em>How to Transcend</em> happens next spring. The work I have done on my role, some of which I hope is represented here in this writing, will continue. I will continue to transform. And, I'm sure, more great uncertainty is on its way.</p>
+        
+        <p>I am currently experiencing a glowing sort of spacious warmth as I type these words, thinking back on the work I have done and the work I will continue to do.</p>
+        
+        <p>I tried to tell the truth.</p>
+        
+        <p>I know it wasn't science but I hope it held some value to you.</p>
+
+        <h2 class="references">References</h2>
+        
+        <div class="references">
+            <p>Amabile, T. M. (1979). Effects of external evaluation on artistic creativity. <em>Journal of Personality and Social Psychology</em>, 37(2), 221-233.</p>
+            
+            <p>Ashley, J. (1997). Overcoming stage fright in everyday life. New York: Three Rivers Press.</p>
+            
+            <p>Baldwin, M. W., &amp; Holmes, J. G. (1987). Salient private audiences and awareness of the self. <em>Journal of Personality and Social Psychology</em>, 52(6), 1087-1098.</p>
+            
+            <p>Breger, L. (2009). <em>A Dream of Undying Fame: How Freud Betrayed His Mentor and Invented Psychoanalysis</em>. Basic Books.</p>
+            
+            <p>Bressert, S. (2019). Manic Episode Symptoms. <em>Psych Central</em>. Retrieved on September 8, 2019, from https://psychcentral.com/disorders/manic-episode/</p>
+            
+            <p>Burgstahler, M. S., &amp; Stenson, M. C. (2019). Effects of guided mindfulness meditation on anxiety and stress in a pre-healthcare college student population: a pilot study. <em>Journal of American College Health</em>, 1–7.</p>
+            
+            <p>Cahill, K. (2017). Harbur Gate. Bret Adams Agency.</p>
+            
+            <p>Cerullo, J. (Ed.). (2009). Michael Chekhov: Critical Issues, Reflections, Dreams. New London, CT: MICHA, the Michael Chekhov Association.</p>
+            
+            <p>Chekhov, M., &amp; Gordon, M. (1991). On the technique of acting. New York: Harper Perennial.</p>
+            
+            <p>Chekhov, M., Prey, D. H. du, &amp; Gordon, M. (1987). Lessons for the professional actor. New York: Performing Arts Journal Publications.</p>
+            
+            <p>Daboo, J. (2007). Michael Chekhov and the embodied imagination: Higher self and non-self. <em>Studies in Theatre and Performance</em>, 27(3), 261–273.</p>
+            
+            <p>Feist, J., Feist, G. J., &amp; Roberts, T. (2018). Theories of personality (9th ed.). New York, NY: McGraw Hill.</p>
+            
+            <p>Freidank, R. (2018, August 27). Imaginary Classes. Retrieved from https://michaelchekhovschool.org/view/</p>
+            
+            <p>Freidank, R. (2018). Imaginary Classes - Audio Exercises. Hudson, NY: Michael Chekhov School.</p>
+            
+            <p>Freidank, R. (2019). Dream doors [Audio podcast]. Retrieved from https://michaelchekhovschool.org/2018/05/10/dream-doors/.</p>
+            
+            <p>Hayes, D. (1975). The archetypal nature of stage fright. <em>Art Psychotherapy</em>, 2(3-4), 279–281.</p>
+            
+            <p>Hnath, L. (2017). A Doll's House, Part 2. Dramatists Play Service.</p>
+            
+            <p>Howe, T. (2004). In Conversation with Sarah Ruhl. <em>The Dramatist</em>, 7(2), 36–39.</p>
+            
+            <p>Hyde, L. (1983). The Gift: Imagination and the Erotic Life of Property. Penguin Random House.</p>
+            
+            <p>Jackson, J. M., &amp; Latane, B. (1981). All alone in front of all those people: Stage fright as a function of number and type of co-performers and audience. <em>Journal of Personality and Social Psychology</em>, 40(1), 73-85.</p>
+            
+            <p>Kaplan, J. (2016). The Poetry of Madness: Plato's Ion and the Psychology of Acting. <em>Journal of Dramatic Theory and Criticism, 31</em>(1), 45–64.</p>
+            
+            <p>Köhler, W. (1947). Gestalt Psychology: An Introduction to New Concepts in Modern Psychology. Liveright.</p>
+            
+            <p>Kron, L., Tesori, J., &amp; Bechdel, A. (2013). Fun Home. Concord Theatricals - Samuel French.</p>
+            
+            <p>Lahr, J. (2008, March 17). Surreal Life: The Plays of Sarah Ruhl. <em>The New Yorker</em>.</p>
+            
+            <p>Lahr, J. (2006, August 28). Petrified: the horrors of stagefright. <em>The New Yorker</em>, 38–42.</p>
+            
+            <p>Lee, J., Stewart, D., &amp; Marchiano, L. (2019, May 30). Individuation [Audio podcast]. Retrieved from http://www.thisjungianlife.com/episode-61-individuation/.</p>
+            
+            <p>Lemasson, A., André, V., Boudard, M., Lippi, D., &amp; Hausberger, M. (2018). Audience size influences actors' anxiety and associated postures on stage. <em>Behavioural Processes</em>, 157, 225–229.</p>
+            
+            <p>Mcdermott, P. (2013). To the Actor on the Technique of Acting. <em>Theatre, Dance and Performance Training</em>, 4(2), 325–327.</p>
+            
+            <p>McGuire, William, and R. F. C. Hull. C.G. Jung Speaking: Interviews and Encounters. Princeton University Press, 1993.</p>
+            
+            <p>MICHA, The Michael Chekhov Association (2007). Michael Chekhov on theatre and the art of acting: the six-hour master class: a guide to discovery with exercises. London: Routledge.</p>
+            
+            <p>Jung, C. G. (1970). The collected works of C.G. Jung. Princeton, NJ: Princeton University Press.</p>
+            
+            <p>Jung, C. G., &amp; Campbell, J. (1985). The portable Jung. Penguin Books.</p>
+            
+            <p>Jung, C. G., Jaffé Aniela, &amp; Winston, R. (1963). Memories, dreams, reflections. New York: Vintage Books.</p>
+            
+            <p>Olenina, A. H., Amazeen, E. L., Eckard, B., &amp; Papenfuss, J. (2019). Embodied Cognition in Performance: The Impact of Michael Chekhov's Acting Exercises on Affect and Height Perception. <em>Frontiers in Psychology</em>, 10.</p>
+            
+            <p>Ovid, &amp; Garth, S. (1751). Ovid's Metamorphoses, in fifteen books. Translated by Mr. Dryden. Mr. Addison. ... and other eminent hands. London: Printed for J. and R. Tonson and S. Draper.</p>
+            
+            <p>Plato. (1925). Plato in Twelve Volumes, Vol. 9. (W. R. M. Lamb, Trans.). Cambridge, MA: Harvard University Press.</p>
+            
+            <p>Rowland, D., &amp; Van Lankveld, J.J.D.M. (2019). Anxiety and Performance in Sex, Sport, and Stage: Identifying Common Ground. <em>Frontiers in Psychology</em>.</p>
+            
+            <p>Ruhl, S. (2019). How to Transcend a Happy Marriage. Theatre Communications Group.</p>
+            
+            <p>Ruhl, S. (2018). Letters From Max. Milkweed Editions.</p>
+            
+            <p>Ruhl, S. (2020). 44 Poems For You. Copper Canyon Press.</p>
+            
+            <p>Rushe, Sinéad. (2019). Michael Chekhov's acting technique: a practitioner's guide. London, UK: Methuen Drama.</p>
+            
+            <p>Salzberg, S. (2019, June 10). Ep. 100 - Sarah Ruhl [Audio podcast]. Retrieved from https://www.sharonsalzberg.com/metta-hour-podcast-episode-100-sarah-ruhl/.</p>
+            
+            <p>Senelick, L. (2004). Stanislavsky's Second Thoughts on 'The Seagull'. <em>New Theatre Quarterly</em>. Cambridge, England: Cambridge University Press.</p>
+            
+            <p>Simpson, C. E. (2019). form of a girl unknown. Dramatists Play Service.</p>
+            
+            <p>Strasberg, L. (1941). Acting and the Training of the Actor. In <em>Producing the Play by John Gassner</em>. New York, NY: Dryden Press.</p>
+            
+            <p>Stein, M. (1998). Jung's Map of the Soul: An Introduction. Chicago: Open Court.</p>
+            
+            <p>Steinmetz, J., Xu, Q., Fishbach, A., &amp; Zhang, Y. (2016). Being observed magnifies action. <em>Journal of Personality and Social Psychology</em>, 111(6), 852-865.</p>
+            
+            <p>Steptoe, A., &amp; Malik, F. (1995). The impact of stage fright on student actors. <em>British Journal of Psychology</em>, 86(1), 27.</p>
+            
+            <p>Vogel, P. (2007, April 1). Sarah Ruhl. <em>BOMB Magazine</em>.</p>
+            
+            <p>Wellman, M. (1984). The Theatre of Good Intentions. <em>Performing Arts Journal</em>, 8(3), 59-70.</p>
+            
+            <p>Zinder, D. (2007). 'The actor imagines with his body' – Michael Chekhov: An examination of the phenomenon. <em>Contemporary Theatre Review</em>, 17(1), 7–14.</p>
+        </div>
+    </main>
+    
+    <footer>
+        <p><a href="index.html">Back to home</a> | <a href="guestbook.html">Sign My Guestbook</a></p>
+        <p>&copy; 2025 Topher Rasmussen</p>
+        
+        <div class="counter">
+            <p>You are visitor number:</p>
+            <div class="counter-display" style="font-family: 'Courier New', Courier, monospace; font-weight: bold; background-color: #000; color: #0f0; padding: 5px; display: inline-block; border: 2px inset #999;">00000001</div>
+            <p><small>I have no idea what I'm doing</small></p>
+        </div>
+        
+        <div class="last-updated">
+            Last updated: October 8, 2025
+        </div>
+    </footer>
+
+    <style>
+        @keyframes rainbow-border {
+            0% { border-color: red; }
+            14% { border-color: orange; }
+            28% { border-color: yellow; }
+            42% { border-color: green; }
+            56% { border-color: blue; }
+            70% { border-color: indigo; }
+            85% { border-color: violet; }
+            100% { border-color: red; }
+        }
+        
+        .counter-display {
+            animation: rainbow-border 3s linear infinite;
+            border-width: 3px !important;
+            border-style: ridge !important;
+        }
+    </style>
+</body>
+</html>
