@@ -168,6 +168,65 @@
             padding-left: 2em;
         }
         
+        /* Reading Progress Indicator */
+        .progress-container {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .progress-bar {
+            width: 4px;
+            height: 400px;
+            background-color: #E0E0E0;
+            border-radius: 2px;
+            position: relative;
+        }
+        
+        .progress-fill {
+            width: 100%;
+            background-color: #333333;
+            border-radius: 2px;
+            transition: height 0.3s ease;
+            height: 0%;
+        }
+        
+        .progress-marker {
+            width: 12px;
+            height: 12px;
+            background-color: #333333;
+            border: 2px solid #FFFFFF;
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: all 0.3s ease;
+        }
+        
+        .progress-marker.active {
+            background-color: #000000;
+            width: 16px;
+            height: 16px;
+            box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Clickable Table of Contents */
+        .table-of-contents a {
+            color: #000000;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .table-of-contents a:hover {
+            color: #0066CC;
+            text-decoration: underline;
+        }
+        
         @media (max-width: 767px) {
             body {
                 font-size: 16px;
@@ -198,10 +257,23 @@
                 padding: 8px 12px;
                 font-size: 0.9em;
             }
+            
+            /* Hide progress indicator on mobile */
+            .progress-container {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Reading Progress Indicator -->
+    <div class="progress-container">
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+            <div class="progress-marker" style="top: 0%;"></div>
+        </div>
+    </div>
+
     <div class="navbar">
         <a href="index.html">Home</a>
         <a href="essay.html">Essay</a>
@@ -224,9 +296,9 @@
         <div class="table-of-contents">
             <h2>Table of Contents</h2>
             <ul>
-                <li>Introduction</li>
-                <li>Preface</li>
-                <li>1: hypotheses
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#preface">Preface</a></li>
+                <li><a href="#hypotheses">1: hypotheses</a>
                     <ul>
                         <li class="subsection">in which the brainstorm begins</li>
                         <li class="subsection">in which it is revealed just how little I know about psychology</li>
@@ -234,7 +306,7 @@
                         <li class="subsection">in which I doubt my approach</li>
                     </ul>
                 </li>
-                <li>2: preparation
+                <li><a href="#preparation">2: preparation</a>
                     <ul>
                         <li class="subsection">questions regarding praxis</li>
                         <li class="subsection">interlude: on giftedness</li>
@@ -243,7 +315,7 @@
                         <li class="subsection">the apprehension returns</li>
                     </ul>
                 </li>
-                <li>3: enactment
+                <li><a href="#enactment">3: enactment</a>
                     <ul>
                         <li class="subsection">4:10 pm, directly following the audition</li>
                         <li class="subsection">results</li>
@@ -252,7 +324,7 @@
                         <li class="subsection">the path becomes clear</li>
                     </ul>
                 </li>
-                <li>4: rumination (causes &amp; consequences)
+                <li><a href="#rumination">4: rumination (causes &amp; consequences)</a>
                     <ul>
                         <li class="subsection">purging the yuck</li>
                         <li class="subsection">continuing getting this out</li>
@@ -263,7 +335,7 @@
                         <li class="subsection">ruining nuance</li>
                     </ul>
                 </li>
-                <li>5: chronesthesia
+                <li><a href="#chronesthesia">5: chronesthesia</a>
                     <ul>
                         <li class="subsection">the cycle begins again</li>
                         <li class="subsection">2:50 pm</li>
@@ -271,13 +343,13 @@
                         <li class="subsection">waiting to get results</li>
                     </ul>
                 </li>
-                <li>6: rehearsal begins
+                <li><a href="#rehearsal">6: rehearsal begins</a>
                     <ul>
                         <li class="subsection">first read</li>
                         <li class="subsection">table work</li>
                     </ul>
                 </li>
-                <li>7: collapse
+                <li><a href="#collapse">7: collapse</a>
                     <ul>
                         <li class="subsection">well that was fucking crazy</li>
                         <li class="subsection">honing attention</li>
@@ -286,11 +358,11 @@
                         <li class="subsection">standstill</li>
                     </ul>
                 </li>
-                <li>Conclusion</li>
+                <li><a href="#conclusion">Conclusion</a></li>
             </ul>
         </div>
 
-        <h2>Introduction</h2>
+        <h2 id="introduction">Introduction</h2>
         
         <p>I am not a scientist.</p>
         
@@ -325,7 +397,7 @@
         
         <p>These pieces of writing land somewhere in the overlap between autobiographical narrative, process journal, and memoir. My hope is that the reader will engage with my confusions and excitements and will not be alienated.</p>
 
-        <h2>Preface</h2>
+        <h2 id="preface">Preface</h2>
         
         <p>On a beach in Southern California when I was four years old I remember watching the tide recede around my ankles and then a wave slammed into me suddenly and it was so loud and the wind was knocked out of me and I could only see churning water and sand and I couldn't breathe and I didn't know what was happening but I thought I was dying.</p>
         
@@ -345,7 +417,7 @@
         
         <p>On many levels, acting and psychoanalysis both concern the inner world of the individual. Thoughts and feelings are the raw material used in both processes: here are some of mine.</p>
 
-        <h2>1: hypotheses</h2>
+        <h2 id="hypotheses">1: hypotheses</h2>
         <p style="text-align: center; font-style: italic;">August 21, 2019 - September 15, 2019</p>
         
         <blockquote>
@@ -469,7 +541,7 @@
         
         <p><small><sup>12</sup> Thus far, I have not uncovered a single archetypal form.</small></p>
 
-        <h2>2: preparation</h2>
+        <h2 id="preparation">2: preparation</h2>
         <p style="text-align: center; font-style: italic;">September 30, 2019 - October 3, 2019</p>
         
         <blockquote>
@@ -559,7 +631,7 @@
         
         <p>Tomorrow, I'll find out.</p>
 
-        <h2>3: enactment</h2>
+        <h2 id="enactment">3: enactment</h2>
         <p style="text-align: center; font-style: italic;">October 10, 2019 - October 26, 2019</p>
         
         <blockquote>
@@ -677,7 +749,7 @@
         
         <p>The path has become clear. Now I have to walk it.</p>
 
-        <h2>4: rumination (causes &amp; consequences)</h2>
+        <h2 id="rumination">4: rumination (causes &amp; consequences)</h2>
         <p style="text-align: center; font-style: italic;">October 28, 2019 - November 17, 2019</p>
         
         <blockquote>
@@ -801,7 +873,7 @@
         
         <p>We'll see how that goes.</p>
 
-        <h2>5: chronesthesia</h2>
+        <h2 id="chronesthesia">5: chronesthesia</h2>
         <p style="text-align: center; font-style: italic;">November 18, 2019 - January 23, 2020</p>
         
         <blockquote>
@@ -901,7 +973,7 @@
         
         <p>I'm still afraid. But I'm also ready.</p>
 
-        <h2>6: rehearsal begins</h2>
+        <h2 id="rehearsal">6: rehearsal begins</h2>
         <p style="text-align: center; font-style: italic;">February 6, 2020 - February 22, 2020</p>
         
         <blockquote>
@@ -953,7 +1025,7 @@
         
         <p>I'm still figuring this out. Still practicing. Still learning.</p>
 
-        <h2>7: collapse</h2>
+        <h2 id="collapse">7: collapse</h2>
         <p style="text-align: center; font-style: italic;">March 2, 2020 - April 14, 2020</p>
         
         <blockquote>
@@ -1053,7 +1125,7 @@
         
         <p>That opportunity is gone.</p>
 
-        <h2>Conclusion</h2>
+        <h2 id="conclusion">Conclusion</h2>
         <p style="text-align: center; font-style: italic;">April 14, 2020 - approaching the end</p>
         
         <h3>What am I left with at the end of this journey?</h3>
@@ -1245,5 +1317,75 @@
             border-style: ridge !important;
         }
     </style>
+
+    <script>
+        // Reading Progress Indicator Script
+        function updateProgressIndicator() {
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight - windowHeight;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollPercent = (scrollTop / documentHeight) * 100;
+            
+            // Update progress fill
+            const progressFill = document.querySelector('.progress-fill');
+            if (progressFill) {
+                progressFill.style.height = scrollPercent + '%';
+            }
+            
+            // Update progress marker position
+            const progressMarker = document.querySelector('.progress-marker');
+            if (progressMarker) {
+                progressMarker.style.top = scrollPercent + '%';
+            }
+            
+            // Highlight current section in progress indicator
+            const sections = document.querySelectorAll('h2[id]');
+            let currentSection = null;
+            
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= windowHeight / 3) {
+                    currentSection = section;
+                }
+            });
+            
+            // Add active class to marker if we're in a section
+            if (currentSection && progressMarker) {
+                progressMarker.classList.add('active');
+            } else if (progressMarker) {
+                progressMarker.classList.remove('active');
+            }
+        }
+        
+        // Smooth scroll for anchor links
+        document.addEventListener('DOMContentLoaded', function() {
+            const anchorLinks = document.querySelectorAll('.table-of-contents a[href^="#"]');
+            
+            anchorLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        const navbarHeight = document.querySelector('.navbar').offsetHeight;
+                        const targetPosition = targetElement.offsetTop - navbarHeight - 20;
+                        
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Initial update
+            updateProgressIndicator();
+            
+            // Update on scroll
+            window.addEventListener('scroll', updateProgressIndicator);
+            window.addEventListener('resize', updateProgressIndicator);
+        });
+    </script>
 </body>
 </html>
