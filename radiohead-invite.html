@@ -138,6 +138,91 @@
         let glitchBands = [];
         let autoRippleInterval = null;
         let messageSettled = false;
+        let trailEffects = [];
+        let isDrawing = false;
+        let lastTrailPoint = null;
+
+        class TrailEffect {
+            constructor(x, y, startTime) {
+                this.x = x;
+                this.y = y;
+                this.startTime = startTime;
+                this.duration = 6000; // 6 seconds
+                this.affectedCells = [];
+                this.originalStates = new Map();
+                
+                // Find cells within radius and store their original states
+                const radius = 100 + Math.random() * 100;
+                cells.forEach(cell => {
+                    const dx = cell.x - x;
+                    const dy = cell.y - y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (dist < radius) {
+                        this.affectedCells.push({
+                            cell: cell,
+                            distance: dist,
+                            angle: Math.atan2(dy, dx)
+                        });
+                        
+                        // Store original state
+                        this.originalStates.set(cell, {
+                            char: cell.currentChar,
+                            isMessage: cell.isMessage,
+                            targetChar: cell.targetChar,
+                            settled: cell.settled,
+                            brightness: cell.brightness,
+                            hue: cell.hue
+                        });
+                    }
+                });
+            }
+            
+            update(currentTime) {
+                const elapsed = currentTime - this.startTime;
+                const progress = Math.min(elapsed / this.duration, 1);
+                
+                if (progress < 0.5) {
+                    // First 3 seconds: ripple out effect
+                    const rippleProgress = progress * 2;
+                    this.affectedCells.forEach(({ cell, distance, angle }) => {
+                        const ripplePhase = (distance / 200) - rippleProgress * 2;
+                        
+                        if (Math.abs(ripplePhase) < 0.3) {
+                            // Transform character
+                            cell.currentChar = CHARSET[Math.floor(Math.random() * CHARSET.length)];
+                            cell.brightness = 0.8 + Math.random() * 0.2;
+                            cell.hue = (cell.hue + 120) % 360;
+                            
+                            // Add ripple displacement
+                            const intensity = 1 - Math.abs(ripplePhase) / 0.3;
+                            cell.glitchOffset = {
+                                x: Math.cos(angle) * intensity * 8,
+                                y: Math.sin(angle) * intensity * 8
+                            };
+                        }
+                    });
+                } else {
+                    // Last 3 seconds: return to original state
+                    const returnProgress = (progress - 0.5) * 2;
+                    this.affectedCells.forEach(({ cell }) => {
+                        const original = this.originalStates.get(cell);
+                        if (original) {
+                            // Gradually return to original state
+                            if (returnProgress > 0.8) {
+                                cell.currentChar = original.char;
+                                cell.brightness = original.brightness;
+                                cell.hue = original.hue;
+                                cell.glitchOffset = { x: 0, y: 0 };
+                                cell.settled = original.settled;
+                            }
+                        }
+                    });
+                }
+                
+                return progress >= 1;
+            }
+        }
 
         class Cell {
             constructor(x, y, col, row) {
@@ -332,6 +417,9 @@
             
             updateGlitchBands();
             
+            // Update trail effects
+            trailEffects = trailEffects.filter(effect => !effect.update(time));
+            
             cells.forEach(cell => {
                 cell.update(time);
                 cell.draw();
@@ -356,12 +444,89 @@
             requestAnimationFrame(animate);
         }
 
+        function createTrailEffect(x, y) {
+            // Only create trail if enough distance from last point
+            if (lastTrailPoint) {
+                const dx = x - lastTrailPoint.x;
+                const dy = y - lastTrailPoint.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 30) return; // Minimum distance between trail points
+            }
+            
+            trailEffects.push(new TrailEffect(x, y, time));
+            lastTrailPoint = { x, y };
+        }
+
         canvas.addEventListener('click', (e) => {
             const rect = canvas.getBoundingClientRect();
             const dpr = Math.min(window.devicePixelRatio || 1, 2);
             const x = (e.clientX - rect.left) * dpr;
             const y = (e.clientY - rect.top) * dpr;
-            triggerRipple(x, y);
+            createTrailEffect(x, y);
+        });
+
+        // Mouse drag events
+        canvas.addEventListener('mousedown', (e) => {
+            isDrawing = true;
+            const rect = canvas.getBoundingClientRect();
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            const x = (e.clientX - rect.left) * dpr;
+            const y = (e.clientY - rect.top) * dpr;
+            createTrailEffect(x, y);
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (!isDrawing) return;
+            const rect = canvas.getBoundingClientRect();
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            const x = (e.clientX - rect.left) * dpr;
+            const y = (e.clientY - rect.top) * dpr;
+            createTrailEffect(x, y);
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            isDrawing = false;
+            lastTrailPoint = null;
+        });
+
+        canvas.addEventListener('mouseleave', () => {
+            isDrawing = false;
+            lastTrailPoint = null;
+        });
+
+        // Touch events for mobile
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            isDrawing = true;
+            const rect = canvas.getBoundingClientRect();
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            const touch = e.touches[0];
+            const x = (touch.clientX - rect.left) * dpr;
+            const y = (touch.clientY - rect.top) * dpr;
+            createTrailEffect(x, y);
+        });
+
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            if (!isDrawing) return;
+            const rect = canvas.getBoundingClientRect();
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            const touch = e.touches[0];
+            const x = (touch.clientX - rect.left) * dpr;
+            const y = (touch.clientY - rect.top) * dpr;
+            createTrailEffect(x, y);
+        });
+
+        canvas.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            isDrawing = false;
+            lastTrailPoint = null;
+        });
+
+        canvas.addEventListener('touchcancel', (e) => {
+            e.preventDefault();
+            isDrawing = false;
+            lastTrailPoint = null;
         });
 
         window.addEventListener('resize', () => {
