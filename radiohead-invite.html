@@ -130,6 +130,11 @@
             '#EE82EE', // violet
         ];
 
+        // Theme configuration
+        const HUE_MODE = 'interactive'; // 'interactive', 'sequence', 'random'
+        const THEME_WAVE_SPEED = 0.3; // ms per pixel
+        const COLORED_MESSAGE_TEXT = true; // true = colored text, false = white text with colored glow
+
         let cols, rows, cellWidth, cellHeight;
         let cells = [];
         let messageMap = [];
@@ -141,6 +146,12 @@
         let trailEffects = [];
         let isDrawing = false;
         let lastTrailPoint = null;
+        
+        // Theme wave state
+        let currentThemeHue = 280; // Start with purple/magenta
+        let activeThemeWave = null;
+        let lastThemeWaveTime = 0;
+        let sequenceHueIndex = 0;
 
         class TrailEffect {
             constructor(x, y, startTime) {
@@ -192,7 +203,7 @@
                             // Transform character
                             cell.currentChar = CHARSET[Math.floor(Math.random() * CHARSET.length)];
                             cell.brightness = 0.8 + Math.random() * 0.2;
-                            cell.hue = (cell.hue + 120) % 360;
+                            // Don't change hue - let theme system control it
                             
                             // Add ripple displacement
                             const intensity = 1 - Math.abs(ripplePhase) / 0.3;
@@ -219,7 +230,7 @@
                                 // Non-message cells return to their snapshot state
                                 cell.currentChar = original.char;
                                 cell.brightness = original.brightness;
-                                cell.hue = original.hue;
+                                // Don't restore hue - let theme system control it
                                 cell.glitchOffset = { x: 0, y: 0 };
                                 cell.settled = original.settled;
                             }
@@ -228,6 +239,52 @@
                 }
                 
                 return progress >= 1;
+            }
+        }
+
+        class ThemeWave {
+            constructor(targetHue, originX, originY, startTime) {
+                this.targetHue = targetHue;
+                this.originX = originX;
+                this.originY = originY;
+                this.startTime = startTime;
+                this.speed = THEME_WAVE_SPEED;
+                
+                // Precompute themeSwitchAt for each cell
+                let maxDistance = 0;
+                cells.forEach(cell => {
+                    const dx = cell.x - originX;
+                    const dy = cell.y - originY;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    cell.themeSwitchAt = startTime + dist * this.speed;
+                    cell.themeWaveDistance = dist;
+                    maxDistance = Math.max(maxDistance, dist);
+                });
+                
+                this.endAt = startTime + maxDistance * this.speed;
+            }
+            
+            update(currentTime) {
+                // Check if wave is complete
+                if (currentTime >= this.endAt) {
+                    currentThemeHue = this.targetHue;
+                    return true; // Wave complete
+                }
+                
+                // Apply color changes to cells that have reached their switch time
+                cells.forEach(cell => {
+                    if (currentTime >= cell.themeSwitchAt && cell.appliedThemeHue !== this.targetHue) {
+                        cell.appliedThemeHue = this.targetHue;
+                        
+                        // Add a brief brightness spark at the wavefront
+                        const timeSinceSwitch = currentTime - cell.themeSwitchAt;
+                        if (timeSinceSwitch < 80) {
+                            cell.flashUntil = currentTime + 120;
+                        }
+                    }
+                });
+                
+                return false; // Wave still active
             }
         }
 
@@ -247,6 +304,10 @@
                 this.hue = Math.random() * 360;
                 this.brightness = 0.3 + Math.random() * 0.7;
                 this.glitchOffset = { x: 0, y: 0 };
+                this.appliedThemeHue = currentThemeHue;
+                this.themeSwitchAt = 0;
+                this.themeWaveDistance = 0;
+                this.flashUntil = 0;
             }
 
             randomChar() {
@@ -285,21 +346,102 @@
                 
                 if (this.isMessage && this.settled) {
                     ctx.globalAlpha = 1;
-                    ctx.fillStyle = '#fff';
-                    ctx.shadowColor = '#FF00FF';
-                    ctx.shadowBlur = 12;
-                    ctx.fillText(this.currentChar, drawX, drawY);
-                    ctx.shadowBlur = 0;
+                    
+                    if (COLORED_MESSAGE_TEXT) {
+                        // Colored text with colored glow
+                        ctx.fillStyle = themeColorForCell(this, true);
+                        ctx.shadowColor = themeGlowColor(this.appliedThemeHue);
+                        ctx.shadowBlur = 12;
+                        ctx.fillText(this.currentChar, drawX, drawY);
+                        ctx.shadowBlur = 0;
+                    } else {
+                        // White text with colored glow (original style)
+                        ctx.fillStyle = '#fff';
+                        ctx.shadowColor = themeGlowColor(this.appliedThemeHue);
+                        ctx.shadowBlur = 12;
+                        ctx.fillText(this.currentChar, drawX, drawY);
+                        ctx.shadowBlur = 0;
+                    }
                 } else {
-                    const colorIndex = Math.floor((this.hue / 360) * GOTH_COLORS.length);
-                    const color = GOTH_COLORS[colorIndex % GOTH_COLORS.length];
-                    ctx.globalAlpha = this.brightness;
-                    ctx.fillStyle = color;
+                    // Non-message cells: use theme color with brightness-based alpha
+                    const effectiveBrightness = (time < this.flashUntil) ? Math.max(this.brightness, 0.9) : this.brightness;
+                    ctx.globalAlpha = effectiveBrightness;
+                    ctx.fillStyle = themeColorForCell(this, false);
                     ctx.fillText(this.currentChar, drawX, drawY);
                 }
                 
                 ctx.globalAlpha = 1;
             }
+        }
+        
+        // Helper function to generate theme-based HSL color for a cell
+        function themeColorForCell(cell, isMessage) {
+            let hue = cell.appliedThemeHue;
+            
+            // Add small hue jitter during glitches (only for non-message cells)
+            if (!isMessage && cell.glitchOffset.x !== 0) {
+                hue += (Math.random() - 0.5) * 10; // ±5 degree jitter
+            }
+            
+            if (isMessage) {
+                // Message cells: high lightness for legibility
+                return `hsl(${hue}, 100%, 92%)`;
+            } else {
+                // Non-message cells: vary lightness based on brightness
+                const saturation = 80 + Math.random() * 10; // 80-90%
+                const lightness = 25 + 55 * cell.brightness; // 25-80% based on brightness
+                return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+            }
+        }
+        
+        // Helper function to generate glow color
+        function themeGlowColor(hue) {
+            return `hsl(${hue}, 100%, 55%)`;
+        }
+        
+        // Function to compute next hue based on mode and position
+        function computeNextHue(x, y) {
+            if (HUE_MODE === 'interactive') {
+                // Map click position to hue based on angle from center
+                const centerX = canvas.width / 2;
+                const centerY = canvas.height / 2;
+                const dx = x - centerX;
+                const dy = y - centerY;
+                const angle = Math.atan2(dy, dx); // -π to π
+                const normalizedAngle = (angle + Math.PI) / (2 * Math.PI); // 0 to 1
+                const angleHue = normalizedAngle * 360;
+                
+                // Slight bias toward previous hue to reduce jarring jumps
+                const nextHue = currentThemeHue * 0.15 + angleHue * 0.85;
+                return nextHue % 360;
+            } else if (HUE_MODE === 'sequence') {
+                // ROYGBIV sequence with golden angle stepping
+                const goldenAngle = 137.5;
+                sequenceHueIndex++;
+                return (sequenceHueIndex * goldenAngle) % 360;
+            } else if (HUE_MODE === 'random') {
+                // Random hue
+                return Math.random() * 360;
+            }
+            return currentThemeHue;
+        }
+        
+        // Function to start a theme wave
+        function startThemeWave(x, y) {
+            const now = Date.now();
+            
+            // Cooldown to prevent double-triggering
+            if (now - lastThemeWaveTime < 300) {
+                return;
+            }
+            
+            lastThemeWaveTime = now;
+            
+            // Compute next hue
+            const targetHue = computeNextHue(x, y);
+            
+            // Create and start the theme wave
+            activeThemeWave = new ThemeWave(targetHue, x, y, now);
         }
 
         function initCanvas() {
@@ -422,7 +564,8 @@
                     
                     if (Math.abs(pos - bandPos) < band.thickness && !(cell.isMessage && cell.settled)) {
                         cell.glitchOffset = band.offset;
-                        cell.hue = (cell.hue + 180) % 360;
+                        // Don't change hue - let theme system control it
+                        // The small hue jitter is handled in themeColorForCell() when glitchOffset is active
                     }
                 });
             });
@@ -435,6 +578,14 @@
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
             updateGlitchBands();
+            
+            // Update theme wave
+            if (activeThemeWave) {
+                const waveComplete = activeThemeWave.update(time);
+                if (waveComplete) {
+                    activeThemeWave = null;
+                }
+            }
             
             // Update trail effects
             trailEffects = trailEffects.filter(effect => !effect.update(time));
@@ -477,14 +628,6 @@
             lastTrailPoint = { x, y };
         }
 
-        canvas.addEventListener('click', (e) => {
-            const rect = canvas.getBoundingClientRect();
-            const dpr = Math.min(window.devicePixelRatio || 1, 2);
-            const x = (e.clientX - rect.left) * dpr;
-            const y = (e.clientY - rect.top) * dpr;
-            createTrailEffect(x, y);
-        });
-
         // Mouse drag events
         canvas.addEventListener('mousedown', (e) => {
             isDrawing = true;
@@ -492,6 +635,9 @@
             const dpr = Math.min(window.devicePixelRatio || 1, 2);
             const x = (e.clientX - rect.left) * dpr;
             const y = (e.clientY - rect.top) * dpr;
+            
+            // Start theme wave on mousedown
+            startThemeWave(x, y);
             createTrailEffect(x, y);
         });
 
@@ -524,6 +670,9 @@
             const touch = e.touches[0];
             const x = (touch.clientX - rect.left) * dpr;
             const y = (touch.clientY - rect.top) * dpr;
+            
+            // Start theme wave on touchstart
+            startThemeWave(x, y);
             createTrailEffect(x, y);
         };
 
