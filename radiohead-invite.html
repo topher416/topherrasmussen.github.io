@@ -207,9 +207,16 @@
                     const returnProgress = (progress - 0.5) * 2;
                     this.affectedCells.forEach(({ cell }) => {
                         const original = this.originalStates.get(cell);
-                        if (original) {
-                            // Gradually return to original state
-                            if (returnProgress > 0.8) {
+                        if (returnProgress > 0.8) {
+                            if (cell.isMessage) {
+                                // Message cells always snap back to their canonical state
+                                cell.currentChar = cell.targetChar;
+                                cell.settled = true;
+                                cell.flipRate = Infinity;
+                                cell.brightness = 1;
+                                cell.glitchOffset = { x: 0, y: 0 };
+                            } else if (original) {
+                                // Non-message cells return to their snapshot state
                                 cell.currentChar = original.char;
                                 cell.brightness = original.brightness;
                                 cell.hue = original.hue;
@@ -372,6 +379,18 @@
             });
         }
 
+        function resetMessageNow() {
+            if (!messageMap || messageMap.length === 0) return;
+            messageMap.forEach(cell => {
+                if (!cell) return;
+                cell.currentChar = cell.targetChar;
+                cell.settled = true;
+                cell.flipRate = Infinity;
+                cell.brightness = 1;
+                cell.glitchOffset = { x: 0, y: 0 };
+            });
+        }
+
         function triggerGlitchBand() {
             const isHorizontal = Math.random() > 0.5;
             const position = Math.random();
@@ -450,7 +469,8 @@
                 const dx = x - lastTrailPoint.x;
                 const dy = y - lastTrailPoint.y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
-                if (dist < 30) return; // Minimum distance between trail points
+                const minStep = window.innerWidth < 768 ? 15 : 30;
+                if (dist < minStep) return; // Minimum distance between trail points
             }
             
             trailEffects.push(new TrailEffect(x, y, time));
@@ -487,6 +507,7 @@
         canvas.addEventListener('mouseup', () => {
             isDrawing = false;
             lastTrailPoint = null;
+            setTimeout(resetMessageNow, 1200);
         });
 
         canvas.addEventListener('mouseleave', () => {
@@ -495,7 +516,7 @@
         });
 
         // Touch events for mobile
-        canvas.addEventListener('touchstart', (e) => {
+        const onTouchStart = (e) => {
             e.preventDefault();
             isDrawing = true;
             const rect = canvas.getBoundingClientRect();
@@ -504,9 +525,9 @@
             const x = (touch.clientX - rect.left) * dpr;
             const y = (touch.clientY - rect.top) * dpr;
             createTrailEffect(x, y);
-        });
+        };
 
-        canvas.addEventListener('touchmove', (e) => {
+        const onTouchMove = (e) => {
             e.preventDefault();
             if (!isDrawing) return;
             const rect = canvas.getBoundingClientRect();
@@ -515,19 +536,25 @@
             const x = (touch.clientX - rect.left) * dpr;
             const y = (touch.clientY - rect.top) * dpr;
             createTrailEffect(x, y);
-        });
+        };
 
-        canvas.addEventListener('touchend', (e) => {
+        const onTouchEnd = (e) => {
             e.preventDefault();
             isDrawing = false;
             lastTrailPoint = null;
-        });
+            setTimeout(resetMessageNow, 1200);
+        };
 
-        canvas.addEventListener('touchcancel', (e) => {
+        const onTouchCancel = (e) => {
             e.preventDefault();
             isDrawing = false;
             lastTrailPoint = null;
-        });
+        };
+
+        canvas.addEventListener('touchstart', onTouchStart, { passive: false });
+        canvas.addEventListener('touchmove', onTouchMove, { passive: false });
+        canvas.addEventListener('touchend', onTouchEnd, { passive: false });
+        canvas.addEventListener('touchcancel', onTouchCancel, { passive: false });
 
         window.addEventListener('resize', () => {
             initCanvas();
@@ -540,6 +567,9 @@
                 triggerRipple(x, y);
             }
         }, 5000);
+
+        // Periodic reset to ensure message characters always return to correct state
+        setInterval(resetMessageNow, 10000);
 
         initCanvas();
         animate();
