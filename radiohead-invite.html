@@ -141,6 +141,9 @@
         let trailEffects = [];
         let isDrawing = false;
         let lastTrailPoint = null;
+        let isPaused = false;
+        let lastScanTime = Date.now();
+        let lastDegradationTime = 0;
 
         class TrailEffect {
             constructor(x, y, startTime) {
@@ -439,6 +442,9 @@
             // Update trail effects
             trailEffects = trailEffects.filter(effect => !effect.update(time));
             
+            // Progressive text degradation
+            degradeText();
+            
             cells.forEach(cell => {
                 cell.update(time);
                 cell.draw();
@@ -464,6 +470,9 @@
         }
 
         function createTrailEffect(x, y) {
+            // Don't create trail effects while paused
+            if (isPaused) return;
+            
             // Only create trail if enough distance from last point
             if (lastTrailPoint) {
                 const dx = x - lastTrailPoint.x;
@@ -488,6 +497,8 @@
         // Mouse drag events
         canvas.addEventListener('mousedown', (e) => {
             isDrawing = true;
+            isPaused = true;
+            resetMessageNow(); // Snap to clean immediately
             const rect = canvas.getBoundingClientRect();
             const dpr = Math.min(window.devicePixelRatio || 1, 2);
             const x = (e.clientX - rect.left) * dpr;
@@ -506,12 +517,13 @@
 
         canvas.addEventListener('mouseup', () => {
             isDrawing = false;
+            isPaused = false;
             lastTrailPoint = null;
-            setTimeout(resetMessageNow, 1200);
         });
 
         canvas.addEventListener('mouseleave', () => {
             isDrawing = false;
+            isPaused = false;
             lastTrailPoint = null;
         });
 
@@ -519,6 +531,8 @@
         const onTouchStart = (e) => {
             e.preventDefault();
             isDrawing = true;
+            isPaused = true;
+            resetMessageNow(); // Snap to clean immediately
             const rect = canvas.getBoundingClientRect();
             const dpr = Math.min(window.devicePixelRatio || 1, 2);
             const touch = e.touches[0];
@@ -541,13 +555,14 @@
         const onTouchEnd = (e) => {
             e.preventDefault();
             isDrawing = false;
+            isPaused = false;
             lastTrailPoint = null;
-            setTimeout(resetMessageNow, 1200);
         };
 
         const onTouchCancel = (e) => {
             e.preventDefault();
             isDrawing = false;
+            isPaused = false;
             lastTrailPoint = null;
         };
 
@@ -577,6 +592,9 @@
         }
         
         function flipRow(rowIndex) {
+            // Don't flip rows while paused
+            if (isPaused) return;
+            
             const now = Date.now();
             const jitter = 60;
             const startIdx = rowIndex * cols;
@@ -595,10 +613,45 @@
         }
         
         function scheduleWaterfall() {
+            lastScanTime = Date.now();
             const duration = getScanDuration();
             for (let r = 0; r < rows; r++) {
                 const delay = (r / rows) * duration;
                 setTimeout(() => flipRow(r), delay);
+            }
+        }
+        
+        function degradeText() {
+            if (isPaused || !messageMap || messageMap.length === 0) return;
+            
+            const now = Date.now();
+            const scanDurationMs = getScanDuration();
+            const elapsed = now - lastScanTime;
+            const strength = Math.min(elapsed / scanDurationMs, 1);
+            
+            // Throttle degradation based on strength
+            const throttleMs = 220 - 180 * strength;
+            if (now - lastDegradationTime < throttleMs) return;
+            
+            lastDegradationTime = now;
+            
+            // Progressive degradation: more characters as time passes
+            const count = 1 + Math.floor(strength * 4);
+            
+            // Pick random settled message cells to break
+            const settledMessageCells = messageMap.filter(cell => cell && cell.settled);
+            if (settledMessageCells.length === 0) return;
+            
+            for (let i = 0; i < count && i < settledMessageCells.length; i++) {
+                const randomIdx = Math.floor(Math.random() * settledMessageCells.length);
+                const cell = settledMessageCells[randomIdx];
+                
+                if (cell) {
+                    cell.settled = false;
+                    cell.nextFlipAt = now;
+                    cell.flipRate = 40 + Math.random() * 90 - Math.floor(40 * strength);
+                    cell.settleAt = Infinity; // Keep broken until scan line fixes it
+                }
             }
         }
         
