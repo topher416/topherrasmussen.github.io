@@ -105,26 +105,21 @@
         ];
 
         const GOTH_COLORS = [
-            '#8B008B', // dark magenta
-            '#4B0082', // indigo
-            '#800080', // purple
-            '#9400D3', // dark violet
-            '#6A0DAD', // purple
-            '#663399', // rebecca purple
-            '#8A2BE2', // blue violet
-            '#9932CC', // dark orchid
-            '#BA55D3', // medium orchid
-            '#FF00FF', // magenta
-            '#DA70D6', // orchid
-            '#EE82EE', // violet
+            '#8B008B', '#4B0082', '#800080', '#9400D3', '#6A0DAD', '#663399',
+            '#8A2BE2', '#9932CC', '#BA55D3', '#FF00FF', '#DA70D6', '#EE82EE'
         ];
 
-        let cols, rows, cellWidth, cellHeight;
+        let cols, rows, cellWidth, cellHeight, dpr;
         let cells = [];
         let messageMap = [];
-        let ripples = [];
         let time = 0;
-        let glitchBands = [];
+        let phase = 'REVEAL_WATERFALL';
+        let phaseStartTime = 0;
+        let revealEndAt = 0;
+        let holdEndAt = 0;
+        let scanPos = 0;
+        let scanSpeed = 220;
+        let bandThickness = 3;
 
         class Cell {
             constructor(x, y, col, row) {
@@ -135,12 +130,13 @@
                 this.currentChar = this.randomChar();
                 this.targetChar = null;
                 this.isMessage = false;
-                this.flipRate = 30 + Math.random() * 90;
-                this.nextFlipAt = time + Math.random() * 100;
-                this.settleAt = Infinity;
-                this.settled = false;
+                this.corruption = 1.0;
+                this.corruptionTarget = 1.0;
+                this.flipRate = 40 + Math.random() * 80;
+                this.nextFlipAt = 0;
+                this.revealAt = Infinity;
+                this.lastRevealedAt = 0;
                 this.hue = Math.random() * 360;
-                this.brightness = 0.3 + Math.random() * 0.7;
                 this.glitchOffset = { x: 0, y: 0 };
             }
 
@@ -148,44 +144,73 @@
                 return CHARSET[Math.floor(Math.random() * CHARSET.length)];
             }
 
-            update(now) {
-                if (now >= this.nextFlipAt && !this.settled) {
-                    this.currentChar = this.randomChar();
-                    this.nextFlipAt = now + this.flipRate;
-                }
-
-                if (now >= this.settleAt && !this.settled) {
-                    if (this.isMessage && this.targetChar) {
-                        this.currentChar = this.targetChar;
-                        this.settled = true;
-                        this.flipRate = 500 + Math.random() * 1000;
-                    } else {
-                        this.flipRate = 200 + Math.random() * 300;
-                        this.brightness *= 0.3;
+            update(now, dt) {
+                if (phase === 'REVEAL_WATERFALL') {
+                    if (now >= this.revealAt && this.corruption > 0) {
+                        this.corruption = Math.max(0, this.corruption - dt * 0.004);
+                        if (this.corruption <= 0 && this.isMessage && this.targetChar) {
+                            this.currentChar = this.targetChar;
+                        }
                     }
                 }
 
-                if (this.settled && Math.random() < 0.001) {
-                    this.currentChar = this.randomChar();
-                    setTimeout(() => {
-                        this.currentChar = this.targetChar;
-                    }, 50);
+                if (this.corruption > 0.1) {
+                    if (now >= this.nextFlipAt) {
+                        this.currentChar = this.randomChar();
+                        this.nextFlipAt = now + this.flipRate;
+                    }
+                }
+
+                if (this.corruptionTarget !== this.corruption) {
+                    const diff = this.corruptionTarget - this.corruption;
+                    this.corruption += diff * dt * 0.006;
+                    if (Math.abs(diff) < 0.01) {
+                        this.corruption = this.corruptionTarget;
+                    }
+                }
+
+                if (this.corruption < 0.1 && this.isMessage && this.targetChar) {
+                    this.currentChar = this.targetChar;
                 }
             }
 
-            draw() {
+            applyCorruption(amount) {
+                if (this.isMessage && this.corruption < 0.8) {
+                    this.corruptionTarget = Math.min(1.0, this.corruption + amount);
+                }
+            }
+
+            draw(now) {
                 const colorIndex = Math.floor((this.hue / 360) * GOTH_COLORS.length);
                 const color = GOTH_COLORS[colorIndex % GOTH_COLORS.length];
                 
-                ctx.globalAlpha = this.brightness;
-                ctx.fillStyle = color;
+                let brightness;
+                if (this.isMessage) {
+                    brightness = 1.0 - (this.corruption * 0.65);
+                } else {
+                    brightness = 0.15 + (this.corruption * 0.15);
+                }
                 
                 const drawX = this.x + this.glitchOffset.x;
                 const drawY = this.y + this.glitchOffset.y;
                 
-                if (this.isMessage && this.settled) {
+                const isRecentlyRevealed = (now - this.lastRevealedAt) < 400;
+                const showOutline = (phase === 'HOLD_CRISP' || isRecentlyRevealed) && 
+                                   this.isMessage && this.corruption < 0.2;
+                
+                if (showOutline) {
+                    ctx.lineWidth = dpr * 0.8;
+                    ctx.strokeStyle = '#fff';
+                    ctx.globalAlpha = brightness;
+                    ctx.strokeText(this.currentChar, drawX, drawY);
+                }
+                
+                ctx.globalAlpha = brightness;
+                ctx.fillStyle = color;
+                
+                if (this.isMessage && this.corruption < 0.3) {
                     ctx.shadowColor = color;
-                    ctx.shadowBlur = 10;
+                    ctx.shadowBlur = 8 * dpr;
                     ctx.fillText(this.currentChar, drawX, drawY);
                     ctx.shadowBlur = 0;
                 } else {
@@ -197,14 +222,14 @@
         }
 
         function initCanvas() {
-            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            dpr = Math.min(window.devicePixelRatio || 1, 2);
             canvas.width = window.innerWidth * dpr;
             canvas.height = window.innerHeight * dpr;
             canvas.style.width = window.innerWidth + 'px';
             canvas.style.height = window.innerHeight + 'px';
             
             const isMobile = window.innerWidth < 768;
-            const fontSize = isMobile ? 12 : 16;
+            const fontSize = isMobile ? 18 : 20;
             ctx.font = `${fontSize * dpr}px "Courier New", monospace`;
             ctx.textBaseline = 'top';
             
@@ -225,7 +250,7 @@
             }
             
             createMessageMap();
-            triggerRipple(canvas.width / 2, canvas.height / 2);
+            startWaterfallReveal();
         }
 
         function createMessageMap() {
@@ -270,93 +295,102 @@
             });
         }
 
-        function triggerRipple(x, y) {
-            const speed = 0.3;
-            const jitter = 50;
+        function startWaterfallReveal() {
+            phase = 'REVEAL_WATERFALL';
+            phaseStartTime = Date.now();
+            const rowDelay = 20;
+            
+            cells.forEach(cell => {
+                cell.corruption = 1.0;
+                cell.corruptionTarget = 1.0;
+                cell.revealAt = phaseStartTime + cell.row * rowDelay + Math.random() * 12;
+            });
+            
+            const lastRow = Math.max(...cells.map(c => c.row));
+            revealEndAt = phaseStartTime + lastRow * rowDelay + 500;
+            holdEndAt = revealEndAt + 2500;
+        }
+
+        function triggerRippleReveal(x, y) {
+            const radius = window.innerWidth < 768 ? 160 : 200;
             
             cells.forEach(cell => {
                 const dx = cell.x - x;
                 const dy = cell.y - y;
                 const dist = Math.sqrt(dx * dx + dy * dy);
-                cell.settleAt = time + dist * speed + Math.random() * jitter;
-                cell.settled = false;
+                
+                if (dist < radius && cell.isMessage) {
+                    cell.corruptionTarget = 0;
+                    cell.lastRevealedAt = Date.now();
+                }
             });
         }
 
-        function triggerGlitchBand() {
-            const isHorizontal = Math.random() > 0.5;
-            const position = Math.random();
-            const thickness = 3 + Math.floor(Math.random() * 8);
-            const duration = 100 + Math.random() * 150;
-            const endTime = time + duration;
+        function updateCRTScan(dt) {
+            if (phase !== 'DEGRADE_CRT') return;
             
-            glitchBands.push({
-                isHorizontal,
-                position,
-                thickness,
-                endTime,
-                offset: { x: (Math.random() - 0.5) * 4, y: (Math.random() - 0.5) * 4 }
-            });
-        }
-
-        function updateGlitchBands() {
-            glitchBands = glitchBands.filter(band => time < band.endTime);
+            scanPos += scanSpeed * dt / 1000;
+            if (scanPos > canvas.height) {
+                scanPos = 0;
+            }
+            
+            const scanRow = Math.floor(scanPos / cellHeight);
             
             cells.forEach(cell => {
-                cell.glitchOffset = { x: 0, y: 0 };
-            });
-            
-            glitchBands.forEach(band => {
-                cells.forEach(cell => {
-                    const pos = band.isHorizontal ? cell.row : cell.col;
-                    const max = band.isHorizontal ? rows : cols;
-                    const bandPos = band.position * max;
-                    
-                    if (Math.abs(pos - bandPos) < band.thickness) {
-                        cell.glitchOffset = band.offset;
-                        cell.hue = (cell.hue + 180) % 360;
-                    }
-                });
+                if (Math.abs(cell.row - scanRow) < bandThickness) {
+                    cell.applyCorruption(0.18);
+                }
             });
         }
 
+        let lastTime = Date.now();
         function animate() {
-            time = Date.now();
+            const now = Date.now();
+            const dt = now - lastTime;
+            lastTime = now;
+            time = now;
             
-            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            if (phase === 'REVEAL_WATERFALL' && now >= revealEndAt) {
+                phase = 'HOLD_CRISP';
+            }
+            
+            if (phase === 'HOLD_CRISP' && now >= holdEndAt) {
+                phase = 'DEGRADE_CRT';
+                scanPos = 0;
+            }
+            
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.15)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             
-            updateGlitchBands();
+            updateCRTScan(dt);
             
             cells.forEach(cell => {
-                cell.update(time);
-                cell.draw();
+                cell.update(now, dt);
+                cell.draw(now);
             });
-            
-            if (Math.random() < 0.02) {
-                triggerGlitchBand();
-            }
             
             requestAnimationFrame(animate);
         }
 
         canvas.addEventListener('click', (e) => {
             const rect = canvas.getBoundingClientRect();
-            const dpr = Math.min(window.devicePixelRatio || 1, 2);
             const x = (e.clientX - rect.left) * dpr;
             const y = (e.clientY - rect.top) * dpr;
-            triggerRipple(x, y);
+            triggerRippleReveal(x, y);
+        });
+
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            const x = (touch.clientX - rect.left) * dpr;
+            const y = (touch.clientY - rect.top) * dpr;
+            triggerRippleReveal(x, y);
         });
 
         window.addEventListener('resize', () => {
             initCanvas();
         });
-
-        setInterval(() => {
-            const x = Math.random() * canvas.width;
-            const y = Math.random() * canvas.height;
-            triggerRipple(x, y);
-        }, 5000);
 
         initCanvas();
         animate();
