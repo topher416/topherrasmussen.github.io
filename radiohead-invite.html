@@ -243,44 +243,33 @@
         }
 
         function createMessageMap() {
-            const offscreen = document.createElement('canvas');
-            offscreen.width = canvas.width;
-            offscreen.height = canvas.height;
-            const octx = offscreen.getContext('2d');
-            octx.font = ctx.font;
-            octx.textBaseline = 'top';
-            octx.fillStyle = 'white';
-            
-            const startY = (canvas.height - MESSAGE_LINES.length * cellHeight) / 2;
-            
-            MESSAGE_LINES.forEach((line, lineIdx) => {
-                const lineWidth = octx.measureText(line).width;
-                const startX = (canvas.width - lineWidth) / 2;
-                octx.fillText(line, startX, startY + lineIdx * cellHeight);
-            });
-            
-            const imageData = octx.getImageData(0, 0, canvas.width, canvas.height);
             messageMap = [];
             
-            cells.forEach(cell => {
-                const px = Math.floor(cell.x + cellWidth / 2);
-                const py = Math.floor(cell.y + cellHeight / 2);
-                const idx = (py * canvas.width + px) * 4;
-                const alpha = imageData.data[idx + 3];
+            // Calculate starting row for centered message
+            const startRow = Math.floor((rows - MESSAGE_LINES.length) / 2);
+            
+            MESSAGE_LINES.forEach((line, lineIdx) => {
+                if (line.length === 0) return; // Skip empty lines
                 
-                if (alpha > 128) {
-                    cell.isMessage = true;
-                    const lineIdx = Math.floor((py - startY) / cellHeight);
-                    if (lineIdx >= 0 && lineIdx < MESSAGE_LINES.length) {
-                        const line = MESSAGE_LINES[lineIdx];
-                        const lineWidth = octx.measureText(line).width;
-                        const lineStartX = (canvas.width - lineWidth) / 2;
-                        const charIdx = Math.floor((px - lineStartX) / cellWidth);
-                        if (charIdx >= 0 && charIdx < line.length) {
-                            cell.targetChar = line[charIdx];
-                        }
+                const row = startRow + lineIdx;
+                if (row < 0 || row >= rows) return;
+                
+                // Calculate starting column for centered line
+                const startCol = Math.floor((cols - line.length) / 2);
+                
+                // Assign each character to a specific grid cell
+                for (let charIdx = 0; charIdx < line.length; charIdx++) {
+                    const col = startCol + charIdx;
+                    if (col < 0 || col >= cols) continue;
+                    
+                    // Find the cell at this row/col
+                    const cellIndex = row * cols + col;
+                    if (cellIndex >= 0 && cellIndex < cells.length) {
+                        const cell = cells[cellIndex];
+                        cell.isMessage = true;
+                        cell.targetChar = line[charIdx];
+                        messageMap.push(cell);
                     }
-                    messageMap.push(cell);
                 }
             });
         }
