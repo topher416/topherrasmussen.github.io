@@ -132,8 +132,15 @@
 
         // Theme configuration
         const HUE_MODE = 'interactive'; // 'interactive', 'sequence', 'random'
-        const THEME_WAVE_SPEED = 0.3; // ms per pixel
+        const THEME_WAVE_SPEED = 1.2; // ms per pixel - slow creeping like tendrils
         const COLORED_MESSAGE_TEXT = true; // true = colored text, false = white text with colored glow
+        
+        // Viral spread configuration
+        const VIRAL_NOISE_SCALE = 0.08; // Frequency of noise (lower = broader structures)
+        const VIRAL_NOISE_AMP = 0.8; // Amplitude of noise variation
+        const VIRAL_JITTER = 0.12; // Random jitter per step
+        const ANISO_AMP = 0.25; // Angular anisotropy amplitude
+        const ANISO_FREQ = 6; // Angular anisotropy frequency
 
         let cols, rows, cellWidth, cellHeight;
         let cells = [];
@@ -152,6 +159,112 @@
         let activeThemeWave = null;
         let lastThemeWaveTime = 0;
         let sequenceHueIndex = 0;
+
+        // Simple coherent noise function (value noise with smoothstep interpolation)
+        function valueNoise(x, y) {
+            // Simple hash function for pseudo-random values
+            const hash = (x, y) => {
+                let h = (x * 374761393 + y * 668265263) & 0x7fffffff;
+                h = (h ^ (h >> 13)) * 1274126177;
+                return ((h ^ (h >> 16)) & 0x7fffffff) / 0x7fffffff;
+            };
+            
+            const x0 = Math.floor(x);
+            const x1 = x0 + 1;
+            const y0 = Math.floor(y);
+            const y1 = y0 + 1;
+            
+            const sx = x - x0;
+            const sy = y - y0;
+            
+            // Smoothstep interpolation
+            const smoothstep = t => t * t * (3 - 2 * t);
+            const tx = smoothstep(sx);
+            const ty = smoothstep(sy);
+            
+            // Get corner values
+            const c00 = hash(x0, y0);
+            const c10 = hash(x1, y0);
+            const c01 = hash(x0, y1);
+            const c11 = hash(x1, y1);
+            
+            // Bilinear interpolation
+            const nx0 = c00 * (1 - tx) + c10 * tx;
+            const nx1 = c01 * (1 - tx) + c11 * tx;
+            return nx0 * (1 - ty) + nx1 * ty;
+        }
+        
+        // Fractional Brownian Motion (fBm) - layered noise for richness
+        function fbm(x, y, octaves = 3) {
+            let value = 0;
+            let amplitude = 1;
+            let frequency = 1;
+            let maxValue = 0;
+            
+            for (let i = 0; i < octaves; i++) {
+                value += valueNoise(x * frequency, y * frequency) * amplitude;
+                maxValue += amplitude;
+                amplitude *= 0.5;
+                frequency *= 2;
+            }
+            
+            return value / maxValue;
+        }
+        
+        // Simple priority queue (min-heap) for Dijkstra
+        class PriorityQueue {
+            constructor() {
+                this.heap = [];
+            }
+            
+            push(item, priority) {
+                this.heap.push({ item, priority });
+                this.bubbleUp(this.heap.length - 1);
+            }
+            
+            pop() {
+                if (this.heap.length === 0) return null;
+                const result = this.heap[0];
+                const end = this.heap.pop();
+                if (this.heap.length > 0) {
+                    this.heap[0] = end;
+                    this.bubbleDown(0);
+                }
+                return result;
+            }
+            
+            bubbleUp(index) {
+                while (index > 0) {
+                    const parentIndex = Math.floor((index - 1) / 2);
+                    if (this.heap[index].priority >= this.heap[parentIndex].priority) break;
+                    [this.heap[index], this.heap[parentIndex]] = [this.heap[parentIndex], this.heap[index]];
+                    index = parentIndex;
+                }
+            }
+            
+            bubbleDown(index) {
+                while (true) {
+                    const leftChild = 2 * index + 1;
+                    const rightChild = 2 * index + 2;
+                    let smallest = index;
+                    
+                    if (leftChild < this.heap.length && this.heap[leftChild].priority < this.heap[smallest].priority) {
+                        smallest = leftChild;
+                    }
+                    if (rightChild < this.heap.length && this.heap[rightChild].priority < this.heap[smallest].priority) {
+                        smallest = rightChild;
+                    }
+                    if (smallest === index) break;
+                    
+                    [this.heap[index], this.heap[smallest]] = [this.heap[smallest], this.heap[index]];
+                    index = smallest;
+                }
+            }
+            
+            isEmpty() {
+                return this.heap.length === 0;
+            }
+        }
 
         class TrailEffect {
             constructor(x, y, startTime) {
@@ -250,18 +363,99 @@
                 this.startTime = startTime;
                 this.speed = THEME_WAVE_SPEED;
                 
-                // Precompute themeSwitchAt for each cell
-                let maxDistance = 0;
+                // Find origin cell (nearest to click point)
+                let originCell = cells[0];
+                let minDist = Infinity;
                 cells.forEach(cell => {
                     const dx = cell.x - originX;
                     const dy = cell.y - originY;
                     const dist = Math.sqrt(dx * dx + dy * dy);
-                    cell.themeSwitchAt = startTime + dist * this.speed;
-                    cell.themeWaveDistance = dist;
-                    maxDistance = Math.max(maxDistance, dist);
+                    if (dist < minDist) {
+                        minDist = dist;
+                        originCell = cell;
+                    }
                 });
                 
-                this.endAt = startTime + maxDistance * this.speed;
+                // Dijkstra's algorithm with noise-modulated edge costs for viral spread
+                const times = new Array(cells.length).fill(Infinity);
+                const visited = new Array(cells.length).fill(false);
+                const pq = new PriorityQueue();
+                
+                const originIdx = cells.indexOf(originCell);
+                times[originIdx] = startTime;
+                pq.push(originIdx, startTime);
+                
+                // Helper to get cell index from row/col
+                const getCellIdx = (row, col) => {
+                    if (row < 0 || row >= rows || col < 0 || col >= cols) return -1;
+                    return row * cols + col;
+                };
+                
+                // 8-neighbor connectivity
+                const neighbors = [
+                    [-1, -1], [-1, 0], [-1, 1],
+                    [0, -1],           [0, 1],
+                    [1, -1],  [1, 0],  [1, 1]
+                ];
+                
+                let maxTime = startTime;
+                
+                while (!pq.isEmpty()) {
+                    const current = pq.pop();
+                    const idx = current.item;
+                    const currentTime = current.priority;
+                    
+                    if (visited[idx]) continue;
+                    visited[idx] = true;
+                    
+                    const cell = cells[idx];
+                    const row = cell.row;
+                    const col = cell.col;
+                    
+                    // Process neighbors
+                    neighbors.forEach(([dr, dc]) => {
+                        const nRow = row + dr;
+                        const nCol = col + dc;
+                        const nIdx = getCellIdx(nRow, nCol);
+                        
+                        if (nIdx === -1 || visited[nIdx]) return;
+                        
+                        const nCell = cells[nIdx];
+                        
+                        // Calculate step distance in pixels
+                        const dx = nCell.x - cell.x;
+                        const dy = nCell.y - cell.y;
+                        const stepDist = Math.sqrt(dx * dx + dy * dy);
+                        
+                        // Compute cost multiplier with coherent noise + jitter + anisotropy
+                        const noiseValue = fbm(nCol * VIRAL_NOISE_SCALE, nRow * VIRAL_NOISE_SCALE, 2);
+                        const jitter = (Math.random() - 0.5) * VIRAL_JITTER;
+                        
+                        // Angular anisotropy for extra irregularity
+                        const angleFromOrigin = Math.atan2(nCell.y - originY, nCell.x - originX);
+                        const anisotropy = ANISO_AMP * Math.sin(ANISO_FREQ * angleFromOrigin);
+                        
+                        const costMultiplier = Math.max(0.2, 1 + VIRAL_NOISE_AMP * (noiseValue - 0.5) + jitter + anisotropy);
+                        
+                        // Edge time = step distance * speed * cost multiplier
+                        const edgeTime = stepDist * this.speed * costMultiplier;
+                        const newTime = currentTime + edgeTime;
+                        
+                        if (newTime < times[nIdx]) {
+                            times[nIdx] = newTime;
+                            pq.push(nIdx, newTime);
+                            maxTime = Math.max(maxTime, newTime);
+                        }
+                    });
+                }
+                
+                // Set themeSwitchAt for all cells
+                cells.forEach((cell, idx) => {
+                    cell.themeSwitchAt = times[idx];
+                    cell.themeWaveDistance = times[idx] - startTime;
+                });
+                
+                this.endAt = maxTime;
             }
             
             update(currentTime) {
@@ -453,7 +647,7 @@
             
             const isMobile = window.innerWidth < 768;
             const fontSize = isMobile ? 18 : 22;
-            ctx.font = `${fontSize * dpr}px "Courier New", monospace`;
+            ctx.font = `bold ${fontSize * dpr}px "Courier New", monospace`;
             ctx.textBaseline = 'top';
             
             const metrics = ctx.measureText('M');
