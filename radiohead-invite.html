@@ -568,8 +568,42 @@
             }
         }, 5000);
 
-        // Periodic reset to ensure message characters always return to correct state
-        setInterval(resetMessageNow, 10000);
+        // Scan-line driven waterfall reset
+        const scanLine = document.querySelector('.scan-line');
+        
+        function getScanDuration() {
+            const duration = getComputedStyle(scanLine).animationDuration || '4s';
+            return duration.endsWith('ms') ? parseFloat(duration) : parseFloat(duration) * 1000;
+        }
+        
+        function flipRow(rowIndex) {
+            const now = Date.now();
+            const jitter = 60;
+            const startIdx = rowIndex * cols;
+            const endIdx = Math.min((rowIndex + 1) * cols, cells.length);
+            
+            for (let i = startIdx; i < endIdx; i++) {
+                const cell = cells[i];
+                if (!cell) continue;
+                
+                cell.settled = false;
+                cell.nextFlipAt = now;
+                cell.flipRate = 20 + Math.random() * 25;
+                cell.glitchOffset = { x: 0, y: 0 };
+                cell.settleAt = Date.now() + 120 + Math.random() * jitter;
+            }
+        }
+        
+        function scheduleWaterfall() {
+            const duration = getScanDuration();
+            for (let r = 0; r < rows; r++) {
+                const delay = (r / rows) * duration;
+                setTimeout(() => flipRow(r), delay);
+            }
+        }
+        
+        scanLine.addEventListener('animationstart', scheduleWaterfall);
+        scanLine.addEventListener('animationiteration', scheduleWaterfall);
 
         initCanvas();
         animate();
