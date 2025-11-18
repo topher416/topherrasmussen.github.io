@@ -132,7 +132,7 @@
 
         // Theme configuration
         const HUE_MODE = 'interactive'; // 'interactive', 'sequence', 'random'
-        const THEME_WAVE_SPEED = 0.3; // ms per pixel
+        const THEME_WAVE_SPEED = 1.2; // ms per pixel - slow creeping like tendrils
         const COLORED_MESSAGE_TEXT = true; // true = colored text, false = white text with colored glow
 
         let cols, rows, cellWidth, cellHeight;
@@ -453,7 +453,7 @@
             
             const isMobile = window.innerWidth < 768;
             const fontSize = isMobile ? 18 : 22;
-            ctx.font = `${fontSize * dpr}px "Courier New", monospace`;
+            ctx.font = `bold ${fontSize * dpr}px "Courier New", monospace`;
             ctx.textBaseline = 'top';
             
             const metrics = ctx.measureText('M');
