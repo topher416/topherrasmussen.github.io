@@ -48,15 +48,26 @@
             width: 100vw;
             height: 100vh;
             pointer-events: none;
-            opacity: 0.05;
+            opacity: 0.02;
             z-index: 5;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
             animation: noise-shift 0.5s infinite;
         }
 
         @keyframes noise-shift {
-            0%, 100% { opacity: 0.05; }
-            50% { opacity: 0.08; }
+            0%, 100% { opacity: 0.02; }
+            50% { opacity: 0.04; }
+        }
+        
+        @media (max-width: 767px) {
+            .noise-overlay {
+                opacity: 0.01;
+            }
+            
+            @keyframes noise-shift {
+                0%, 100% { opacity: 0.01; }
+                50% { opacity: 0.02; }
+            }
         }
 
         .sr-only {
@@ -125,6 +136,8 @@
         let ripples = [];
         let time = 0;
         let glitchBands = [];
+        let autoRippleInterval = null;
+        let messageSettled = false;
 
         class Cell {
             constructor(x, y, col, row) {
@@ -158,14 +171,15 @@
                     if (this.isMessage && this.targetChar) {
                         this.currentChar = this.targetChar;
                         this.settled = true;
-                        this.flipRate = 500 + Math.random() * 1000;
+                        this.flipRate = Infinity;
+                        this.brightness = 1;
                     } else {
                         this.flipRate = 200 + Math.random() * 300;
-                        this.brightness *= 0.3;
+                        this.brightness *= 0.15;
                     }
                 }
 
-                if (this.settled && Math.random() < 0.001) {
+                if (this.settled && !this.isMessage && Math.random() < 0.001) {
                     this.currentChar = this.randomChar();
                     setTimeout(() => {
                         this.currentChar = this.targetChar;
@@ -174,21 +188,21 @@
             }
 
             draw() {
-                const colorIndex = Math.floor((this.hue / 360) * GOTH_COLORS.length);
-                const color = GOTH_COLORS[colorIndex % GOTH_COLORS.length];
-                
-                ctx.globalAlpha = this.brightness;
-                ctx.fillStyle = color;
-                
                 const drawX = this.x + this.glitchOffset.x;
                 const drawY = this.y + this.glitchOffset.y;
                 
                 if (this.isMessage && this.settled) {
-                    ctx.shadowColor = color;
-                    ctx.shadowBlur = 10;
+                    ctx.globalAlpha = 1;
+                    ctx.fillStyle = '#fff';
+                    ctx.shadowColor = '#FF00FF';
+                    ctx.shadowBlur = 12;
                     ctx.fillText(this.currentChar, drawX, drawY);
                     ctx.shadowBlur = 0;
                 } else {
+                    const colorIndex = Math.floor((this.hue / 360) * GOTH_COLORS.length);
+                    const color = GOTH_COLORS[colorIndex % GOTH_COLORS.length];
+                    ctx.globalAlpha = this.brightness;
+                    ctx.fillStyle = color;
                     ctx.fillText(this.currentChar, drawX, drawY);
                 }
                 
@@ -204,7 +218,7 @@
             canvas.style.height = window.innerHeight + 'px';
             
             const isMobile = window.innerWidth < 768;
-            const fontSize = isMobile ? 12 : 16;
+            const fontSize = isMobile ? 18 : 22;
             ctx.font = `${fontSize * dpr}px "Courier New", monospace`;
             ctx.textBaseline = 'top';
             
@@ -249,18 +263,19 @@
             messageMap = [];
             
             cells.forEach(cell => {
-                const px = Math.floor(cell.x);
-                const py = Math.floor(cell.y);
+                const px = Math.floor(cell.x + cellWidth / 2);
+                const py = Math.floor(cell.y + cellHeight / 2);
                 const idx = (py * canvas.width + px) * 4;
                 const alpha = imageData.data[idx + 3];
                 
                 if (alpha > 128) {
                     cell.isMessage = true;
-                    const charX = Math.floor((px - (canvas.width - octx.measureText(MESSAGE_LINES[0]).width) / 2) / cellWidth);
                     const lineIdx = Math.floor((py - startY) / cellHeight);
                     if (lineIdx >= 0 && lineIdx < MESSAGE_LINES.length) {
                         const line = MESSAGE_LINES[lineIdx];
-                        const charIdx = Math.floor((px - (canvas.width - octx.measureText(line).width) / 2) / cellWidth);
+                        const lineWidth = octx.measureText(line).width;
+                        const lineStartX = (canvas.width - lineWidth) / 2;
+                        const charIdx = Math.floor((px - lineStartX) / cellWidth);
                         if (charIdx >= 0 && charIdx < line.length) {
                             cell.targetChar = line[charIdx];
                         }
@@ -312,7 +327,7 @@
                     const max = band.isHorizontal ? rows : cols;
                     const bandPos = band.position * max;
                     
-                    if (Math.abs(pos - bandPos) < band.thickness) {
+                    if (Math.abs(pos - bandPos) < band.thickness && !(cell.isMessage && cell.settled)) {
                         cell.glitchOffset = band.offset;
                         cell.hue = (cell.hue + 180) % 360;
                     }
@@ -333,6 +348,18 @@
                 cell.draw();
             });
             
+            // Check if message has settled
+            if (!messageSettled && messageMap.length > 0) {
+                const allSettled = messageMap.every(cell => cell.settled);
+                if (allSettled) {
+                    messageSettled = true;
+                    if (autoRippleInterval) {
+                        clearInterval(autoRippleInterval);
+                        autoRippleInterval = null;
+                    }
+                }
+            }
+            
             if (Math.random() < 0.02) {
                 triggerGlitchBand();
             }
@@ -352,10 +379,12 @@
             initCanvas();
         });
 
-        setInterval(() => {
-            const x = Math.random() * canvas.width;
-            const y = Math.random() * canvas.height;
-            triggerRipple(x, y);
+        autoRippleInterval = setInterval(() => {
+            if (!messageSettled) {
+                const x = Math.random() * canvas.width;
+                const y = Math.random() * canvas.height;
+                triggerRipple(x, y);
+            }
         }, 5000);
 
         initCanvas();
