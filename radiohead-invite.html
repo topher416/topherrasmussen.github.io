@@ -4,230 +4,362 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Radiohead Ensemble - December 14, 2025</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @keyframes glitch {
-            0% {
-                transform: translate(0);
-            }
-            20% {
-                transform: translate(-2px, 2px);
-            }
-            40% {
-                transform: translate(-2px, -2px);
-            }
-            60% {
-                transform: translate(2px, 2px);
-            }
-            80% {
-                transform: translate(2px, -2px);
-            }
-            100% {
-                transform: translate(0);
-            }
-        }
-
-        @keyframes color-shift {
-            0% {
-                filter: hue-rotate(0deg);
-            }
-            100% {
-                filter: hue-rotate(360deg);
-            }
-        }
-
-        @keyframes flicker {
-            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-                opacity: 1;
-            }
-            20%, 24%, 55% {
-                opacity: 0.4;
-            }
-        }
-
-        @keyframes drift {
-            0% {
-                transform: translateY(0px) rotate(0deg);
-            }
-            50% {
-                transform: translateY(-20px) rotate(5deg);
-            }
-            100% {
-                transform: translateY(0px) rotate(0deg);
-            }
-        }
-
-        @keyframes rgb-split {
-            0% {
-                text-shadow: 2px 0 0 rgba(255, 0, 0, 0.7), -2px 0 0 rgba(0, 255, 255, 0.7);
-            }
-            25% {
-                text-shadow: -2px 0 0 rgba(255, 0, 0, 0.7), 2px 0 0 rgba(0, 255, 255, 0.7);
-            }
-            50% {
-                text-shadow: 0 2px 0 rgba(255, 0, 0, 0.7), 0 -2px 0 rgba(0, 255, 255, 0.7);
-            }
-            75% {
-                text-shadow: 0 -2px 0 rgba(255, 0, 0, 0.7), 0 2px 0 rgba(0, 255, 255, 0.7);
-            }
-            100% {
-                text-shadow: 2px 0 0 rgba(255, 0, 0, 0.7), -2px 0 0 rgba(0, 255, 255, 0.7);
-            }
-        }
-
-        @keyframes scan-line {
-            0% {
-                top: 0%;
-            }
-            100% {
-                top: 100%;
-            }
-        }
-
-        .glitch {
-            animation: glitch 0.3s infinite;
-        }
-
-        .glitch-text {
-            animation: rgb-split 2s infinite;
-        }
-
-        .flicker {
-            animation: flicker 3s infinite;
-        }
-
-        .drift {
-            animation: drift 6s ease-in-out infinite;
-        }
-
-        .color-shift {
-            animation: color-shift 10s linear infinite;
-        }
-
-        .scan-line {
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.1);
-            animation: scan-line 4s linear infinite;
-            pointer-events: none;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            overflow-x: hidden;
+            overflow: hidden;
+            background: #000;
+            font-family: 'Courier New', monospace;
         }
 
-        .noise {
+        #board {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            image-rendering: pixelated;
+        }
+
+        .scan-line {
+            position: fixed;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(transparent, rgba(139, 0, 139, 0.5), transparent);
+            animation: scan 4s linear infinite;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        @keyframes scan {
+            0% { top: 0%; }
+            100% { top: 100%; }
+        }
+
+        .noise-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
             pointer-events: none;
-            opacity: 0.03;
-            z-index: 1000;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.05;
+            z-index: 5;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            animation: noise-shift 0.5s infinite;
         }
 
-        @media (max-width: 640px) {
-            .glitch-text {
-                font-size: 2rem;
-            }
+        @keyframes noise-shift {
+            0%, 100% { opacity: 0.05; }
+            50% { opacity: 0.08; }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
         }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4 relative">
-    <div class="noise"></div>
+<body>
+    <canvas id="board"></canvas>
     <div class="scan-line"></div>
+    <div class="noise-overlay"></div>
     
-    <div class="max-w-2xl w-full relative z-10">
-        <div class="drift">
-            <div class="text-center space-y-8 p-8 rounded-lg backdrop-blur-sm">
-                <div class="flicker">
-                    <h1 class="text-6xl md:text-8xl font-bold glitch-text mb-4">
-                        RADIOHEAD
-                    </h1>
-                    <p class="text-2xl md:text-3xl font-light tracking-widest">
-                        ENSEMBLE
-                    </p>
-                </div>
-
-                <div class="space-y-4 text-lg md:text-xl">
-                    <div class="glitch">
-                        <p class="font-mono">DECEMBER 14, 2025</p>
-                    </div>
-                    
-                    <div class="flicker">
-                        <p class="font-mono">4:00 PM</p>
-                    </div>
-
-                    <div class="space-y-2 mt-8">
-                        <p class="font-bold text-xl md:text-2xl color-shift">
-                            OLD TOWN SCHOOL OF FOLK MUSIC
-                        </p>
-                        <p class="font-mono text-base md:text-lg">
-                            909 West Armitage
-                        </p>
-                        <p class="font-mono text-base md:text-lg">
-                            Lincoln Park, Chicago, Illinois
-                        </p>
-                    </div>
-                </div>
-
-                <div class="mt-12 pt-8 border-t border-current opacity-60">
-                    <p class="text-sm md:text-base font-mono glitch">
-                        ⟡ A LIVE PERFORMANCE ⟡
-                    </p>
-                </div>
-            </div>
-        </div>
+    <div class="sr-only">
+        RADIOHEAD ENSEMBLE
+        December 14, 2025 at 4:00 PM
+        Old Town School of Folk Music
+        909 West Armitage, Lincoln Park, Chicago, Illinois
+        A Live Performance
     </div>
 
     <script>
-        const colors = [
-            ['#000000', '#FFFFFF'],
-            ['#1a1a2e', '#16213e', '#0f3460', '#e94560'],
-            ['#0d1b2a', '#1b263b', '#415a77', '#778da9', '#e0e1dd'],
-            ['#2d00f7', '#6a00f4', '#8900f2', '#a100f2', '#b100e8', '#bc00dd', '#d100d1', '#db00b6'],
-            ['#ff006e', '#fb5607', '#ffbe0b', '#8338ec', '#3a86ff'],
-            ['#03045e', '#023e8a', '#0077b6', '#0096c7', '#00b4d8', '#48cae4'],
-            ['#10002b', '#240046', '#3c096c', '#5a189a', '#7209b7', '#9d4edd'],
-            ['#006466', '#065a60', '#0b525b', '#144552', '#1b3a4b', '#212f45']
+        const canvas = document.getElementById('board');
+        const ctx = canvas.getContext('2d');
+        
+        const CHARSET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?/~`█▓▒░';
+        const MESSAGE_LINES = [
+            'RADIOHEAD',
+            'ENSEMBLE',
+            '',
+            'DECEMBER 14 2025',
+            '4:00 PM',
+            '',
+            'OLD TOWN SCHOOL',
+            'OF FOLK MUSIC',
+            '909 W ARMITAGE',
+            'LINCOLN PARK',
+            'CHICAGO IL'
         ];
 
-        let currentScheme = 0;
+        const GOTH_COLORS = [
+            '#8B008B', // dark magenta
+            '#4B0082', // indigo
+            '#800080', // purple
+            '#9400D3', // dark violet
+            '#6A0DAD', // purple
+            '#663399', // rebecca purple
+            '#8A2BE2', // blue violet
+            '#9932CC', // dark orchid
+            '#BA55D3', // medium orchid
+            '#FF00FF', // magenta
+            '#DA70D6', // orchid
+            '#EE82EE', // violet
+        ];
 
-        function randomizeColors() {
-            currentScheme = Math.floor(Math.random() * colors.length);
-            const scheme = colors[currentScheme];
+        let cols, rows, cellWidth, cellHeight;
+        let cells = [];
+        let messageMap = [];
+        let ripples = [];
+        let time = 0;
+        let glitchBands = [];
+
+        class Cell {
+            constructor(x, y, col, row) {
+                this.x = x;
+                this.y = y;
+                this.col = col;
+                this.row = row;
+                this.currentChar = this.randomChar();
+                this.targetChar = null;
+                this.isMessage = false;
+                this.flipRate = 30 + Math.random() * 90;
+                this.nextFlipAt = time + Math.random() * 100;
+                this.settleAt = Infinity;
+                this.settled = false;
+                this.hue = Math.random() * 360;
+                this.brightness = 0.3 + Math.random() * 0.7;
+                this.glitchOffset = { x: 0, y: 0 };
+            }
+
+            randomChar() {
+                return CHARSET[Math.floor(Math.random() * CHARSET.length)];
+            }
+
+            update(now) {
+                if (now >= this.nextFlipAt && !this.settled) {
+                    this.currentChar = this.randomChar();
+                    this.nextFlipAt = now + this.flipRate;
+                }
+
+                if (now >= this.settleAt && !this.settled) {
+                    if (this.isMessage && this.targetChar) {
+                        this.currentChar = this.targetChar;
+                        this.settled = true;
+                        this.flipRate = 500 + Math.random() * 1000;
+                    } else {
+                        this.flipRate = 200 + Math.random() * 300;
+                        this.brightness *= 0.3;
+                    }
+                }
+
+                if (this.settled && Math.random() < 0.001) {
+                    this.currentChar = this.randomChar();
+                    setTimeout(() => {
+                        this.currentChar = this.targetChar;
+                    }, 50);
+                }
+            }
+
+            draw() {
+                const colorIndex = Math.floor((this.hue / 360) * GOTH_COLORS.length);
+                const color = GOTH_COLORS[colorIndex % GOTH_COLORS.length];
+                
+                ctx.globalAlpha = this.brightness;
+                ctx.fillStyle = color;
+                
+                const drawX = this.x + this.glitchOffset.x;
+                const drawY = this.y + this.glitchOffset.y;
+                
+                if (this.isMessage && this.settled) {
+                    ctx.shadowColor = color;
+                    ctx.shadowBlur = 10;
+                    ctx.fillText(this.currentChar, drawX, drawY);
+                    ctx.shadowBlur = 0;
+                } else {
+                    ctx.fillText(this.currentChar, drawX, drawY);
+                }
+                
+                ctx.globalAlpha = 1;
+            }
+        }
+
+        function initCanvas() {
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            canvas.width = window.innerWidth * dpr;
+            canvas.height = window.innerHeight * dpr;
+            canvas.style.width = window.innerWidth + 'px';
+            canvas.style.height = window.innerHeight + 'px';
             
-            document.body.style.background = `linear-gradient(${Math.random() * 360}deg, ${scheme[0]}, ${scheme[scheme.length - 1]})`;
-            document.body.style.color = scheme.length > 2 ? scheme[Math.floor(scheme.length / 2)] : '#FFFFFF';
+            const isMobile = window.innerWidth < 768;
+            const fontSize = isMobile ? 12 : 16;
+            ctx.font = `${fontSize * dpr}px "Courier New", monospace`;
+            ctx.textBaseline = 'top';
             
-            const textElements = document.querySelectorAll('h1, p');
-            textElements.forEach((el, idx) => {
-                el.style.color = scheme[idx % scheme.length];
+            const metrics = ctx.measureText('M');
+            cellWidth = metrics.width;
+            cellHeight = fontSize * dpr * 1.2;
+            
+            cols = Math.floor(canvas.width / cellWidth);
+            rows = Math.floor(canvas.height / cellHeight);
+            
+            cells = [];
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    const x = col * cellWidth;
+                    const y = row * cellHeight;
+                    cells.push(new Cell(x, y, col, row));
+                }
+            }
+            
+            createMessageMap();
+            triggerRipple(canvas.width / 2, canvas.height / 2);
+        }
+
+        function createMessageMap() {
+            const offscreen = document.createElement('canvas');
+            offscreen.width = canvas.width;
+            offscreen.height = canvas.height;
+            const octx = offscreen.getContext('2d');
+            octx.font = ctx.font;
+            octx.textBaseline = 'top';
+            octx.fillStyle = 'white';
+            
+            const startY = (canvas.height - MESSAGE_LINES.length * cellHeight) / 2;
+            
+            MESSAGE_LINES.forEach((line, lineIdx) => {
+                const lineWidth = octx.measureText(line).width;
+                const startX = (canvas.width - lineWidth) / 2;
+                octx.fillText(line, startX, startY + lineIdx * cellHeight);
+            });
+            
+            const imageData = octx.getImageData(0, 0, canvas.width, canvas.height);
+            messageMap = [];
+            
+            cells.forEach(cell => {
+                const px = Math.floor(cell.x);
+                const py = Math.floor(cell.y);
+                const idx = (py * canvas.width + px) * 4;
+                const alpha = imageData.data[idx + 3];
+                
+                if (alpha > 128) {
+                    cell.isMessage = true;
+                    const charX = Math.floor((px - (canvas.width - octx.measureText(MESSAGE_LINES[0]).width) / 2) / cellWidth);
+                    const lineIdx = Math.floor((py - startY) / cellHeight);
+                    if (lineIdx >= 0 && lineIdx < MESSAGE_LINES.length) {
+                        const line = MESSAGE_LINES[lineIdx];
+                        const charIdx = Math.floor((px - (canvas.width - octx.measureText(line).width) / 2) / cellWidth);
+                        if (charIdx >= 0 && charIdx < line.length) {
+                            cell.targetChar = line[charIdx];
+                        }
+                    }
+                    messageMap.push(cell);
+                }
             });
         }
 
-        randomizeColors();
-        
-        setInterval(() => {
-            randomizeColors();
-        }, 8000);
+        function triggerRipple(x, y) {
+            const speed = 0.3;
+            const jitter = 50;
+            
+            cells.forEach(cell => {
+                const dx = cell.x - x;
+                const dy = cell.y - y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                cell.settleAt = time + dist * speed + Math.random() * jitter;
+                cell.settled = false;
+            });
+        }
 
-        document.addEventListener('click', () => {
-            randomizeColors();
+        function triggerGlitchBand() {
+            const isHorizontal = Math.random() > 0.5;
+            const position = Math.random();
+            const thickness = 3 + Math.floor(Math.random() * 8);
+            const duration = 100 + Math.random() * 150;
+            const endTime = time + duration;
+            
+            glitchBands.push({
+                isHorizontal,
+                position,
+                thickness,
+                endTime,
+                offset: { x: (Math.random() - 0.5) * 4, y: (Math.random() - 0.5) * 4 }
+            });
+        }
+
+        function updateGlitchBands() {
+            glitchBands = glitchBands.filter(band => time < band.endTime);
+            
+            cells.forEach(cell => {
+                cell.glitchOffset = { x: 0, y: 0 };
+            });
+            
+            glitchBands.forEach(band => {
+                cells.forEach(cell => {
+                    const pos = band.isHorizontal ? cell.row : cell.col;
+                    const max = band.isHorizontal ? rows : cols;
+                    const bandPos = band.position * max;
+                    
+                    if (Math.abs(pos - bandPos) < band.thickness) {
+                        cell.glitchOffset = band.offset;
+                        cell.hue = (cell.hue + 180) % 360;
+                    }
+                });
+            });
+        }
+
+        function animate() {
+            time = Date.now();
+            
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            updateGlitchBands();
+            
+            cells.forEach(cell => {
+                cell.update(time);
+                cell.draw();
+            });
+            
+            if (Math.random() < 0.02) {
+                triggerGlitchBand();
+            }
+            
+            requestAnimationFrame(animate);
+        }
+
+        canvas.addEventListener('click', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            const x = (e.clientX - rect.left) * dpr;
+            const y = (e.clientY - rect.top) * dpr;
+            triggerRipple(x, y);
         });
 
-        const glitchElements = document.querySelectorAll('.glitch, .glitch-text');
+        window.addEventListener('resize', () => {
+            initCanvas();
+        });
+
         setInterval(() => {
-            const randomEl = glitchElements[Math.floor(Math.random() * glitchElements.length)];
-            randomEl.style.animation = 'none';
-            setTimeout(() => {
-                randomEl.style.animation = '';
-            }, 50);
-        }, 3000);
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * canvas.height;
+            triggerRipple(x, y);
+        }, 5000);
+
+        initCanvas();
+        animate();
     </script>
 </body>
 </html>
