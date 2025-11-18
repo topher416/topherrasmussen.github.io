@@ -155,6 +155,8 @@
                 this.hue = Math.random() * 360;
                 this.brightness = 0.3 + Math.random() * 0.7;
                 this.glitchOffset = { x: 0, y: 0 };
+                this.fallOffset = 0;
+                this.revealDuration = 800;
             }
 
             randomChar() {
@@ -167,12 +169,24 @@
                     this.nextFlipAt = now + this.flipRate;
                 }
 
+                // Update fall animation for message cells
+                if (this.isMessage && !this.settled) {
+                    const revealStart = this.settleAt - this.revealDuration;
+                    if (now >= revealStart && now < this.settleAt) {
+                        const progress = (now - revealStart) / this.revealDuration;
+                        // Ease out cubic
+                        const eased = 1 - Math.pow(1 - progress, 3);
+                        this.fallOffset = (1 - eased) * -6 * cellHeight;
+                    }
+                }
+
                 if (now >= this.settleAt && !this.settled) {
                     if (this.isMessage && this.targetChar) {
                         this.currentChar = this.targetChar;
                         this.settled = true;
                         this.flipRate = Infinity;
                         this.brightness = 1;
+                        this.fallOffset = 0;
                     } else {
                         this.flipRate = 200 + Math.random() * 300;
                         this.brightness *= 0.15;
@@ -189,13 +203,21 @@
 
             draw() {
                 const drawX = this.x + this.glitchOffset.x;
-                const drawY = this.y + this.glitchOffset.y;
+                const drawY = this.y + this.glitchOffset.y + this.fallOffset;
                 
                 if (this.isMessage && this.settled) {
                     ctx.globalAlpha = 1;
                     ctx.fillStyle = '#fff';
                     ctx.shadowColor = '#FF00FF';
                     ctx.shadowBlur = 12;
+                    ctx.fillText(this.currentChar, drawX, drawY);
+                    ctx.shadowBlur = 0;
+                } else if (this.isMessage && !this.settled) {
+                    // Message cells during reveal: bright magenta with flipping
+                    ctx.globalAlpha = 0.9;
+                    ctx.fillStyle = '#FF00FF';
+                    ctx.shadowColor = '#FF00FF';
+                    ctx.shadowBlur = 8;
                     ctx.fillText(this.currentChar, drawX, drawY);
                     ctx.shadowBlur = 0;
                 } else {
@@ -239,7 +261,6 @@
             }
             
             createMessageMap();
-            triggerRipple(canvas.width / 2, canvas.height / 2);
         }
 
         function createMessageMap() {
@@ -247,6 +268,11 @@
             
             // Calculate starting row for centered message
             const startRow = Math.floor((rows - MESSAGE_LINES.length) / 2);
+            
+            const baseDelay = 300;
+            const lineDelay = 120;
+            const charDelay = 30;
+            const jitterAmount = 25;
             
             MESSAGE_LINES.forEach((line, lineIdx) => {
                 if (line.length === 0) return; // Skip empty lines
@@ -257,7 +283,7 @@
                 // Calculate starting column for centered line
                 const startCol = Math.floor((cols - line.length) / 2);
                 
-                // Assign each character to a specific grid cell
+                // Assign each character to a specific grid cell with waterfall timing
                 for (let charIdx = 0; charIdx < line.length; charIdx++) {
                     const col = startCol + charIdx;
                     if (col < 0 || col >= cols) continue;
@@ -268,6 +294,13 @@
                         const cell = cells[cellIndex];
                         cell.isMessage = true;
                         cell.targetChar = line[charIdx];
+                        
+                        // Waterfall reveal timing: line-by-line, then char-by-char
+                        const jitter = Math.random() * jitterAmount;
+                        cell.settleAt = time + baseDelay + (lineIdx * lineDelay) + (charIdx * charDelay) + jitter;
+                        cell.flipRate = 50; // Fast flipping during reveal
+                        cell.settled = false;
+                        
                         messageMap.push(cell);
                     }
                 }
