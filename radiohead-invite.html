@@ -629,30 +629,37 @@
             const elapsed = now - lastScanTime;
             const strength = Math.min(elapsed / scanDurationMs, 1);
             
-            // Throttle degradation based on strength
-            const throttleMs = 220 - 180 * strength;
-            if (now - lastDegradationTime < throttleMs) return;
+            // Per-frame continuous degradation: break a percentage of settled cells
+            // Start at ~1% and grow to ~7% of message cells per frame
+            const fraction = 0.01 + 0.06 * strength;
+            const count = Math.min(Math.ceil(messageMap.length * fraction), 15); // Cap at 15 per frame
             
-            lastDegradationTime = now;
-            
-            // Progressive degradation: more characters as time passes
-            const count = 1 + Math.floor(strength * 4);
+            // Target flip rate that accelerates with strength
+            const targetFlipRate = Math.max(15, 90 - 70 * strength);
             
             // Pick random settled message cells to break
             const settledMessageCells = messageMap.filter(cell => cell && cell.settled);
-            if (settledMessageCells.length === 0) return;
             
-            for (let i = 0; i < count && i < settledMessageCells.length; i++) {
-                const randomIdx = Math.floor(Math.random() * settledMessageCells.length);
-                const cell = settledMessageCells[randomIdx];
-                
-                if (cell) {
-                    cell.settled = false;
-                    cell.nextFlipAt = now;
-                    cell.flipRate = 40 + Math.random() * 90 - Math.floor(40 * strength);
-                    cell.settleAt = Infinity; // Keep broken until scan line fixes it
+            if (settledMessageCells.length > 0) {
+                for (let i = 0; i < count && i < settledMessageCells.length; i++) {
+                    const randomIdx = Math.floor(Math.random() * settledMessageCells.length);
+                    const cell = settledMessageCells[randomIdx];
+                    
+                    if (cell) {
+                        cell.settled = false;
+                        cell.nextFlipAt = now;
+                        cell.flipRate = targetFlipRate;
+                        cell.settleAt = Infinity; // Keep broken until scan line fixes it
+                    }
                 }
             }
+            
+            // Accelerate already-broken message cells as strength increases
+            messageMap.forEach(cell => {
+                if (cell && !cell.settled && cell.settleAt === Infinity) {
+                    cell.flipRate = Math.min(cell.flipRate, targetFlipRate);
+                }
+            });
         }
         
         scanLine.addEventListener('animationstart', scheduleWaterfall);
