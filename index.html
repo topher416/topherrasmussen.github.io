@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Topher Rasmussen</title>
+    <title>~*~ Topher's Homepage ~*~</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
         * {
             margin: 0;
             padding: 0;
@@ -12,203 +14,551 @@
         }
 
         body {
-            font-family: Georgia, Times, 'Times New Roman', serif;
-            line-height: 1.6;
-            background-color: #fafafa;
-            color: #222;
-            padding: 40px 20px;
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Comic Neue', cursive;
+            background-color: #000033;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23003366' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            color: #00ff00;
+            min-height: 100vh;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+                radial-gradient(2px 2px at 40px 70px, #fff, transparent),
+                radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+                radial-gradient(2px 2px at 130px 80px, #fff, transparent),
+                radial-gradient(1px 1px at 160px 120px, #fff, transparent),
+                radial-gradient(2px 2px at 200px 50px, #fff, transparent),
+                radial-gradient(1px 1px at 250px 160px, #fff, transparent),
+                radial-gradient(2px 2px at 300px 90px, #fff, transparent),
+                radial-gradient(1px 1px at 350px 200px, #fff, transparent),
+                radial-gradient(2px 2px at 400px 150px, #fff, transparent);
+            background-size: 450px 250px;
+            animation: twinkle 4s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
         }
 
         .container {
-            max-width: 650px;
+            max-width: 800px;
             margin: 0 auto;
+            padding: 20px;
         }
 
-        header {
-            margin-bottom: 40px;
+        .main-table {
+            width: 100%;
+            border: 4px ridge #ff00ff;
+            background: linear-gradient(180deg, #000066 0%, #000033 100%);
+            box-shadow: 0 0 20px #ff00ff;
+        }
+
+        .main-table td {
+            padding: 15px;
+            vertical-align: top;
+        }
+
+        .header-cell {
+            text-align: center;
+            background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+            background-size: 400% 100%;
+            animation: rainbow-bg 3s linear infinite;
+            padding: 20px !important;
+        }
+
+        @keyframes rainbow-bg {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 400% 50%; }
         }
 
         h1 {
-            font-size: 2rem;
-            margin-bottom: 12px;
-            color: #111;
+            font-family: 'VT323', monospace;
+            font-size: 3rem;
+            color: #000;
+            text-shadow: 2px 2px #fff, -2px -2px #ff00ff;
+            letter-spacing: 4px;
         }
 
-        .tagline {
-            font-size: 1rem;
-            color: #555;
-            margin-bottom: 20px;
+        .welcome-text {
+            font-size: 1.5rem;
+            color: #ffff00;
+            text-shadow: 2px 2px #ff0000;
+            animation: blink 1s step-end infinite;
         }
 
-        .intro {
-            font-size: 1rem;
-            color: #333;
-            margin-bottom: 50px;
-            line-height: 1.7;
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
-        section {
-            margin-bottom: 50px;
+        .marquee-container {
+            background: #000;
+            border: 2px inset #808080;
+            padding: 8px;
+            margin: 10px 0;
+            overflow: hidden;
         }
 
-        h2 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            color: #111;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-size: 0.9rem;
-            font-weight: 600;
+        .marquee-text {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 15s linear infinite;
+            color: #00ffff;
+            font-size: 1.1rem;
         }
 
-        .item {
-            margin-bottom: 30px;
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
         }
 
-        .item-title {
+        .sidebar {
+            width: 180px;
+            background: #000066;
+            border: 3px outset #0080ff;
+        }
+
+        .sidebar-title {
+            background: linear-gradient(180deg, #0080ff, #004080);
+            color: #fff;
+            padding: 8px;
+            text-align: center;
             font-weight: bold;
-            color: #111;
-            margin-bottom: 6px;
-        }
-
-        .item-title a {
-            color: #7b2cbf;
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            transition: border-bottom-color 0.2s;
-        }
-
-        .item-title a:hover {
-            border-bottom-color: #7b2cbf;
-        }
-
-        .item-description {
-            color: #444;
-            font-size: 0.95rem;
-        }
-
-        footer {
-            margin-top: 60px;
-            padding-top: 30px;
-            border-top: 1px solid #ddd;
+            border-bottom: 2px solid #00ffff;
             font-size: 0.9rem;
-            color: #666;
         }
 
-        footer a {
-            color: #7b2cbf;
+        .nav-links {
+            list-style: none;
+            padding: 10px;
+        }
+
+        .nav-links li {
+            margin: 8px 0;
+        }
+
+        .nav-links a {
+            color: #00ff00;
             text-decoration: none;
+            font-size: 0.95rem;
+            display: block;
+            padding: 4px;
+            transition: all 0.2s;
         }
 
-        footer a:hover {
+        .nav-links a:hover {
+            background: #ff00ff;
+            color: #fff;
+        }
+
+        .nav-links a::before {
+            content: ">> ";
+            color: #ffff00;
+        }
+
+        .content-area {
+            background: rgba(0, 0, 51, 0.8);
+            border: 3px double #00ffff;
+            padding: 15px;
+        }
+
+        .section-header {
+            color: #ff00ff;
+            font-size: 1.4rem;
+            border-bottom: 2px dashed #ff00ff;
+            padding-bottom: 8px;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px #000;
+        }
+
+        .section-header::before,
+        .section-header::after {
+            content: " ~*~ ";
+            color: #ffff00;
+        }
+
+        .project-item {
+            background: linear-gradient(180deg, #001a4d, #000033);
+            border: 2px ridge #0080ff;
+            padding: 12px;
+            margin-bottom: 15px;
+        }
+
+        .project-title a {
+            color: #00ffff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        .project-title a:hover {
+            color: #ff00ff;
             text-decoration: underline;
         }
 
-        .footer-links {
-            margin-bottom: 20px;
+        .project-title::before {
+            content: "[NEW!] ";
+            color: #ff0000;
+            animation: blink 1s step-end infinite;
+            font-size: 0.8rem;
         }
 
-        .counter {
+        .project-desc {
+            color: #cccccc;
+            font-size: 0.9rem;
+            margin-top: 8px;
+            line-height: 1.5;
+        }
+
+        .guestbook-section {
+            text-align: center;
+            padding: 20px;
+            background: #000;
+            border: 3px groove #ffff00;
             margin-top: 20px;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.85rem;
-            color: #888;
+        }
+
+        .guestbook-btn {
+            display: inline-block;
+            background: linear-gradient(180deg, #ffff00, #ff8800);
+            color: #000;
+            padding: 10px 25px;
+            text-decoration: none;
+            font-weight: bold;
+            border: 3px outset #ffff00;
+            font-size: 1rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .guestbook-btn:hover {
+            background: linear-gradient(180deg, #ff8800, #ffff00);
+            border-style: inset;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .footer-area {
+            text-align: center;
+            padding: 20px;
+            background: #000;
+            border-top: 3px double #ff00ff;
+        }
+
+        .counter-box {
+            display: inline-block;
+            background: #000;
+            border: 3px inset #808080;
+            padding: 8px 15px;
+            margin: 10px 0;
+        }
+
+        .counter-label {
+            color: #ffff00;
+            font-size: 0.9rem;
         }
 
         .counter-display {
-            display: inline;
-            font-weight: bold;
-            color: #555;
+            font-family: 'VT323', monospace;
+            font-size: 1.5rem;
+            color: #00ff00;
+            background: #001100;
+            padding: 5px 10px;
+            border: 2px inset #00ff00;
+            display: inline-block;
+            margin-top: 5px;
+            letter-spacing: 3px;
         }
 
-        @media (max-width: 600px) {
-            body {
-                padding: 30px 15px;
-            }
+        .badges {
+            margin-top: 15px;
+        }
 
+        .badge {
+            display: inline-block;
+            background: linear-gradient(180deg, #808080, #404040);
+            border: 2px outset #808080;
+            padding: 5px 10px;
+            margin: 5px;
+            font-size: 0.75rem;
+            color: #fff;
+        }
+
+        .contact-links {
+            margin: 15px 0;
+        }
+
+        .contact-links a {
+            color: #00ffff;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .contact-links a:hover {
+            color: #ff00ff;
+            text-decoration: underline;
+        }
+
+        .under-construction {
+            text-align: center;
+            padding: 10px;
+            background: repeating-linear-gradient(
+                45deg,
+                #ffff00,
+                #ffff00 10px,
+                #000 10px,
+                #000 20px
+            );
+            color: #000;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+
+        .under-construction span {
+            background: #ffff00;
+            padding: 2px 8px;
+        }
+
+        .sparkle {
+            display: inline-block;
+            animation: sparkle-rotate 1s linear infinite;
+        }
+
+        @keyframes sparkle-rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .intro-text {
+            color: #ffffff;
+            font-size: 1rem;
+            line-height: 1.6;
+            padding: 10px;
+            border-left: 3px solid #ff00ff;
+            margin-bottom: 20px;
+        }
+
+        .webring {
+            margin-top: 20px;
+            padding: 10px;
+            border: 2px dashed #00ffff;
+            text-align: center;
+        }
+
+        .webring-title {
+            color: #ffff00;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .webring a {
+            color: #00ff00;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+        .webring a:hover {
+            color: #ff00ff;
+        }
+
+        .location-text {
+            color: #ff8800;
+            font-style: italic;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 700px) {
+            .sidebar {
+                display: none;
+            }
+            
             h1 {
-                font-size: 1.6rem;
+                font-size: 2rem;
             }
+            
+            .mobile-nav {
+                display: block;
+                background: #000066;
+                border: 2px solid #00ffff;
+                padding: 10px;
+                margin-bottom: 15px;
+            }
+            
+            .mobile-nav a {
+                color: #00ff00;
+                display: block;
+                padding: 8px;
+                text-decoration: none;
+            }
+        }
 
-            h2 {
-                font-size: 0.85rem;
+        @media (min-width: 701px) {
+            .mobile-nav {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
+    <div class="stars"></div>
+    
     <div class="container">
-        <header>
-            <h1>Topher Rasmussen</h1>
-            <p class="tagline">Based in Chicago.</p>
-            <p class="intro">
-                This is where I keep experimental projects and writing I'm working through. 
-                Essays, code, a tarot game, music things. Figuring out what I actually 
-                think and whether I can write it.
-            </p>
-            <p class="intro">Start wherever.</p>
-        </header>
+        <table class="main-table" cellspacing="0">
+            <tr>
+                <td colspan="2" class="header-cell">
+                    <h1><span class="sparkle">*</span> TOPHER'S HOMEPAGE <span class="sparkle">*</span></h1>
+                    <p class="welcome-text">Welcome to my corner of the web!</p>
+                    <p class="location-text">~ Based in Chicago ~</p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="marquee-container">
+                        <span class="marquee-text">
+                            +++ WELCOME TO MY SITE +++ CHECK OUT MY PROJECTS +++ SIGN THE GUESTBOOK +++ LAST UPDATED: 2025 +++ YOU ARE VISITOR #<span class="counter-display-inline">???</span> +++ THANKS FOR STOPPING BY +++
+                        </span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="sidebar">
+                    <div class="sidebar-title">NAVIGATION</div>
+                    <ul class="nav-links">
+                        <li><a href="horrortarot/">Horror Tarot</a></li>
+                        <li><a href="radiohead-invite.html">Radiohead Event</a></li>
+                        <li><a href="essay.html">AI Essay</a></li>
+                        <li><a href="analyticintrospections/">Acting Essays</a></li>
+                        <li><a href="mailto:topher416@gmail.com">Email Me!</a></li>
+                        <li><a href="https://www.linkedin.com/in/topherrasmussen">LinkedIn</a></li>
+                    </ul>
+                    
+                    <div style="padding: 10px; text-align: center;">
+                        <div class="badge">Made with Notepad</div>
+                        <div class="badge">Best viewed at 800x600</div>
+                        <div class="badge">Netscape Now!</div>
+                    </div>
+                </td>
+                <td class="content-area">
+                    <div class="mobile-nav">
+                        <strong style="color: #ffff00;">MENU:</strong>
+                        <a href="horrortarot/">Horror Tarot</a>
+                        <a href="radiohead-invite.html">Radiohead Event</a>
+                        <a href="essay.html">AI Essay</a>
+                        <a href="analyticintrospections/">Acting Essays</a>
+                    </div>
 
-        <section>
-            <h2>Vibe Coded Projects</h2>
-            
-            <div class="item">
-                <div class="item-title">
-                    <a href="horrortarot/">Horror Movie Tarot</a>
-                </div>
-                <div class="item-description">
-                    Draw a nine-card spread of curated horror films presented as tarot cards, with generative ambient music and streaming links for each pick.
-                </div>
-            </div>
+                    <p class="intro-text">
+                        This is where I keep experimental projects and writing I'm working through. 
+                        Essays, code, a tarot game, music things. Figuring out what I actually 
+                        think and whether I can write it. Start wherever.
+                    </p>
 
-            <div class="item">
-                <div class="item-title">
-                    <a href="radiohead-invite.html">Radiohead Ensemble Invitation</a>
-                </div>
-                <div class="item-description">
-                    An interactive, glitchy canvas poster for a December 14, 2025 Radiohead ensemble performance in Chicago.
-                </div>
-            </div>
-        </section>
+                    <h2 class="section-header">Vibe Coded Projects</h2>
+                    
+                    <div class="project-item">
+                        <div class="project-title">
+                            <a href="horrortarot/">Horror Movie Tarot</a>
+                        </div>
+                        <p class="project-desc">
+                            Draw a nine-card spread of curated horror films presented as tarot cards, with generative ambient music and streaming links for each pick.
+                        </p>
+                    </div>
 
-        <section>
-            <h2>Writing</h2>
-            
-            <div class="item">
-                <div class="item-title">
-                    <a href="essay.html">The Fantasy of Machine-Assisted Authorship</a>
-                </div>
-                <div class="item-description">
-                    An essay about AI writing tools, shame, "linguistic money laundering," and what gets lost when we outsource our sentences.
-                </div>
-            </div>
+                    <div class="project-item">
+                        <div class="project-title">
+                            <a href="radiohead-invite.html">Radiohead Ensemble Invitation</a>
+                        </div>
+                        <p class="project-desc">
+                            An interactive, glitchy canvas poster for a December 14, 2025 Radiohead ensemble performance in Chicago.
+                        </p>
+                    </div>
 
-            <div class="item">
-                <div class="item-title">
-                    <a href="analyticintrospections/">Analytic Introspections from an Actor's Perspective</a>
-                </div>
-                <div class="item-description">
-                    Long-form thoughts on acting, attention, and psychoanalysis, written from the inside of the rehearsal room.
-                </div>
-            </div>
-        </section>
+                    <h2 class="section-header">Writing</h2>
+                    
+                    <div class="project-item">
+                        <div class="project-title">
+                            <a href="essay.html">The Fantasy of Machine-Assisted Authorship</a>
+                        </div>
+                        <p class="project-desc">
+                            An essay about AI writing tools, shame, "linguistic money laundering," and what gets lost when we outsource our sentences.
+                        </p>
+                    </div>
 
-        <footer>
-            <div class="footer-links">
-                <a href="mailto:topher416@gmail.com">Email</a> · 
-                <a href="https://www.linkedin.com/in/topherrasmussen">LinkedIn</a>
-            </div>
-            
-            <div class="counter">
-                Visitor count: <span class="counter-display">00000372</span>
-            </div>
-        </footer>
+                    <div class="project-item">
+                        <div class="project-title">
+                            <a href="analyticintrospections/">Analytic Introspections from an Actor's Perspective</a>
+                        </div>
+                        <p class="project-desc">
+                            Long-form thoughts on acting, attention, and psychoanalysis, written from the inside of the rehearsal room.
+                        </p>
+                    </div>
+
+                    <div class="guestbook-section">
+                        <p style="color: #ffff00; margin-bottom: 10px;">Did you enjoy your visit?</p>
+                        <a href="mailto:topher416@gmail.com?subject=Guestbook Entry" class="guestbook-btn">Sign My Guestbook!</a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" class="footer-area">
+                    <div class="contact-links">
+                        <a href="mailto:topher416@gmail.com">[ Email ]</a>
+                        <a href="https://www.linkedin.com/in/topherrasmussen">[ LinkedIn ]</a>
+                    </div>
+                    
+                    <div class="counter-box">
+                        <div class="counter-label">You are visitor number:</div>
+                        <div class="counter-display">00000372</div>
+                    </div>
+
+                    <div class="badges">
+                        <span class="badge">HTML 4.0</span>
+                        <span class="badge">CSS</span>
+                        <span class="badge">JavaScript</span>
+                        <span class="badge">No Frames!</span>
+                    </div>
+
+                    <div class="webring">
+                        <div class="webring-title">~ Personal Sites Webring ~</div>
+                        <a href="#">&lt;&lt; Prev</a>
+                        <span style="color: #808080;">|</span>
+                        <a href="#">Random</a>
+                        <span style="color: #808080;">|</span>
+                        <a href="#">Next &gt;&gt;</a>
+                    </div>
+
+                    <div class="under-construction">
+                        <span>ALWAYS UNDER CONSTRUCTION</span>
+                    </div>
+
+                    <p style="color: #808080; font-size: 0.8rem; margin-top: 15px;">
+                        Copyright 2025 Topher Rasmussen. All rights reserved.
+                    </p>
+                </td>
+            </tr>
+        </table>
     </div>
 
     <script>
         function displayCount(count) {
             const formattedCount = count.toString().padStart(8, '0');
             document.querySelector('.counter-display').textContent = formattedCount;
+            const inlineCounter = document.querySelector('.counter-display-inline');
+            if (inlineCounter) {
+                inlineCounter.textContent = count;
+            }
         }
 
         document.addEventListener('DOMContentLoaded', function() {
