@@ -32,7 +32,7 @@
   font-weight: 900;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  background: linear-gradient(145deg, #ff6b6b, #a855f7, #3b82f6);
+  background: linear-gradient(145deg, #ff6b6b, #2DD4BF, #3b82f6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -119,7 +119,7 @@
 .btn-primary:hover { background: rgba(255,255,255,0.18); }
 .btn-secondary {
   background: transparent;
-  border: 1px solid rgba(168, 85, 247, 0.6);
+  border: 1px solid rgba(45, 212, 191, 0.6);
   color: #fff;
   padding: 10px 14px;
   border-radius: 8px;
@@ -148,7 +148,7 @@
 .card-back {
   border: 1px solid rgba(255,255,255,0.25);
   border-radius: 10px;
-  background: linear-gradient(145deg, rgba(74,25,72,0.4), rgba(0,77,64,0.35));
+  background: linear-gradient(145deg, rgba(19,78,74,0.4), rgba(0,77,64,0.35));
   display: flex;
   align-items: center;
   justify-content: center;

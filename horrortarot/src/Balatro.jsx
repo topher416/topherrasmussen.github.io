@@ -104,7 +104,7 @@ export default function Balatro({
   spinRotation = -2.0,
   spinSpeed = 7.0,
   offset = [0.0, 0.0],
-  color1 = '#4A1948', // Deep Amethyst/Purple
+  color1 = '#134E4A', // Deep Sea Foam/Teal
   color2 = '#004D40', // Muted Emerald/Teal
   color3 = '#1B1B1B', // Charcoal Black
   contrast = 3.5,
