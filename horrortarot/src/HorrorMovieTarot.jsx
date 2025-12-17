@@ -464,7 +464,7 @@ const HorrorMovieTarot = () => {
       case 'legendary':
         return { border: 'border-yellow-400', text: 'text-yellow-300', icon: Crown };
       case 'epic':
-        return { border: 'border-purple-400', text: 'text-purple-200', icon: Sparkles };
+        return { border: 'border-teal-400', text: 'text-teal-200', icon: Sparkles };
       case 'rare':
         return { border: 'border-blue-400', text: 'text-blue-300', icon: Star };
       default:
@@ -808,7 +808,7 @@ const HorrorMovieTarot = () => {
                     backgroundImage: 'linear-gradient(135deg, rgba(15, 10, 20, 0.98), rgba(25, 15, 30, 0.98))',
                     backdropFilter: 'blur(10px)',
                     borderRadius: '12px',
-                    boxShadow: 'inset 0 0 80px rgba(139, 92, 246, 0.15)',
+                    boxShadow: 'inset 0 0 80px rgba(20, 184, 166, 0.15)',
                     padding: '20px',
                     gap: 12,
                     overflow: 'auto'
@@ -817,8 +817,8 @@ const HorrorMovieTarot = () => {
                     <div style={{
                       textAlign: 'center',
                       padding: '12px',
-                      background: 'linear-gradient(to bottom, rgba(139, 92, 246, 0.15), rgba(139, 92, 246, 0.05))',
-                      border: '1px solid rgba(139, 92, 246, 0.3)',
+                      background: 'linear-gradient(to bottom, rgba(20, 184, 166, 0.15), rgba(20, 184, 166, 0.05))',
+                      border: '1px solid rgba(20, 184, 166, 0.3)',
                       borderRadius: 8
                     }}>
                       <h3 className="font-serif text-xl text-white/95" style={{ margin: 0 }}>
@@ -855,8 +855,8 @@ const HorrorMovieTarot = () => {
                           }}
                           style={{
                             padding: '12px 16px',
-                            background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(79, 70, 229, 0.1))',
-                            border: '1px solid rgba(139, 92, 246, 0.3)',
+                            background: 'linear-gradient(135deg, rgba(20, 184, 166, 0.1), rgba(13, 148, 136, 0.1))',
+                            border: '1px solid rgba(20, 184, 166, 0.3)',
                             borderRadius: 6,
                             textDecoration: 'none',
                             display: 'flex',
@@ -868,14 +868,14 @@ const HorrorMovieTarot = () => {
                             cursor: 'pointer'
                           }}
                           onMouseEnter={(e) => {
-                            e.currentTarget.style.color = 'rgb(192, 132, 252)';
-                            e.currentTarget.style.boxShadow = '0 0 20px rgba(192, 132, 252, 0.6)';
-                            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(79, 70, 229, 0.3))';
+                            e.currentTarget.style.color = 'rgb(94, 234, 212)';
+                            e.currentTarget.style.boxShadow = '0 0 20px rgba(94, 234, 212, 0.6)';
+                            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(20, 184, 166, 0.3), rgba(13, 148, 136, 0.3))';
                           }}
                           onMouseLeave={(e) => {
                             e.currentTarget.style.color = 'rgba(255, 255, 255, 0.9)';
                             e.currentTarget.style.boxShadow = 'none';
-                            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(79, 70, 229, 0.1))';
+                            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(20, 184, 166, 0.1), rgba(13, 148, 136, 0.1))';
                           }}
                         >
                           <Eye className="w-4 h-4" />
@@ -894,8 +894,8 @@ const HorrorMovieTarot = () => {
                         }}
                         style={{
                           padding: '12px 16px',
-                          background: 'linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(79, 70, 229, 0.1))',
-                          border: '1px solid rgba(139, 92, 246, 0.3)',
+                          background: 'linear-gradient(135deg, rgba(20, 184, 166, 0.1), rgba(13, 148, 136, 0.1))',
+                          border: '1px solid rgba(20, 184, 166, 0.3)',
                           borderRadius: 6,
                           textDecoration: 'none',
                           display: 'flex',
@@ -907,14 +907,14 @@ const HorrorMovieTarot = () => {
                           cursor: 'pointer'
                         }}
                         onMouseEnter={(e) => {
-                          e.currentTarget.style.color = 'rgb(192, 132, 252)';
-                          e.currentTarget.style.boxShadow = '0 0 20px rgba(192, 132, 252, 0.6)';
-                          e.currentTarget.style.background = 'linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(79, 70, 229, 0.3))';
+                          e.currentTarget.style.color = 'rgb(94, 234, 212)';
+                          e.currentTarget.style.boxShadow = '0 0 20px rgba(94, 234, 212, 0.6)';
+                          e.currentTarget.style.background = 'linear-gradient(135deg, rgba(20, 184, 166, 0.3), rgba(13, 148, 136, 0.3))';
                         }}
                         onMouseLeave={(e) => {
                           e.currentTarget.style.color = 'rgba(255, 255, 255, 0.9)';
                           e.currentTarget.style.boxShadow = 'none';
-                          e.currentTarget.style.background = 'linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(79, 70, 229, 0.1))';
+                          e.currentTarget.style.background = 'linear-gradient(135deg, rgba(20, 184, 166, 0.1), rgba(13, 148, 136, 0.1))';
                         }}
                       >
                         <span style={{ fontSize: '1rem' }}>📖</span>
@@ -943,8 +943,8 @@ const HorrorMovieTarot = () => {
                               {drawnCard.watchProviders.flatrate.slice(0, 6).map((provider, idx) => (
                                 <div key={idx} style={{
                                   padding: '6px 12px',
-                                  background: 'rgba(139, 92, 246, 0.15)',
-                                  border: '1px solid rgba(139, 92, 246, 0.3)',
+                                  background: 'rgba(20, 184, 166, 0.15)',
+                                  border: '1px solid rgba(20, 184, 166, 0.3)',
                                   borderRadius: 4,
                                   fontSize: '0.75rem',
                                   color: 'rgba(255, 255, 255, 0.85)'
@@ -963,8 +963,8 @@ const HorrorMovieTarot = () => {
                               {drawnCard.watchProviders.rent.slice(0, 4).map((provider, idx) => (
                                 <div key={idx} style={{
                                   padding: '6px 12px',
-                                  background: 'rgba(139, 92, 246, 0.1)',
-                                  border: '1px solid rgba(139, 92, 246, 0.2)',
+                                  background: 'rgba(20, 184, 166, 0.1)',
+                                  border: '1px solid rgba(20, 184, 166, 0.2)',
                                   borderRadius: 4,
                                   fontSize: '0.75rem',
                                   color: 'rgba(255, 255, 255, 0.7)'
@@ -995,7 +995,7 @@ const HorrorMovieTarot = () => {
 
               {/* Electric border on top - outside overflow container */}
               <div style={{ position: 'absolute', top: -16, left: -16, right: -16, bottom: -16, zIndex: 10, pointerEvents: 'none' }}>
-                <ElectricBorder color="#6d28d9" speed={1} chaos={0.7} thickness={5} style={{ borderRadius: 18, width: '100%', height: '100%' }}>
+                <ElectricBorder color="#0D9488" speed={1} chaos={0.7} thickness={5} style={{ borderRadius: 18, width: '100%', height: '100%' }}>
                   <div style={{ width: '100%', height: '100%' }} />
                 </ElectricBorder>
               </div>
@@ -1017,7 +1017,7 @@ const HorrorMovieTarot = () => {
                   width: 48,
                   height: 48,
                   borderRadius: '50%',
-                  background: isFlipped ? 'rgba(139, 92, 246, 0.3)' : 'rgba(139, 92, 246, 0.9)',
+                  background: isFlipped ? 'rgba(20, 184, 166, 0.3)' : 'rgba(20, 184, 166, 0.9)',
                   border: '2px solid rgba(255, 255, 255, 0.3)',
                   display: 'flex',
                   alignItems: 'center',
@@ -1048,7 +1048,7 @@ const HorrorMovieTarot = () => {
                   width: 48,
                   height: 48,
                   borderRadius: '50%',
-                  background: isFlipped ? 'rgba(139, 92, 246, 0.3)' : 'rgba(139, 92, 246, 0.9)',
+                  background: isFlipped ? 'rgba(20, 184, 166, 0.3)' : 'rgba(20, 184, 166, 0.9)',
                   border: '2px solid rgba(255, 255, 255, 0.3)',
                   display: 'flex',
                   alignItems: 'center',
