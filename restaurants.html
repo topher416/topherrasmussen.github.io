@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Reviews - Topher Rasmussen</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, Times, 'Times New Roman', serif;
+            line-height: 1.6;
+            background-color: #fafafa;
+            color: #222;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            color: #111;
+        }
+
+        .tagline {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .intro {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 50px;
+            line-height: 1.7;
+        }
+
+        .back-link {
+            margin-bottom: 30px;
+        }
+
+        .back-link a {
+            color: #7b2cbf;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+
+        .review {
+            margin-bottom: 50px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .review:last-child {
+            border-bottom: none;
+        }
+
+        .restaurant-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #111;
+            margin-bottom: 8px;
+        }
+
+        .restaurant-meta {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .restaurant-meta span {
+            margin-right: 15px;
+        }
+
+        .rating {
+            color: #7b2cbf;
+            font-weight: bold;
+        }
+
+        .cuisine {
+            font-style: italic;
+        }
+
+        .review-text {
+            color: #333;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .review-text p {
+            margin-bottom: 12px;
+        }
+
+        .highlight {
+            background-color: #f5f0ff;
+            padding: 15px 20px;
+            border-left: 3px solid #7b2cbf;
+            margin: 20px 0;
+            font-style: italic;
+            color: #444;
+        }
+
+        .visit-date {
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 15px;
+        }
+
+        footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid #ddd;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        footer a {
+            color: #7b2cbf;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 30px 15px;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            .restaurant-name {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="back-link">
+            <a href="index.html">&larr; Back to Home</a>
+        </div>
+
+        <header>
+            <h1>Restaurant Reviews</h1>
+            <p class="tagline">Eating my way through Logan Square, Chicago.</p>
+            <p class="intro">
+                Notes on places I've eaten in the neighborhood. Not trying to be a critic, 
+                just keeping track of what's good and what I'd go back to. Mostly Logan Square, 
+                sometimes wandering into neighboring areas when hunger demands it.
+            </p>
+        </header>
+
+        <div class="review">
+            <div class="restaurant-name">Lula Cafe</div>
+            <div class="restaurant-meta">
+                <span class="cuisine">New American, Farm-to-Table</span>
+                <span class="rating">9/10</span>
+            </div>
+            <div class="review-text">
+                <p>
+                    Lula has been anchoring Logan Square's dining scene for over two decades now, 
+                    and there's a reason it's still packed on weekends. The menu changes constantly 
+                    based on what's coming in from local farms, which means you're never quite sure 
+                    what you'll get, but you're almost always glad you got it.
+                </p>
+                <p>
+                    The Monday night prix fixe is the move if you want the full experience without 
+                    completely destroying your wallet. Last time I went, there was this roasted 
+                    carrot dish with some kind of tahini situation that I'm still thinking about 
+                    weeks later.
+                </p>
+                <div class="highlight">
+                    Order the farm egg if it's on the menu. I don't know what they do to it, 
+                    but it's not like any egg you've made at home.
+                </div>
+            </div>
+            <div class="visit-date">Last visited: November 2025</div>
+        </div>
+
+        <div class="review">
+            <div class="restaurant-name">Mi Tocaya Antojeria</div>
+            <div class="restaurant-meta">
+                <span class="cuisine">Modern Mexican</span>
+                <span class="rating">9/10</span>
+            </div>
+            <div class="review-text">
+                <p>
+                    Diana Davila's place is doing something genuinely interesting with Mexican food 
+                    that doesn't feel like it's trying too hard to be "elevated" or whatever. 
+                    The flavors are bold and the presentations are beautiful without being fussy.
+                </p>
+                <p>
+                    The queso fundido with rajas is mandatory. The carnitas are crispy in all the 
+                    right places. And the mezcal list is deep enough to get you into trouble if 
+                    you're not careful.
+                </p>
+                <div class="highlight">
+                    The pork belly tostada is a perfect bite. Crispy, fatty, acidic, all at once.
+                </div>
+            </div>
+            <div class="visit-date">Last visited: October 2025</div>
+        </div>
+
+        <div class="review">
+            <div class="restaurant-name">Parson's Chicken & Fish</div>
+            <div class="restaurant-meta">
+                <span class="cuisine">American, Fried Chicken</span>
+                <span class="rating">7/10</span>
+            </div>
+            <div class="review-text">
+                <p>
+                    Look, sometimes you just want fried chicken and a frozen negroni on a patio, 
+                    and Parson's delivers exactly that. The chicken is solid, not life-changing, 
+                    but consistently good. The real draw is the vibe: picnic tables, slushie 
+                    cocktails, and that feeling of summer even when it's barely warm enough to 
+                    sit outside.
+                </p>
+                <p>
+                    The hush puppies are better than they need to be. The slaw is fine. 
+                    The whole experience is greater than the sum of its parts.
+                </p>
+            </div>
+            <div class="visit-date">Last visited: September 2025</div>
+        </div>
+
+        <div class="review">
+            <div class="restaurant-name">Spinning J</div>
+            <div class="restaurant-meta">
+                <span class="cuisine">Bakery, Cafe, Pies</span>
+                <span class="rating">8/10</span>
+            </div>
+            <div class="review-text">
+                <p>
+                    A pie and ice cream shop that also does solid breakfast and lunch. 
+                    The space is cozy in that way where you want to stay for hours with a book, 
+                    which is exactly what I've done more times than I'd like to admit.
+                </p>
+                <p>
+                    The pies rotate seasonally and they take them seriously. The chess pie is 
+                    a staple. The biscuits at brunch are the real deal, flaky and buttery and 
+                    big enough to share (but you won't want to).
+                </p>
+                <div class="highlight">
+                    Get a slice of whatever pie looks good and a scoop of ice cream. 
+                    Don't overthink it.
+                </div>
+            </div>
+            <div class="visit-date">Last visited: November 2025</div>
+        </div>
+
+        <div class="review">
+            <div class="restaurant-name">Longman & Eagle</div>
+            <div class="restaurant-meta">
+                <span class="cuisine">Gastropub, American</span>
+                <span class="rating">8/10</span>
+            </div>
+            <div class="review-text">
+                <p>
+                    The whiskey bar that also happens to serve really good food. The menu 
+                    leans hearty and rich, which pairs well with the extensive bourbon selection. 
+                    It's the kind of place where you end up staying longer than planned because 
+                    the bartender keeps recommending things you haven't tried.
+                </p>
+                <p>
+                    The bone marrow is indulgent in the best way. The burger is one of the 
+                    better ones in the neighborhood. Brunch gets crowded but the wild boar 
+                    sloppy joe is worth the wait.
+                </p>
+            </div>
+            <div class="visit-date">Last visited: October 2025</div>
+        </div>
+
+        <div class="review">
+            <div class="restaurant-name">Bang Bang Pie & Biscuits</div>
+            <div class="restaurant-meta">
+                <span class="cuisine">Bakery, Southern</span>
+                <span class="rating">7/10</span>
+            </div>
+            <div class="review-text">
+                <p>
+                    Another pie spot in the neighborhood, with more of a Southern bent. 
+                    The biscuit sandwiches are the main event here, stuffed with various 
+                    combinations of eggs, cheese, and meat. The line on weekend mornings 
+                    can be brutal, but it moves.
+                </p>
+                <p>
+                    The pies are good, maybe not quite as refined as Spinning J, but 
+                    the portions are generous and the prices are fair. The key lime is 
+                    a standout.
+                </p>
+            </div>
+            <div class="visit-date">Last visited: August 2025</div>
+        </div>
+
+        <div class="review">
+            <div class="restaurant-name">Cafe Marie-Jeanne</div>
+            <div class="restaurant-meta">
+                <span class="cuisine">French Bistro</span>
+                <span class="rating">8/10</span>
+            </div>
+            <div class="review-text">
+                <p>
+                    A tiny French-ish spot on Humboldt Boulevard that feels like it was 
+                    transported from some idealized version of Paris. The menu is small 
+                    and changes often, but everything I've had has been carefully made 
+                    and thoughtfully seasoned.
+                </p>
+                <p>
+                    The rotisserie chicken is simple and perfect. The natural wine list 
+                    is interesting without being pretentious. It's the kind of place where 
+                    you trust the kitchen and just order whatever sounds good.
+                </p>
+                <div class="highlight">
+                    Sit at the counter if you can. Watching them work in that tiny 
+                    kitchen is half the experience.
+                </div>
+            </div>
+            <div class="visit-date">Last visited: November 2025</div>
+        </div>
+
+        <footer>
+            <a href="index.html">Home</a> · 
+            <a href="mailto:topher416@gmail.com">Email</a>
+        </footer>
+    </div>
+</body>
+</html>
