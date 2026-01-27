@@ -857,13 +857,13 @@
             canvas.style.height = window.innerHeight + 'px';
             
             const isMobile = window.innerWidth < 768;
-            baseFontSize = isMobile ? 32 : 60;
+            baseFontSize = isMobile ? 24 : 42;
             ctx.font = `500 ${baseFontSize * dpr}px "Cinzel", serif`;
             ctx.textBaseline = 'top';
             
             const metrics = ctx.measureText('M');
-            cellWidth = metrics.width;
-            cellHeight = baseFontSize * dpr * 1.2;
+            cellWidth = metrics.width * 0.85;
+            cellHeight = baseFontSize * dpr * 1.05;
             
             cols = Math.floor(canvas.width / cellWidth);
             rows = Math.floor(canvas.height / cellHeight);
