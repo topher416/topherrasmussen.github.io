@@ -176,6 +176,42 @@
             white-space: nowrap;
             border-width: 0;
         }
+
+        .reserve-btn {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            padding: 12px 28px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #fff;
+            background: rgba(139, 0, 139, 0.3);
+            border: 2px solid #8B008B;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(139, 0, 139, 0.5), inset 0 0 10px rgba(139, 0, 139, 0.2);
+        }
+
+        .reserve-btn:hover {
+            background: rgba(139, 0, 139, 0.5);
+            box-shadow: 0 0 30px rgba(139, 0, 139, 0.8), inset 0 0 15px rgba(139, 0, 139, 0.3);
+            text-shadow: 0 0 10px #fff;
+        }
+
+        @media (max-width: 767px) {
+            .reserve-btn {
+                bottom: 30px;
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -213,6 +249,8 @@
         Free | BYOB
         A Live Performance
     </div>
+
+    <a href="https://www.eventbrite.com/e/radiohead-led-zeppelin-new-orleans-deep-dive-ots-ensemble-showcase-tickets-1981735073953" class="reserve-btn" target="_blank" rel="noopener noreferrer">Reserve a Seat</a>
 
     <script>
         const canvas = document.getElementById('board');
