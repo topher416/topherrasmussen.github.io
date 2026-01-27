@@ -6,7 +6,7 @@
         <title>Radiohead Ensemble - March 8, 2026</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Recursive:slnt,wght@-15..0,300..1000&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Recursive:slnt,wght@-15..0,300..1000&family=Cinzel:wght@400..900&display=swap" rel="stylesheet">
         <style>
         * {
             margin: 0;
@@ -187,7 +187,7 @@
             transform: translateX(-50%);
             z-index: 100;
             padding: 10px 24px;
-            font-family: 'Recursive', monospace;
+            font-family: 'Cinzel', serif;
             font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -211,15 +211,15 @@
         .reserve-btn span {
             display: inline-block;
             animation: breathe 2s ease-in-out infinite;
-            font-variation-settings: 'wght' 300, 'slnt' 0;
+            font-variation-settings: 'wght' 400;
         }
 
         @keyframes breathe {
             0%, 100% {
-                font-variation-settings: 'wght' 300, 'slnt' 0;
+                font-variation-settings: 'wght' 400;
             }
             50% {
-                font-variation-settings: 'wght' 900, 'slnt' -10;
+                font-variation-settings: 'wght' 900;
             }
         }
 
@@ -727,6 +727,10 @@
                 const drawX = this.x + this.glitchOffset.x;
                 const drawY = this.y + this.glitchOffset.y;
                 
+                // Get breathing weight for this cell
+                const weight = getBreathWeight(this.col, this.row, time);
+                ctx.font = `${weight} ${baseFontSize * dpr}px "Cinzel", serif`;
+                
                 if (this.isMessage && this.settled) {
                     ctx.globalAlpha = 1;
                     
@@ -827,21 +831,39 @@
             activeThemeWave = new ThemeWave(targetHue, x, y, now);
         }
 
+        // Breathing effect configuration
+        const BREATH_DURATION = 2000; // 2 seconds per breath cycle
+        const BREATH_STAGGER = 80; // 80ms stagger between adjacent cells
+        const MIN_WEIGHT = 400;
+        const MAX_WEIGHT = 900;
+        
+        let baseFontSize;
+        let dpr;
+        
+        function getBreathWeight(col, row, now) {
+            // Calculate phase based on position and time
+            const cellDelay = (col + row) * BREATH_STAGGER;
+            const phase = ((now + cellDelay) % BREATH_DURATION) / BREATH_DURATION;
+            // Sine wave for smooth breathing (0 to 1 to 0)
+            const breathFactor = (Math.sin(phase * Math.PI * 2 - Math.PI / 2) + 1) / 2;
+            return Math.round(MIN_WEIGHT + breathFactor * (MAX_WEIGHT - MIN_WEIGHT));
+        }
+
         function initCanvas() {
-            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            dpr = Math.min(window.devicePixelRatio || 1, 2);
             canvas.width = window.innerWidth * dpr;
             canvas.height = window.innerHeight * dpr;
             canvas.style.width = window.innerWidth + 'px';
             canvas.style.height = window.innerHeight + 'px';
             
             const isMobile = window.innerWidth < 768;
-            const fontSize = isMobile ? 32 : 60;
-            ctx.font = `bold ${fontSize * dpr}px "Courier New", monospace`;
+            baseFontSize = isMobile ? 32 : 60;
+            ctx.font = `500 ${baseFontSize * dpr}px "Cinzel", serif`;
             ctx.textBaseline = 'top';
             
             const metrics = ctx.measureText('M');
             cellWidth = metrics.width;
-            cellHeight = fontSize * dpr * 1.2;
+            cellHeight = baseFontSize * dpr * 1.2;
             
             cols = Math.floor(canvas.width / cellWidth);
             rows = Math.floor(canvas.height / cellHeight);
