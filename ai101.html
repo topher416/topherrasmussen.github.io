@@ -1,9 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="color-scheme: dark;">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0f172a">
     <title>AI 101 | Topher Rasmussen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -12,59 +16,104 @@
         tailwind.config = {
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['Space Grotesk', 'system-ui', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
                     colors: {
-                        'deep-teal': '#0D473B',
-                        'teal': '#1A5C50',
-                        'light-teal': '#2D7A6D',
-                        'cyan': '#4DD0E1',
-                        'soft-blue': '#90CAF9',
+                        slate: {
+                            850: '#1a1f2e',
+                            950: '#0a0d14',
+                        }
                     }
                 }
             }
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        .gradient-bg {
-            background: linear-gradient(135deg, #0D473B 0%, #1A5C50 50%, #1E3A5F 100%);
-        }
-        .card-gradient {
-            background: linear-gradient(145deg, rgba(26, 92, 80, 0.6) 0%, rgba(13, 71, 59, 0.8) 100%);
-        }
-        .glow {
-            box-shadow: 0 0 40px rgba(77, 208, 225, 0.15);
-        }
-        .section-divider {
-            background: linear-gradient(90deg, transparent 0%, rgba(77, 208, 225, 0.3) 50%, transparent 100%);
-            height: 1px;
-        }
+        * { -webkit-tap-highlight-color: transparent; }
         html { scroll-behavior: smooth; }
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        body {
+            font-family: 'Space Grotesk', system-ui, sans-serif;
+            background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+            min-height: 100vh;
+        }
+        .glass {
+            background: rgba(30, 41, 59, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+        .card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+        .card:hover {
+            border-color: rgba(148, 163, 184, 0.2);
+        }
+        .glow-sm { box-shadow: 0 0 20px rgba(56, 189, 248, 0.1); }
+        .glow-md { box-shadow: 0 0 40px rgba(56, 189, 248, 0.15); }
+        .text-gradient {
+            background: linear-gradient(135deg, #f8fafc 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .accent-gradient {
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .focus-ring:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 2px #0f172a, 0 0 0 4px #38bdf8;
+        }
+        a:focus-visible, button:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 2px #0f172a, 0 0 0 4px #38bdf8;
+            border-radius: 4px;
+        }
     </style>
 </head>
-<body class="gradient-bg min-h-screen text-white">
+<body class="text-slate-200 antialiased">
     <div id="root"></div>
 
     <script type="text/babel">
         const { useState, useEffect } = React;
 
-        // Navigation Component
-        function Navigation({ sections, activeSection }) {
+        // Navigation
+        function Nav({ sections, active }) {
             return (
-                <nav className="fixed top-0 left-0 right-0 z-50 bg-deep-teal/90 backdrop-blur-sm border-b border-white/10">
-                    <div className="max-w-6xl mx-auto px-4 py-3">
+                <nav className="fixed top-0 left-0 right-0 z-50 glass">
+                    <div className="max-w-5xl mx-auto px-6 py-4">
                         <div className="flex items-center justify-between">
-                            <a href="index.html" className="text-soft-blue hover:text-cyan transition-colors text-sm">
-                                ← Back to Home
+                            <a
+                                href="index.html"
+                                className="text-slate-400 hover:text-white transition-colors text-sm font-medium"
+                            >
+                                ← Home
                             </a>
-                            <div className="hidden md:flex space-x-6 text-sm">
-                                {sections.map((section) => (
+                            <div className="hidden md:flex items-center gap-1">
+                                {sections.map((s) => (
                                     <a
-                                        key={section.id}
-                                        href={`#${section.id}`}
-                                        className={`transition-colors ${activeSection === section.id ? 'text-cyan' : 'text-white/70 hover:text-white'}`}
+                                        key={s.id}
+                                        href={`#${s.id}`}
+                                        className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
+                                            active === s.id
+                                                ? 'bg-slate-700/50 text-white'
+                                                : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+                                        }`}
                                     >
-                                        {section.short}
+                                        {s.label}
                                     </a>
                                 ))}
                             </div>
@@ -74,32 +123,37 @@
             );
         }
 
-        // Hero Section
+        // Hero
         function Hero() {
             return (
-                <section className="pt-24 pb-16 px-4">
-                    <div className="max-w-4xl mx-auto text-center">
-                        <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-cyan to-soft-blue bg-clip-text text-transparent">
+                <section className="pt-28 pb-20 px-6">
+                    <div className="max-w-3xl mx-auto text-center">
+                        <p className="text-sky-400 font-mono text-sm mb-4 tracking-wider uppercase">Crash Course</p>
+                        <h1 className="text-5xl md:text-7xl font-bold mb-6 text-gradient tracking-tight">
                             AI 101
                         </h1>
-                        <p className="text-xl md:text-2xl text-white/80 mb-4">Crash Course: ChatGPT & Generative AI</p>
-                        <p className="text-white/60 mb-8">Topher Rasmussen, MSW</p>
+                        <p className="text-xl text-slate-400 mb-2">
+                            ChatGPT &amp; Generative AI
+                        </p>
+                        <p className="text-slate-500 mb-12">Topher Rasmussen, MSW</p>
 
-                        <div className="card-gradient rounded-2xl p-6 glow max-w-2xl mx-auto">
-                            <h3 className="text-cyan font-semibold mb-4">Learning Objectives</h3>
-                            <ul className="text-left space-y-3 text-white/90">
-                                <li className="flex items-start gap-3">
-                                    <span className="text-cyan mt-1">✓</span>
-                                    Understand what generative AI actually is
-                                </li>
-                                <li className="flex items-start gap-3">
-                                    <span className="text-cyan mt-1">✓</span>
-                                    Learn how to write effective prompts
-                                </li>
-                                <li className="flex items-start gap-3">
-                                    <span className="text-cyan mt-1">✓</span>
-                                    Recognize AI's strengths and limitations
-                                </li>
+                        <div className="card rounded-2xl p-8 glow-md max-w-xl mx-auto text-left">
+                            <h2 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-5">
+                                What You'll Learn
+                            </h2>
+                            <ul className="space-y-4">
+                                {[
+                                    'Understand what generative AI actually is',
+                                    'Learn how to write effective prompts',
+                                    'Recognize AI's strengths and limitations'
+                                ].map((item, i) => (
+                                    <li key={i} className="flex items-start gap-3">
+                                        <span className="flex-shrink-0 w-6 h-6 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center text-sm font-medium">
+                                            {i + 1}
+                                        </span>
+                                        <span className="text-slate-300">{item}</span>
+                                    </li>
+                                ))}
                             </ul>
                         </div>
                     </div>
@@ -107,701 +161,566 @@
             );
         }
 
-        // Expandable Card Component
-        function ExpandableCard({ title, emoji, children, defaultOpen = false }) {
-            const [isOpen, setIsOpen] = useState(defaultOpen);
-
+        // Section wrapper
+        function Section({ id, title, subtitle, children, dark }) {
             return (
-                <div className="card-gradient rounded-xl overflow-hidden glow mb-4">
-                    <button
-                        onClick={() => setIsOpen(!isOpen)}
-                        className="w-full p-5 flex items-center justify-between text-left hover:bg-white/5 transition-colors"
-                    >
-                        <span className="flex items-center gap-3">
-                            <span className="text-2xl">{emoji}</span>
-                            <span className="font-semibold text-lg">{title}</span>
-                        </span>
-                        <span className={`text-cyan transition-transform ${isOpen ? 'rotate-180' : ''}`}>
-                            ▼
-                        </span>
-                    </button>
-                    {isOpen && (
-                        <div className="px-5 pb-5 border-t border-white/10 pt-4">
-                            {children}
-                        </div>
-                    )}
-                </div>
+                <section id={id} className={`py-20 px-6 ${dark ? 'bg-slate-900/50' : ''}`}>
+                    <div className="max-w-5xl mx-auto">
+                        {title && (
+                            <div className="text-center mb-12">
+                                <h2 className="text-3xl md:text-4xl font-bold text-gradient mb-3">{title}</h2>
+                                {subtitle && <p className="text-slate-400">{subtitle}</p>}
+                            </div>
+                        )}
+                        {children}
+                    </div>
+                </section>
             );
         }
 
         // GPT Section
-        function WhatIsGPT() {
-            return (
-                <section id="what-is-gpt" className="py-16 px-4">
-                    <div className="max-w-4xl mx-auto">
-                        <h2 className="text-3xl font-bold mb-8 text-center">What Does GPT Stand For?</h2>
-
-                        <div className="grid md:grid-cols-3 gap-6">
-                            <div className="card-gradient rounded-xl p-6 glow text-center">
-                                <div className="text-5xl font-bold text-cyan mb-4">G</div>
-                                <h3 className="font-semibold text-xl mb-3">Generative</h3>
-                                <p className="text-white/70 text-sm">Creates new content — text, code, images, music. Not just retrieving information, but generating novel outputs.</p>
-                            </div>
-                            <div className="card-gradient rounded-xl p-6 glow text-center">
-                                <div className="text-5xl font-bold text-cyan mb-4">P</div>
-                                <h3 className="font-semibold text-xl mb-3">Pre-trained</h3>
-                                <p className="text-white/70 text-sm">Learned from massive datasets before you ever used it. Training cost: millions of dollars, months of compute time.</p>
-                            </div>
-                            <div className="card-gradient rounded-xl p-6 glow text-center">
-                                <div className="text-5xl font-bold text-cyan mb-4">T</div>
-                                <h3 className="font-semibold text-xl mb-3">Transformer</h3>
-                                <p className="text-white/70 text-sm">Neural network architecture that revolutionized AI. Enables understanding of context across long passages.</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            );
-        }
-
-        // How It Works Section
-        function HowItWorks() {
-            return (
-                <section id="how-it-works" className="py-16 px-4 bg-black/20">
-                    <div className="max-w-4xl mx-auto">
-                        <h2 className="text-3xl font-bold mb-8 text-center">How AI Actually Works</h2>
-
-                        <ExpandableCard title="Pre-training: Learning from the Internet" emoji="📚" defaultOpen={true}>
-                            <ul className="space-y-3 text-white/80">
-                                <li>• Trained on billions of web pages, books, and articles</li>
-                                <li>• Learning process: Predict the next word, check answer, adjust weights</li>
-                                <li>• <span className="text-cyan">Example:</span> "The capital of France is ____" → Model predicts: "Paris"</li>
-                                <li>• Result: A statistical model encoding grammar, facts, reasoning, and styles</li>
-                            </ul>
-                        </ExpandableCard>
-
-                        <ExpandableCard title="Fine-tuning with RLHF" emoji="🎯">
-                            <p className="text-white/70 mb-4">Reinforcement Learning from Human Feedback</p>
-                            <ul className="space-y-3 text-white/80">
-                                <li>• Pre-training alone creates a "raw" model — powerful but unhelpful</li>
-                                <li>• Human raters rank AI responses for helpfulness, accuracy, safety</li>
-                                <li>• Model adjusts to prefer human-preferred outputs</li>
-                                <li>• This is why ChatGPT feels "helpful" vs raw GPT</li>
-                            </ul>
-                        </ExpandableCard>
-
-                        <ExpandableCard title="The Transformer Revolution" emoji="⚡">
-                            <p className="text-cyan mb-3">"Attention Is All You Need" — The 2017 paper that changed everything</p>
-                            <div className="grid md:grid-cols-2 gap-4 text-sm">
-                                <div className="bg-black/30 rounded-lg p-4">
-                                    <h4 className="font-semibold mb-2 text-red-400">Before (RNNs)</h4>
-                                    <ul className="text-white/70 space-y-1">
-                                        <li>• Process words one at a time</li>
-                                        <li>• Long passages = lost context</li>
-                                        <li>• Slow training</li>
-                                    </ul>
-                                </div>
-                                <div className="bg-black/30 rounded-lg p-4">
-                                    <h4 className="font-semibold mb-2 text-green-400">After (Transformers)</h4>
-                                    <ul className="text-white/70 space-y-1">
-                                        <li>• Process all words simultaneously</li>
-                                        <li>• "Attend" to relevant words regardless of distance</li>
-                                        <li>• Enabled modern LLMs</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </ExpandableCard>
-
-                        <ExpandableCard title="Statistical Word Prediction" emoji="🎲">
-                            <p className="text-white/80 mb-4">LLMs predict the most likely next word based on context.</p>
-                            <div className="bg-black/30 rounded-lg p-4 font-mono text-sm mb-4">
-                                <p>"Paris is the capital of ____" → <span className="text-green-400">France (99%+)</span></p>
-                                <p>"The patient presented with ____" → <span className="text-yellow-400">varies by context</span></p>
-                                <p>"Once upon a ____" → <span className="text-green-400">time</span></p>
-                            </div>
-                            <p className="text-white/70 text-sm">This is why context matters so much — more context = better predictions = better outputs.</p>
-                        </ExpandableCard>
-                    </div>
-                </section>
-            );
-        }
-
-        // LLM Comparison
-        function LLMComparison() {
-            const models = [
-                { name: 'ChatGPT (GPT-4)', company: 'OpenAI', strengths: 'Versatile, plugins, DALL-E integration' },
-                { name: 'Claude', company: 'Anthropic', strengths: 'Long context (200K), nuanced writing, safety' },
-                { name: 'Gemini', company: 'Google', strengths: 'Multimodal, Google Workspace integration' },
-                { name: 'Llama', company: 'Meta', strengths: 'Open source, customizable, runs locally' },
+        function GPTSection() {
+            const letters = [
+                { letter: 'G', word: 'Generative', desc: 'Creates new content—text, code, images. Not retrieving, but generating novel outputs.' },
+                { letter: 'P', word: 'Pre-trained', desc: 'Learned from massive datasets before deployment. Millions in compute costs.' },
+                { letter: 'T', word: 'Transformer', desc: 'Neural architecture enabling context understanding across long passages.' },
             ];
 
             return (
-                <section id="llm-landscape" className="py-16 px-4">
-                    <div className="max-w-4xl mx-auto">
-                        <h2 className="text-3xl font-bold mb-8 text-center">The LLM Landscape</h2>
-
-                        <div className="overflow-x-auto">
-                            <table className="w-full">
-                                <thead>
-                                    <tr className="bg-deep-teal">
-                                        <th className="p-4 text-left font-semibold">Model</th>
-                                        <th className="p-4 text-left font-semibold">Company</th>
-                                        <th className="p-4 text-left font-semibold">Key Strengths</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {models.map((model, i) => (
-                                        <tr key={model.name} className={i % 2 === 0 ? 'bg-teal/50' : 'bg-deep-teal/50'}>
-                                            <td className="p-4 font-medium">{model.name}</td>
-                                            <td className="p-4 text-white/70">{model.company}</td>
-                                            <td className="p-4 text-white/70">{model.strengths}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <p className="text-center mt-6 text-soft-blue text-sm">
-                            💡 Tip: Try multiple models — each has different strengths for different tasks
-                        </p>
+                <Section id="gpt" title="What Does GPT Mean?">
+                    <div className="grid md:grid-cols-3 gap-6">
+                        {letters.map((l, i) => (
+                            <div key={l.letter} className="card rounded-2xl p-8 text-center glow-sm transition-all hover:glow-md">
+                                <div className="text-6xl font-bold accent-gradient mb-4">{l.letter}</div>
+                                <h3 className="text-xl font-semibold text-white mb-3">{l.word}</h3>
+                                <p className="text-slate-400 text-sm leading-relaxed">{l.desc}</p>
+                            </div>
+                        ))}
                     </div>
-                </section>
+                </Section>
+            );
+        }
+
+        // Accordion
+        function Accordion({ items }) {
+            const [open, setOpen] = useState(0);
+
+            return (
+                <div className="space-y-3">
+                    {items.map((item, i) => (
+                        <div key={i} className="card rounded-xl overflow-hidden">
+                            <button
+                                onClick={() => setOpen(open === i ? -1 : i)}
+                                aria-expanded={open === i}
+                                aria-label={`${open === i ? 'Collapse' : 'Expand'} ${item.title}`}
+                                className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-slate-800/30 transition-colors"
+                            >
+                                <span className="flex items-center gap-4">
+                                    <span className="text-2xl">{item.icon}</span>
+                                    <span className="font-semibold text-white">{item.title}</span>
+                                </span>
+                                <svg
+                                    className={`w-5 h-5 text-slate-400 transition-transform ${open === i ? 'rotate-180' : ''}`}
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            {open === i && (
+                                <div className="px-6 pb-6 pt-2 border-t border-slate-700/50">
+                                    {item.content}
+                                </div>
+                            )}
+                        </div>
+                    ))}
+                </div>
+            );
+        }
+
+        // How It Works
+        function HowItWorks() {
+            const items = [
+                {
+                    icon: '📚',
+                    title: 'Pre-training',
+                    content: (
+                        <div className="space-y-4 text-slate-300">
+                            <p>LLMs learn by predicting the next word, billions of times.</p>
+                            <div className="bg-slate-800/50 rounded-lg p-4 font-mono text-sm">
+                                <p className="text-slate-400 mb-2">Training example:</p>
+                                <p>"The capital of France is <span className="text-sky-400">____</span>" → <span className="text-emerald-400">Paris</span></p>
+                            </div>
+                            <ul className="space-y-2 text-sm text-slate-400">
+                                <li>• Trained on billions of web pages, books, articles</li>
+                                <li>• Result: statistical model of human language</li>
+                                <li>• Encodes grammar, facts, reasoning patterns</li>
+                            </ul>
+                        </div>
+                    )
+                },
+                {
+                    icon: '🎯',
+                    title: 'Fine-tuning (RLHF)',
+                    content: (
+                        <div className="space-y-4 text-slate-300">
+                            <p className="text-slate-400 text-sm font-medium">Reinforcement Learning from Human Feedback</p>
+                            <ul className="space-y-2 text-sm">
+                                <li>• Humans rate AI responses for helpfulness and safety</li>
+                                <li>• Model adjusts to prefer human-preferred outputs</li>
+                                <li>• This makes ChatGPT feel "helpful" vs raw GPT</li>
+                                <li>• Also why it can be overly agreeable (sycophancy)</li>
+                            </ul>
+                        </div>
+                    )
+                },
+                {
+                    icon: '⚡',
+                    title: 'The Transformer',
+                    content: (
+                        <div className="space-y-4">
+                            <p className="text-slate-400 text-sm">"Attention Is All You Need" — Google, 2017</p>
+                            <div className="grid md:grid-cols-2 gap-4">
+                                <div className="bg-red-950/30 border border-red-900/50 rounded-lg p-4">
+                                    <p className="text-red-400 font-medium text-sm mb-2">Before</p>
+                                    <ul className="text-slate-400 text-sm space-y-1">
+                                        <li>• Words processed sequentially</li>
+                                        <li>• Long text = lost context</li>
+                                    </ul>
+                                </div>
+                                <div className="bg-emerald-950/30 border border-emerald-900/50 rounded-lg p-4">
+                                    <p className="text-emerald-400 font-medium text-sm mb-2">After</p>
+                                    <ul className="text-slate-400 text-sm space-y-1">
+                                        <li>• All words processed at once</li>
+                                        <li>• "Attention" to relevant context</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                }
+            ];
+
+            return (
+                <Section id="how" title="How AI Works" dark>
+                    <Accordion items={items} />
+                </Section>
+            );
+        }
+
+        // Models Table
+        function Models() {
+            const models = [
+                { name: 'ChatGPT', company: 'OpenAI', strength: 'Versatile, plugins, DALL-E' },
+                { name: 'Claude', company: 'Anthropic', strength: 'Long context, nuanced writing' },
+                { name: 'Gemini', company: 'Google', strength: 'Multimodal, Workspace integration' },
+                { name: 'Llama', company: 'Meta', strength: 'Open source, runs locally' },
+            ];
+
+            return (
+                <Section id="models" title="The LLM Landscape" subtitle="Different models, different strengths">
+                    <div className="card rounded-2xl overflow-hidden">
+                        <table className="w-full">
+                            <thead>
+                                <tr className="bg-slate-800/50 text-left">
+                                    <th scope="col" className="px-6 py-4 font-semibold text-sm text-slate-300">Model</th>
+                                    <th scope="col" className="px-6 py-4 font-semibold text-sm text-slate-300">Company</th>
+                                    <th scope="col" className="px-6 py-4 font-semibold text-sm text-slate-300">Key Strength</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-slate-700/50">
+                                {models.map((m) => (
+                                    <tr key={m.name} className="hover:bg-slate-800/30 transition-colors">
+                                        <td className="px-6 py-4 font-medium text-white">{m.name}</td>
+                                        <td className="px-6 py-4 text-slate-400">{m.company}</td>
+                                        <td className="px-6 py-4 text-slate-400">{m.strength}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                    <p className="text-center mt-6 text-slate-500 text-sm">
+                        Try multiple models—each excels at different tasks
+                    </p>
+                </Section>
             );
         }
 
         // Key Concepts
-        function KeyConcepts() {
+        function Concepts() {
+            const concepts = [
+                {
+                    icon: '📅',
+                    title: 'Knowledge Cutoff',
+                    desc: 'AI training has an end date. It can't know events after that—and may confidently give outdated info.'
+                },
+                {
+                    icon: '🎲',
+                    title: 'Probabilistic Output',
+                    desc: 'Unlike traditional software, same prompt → different results. Good for creativity, challenging for consistency.'
+                },
+                {
+                    icon: '🎭',
+                    title: 'Hallucinations',
+                    desc: 'AI can generate plausible-sounding false information. Lawyers have cited fake cases. Always verify.'
+                },
+                {
+                    icon: '😊',
+                    title: 'False Confidence',
+                    desc: 'AI speaks with equal confidence whether right or wrong. Both sound authoritative—only one is true.'
+                },
+            ];
+
             return (
-                <section id="key-concepts" className="py-16 px-4 bg-black/20">
-                    <div className="max-w-4xl mx-auto">
-                        <h2 className="text-3xl font-bold mb-8 text-center">Key Concepts</h2>
-
-                        <div className="grid md:grid-cols-2 gap-6">
-                            <div className="card-gradient rounded-xl p-6 glow">
-                                <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                                    <span className="text-2xl">📅</span> Knowledge Cutoff
-                                </h3>
-                                <p className="text-white/80 mb-4">Every AI model has a training data deadline — it doesn't know what happened after that date.</p>
-                                <ul className="text-sm text-white/70 space-y-2">
-                                    <li>• GPT-4: ~April 2024</li>
-                                    <li>• Claude: ~Early 2024</li>
-                                    <li>• May give outdated answers with total confidence</li>
-                                    <li>• Some models have web search to compensate</li>
-                                </ul>
-                            </div>
-
-                            <div className="card-gradient rounded-xl p-6 glow">
-                                <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                                    <span className="text-2xl">🎰</span> Deterministic vs Probabilistic
-                                </h3>
-                                <div className="text-sm space-y-3">
-                                    <div className="bg-black/30 rounded p-3">
-                                        <p className="text-cyan font-medium">Vending Machine (Traditional Software)</p>
-                                        <p className="text-white/70">Same input = same output, always</p>
-                                    </div>
-                                    <div className="bg-black/30 rounded p-3">
-                                        <p className="text-cyan font-medium">Chef (LLMs)</p>
-                                        <p className="text-white/70">Same request = similar but varied results</p>
+                <Section id="concepts" title="Key Concepts" dark>
+                    <div className="grid md:grid-cols-2 gap-6">
+                        {concepts.map((c) => (
+                            <div key={c.title} className="card rounded-xl p-6 glow-sm">
+                                <div className="flex items-start gap-4">
+                                    <span className="text-3xl">{c.icon}</span>
+                                    <div>
+                                        <h3 className="font-semibold text-white mb-2">{c.title}</h3>
+                                        <p className="text-slate-400 text-sm leading-relaxed">{c.desc}</p>
                                     </div>
                                 </div>
                             </div>
-
-                            <div className="card-gradient rounded-xl p-6 glow">
-                                <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                                    <span className="text-2xl">🎭</span> Hallucinations
-                                </h3>
-                                <p className="text-white/80 mb-3">AI can generate plausible-sounding information that is completely fabricated.</p>
-                                <div className="bg-red-900/30 border border-red-500/30 rounded p-3 text-sm">
-                                    <p className="text-red-300 font-medium mb-1">Real Example:</p>
-                                    <p className="text-white/70">Lawyers cited fake court cases generated by ChatGPT (Mata v. Avianca, 2023)</p>
-                                </div>
-                                <p className="text-white/60 text-sm mt-3">Rule: If it matters, verify it.</p>
-                            </div>
-
-                            <div className="card-gradient rounded-xl p-6 glow">
-                                <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                                    <span className="text-2xl">😊</span> The Confidence Problem
-                                </h3>
-                                <p className="text-white/80 mb-3">AI speaks with equal confidence whether it's right or completely wrong.</p>
-                                <div className="text-sm space-y-2">
-                                    <div className="bg-green-900/30 border border-green-500/30 rounded p-2">
-                                        <span className="text-green-400">✓ Correct:</span>
-                                        <span className="text-white/70 ml-2">"The Transformer was introduced in 2017..."</span>
-                                    </div>
-                                    <div className="bg-red-900/30 border border-red-500/30 rounded p-2">
-                                        <span className="text-red-400">✗ Hallucinated:</span>
-                                        <span className="text-white/70 ml-2">"According to a 2022 study by Chen et al..."</span>
-                                    </div>
-                                </div>
-                                <p className="text-white/60 text-sm mt-2">Both sound equally authoritative.</p>
-                            </div>
-                        </div>
+                        ))}
                     </div>
-                </section>
+                </Section>
             );
         }
 
-        // Prompting Section
+        // Prompting
         function Prompting() {
+            const stack = [
+                { color: 'sky', label: 'Goal', desc: 'What do you want?', example: '"Write a summary for non-technical readers"' },
+                { color: 'violet', label: 'Context', desc: 'Background info', example: '"The audience is hospital board members"' },
+                { color: 'amber', label: 'Format', desc: 'Structure & length', example: '"3 paragraphs, include 2–3 statistics"' },
+                { color: 'rose', label: 'Guardrails', desc: 'What to avoid', example: '"Don't speculate or use jargon"' },
+            ];
+
+            const colors = {
+                sky: 'bg-sky-500/10 border-sky-500/30 text-sky-400',
+                violet: 'bg-violet-500/10 border-violet-500/30 text-violet-400',
+                amber: 'bg-amber-500/10 border-amber-500/30 text-amber-400',
+                rose: 'bg-rose-500/10 border-rose-500/30 text-rose-400',
+            };
+
             return (
-                <section id="prompting" className="py-16 px-4">
-                    <div className="max-w-4xl mx-auto">
-                        <h2 className="text-3xl font-bold mb-8 text-center">The Art of Prompting</h2>
-
-                        {/* The Prompting Stack */}
-                        <div className="card-gradient rounded-xl p-6 glow mb-8">
-                            <h3 className="text-xl font-semibold mb-6 text-center">The Prompting Stack</h3>
-                            <div className="space-y-4">
-                                <div className="flex items-start gap-4 bg-blue-500/20 border border-blue-400/30 rounded-lg p-4">
-                                    <span className="text-2xl">🎯</span>
-                                    <div>
-                                        <h4 className="font-semibold text-blue-300">GOAL — What do you want?</h4>
-                                        <p className="text-white/70 text-sm">"Write a summary of this report for a non-technical audience"</p>
+                <Section id="prompting" title="The Art of Prompting" subtitle="Better prompts → better outputs">
+                    <div className="card rounded-2xl p-8 mb-8">
+                        <h3 className="text-lg font-semibold text-white mb-6">The Prompting Stack</h3>
+                        <div className="space-y-4">
+                            {stack.map((s) => (
+                                <div key={s.label} className={`rounded-lg border p-4 ${colors[s.color]}`}>
+                                    <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+                                        <span className="font-semibold w-24">{s.label}</span>
+                                        <span className="text-slate-400 text-sm flex-1">{s.desc}</span>
+                                        <code className="text-xs font-mono text-slate-300 bg-slate-800/50 px-2 py-1 rounded">
+                                            {s.example}
+                                        </code>
                                     </div>
                                 </div>
-                                <div className="flex items-start gap-4 bg-purple-500/20 border border-purple-400/30 rounded-lg p-4">
-                                    <span className="text-2xl">📚</span>
-                                    <div>
-                                        <h4 className="font-semibold text-purple-300">CONTEXT — What does the AI need to know?</h4>
-                                        <p className="text-white/70 text-sm">"The audience is hospital board members. The report covers Q3 quality metrics."</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-start gap-4 bg-orange-500/20 border border-orange-400/30 rounded-lg p-4">
-                                    <span className="text-2xl">📋</span>
-                                    <div>
-                                        <h4 className="font-semibold text-orange-300">FORMAT — How should the output look?</h4>
-                                        <p className="text-white/70 text-sm">"3 paragraphs, no jargon, include 2-3 key statistics"</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-start gap-4 bg-red-500/20 border border-red-400/30 rounded-lg p-4">
-                                    <span className="text-2xl">⚠️</span>
-                                    <div>
-                                        <h4 className="font-semibold text-red-300">GUARDRAILS — What should it avoid?</h4>
-                                        <p className="text-white/70 text-sm">"Don't speculate beyond the data. Don't use clinical abbreviations."</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Give It a Role */}
-                        <div className="card-gradient rounded-xl p-6 glow mb-8">
-                            <h3 className="text-xl font-semibold mb-4">🎭 Give It a Role</h3>
-                            <p className="text-white/70 mb-4">AI outputs change dramatically based on who you tell it to be.</p>
-                            <div className="grid md:grid-cols-2 gap-3 text-sm">
-                                <div className="bg-black/30 rounded p-3">
-                                    <p className="text-cyan">"You are a healthcare policy analyst..."</p>
-                                    <p className="text-white/60">→ Formal, evidence-based analysis</p>
-                                </div>
-                                <div className="bg-black/30 rounded p-3">
-                                    <p className="text-cyan">"You are an experienced editor..."</p>
-                                    <p className="text-white/60">→ Concrete, constructive feedback</p>
-                                </div>
-                                <div className="bg-black/30 rounded p-3">
-                                    <p className="text-cyan">"You are a skeptical board member..."</p>
-                                    <p className="text-white/60">→ Tough questions and pushback</p>
-                                </div>
-                                <div className="bg-black/30 rounded p-3">
-                                    <p className="text-cyan">"You are a patient communication specialist..."</p>
-                                    <p className="text-white/60">→ Plain-language, empathetic messaging</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Iteration */}
-                        <div className="card-gradient rounded-xl p-6 glow">
-                            <h3 className="text-xl font-semibold mb-4">🔄 The Follow-Up Is the Superpower</h3>
-                            <p className="text-white/70 mb-4">Most people stop after one prompt. The real value comes from what you ask next.</p>
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm mb-4">
-                                <div className="bg-black/30 rounded p-3 text-center">
-                                    <p className="text-cyan font-medium">Refine</p>
-                                    <p className="text-white/60">"Make it shorter"</p>
-                                </div>
-                                <div className="bg-black/30 rounded p-3 text-center">
-                                    <p className="text-cyan font-medium">Challenge</p>
-                                    <p className="text-white/60">"Play devil's advocate"</p>
-                                </div>
-                                <div className="bg-black/30 rounded p-3 text-center">
-                                    <p className="text-cyan font-medium">Expand</p>
-                                    <p className="text-white/60">"Give me 3 alternatives"</p>
-                                </div>
-                                <div className="bg-black/30 rounded p-3 text-center">
-                                    <p className="text-cyan font-medium">Transform</p>
-                                    <p className="text-white/60">"Turn this into an email"</p>
-                                </div>
-                            </div>
-                            <p className="text-white/60 text-sm italic">Think of AI like a talented new hire who doesn't know your preferences yet.</p>
+                            ))}
                         </div>
                     </div>
-                </section>
+
+                    <div className="grid md:grid-cols-2 gap-6">
+                        <div className="card rounded-xl p-6">
+                            <h3 className="font-semibold text-white mb-4">🎭 Give It a Role</h3>
+                            <p className="text-slate-400 text-sm mb-4">Output changes based on persona.</p>
+                            <div className="space-y-2 text-sm">
+                                <div className="bg-slate-800/50 rounded p-3">
+                                    <span className="text-sky-400">"You are a policy analyst…"</span>
+                                    <span className="text-slate-500 ml-2">→ Formal analysis</span>
+                                </div>
+                                <div className="bg-slate-800/50 rounded p-3">
+                                    <span className="text-sky-400">"You are a skeptical reviewer…"</span>
+                                    <span className="text-slate-500 ml-2">→ Tough questions</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="card rounded-xl p-6">
+                            <h3 className="font-semibold text-white mb-4">🔄 Iterate</h3>
+                            <p className="text-slate-400 text-sm mb-4">The follow-up is the superpower.</p>
+                            <div className="grid grid-cols-2 gap-2 text-sm">
+                                {['Refine', 'Challenge', 'Expand', 'Transform'].map((action) => (
+                                    <div key={action} className="bg-slate-800/50 rounded p-3 text-center">
+                                        <span className="text-slate-300">{action}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </Section>
             );
         }
 
         // Cheat Sheet
         function CheatSheet() {
-            const techniques = [
-                { technique: 'Role Assignment', example: '"You are an expert data analyst..."' },
-                { technique: 'Step-by-Step', example: '"Think through this step by step..."' },
-                { technique: 'Examples (Few-shot)', example: '"Here\'s an example of what I want: [example]"' },
-                { technique: 'Constraints', example: '"Respond in exactly 3 bullet points"' },
-                { technique: 'Format Specification', example: '"Output as a markdown table"' },
-                { technique: 'Audience Framing', example: '"Explain this to a 5th grader"' },
-                { technique: 'Critique Request', example: '"What are the weaknesses of this plan?"' },
+            const tips = [
+                { tech: 'Role', ex: '"You are an expert…"' },
+                { tech: 'Step-by-step', ex: '"Think through this step by step"' },
+                { tech: 'Examples', ex: '"Here's an example: [paste]"' },
+                { tech: 'Constraints', ex: '"Respond in 3 bullet points"' },
+                { tech: 'Format', ex: '"Output as a markdown table"' },
+                { tech: 'Audience', ex: '"Explain to a 5th grader"' },
             ];
 
             return (
-                <section id="cheat-sheet" className="py-16 px-4 bg-black/20">
-                    <div className="max-w-4xl mx-auto">
-                        <h2 className="text-3xl font-bold mb-8 text-center">Prompting Cheat Sheet</h2>
-
-                        <div className="overflow-x-auto">
-                            <table className="w-full text-sm">
-                                <thead>
-                                    <tr className="bg-deep-teal">
-                                        <th className="p-4 text-left font-semibold">Technique</th>
-                                        <th className="p-4 text-left font-semibold">Example</th>
+                <Section id="cheatsheet" title="Cheat Sheet" dark>
+                    <div className="card rounded-2xl overflow-hidden">
+                        <table className="w-full text-sm">
+                            <thead>
+                                <tr className="bg-slate-800/50 text-left">
+                                    <th scope="col" className="px-6 py-4 font-semibold text-slate-300">Technique</th>
+                                    <th scope="col" className="px-6 py-4 font-semibold text-slate-300">Example</th>
+                                </tr>
+                            </thead>
+                            <tbody className="divide-y divide-slate-700/50">
+                                {tips.map((t) => (
+                                    <tr key={t.tech} className="hover:bg-slate-800/30">
+                                        <td className="px-6 py-4 font-medium text-sky-400">{t.tech}</td>
+                                        <td className="px-6 py-4 text-slate-400 font-mono text-xs">{t.ex}</td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    {techniques.map((t, i) => (
-                                        <tr key={t.technique} className={i % 2 === 0 ? 'bg-teal/50' : 'bg-deep-teal/50'}>
-                                            <td className="p-4 font-medium text-cyan">{t.technique}</td>
-                                            <td className="p-4 text-white/70 font-mono text-xs">{t.example}</td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
-                </section>
+                </Section>
             );
         }
 
         // Use Cases
         function UseCases() {
             const cases = [
-                { emoji: '✍️', title: 'Write & Edit', items: ['Drafts, emails, reports', 'Talking points, bios, proposals'] },
-                { emoji: '🔍', title: 'Research & Analyze', items: ['Summarize documents', 'Compare options, synthesize data'] },
-                { emoji: '📊', title: 'Visualize Data', items: ['Turn raw data into charts', 'Tables and dashboards'] },
-                { emoji: '💡', title: 'Brainstorm', items: ['Generate ideas, names, frameworks', 'Strategic options'] },
-                { emoji: '🌐', title: 'Translate & Adapt', items: ['Rewrite for different audiences', 'Languages or formats'] },
-                { emoji: '⚙️', title: 'Automate', items: ['Templates, form letters', 'Data cleaning, formatting'] },
+                { icon: '✍️', title: 'Write', items: ['Emails, reports, proposals', 'Editing & proofreading'] },
+                { icon: '🔍', title: 'Research', items: ['Summarize documents', 'Synthesize data'] },
+                { icon: '💡', title: 'Brainstorm', items: ['Generate ideas', 'Explore perspectives'] },
+                { icon: '💻', title: 'Code', items: ['Generate & debug', 'Write documentation'] },
+                { icon: '🌐', title: 'Translate', items: ['Languages', 'Audiences & formats'] },
+                { icon: '⚙️', title: 'Automate', items: ['Templates', 'Data cleaning'] },
             ];
 
             return (
-                <section id="use-cases" className="py-16 px-4">
-                    <div className="max-w-4xl mx-auto">
-                        <h2 className="text-3xl font-bold mb-8 text-center">What Can You Do With It?</h2>
+                <Section id="usecases" title="What Can You Do?">
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-12">
+                        {cases.map((c) => (
+                            <div key={c.title} className="card rounded-xl p-5 glow-sm hover:glow-md transition-all">
+                                <div className="text-2xl mb-3">{c.icon}</div>
+                                <h3 className="font-semibold text-white mb-2">{c.title}</h3>
+                                <ul className="text-slate-400 text-sm space-y-1">
+                                    {c.items.map((item, i) => <li key={i}>• {item}</li>)}
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
 
-                        <div className="grid md:grid-cols-3 gap-4">
-                            {cases.map((c) => (
-                                <div key={c.title} className="card-gradient rounded-xl p-5 glow">
-                                    <div className="text-3xl mb-3">{c.emoji}</div>
-                                    <h3 className="font-semibold mb-2">{c.title}</h3>
-                                    <ul className="text-sm text-white/70 space-y-1">
-                                        {c.items.map((item, i) => (
-                                            <li key={i}>• {item}</li>
-                                        ))}
-                                    </ul>
+                    <div className="card rounded-2xl p-8">
+                        <h3 className="font-semibold text-white mb-6 text-center">🚀 Try Today</h3>
+                        <div className="grid md:grid-cols-2 gap-4 text-sm">
+                            {[
+                                'Paste an email thread → "Summarize decisions and action items"',
+                                'Meeting notes → "Polish into summary with next steps"',
+                                'Upload a report → "Top 3 takeaways for a non-expert"',
+                                'Rough draft → "Edit for clarity. Audience: executives"',
+                            ].map((tip, i) => (
+                                <div key={i} className="flex items-start gap-3 bg-slate-800/30 rounded-lg p-4">
+                                    <span className="text-sky-400 font-bold">{i + 1}</span>
+                                    <span className="text-slate-300">{tip}</span>
                                 </div>
                             ))}
                         </div>
-
-                        {/* Quick Wins */}
-                        <div className="mt-12 card-gradient rounded-xl p-6 glow">
-                            <h3 className="text-xl font-semibold mb-4 text-center">🚀 Quick Wins: Try This Today</h3>
-                            <div className="grid md:grid-cols-2 gap-4 text-sm">
-                                <div className="flex items-start gap-3 bg-black/30 rounded p-3">
-                                    <span className="text-cyan font-bold">1</span>
-                                    <p className="text-white/80">Paste a long email thread: "Summarize the key decisions and open action items."</p>
-                                </div>
-                                <div className="flex items-start gap-3 bg-black/30 rounded p-3">
-                                    <span className="text-cyan font-bold">2</span>
-                                    <p className="text-white/80">Take meeting notes: "Turn these into a polished summary with clear next steps."</p>
-                                </div>
-                                <div className="flex items-start gap-3 bg-black/30 rounded p-3">
-                                    <span className="text-cyan font-bold">3</span>
-                                    <p className="text-white/80">Upload a report: "What are the 3 most important takeaways for a non-expert?"</p>
-                                </div>
-                                <div className="flex items-start gap-3 bg-black/30 rounded p-3">
-                                    <span className="text-cyan font-bold">4</span>
-                                    <p className="text-white/80">Write rough draft: "Edit this for clarity and tone. It's for [audience]."</p>
-                                </div>
-                                <div className="flex items-start gap-3 bg-black/30 rounded p-3">
-                                    <span className="text-cyan font-bold">5</span>
-                                    <p className="text-white/80">"I'm preparing for a meeting about [topic]. What questions should I expect?"</p>
-                                </div>
-                                <div className="flex items-start gap-3 bg-black/30 rounded p-3">
-                                    <span className="text-cyan font-bold">6</span>
-                                    <p className="text-white/80">Describe a repetitive task: "Create a reusable template for this."</p>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                </section>
+                </Section>
             );
         }
 
-        // Limitations & Safety
+        // Limitations
         function Limitations() {
             return (
-                <section id="limitations" className="py-16 px-4 bg-black/20">
-                    <div className="max-w-4xl mx-auto">
-                        <h2 className="text-3xl font-bold mb-8 text-center">Limitations & Safety</h2>
-
-                        <div className="grid md:grid-cols-2 gap-6 mb-8">
-                            {/* Sycophancy */}
-                            <div className="card-gradient rounded-xl p-6 glow">
-                                <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                                    <span className="text-2xl">🤝</span> Beware of Sycophancy
-                                </h3>
-                                <p className="text-white/70 mb-3">LLMs are trained to be helpful — sometimes too helpful.</p>
-                                <div className="bg-yellow-900/30 border border-yellow-500/30 rounded p-3 text-sm mb-3">
-                                    <p className="text-yellow-300 font-medium">Red Flags:</p>
-                                    <ul className="text-white/70 mt-1">
-                                        <li>• "You're absolutely right!"</li>
-                                        <li>• Excessive agreement without pushback</li>
-                                        <li>• Changing its answer when you express doubt</li>
-                                    </ul>
-                                </div>
-                                <p className="text-white/60 text-sm">Counter: Ask "What are the counterarguments?" or "Play devil's advocate."</p>
-                            </div>
-
-                            {/* Privacy */}
-                            <div className="card-gradient rounded-xl p-6 glow">
-                                <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                                    <span className="text-2xl">🔒</span> Privacy & Your Data
-                                </h3>
-                                <p className="text-white/70 mb-3">What you type may be stored, reviewed, or used to train future models.</p>
-                                <div className="grid grid-cols-2 gap-2 text-xs">
-                                    <div className="bg-green-900/30 border border-green-500/30 rounded p-2">
-                                        <p className="text-green-400 font-medium mb-1">Safe to Input</p>
-                                        <ul className="text-white/70">
-                                            <li>• Public information</li>
-                                            <li>• Generic questions</li>
-                                            <li>• Your own writing</li>
-                                        </ul>
-                                    </div>
-                                    <div className="bg-red-900/30 border border-red-500/30 rounded p-2">
-                                        <p className="text-red-400 font-medium mb-1">Think Twice</p>
-                                        <ul className="text-white/70">
-                                            <li>• Client names/financials</li>
-                                            <li>• Health information</li>
-                                            <li>• Passwords, API keys</li>
-                                        </ul>
-                                    </div>
-                                </div>
+                <Section id="limits" title="Limitations & Safety" dark>
+                    <div className="grid md:grid-cols-2 gap-6 mb-8">
+                        <div className="card rounded-xl p-6">
+                            <h3 className="font-semibold text-white mb-4 flex items-center gap-2">
+                                <span>🤝</span> Sycophancy
+                            </h3>
+                            <p className="text-slate-400 text-sm mb-4">AI is trained to be helpful—sometimes too helpful.</p>
+                            <div className="bg-amber-950/30 border border-amber-900/50 rounded-lg p-4 text-sm">
+                                <p className="text-amber-400 font-medium mb-2">Red flags:</p>
+                                <ul className="text-slate-400 space-y-1">
+                                    <li>• "You're absolutely right!"</li>
+                                    <li>• Changes answer when you push back</li>
+                                </ul>
                             </div>
                         </div>
 
-                        {/* Common Mistakes */}
-                        <div className="card-gradient rounded-xl p-6 glow">
-                            <h3 className="text-xl font-semibold mb-4 text-center">❌ Common Mistakes to Avoid</h3>
-                            <div className="grid md:grid-cols-2 gap-4 text-sm">
-                                <div className="flex items-start gap-3">
-                                    <span className="text-red-400">✗</span>
-                                    <div>
-                                        <p className="font-medium">Being too vague</p>
-                                        <p className="text-white/60">"Help me with my project" → What project? What help?</p>
-                                    </div>
+                        <div className="card rounded-xl p-6">
+                            <h3 className="font-semibold text-white mb-4 flex items-center gap-2">
+                                <span>🔒</span> Privacy
+                            </h3>
+                            <p className="text-slate-400 text-sm mb-4">Input may be stored or used for training.</p>
+                            <div className="grid grid-cols-2 gap-3 text-xs">
+                                <div className="bg-emerald-950/30 border border-emerald-900/50 rounded-lg p-3">
+                                    <p className="text-emerald-400 font-medium mb-1">OK</p>
+                                    <p className="text-slate-400">Public info, your own writing</p>
                                 </div>
-                                <div className="flex items-start gap-3">
-                                    <span className="text-red-400">✗</span>
-                                    <div>
-                                        <p className="font-medium">Not providing context</p>
-                                        <p className="text-white/60">AI can't read your mind — share relevant background</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-start gap-3">
-                                    <span className="text-red-400">✗</span>
-                                    <div>
-                                        <p className="font-medium">Accepting first output</p>
-                                        <p className="text-white/60">Iterate! Ask for revisions, alternatives, improvements</p>
-                                    </div>
-                                </div>
-                                <div className="flex items-start gap-3">
-                                    <span className="text-red-400">✗</span>
-                                    <div>
-                                        <p className="font-medium">Trusting without verifying</p>
-                                        <p className="text-white/60">Especially for facts, statistics, citations, code</p>
-                                    </div>
+                                <div className="bg-rose-950/30 border border-rose-900/50 rounded-lg p-3">
+                                    <p className="text-rose-400 font-medium mb-1">Avoid</p>
+                                    <p className="text-slate-400">Passwords, client data, PHI</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
+
+                    <div className="card rounded-xl p-6">
+                        <h3 className="font-semibold text-white mb-4 text-center">❌ Common Mistakes</h3>
+                        <div className="grid md:grid-cols-2 gap-4 text-sm">
+                            {[
+                                { err: 'Too vague', fix: '"Help with project" → What help? Which project?' },
+                                { err: 'No context', fix: 'AI can't read your mind—share background' },
+                                { err: 'First draft = final', fix: 'Iterate! Ask for revisions' },
+                                { err: 'Blind trust', fix: 'Verify facts, citations, code' },
+                            ].map((m) => (
+                                <div key={m.err} className="flex items-start gap-3">
+                                    <span className="text-rose-400 mt-0.5">✗</span>
+                                    <div>
+                                        <p className="font-medium text-white">{m.err}</p>
+                                        <p className="text-slate-500">{m.fix}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </Section>
             );
         }
 
-        // Human-AI Collaboration
+        // Collaboration
         function Collaboration() {
             return (
-                <section id="collaboration" className="py-16 px-4">
-                    <div className="max-w-4xl mx-auto">
-                        <h2 className="text-3xl font-bold mb-8 text-center">Human-AI Collaboration</h2>
-
-                        <div className="grid md:grid-cols-2 gap-6 mb-8">
-                            <div className="card-gradient rounded-xl p-6 glow">
-                                <h3 className="text-xl font-semibold mb-4 text-cyan flex items-center gap-2">
-                                    <span>🧠</span> Humans Excel At
-                                </h3>
-                                <ul className="space-y-2 text-white/80">
-                                    <li>• Judgment and ethics</li>
-                                    <li>• Emotional intelligence</li>
-                                    <li>• Novel problem-solving</li>
-                                    <li>• Context and nuance</li>
-                                    <li>• Accountability</li>
-                                    <li>• Creative vision</li>
-                                </ul>
-                            </div>
-                            <div className="card-gradient rounded-xl p-6 glow">
-                                <h3 className="text-xl font-semibold mb-4 text-cyan flex items-center gap-2">
-                                    <span>🤖</span> AI Excels At
-                                </h3>
-                                <ul className="space-y-2 text-white/80">
-                                    <li>• Processing volume</li>
-                                    <li>• Pattern recognition</li>
-                                    <li>• First drafts at scale</li>
-                                    <li>• Consistency and speed</li>
-                                    <li>• Tireless iteration</li>
-                                    <li>• Knowledge synthesis</li>
-                                </ul>
-                            </div>
+                <Section id="collab" title="Human + AI">
+                    <div className="grid md:grid-cols-2 gap-6 mb-8">
+                        <div className="card rounded-xl p-6">
+                            <h3 className="font-semibold text-sky-400 mb-4">🧠 Humans Excel At</h3>
+                            <ul className="text-slate-300 space-y-2">
+                                {['Judgment & ethics', 'Emotional intelligence', 'Novel problem-solving', 'Accountability'].map((s) => (
+                                    <li key={s}>• {s}</li>
+                                ))}
+                            </ul>
                         </div>
-
-                        {/* 80/20 Rule */}
-                        <div className="card-gradient rounded-xl p-8 glow text-center">
-                            <h3 className="text-2xl font-bold mb-6">The 80/20 Rule of AI</h3>
-                            <div className="grid md:grid-cols-2 gap-8">
-                                <div>
-                                    <div className="text-6xl font-bold text-cyan mb-2">80%</div>
-                                    <p className="text-white/70">of the value comes from getting a solid first draft in minutes instead of hours</p>
-                                </div>
-                                <div>
-                                    <div className="text-6xl font-bold text-soft-blue mb-2">20%</div>
-                                    <p className="text-white/70">of the work is you applying judgment, refining, and making it yours</p>
-                                </div>
-                            </div>
-                            <p className="mt-6 text-lg text-white/80 italic">AI doesn't replace your expertise — it eliminates the blank page.</p>
+                        <div className="card rounded-xl p-6">
+                            <h3 className="font-semibold text-violet-400 mb-4">🤖 AI Excels At</h3>
+                            <ul className="text-slate-300 space-y-2">
+                                {['Processing volume', 'Pattern recognition', 'First drafts at scale', 'Tireless iteration'].map((s) => (
+                                    <li key={s}>• {s}</li>
+                                ))}
+                            </ul>
                         </div>
-
-                        <p className="text-center mt-8 text-xl text-white/80">
-                            "AI won't replace you. <span className="text-cyan">A person using AI might.</span>"
-                        </p>
                     </div>
-                </section>
+
+                    <div className="card rounded-2xl p-8 text-center glow-md">
+                        <h3 className="text-2xl font-bold text-white mb-8">The 80/20 Rule</h3>
+                        <div className="grid md:grid-cols-2 gap-8 mb-8">
+                            <div>
+                                <div className="text-5xl font-bold accent-gradient mb-2">80%</div>
+                                <p className="text-slate-400">Solid first draft in minutes</p>
+                            </div>
+                            <div>
+                                <div className="text-5xl font-bold text-gradient mb-2">20%</div>
+                                <p className="text-slate-400">Your judgment, refinement, ownership</p>
+                            </div>
+                        </div>
+                        <p className="text-slate-500 italic">AI eliminates the blank page—not your expertise.</p>
+                    </div>
+
+                    <p className="text-center mt-8 text-xl text-slate-400">
+                        "AI won't replace you. <span className="text-sky-400 font-medium">A person using AI might.</span>"
+                    </p>
+                </Section>
             );
         }
 
         // Resources
         function Resources() {
-            return (
-                <section id="resources" className="py-16 px-4 bg-black/20">
-                    <div className="max-w-4xl mx-auto">
-                        <h2 className="text-3xl font-bold mb-8 text-center">Resources for Continued Learning</h2>
+            const resources = [
+                { cat: 'Learn', items: ['Anthropic Academy (free)', 'OpenAI Prompt Guide', 'Coursera: AI for Everyone'] },
+                { cat: 'Read', items: ['Co-Intelligence — Mollick', 'Impromptu — Hoffman'] },
+                { cat: 'Practice', items: ['Start with low-stakes tasks', 'One new use case per week', 'Build a prompt library'] },
+            ];
 
-                        <div className="grid md:grid-cols-2 gap-6">
-                            <div className="card-gradient rounded-xl p-6 glow">
-                                <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                                    <span className="text-2xl">📚</span> Courses & Guides
-                                </h3>
-                                <ul className="space-y-2 text-white/80">
-                                    <li>• <a href="https://www.anthropic.com/academy" className="text-cyan hover:underline" target="_blank">Anthropic Academy</a> (free)</li>
-                                    <li>• OpenAI Prompt Engineering Guide</li>
-                                    <li>• Coursera: AI for Everyone (Andrew Ng)</li>
-                                    <li>• Google AI Essentials</li>
+            return (
+                <Section id="resources" title="Keep Learning" dark>
+                    <div className="grid md:grid-cols-3 gap-6">
+                        {resources.map((r) => (
+                            <div key={r.cat} className="card rounded-xl p-6">
+                                <h3 className="font-semibold text-white mb-4">{r.cat}</h3>
+                                <ul className="text-slate-400 text-sm space-y-2">
+                                    {r.items.map((item, i) => <li key={i}>• {item}</li>)}
                                 </ul>
                             </div>
-                            <div className="card-gradient rounded-xl p-6 glow">
-                                <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                                    <span className="text-2xl">📖</span> Books
-                                </h3>
-                                <ul className="space-y-2 text-white/80">
-                                    <li>• Co-Intelligence — Ethan Mollick</li>
-                                    <li>• The AI-First Company — Ash Fontana</li>
-                                    <li>• Impromptu — Reid Hoffman</li>
-                                </ul>
-                            </div>
-                            <div className="card-gradient rounded-xl p-6 glow">
-                                <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                                    <span className="text-2xl">🛠️</span> Practice
-                                </h3>
-                                <ul className="space-y-2 text-white/80">
-                                    <li>• Start with simple daily tasks</li>
-                                    <li>• Challenge: Use AI for one new task each week</li>
-                                    <li>• Document what works (build prompt library)</li>
-                                </ul>
-                            </div>
-                            <div className="card-gradient rounded-xl p-6 glow">
-                                <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                                    <span className="text-2xl">👥</span> Community
-                                </h3>
-                                <ul className="space-y-2 text-white/80">
-                                    <li>• r/ChatGPT, r/ClaudeAI on Reddit</li>
-                                    <li>• Follow AI researchers on X/Twitter</li>
-                                    <li>• Internal channels (Slack, Teams)</li>
-                                </ul>
-                            </div>
-                        </div>
+                        ))}
                     </div>
-                </section>
+                </Section>
             );
         }
 
         // Footer
         function Footer() {
             return (
-                <footer className="py-12 px-4 text-center">
-                    <div className="max-w-4xl mx-auto">
-                        <p className="text-2xl mb-4">Remember:</p>
-                        <p className="text-xl text-cyan mb-8">Start small, iterate often, verify always</p>
-                        <div className="section-divider mb-8"></div>
-                        <p className="text-white/60 mb-2">Topher Rasmussen, MSW</p>
-                        <a href="index.html" className="text-soft-blue hover:text-cyan transition-colors">← Back to topherrasmussen.com</a>
-                    </div>
+                <footer className="py-16 px-6 text-center border-t border-slate-800">
+                    <p className="text-2xl font-semibold text-white mb-2">Start small. Iterate often. Verify always.</p>
+                    <p className="text-slate-500 mb-8">Topher Rasmussen, MSW</p>
+                    <a
+                        href="index.html"
+                        className="text-sky-400 hover:text-sky-300 transition-colors text-sm"
+                    >
+                        ← Back to topherrasmussen.com
+                    </a>
                 </footer>
             );
         }
 
-        // Main App
+        // App
         function App() {
-            const [activeSection, setActiveSection] = useState('');
-
+            const [active, setActive] = useState('');
             const sections = [
-                { id: 'what-is-gpt', short: 'GPT' },
-                { id: 'how-it-works', short: 'How It Works' },
-                { id: 'llm-landscape', short: 'Models' },
-                { id: 'key-concepts', short: 'Concepts' },
-                { id: 'prompting', short: 'Prompting' },
-                { id: 'use-cases', short: 'Use Cases' },
-                { id: 'limitations', short: 'Limitations' },
-                { id: 'collaboration', short: 'Collaboration' },
-                { id: 'resources', short: 'Resources' },
+                { id: 'gpt', label: 'GPT' },
+                { id: 'how', label: 'How' },
+                { id: 'models', label: 'Models' },
+                { id: 'concepts', label: 'Concepts' },
+                { id: 'prompting', label: 'Prompting' },
+                { id: 'usecases', label: 'Uses' },
+                { id: 'limits', label: 'Limits' },
+                { id: 'collab', label: 'Collab' },
             ];
 
             useEffect(() => {
-                const handleScroll = () => {
-                    const scrollPosition = window.scrollY + 100;
-
+                const onScroll = () => {
+                    const y = window.scrollY + 150;
                     for (let i = sections.length - 1; i >= 0; i--) {
-                        const section = document.getElementById(sections[i].id);
-                        if (section && section.offsetTop <= scrollPosition) {
-                            setActiveSection(sections[i].id);
-                            break;
+                        const el = document.getElementById(sections[i].id);
+                        if (el && el.offsetTop <= y) {
+                            setActive(sections[i].id);
+                            return;
                         }
                     }
+                    setActive('');
                 };
-
-                window.addEventListener('scroll', handleScroll);
-                return () => window.removeEventListener('scroll', handleScroll);
+                window.addEventListener('scroll', onScroll);
+                return () => window.removeEventListener('scroll', onScroll);
             }, []);
 
             return (
                 <>
-                    <Navigation sections={sections} activeSection={activeSection} />
+                    <Nav sections={sections} active={active} />
                     <Hero />
-                    <WhatIsGPT />
+                    <GPTSection />
                     <HowItWorks />
-                    <LLMComparison />
-                    <KeyConcepts />
+                    <Models />
+                    <Concepts />
                     <Prompting />
                     <CheatSheet />
                     <UseCases />
