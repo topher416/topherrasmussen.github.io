@@ -4,236 +4,343 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Topher Rasmussen</title>
+    <meta name="description" content="Portfolio of Topher Rasmussen — creative technologist, writer, and musician based in Chicago.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=IBM+Plex+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        * {
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
         body {
-            font-family: Georgia, Times, 'Times New Roman', serif;
-            line-height: 1.6;
-            background-color: #fafafa;
-            color: #222;
-            padding: 40px 20px;
+            font-family: 'IBM Plex Sans', -apple-system, Helvetica, Arial, sans-serif;
+            font-weight: 300;
+            line-height: 1.7;
+            background-color: #111010;
+            color: #c8c1b8;
+            padding: 80px 24px 48px;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
-            max-width: 650px;
+            max-width: 760px;
             margin: 0 auto;
         }
 
-        header {
-            margin-bottom: 40px;
+        /* === BIO === */
+
+        .bio {
+            margin-bottom: 80px;
         }
 
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 12px;
-            color: #111;
-        }
-
-        .tagline {
-            font-size: 1rem;
-            color: #555;
-            margin-bottom: 20px;
-        }
-
-        .intro {
-            font-size: 1rem;
-            color: #333;
-            margin-bottom: 50px;
-            line-height: 1.7;
-        }
-
-        section {
-            margin-bottom: 50px;
-        }
-
-        h2 {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-            color: #111;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            font-size: 0.9rem;
+        .bio-name {
+            font-family: 'IBM Plex Sans', -apple-system, Helvetica, Arial, sans-serif;
             font-weight: 600;
+            font-size: 3.2rem;
+            line-height: 1.1;
+            color: #ece7df;
+            margin-bottom: 8px;
+            letter-spacing: -0.025em;
         }
 
-        .item {
-            margin-bottom: 30px;
+        .bio-location {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.8rem;
+            color: #6b635a;
+            margin-bottom: 32px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
         }
 
-        .item-title {
-            font-weight: bold;
-            color: #111;
-            margin-bottom: 6px;
+        .bio-text {
+            font-size: 1.05rem;
+            line-height: 1.85;
+            color: #9e958a;
+            margin-bottom: 16px;
+            max-width: 56ch;
         }
 
-        .item-title a {
-            color: #7b2cbf;
+        .bio-links {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.8rem;
+            margin-top: 28px;
+        }
+
+        .bio-links a {
+            color: #c45d3e;
             text-decoration: none;
-            border-bottom: 1px solid transparent;
+            border-bottom: 1px solid rgba(196, 93, 62, 0.3);
             transition: border-bottom-color 0.2s;
         }
 
-        .item-title a:hover {
-            border-bottom-color: #7b2cbf;
+        .bio-links a:hover {
+            border-bottom-color: #c45d3e;
         }
 
-        .item-description {
-            color: #444;
-            font-size: 0.95rem;
+        .bio-links .sep {
+            color: #3a3532;
+            margin: 0 10px;
         }
+
+        /* === FILTER BAR === */
+
+        .filter-section {
+            margin-bottom: 48px;
+            border-bottom: 1px solid #2a2624;
+            padding-bottom: 28px;
+        }
+
+        #filter-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .filter-btn {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.76rem;
+            padding: 6px 16px;
+            border: 1px solid #2a2624;
+            border-radius: 999px;
+            background: transparent;
+            color: #6b635a;
+            cursor: pointer;
+            transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+            white-space: nowrap;
+        }
+
+        .filter-btn:hover {
+            border-color: #4a4440;
+            color: #c8c1b8;
+        }
+
+        .filter-btn.active {
+            background-color: #ece7df;
+            color: #111010;
+            border-color: #ece7df;
+        }
+
+        /* === CATALOG === */
+
+        .year-group {
+            margin-bottom: 56px;
+        }
+
+        .year-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.78rem;
+            color: #4a4440;
+            margin-bottom: 20px;
+            letter-spacing: 0.08em;
+        }
+
+        .year-entries {
+            display: flex;
+            flex-direction: column;
+            gap: 36px;
+        }
+
+        .entry {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+        }
+
+        .entry--muted {
+            opacity: 0.45;
+        }
+
+        .entry-image {
+            flex-shrink: 0;
+            width: 140px;
+            height: 94px;
+            border-radius: 4px;
+            overflow: hidden;
+            background: #1e1c1a;
+        }
+
+        .entry-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .entry-body {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .entry-title {
+            font-family: 'IBM Plex Sans', -apple-system, Helvetica, Arial, sans-serif;
+            font-weight: 400;
+            font-size: 1.2rem;
+            line-height: 1.35;
+            margin-bottom: 6px;
+        }
+
+        .entry-title a {
+            color: #ece7df;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-bottom-color 0.2s, color 0.2s;
+        }
+
+        .entry-title a:hover {
+            color: #c45d3e;
+            border-bottom-color: #c45d3e;
+        }
+
+        .entry-title span {
+            color: #ece7df;
+        }
+
+        .entry-meta {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .entry-category {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            color: #6b635a;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .badge-coming-soon {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.66rem;
+            color: #c45d3e;
+            border: 1px solid rgba(196, 93, 62, 0.4);
+            border-radius: 999px;
+            padding: 1px 8px;
+            white-space: nowrap;
+        }
+
+        .entry-description {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: #7a7168;
+        }
+
+        .catalog-empty {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.85rem;
+            color: #4a4440;
+            padding: 20px 0;
+        }
+
+        /* === FOOTER === */
 
         footer {
-            margin-top: 60px;
-            padding-top: 30px;
-            border-top: 1px solid #ddd;
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        footer a {
-            color: #7b2cbf;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        .footer-links {
-            margin-bottom: 20px;
+            margin-top: 80px;
+            padding-top: 24px;
+            border-top: 1px solid #2a2624;
         }
 
         .counter {
-            margin-top: 20px;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.85rem;
-            color: #888;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.76rem;
+            color: #3a3532;
         }
 
         .counter-display {
             display: inline;
-            font-weight: bold;
-            color: #555;
+            font-weight: 400;
+            color: #4a4440;
         }
+
+        /* === RESPONSIVE === */
 
         @media (max-width: 600px) {
             body {
-                padding: 30px 15px;
+                padding: 48px 18px 36px;
             }
 
-            h1 {
-                font-size: 1.6rem;
+            .bio-name {
+                font-size: 2.2rem;
             }
 
-            h2 {
-                font-size: 0.85rem;
+            .bio-text {
+                font-size: 0.95rem;
+            }
+
+            .bio {
+                margin-bottom: 56px;
+            }
+
+            .entry {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .entry-image {
+                width: 100%;
+                height: 180px;
+            }
+
+            .entry-title {
+                font-size: 1.08rem;
+            }
+
+            .entry-description {
+                font-size: 0.86rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                transition: none !important;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>Topher Rasmussen</h1>
-            <p class="tagline">Based in Chicago.</p>
-            <p class="intro">
-                This is where I keep experimental projects and writing I'm working through. 
-                Essays, code, a tarot game, music things. Figuring out what I actually 
-                think and whether I can write it.
+
+        <!-- Bio -->
+        <section class="bio">
+            <h1 class="bio-name">Topher Rasmussen</h1>
+            <p class="bio-location">Chicago, IL</p>
+            <p class="bio-text">
+                Claude Code power user and neurotic creative technologist with an interdisciplinary non-technical background — which is a jargon-heavy way of saying I did theater and music, got an MSW, and now I make websites and write essays about psychoanalysis for fun. I also play in the Radiohead Ensemble at Old Town School of Folk Music. This is my personal site. None of it is that serious.
             </p>
-            <p class="intro">Start wherever.</p>
-        </header>
-
-        <section>
-            <h2>Vibe Coded Projects</h2>
-
-            <div class="item">
-                <div class="item-title">
-                    <a href="ai101.html">AI 101: Crash Course</a>
-                </div>
-                <div class="item-description">
-                    An interactive guide to generative AI, prompt engineering, and human-AI collaboration. Covers GPT fundamentals, the LLM landscape, and practical tips for getting started.
-                </div>
-            </div>
-
-            <div class="item">
-                <div class="item-title">
-                    <a href="horrortarot/">Horror Movie Tarot</a>
-                </div>
-                <div class="item-description">
-                    Draw a nine-card spread of curated horror films presented as tarot cards, with generative ambient music and streaming links for each pick.
-                </div>
-            </div>
-
-            <div class="item">
-                <div class="item-title">
-                    <a href="radiohead-invite.html">Radiohead Ensemble Invitation</a>
-                </div>
-                <div class="item-description">
-                    An interactive, glitchy canvas poster for a December 14, 2025 Radiohead ensemble performance in Chicago.
-                </div>
+            <div class="bio-links">
+                <a href="mailto:topher416@gmail.com">Email</a>
+                <span class="sep">/</span>
+                <a href="https://www.linkedin.com/in/topherrasmussen" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             </div>
         </section>
 
-        <section>
-            <h2>Writing</h2>
-            
-            <div class="item">
-                <div class="item-title">
-                    <a href="essay.html">The Fantasy of Machine-Assisted Authorship</a>
-                </div>
-                <div class="item-description">
-                    An essay about AI writing tools, shame, "linguistic money laundering," and what gets lost when we outsource our sentences.
-                </div>
-            </div>
+        <!-- Filter Bar -->
+        <div class="filter-section">
+            <div id="filter-bar"></div>
+        </div>
 
-            <div class="item">
-                <div class="item-title">
-                    <a href="analyticintrospections/">Analytic Introspections from an Actor's Perspective</a>
-                </div>
-                <div class="item-description">
-                    Long-form thoughts on acting, attention, and psychoanalysis, written from the inside of the rehearsal room.
-                </div>
-            </div>
+        <!-- Catalog -->
+        <div id="catalog-entries"></div>
 
-            <div class="item">
-                <div class="item-title">
-                    <a href="map-territory.html">The Map and the Territory: Five Parables</a>
-                </div>
-                <div class="item-description">
-                    Five parables about self-observation, wounds, identity, and the difference between mapping your life and living it.
-                </div>
-            </div>
-        </section>
-
+        <!-- Footer -->
         <footer>
-            <div class="footer-links">
-                <a href="mailto:topher416@gmail.com">Email</a> · 
-                <a href="https://www.linkedin.com/in/topherrasmussen">LinkedIn</a>
-            </div>
-            
             <div class="counter">
-                Visitor count: <span class="counter-display">00000372</span>
+                Visitor count: <span class="counter-display">00000000</span>
             </div>
         </footer>
+
     </div>
 
+    <script src="/catalog.js"></script>
     <script>
-        function displayCount(count) {
-            const formattedCount = count.toString().padStart(8, '0');
-            document.querySelector('.counter-display').textContent = formattedCount;
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const scriptTag = document.createElement('script');
-            const timestamp = new Date().getTime();
-            scriptTag.src = 'https://script.google.com/macros/s/AKfycbwOYJRKO_zOwkLpCR4U_ENMiD7bgPtuWmXVe6ZTuT913aTHJ0c5Op3OEdfzJQAGUHdv/exec?action=increment&callback=displayCount&t=' + timestamp;
-            document.body.appendChild(scriptTag);
+        document.addEventListener('DOMContentLoaded', function () {
+            var s = document.createElement('script');
+            var t = new Date().getTime();
+            s.src = 'https://script.google.com/macros/s/AKfycbwOYJRKO_zOwkLpCR4U_ENMiD7bgPtuWmXVe6ZTuT913aTHJ0c5Op3OEdfzJQAGUHdv/exec?action=increment&callback=displayCount&t=' + t;
+            document.body.appendChild(s);
         });
     </script>
 </body>
