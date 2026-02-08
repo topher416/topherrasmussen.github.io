@@ -1,0 +1,79 @@
+[
+  {
+    "id": "horror-tarot",
+    "title": "Horror Movie Tarot",
+    "year": 2025,
+    "category": "web-design",
+    "description": "You draw nine horror films as tarot cards. There's generative ambient music, streaming links, and a spread layout that actually works. Built with React, Three.js, and Tone.js.",
+    "url": "/horrortarot/",
+    "image": null,
+    "status": "live",
+    "tags": ["react", "three.js", "tone.js", "vite"]
+  },
+  {
+    "id": "ai101",
+    "title": "AI 101: Crash Course",
+    "year": 2025,
+    "category": "web-design",
+    "description": "An interactive walkthrough of how generative AI actually works, written for people who haven't touched it yet. Prompt engineering, model landscape, practical advice.",
+    "url": "/ai101.html",
+    "image": null,
+    "status": "live",
+    "tags": ["tailwind", "education"]
+  },
+  {
+    "id": "analytic-introspections",
+    "title": "Analytic Introspections from an Actor's Perspective",
+    "year": 2025,
+    "category": "writing",
+    "description": "Long-form writing about what happens when you take psychoanalytic ideas seriously inside a rehearsal room. Attention, resistance, the body, all of it.",
+    "url": "/analyticintrospections/",
+    "image": null,
+    "status": "live",
+    "tags": ["psychoanalysis", "acting", "react"]
+  },
+  {
+    "id": "map-territory",
+    "title": "The Map and the Territory: Five Parables",
+    "year": 2025,
+    "category": "writing",
+    "description": "Five short parables about the difference between mapping your life and actually living it. Wounds, identity, self-observation.",
+    "url": "/map-territory.html",
+    "image": null,
+    "status": "live",
+    "tags": ["essay", "psychoanalysis"]
+  },
+  {
+    "id": "machine-authorship",
+    "title": "The Fantasy of Machine-Assisted Authorship",
+    "year": 2025,
+    "category": "writing",
+    "description": "About what gets lost when you let a machine write your sentences for you. Shame, \"linguistic money laundering,\" and the question of whether any of this counts.",
+    "url": "/essay.html",
+    "image": null,
+    "status": "live",
+    "tags": ["essay", "ai"]
+  },
+  {
+    "id": "radiohead-invite",
+    "title": "Radiohead Ensemble Invitation",
+    "year": 2025,
+    "category": "web-design",
+    "description": "A glitchy interactive canvas poster made to invite people to a Radiohead ensemble show. It breaks on purpose.",
+    "url": "/radiohead-invite.html",
+    "image": null,
+    "status": "live",
+    "tags": ["canvas", "generative"]
+  },
+  {
+    "id": "fm-noggin",
+    "title": "FM Noggin",
+    "year": 2024,
+    "category": "web-design",
+    "description": "Personal internet radio station. A place to put music I'm listening to and see if anyone else wants to hear it.",
+    "url": "https://fmnogg.in",
+    "image": null,
+    "status": "live",
+    "tags": ["music", "web-app"]
+  }
+]
