@@ -35,15 +35,19 @@
     if (!bar) return;
     bar.innerHTML = categories.map(function (cat) {
       var cls = 'filter-btn' + (cat.key === activeCategory ? ' active' : '');
-      return '<button class="' + cls + '" data-cat="' + cat.key + '">' + cat.label + '</button>';
+      var pressed = cat.key === activeCategory ? 'true' : 'false';
+      return '<button type="button" class="' + cls + '" data-cat="' + cat.key + '" aria-pressed="' + pressed + '">' + cat.label + '</button>';
     }).join('');
 
     bar.addEventListener('click', function (e) {
-      if (!e.target.matches('.filter-btn')) return;
-      activeCategory = e.target.getAttribute('data-cat');
+      var clicked = e.target.closest('.filter-btn');
+      if (!clicked) return;
+      activeCategory = clicked.getAttribute('data-cat');
       var btns = bar.querySelectorAll('.filter-btn');
       for (var i = 0; i < btns.length; i++) {
-        btns[i].classList.toggle('active', btns[i].getAttribute('data-cat') === activeCategory);
+        var isActive = btns[i].getAttribute('data-cat') === activeCategory;
+        btns[i].classList.toggle('active', isActive);
+        btns[i].setAttribute('aria-pressed', isActive ? 'true' : 'false');
       }
       render();
     });
@@ -82,10 +86,13 @@
       html += '<div class="year-entries">';
       entries.forEach(function (entry) {
         var isComingSoon = entry.status === 'coming-soon';
-        var entryClass = 'entry' + (isComingSoon ? ' entry--muted' : '');
+        var hasImage = !!entry.image;
+        var entryClass = 'entry';
+        if (hasImage) entryClass += ' entry--with-image';
+        if (isComingSoon) entryClass += ' entry--muted';
         html += '<div class="' + entryClass + '">';
 
-        if (entry.image) {
+        if (hasImage) {
           html += '<div class="entry-image"><img src="' + entry.image + '" alt="' + entry.title + '" loading="lazy"></div>';
         }
 
@@ -102,8 +109,10 @@
 
         // Meta line: category + badge
         html += '<div class="entry-meta">';
-        var displayCat = entry.categories ? entry.categories[0] : entry.category;
-        html += '<span class="entry-category">' + formatCategory(displayCat) + '</span>';
+        var displayCats = entry.categories ? entry.categories : [entry.category];
+        for (var i = 0; i < displayCats.length; i++) {
+          html += '<span class="entry-category">' + formatCategory(displayCats[i]) + '</span>';
+        }
         if (isComingSoon) {
           html += '<span class="badge-coming-soon">Coming soon</span>';
         }
