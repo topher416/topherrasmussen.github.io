@@ -12,7 +12,8 @@
     { key: 'writing', label: 'Writing' },
     { key: 'theater', label: 'Theater' },
     { key: 'visual-art', label: 'Visual Art' },
-    { key: 'experiments', label: 'Experiments' }
+    { key: 'experiments', label: 'Experiments' },
+    { key: 'concept', label: 'Concept' }
   ];
 
   function init() {

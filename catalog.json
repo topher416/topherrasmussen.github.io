@@ -77,6 +77,17 @@
     "tags": ["next.js", "python", "demucs", "music", "audio-processing"]
   },
   {
+    "id": "analytic-anteroom",
+    "title": "The Analytic Anteroom",
+    "year": 2026,
+    "category": "concept",
+    "description": "A concept proposal for a voice-based clinical training tool that uses full-duplex speech models to prepare psychotherapy trainees before their first patient hours. Not a product — a research direction exploring whether emerging voice technology can reduce the shock of first contact in clinical education.",
+    "url": "/anteroom.html",
+    "image": null,
+    "status": "live",
+    "tags": ["psychoanalysis", "voice-ai", "clinical-training"]
+  },
+  {
     "id": "structured-like-a-language",
     "title": "Structured Like a Language",
     "year": 2026,
