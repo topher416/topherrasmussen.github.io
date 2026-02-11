@@ -68,12 +68,23 @@
   {
     "id": "fm-noggin",
     "title": "FM Noggin",
-    "year": 2024,
-    "category": "web-design",
-    "description": "Personal internet radio station. A place to put music I'm listening to and see if anyone else wants to hear it.",
+    "year": 2026,
+    "categories": ["music", "experiments"],
+    "description": "A practice guide for learning Radiohead covers with isolated stems, sheet music, and tempo-adjusted tracks. Powered by a custom Python pipeline that uses Demucs for AI source separation — feed it a YouTube link and it spits out individual instruments at whatever speed you need.",
     "url": "https://fmnogg.in",
     "image": null,
     "status": "live",
-    "tags": ["music", "web-app"]
+    "tags": ["next.js", "python", "demucs", "music", "audio-processing"]
+  },
+  {
+    "id": "structured-like-a-language",
+    "title": "Structured Like a Language",
+    "year": 2026,
+    "categories": ["writing", "experiments", "web-design"],
+    "description": "A research project testing whether transformer LLMs structurally instantiate the operations Lacan attributed to the unconscious. Formal mappings, falsifiable predictions, and a source processing pipeline. Phase 1 of 5 in progress.",
+    "url": "https://structuredlikealanguage.org",
+    "image": null,
+    "status": "live",
+    "tags": ["psychoanalysis", "ai", "jekyll", "research"]
   }
 ]
