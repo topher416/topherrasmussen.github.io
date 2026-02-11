@@ -8,6 +8,20 @@ Personal portfolio and experimental projects website hosted on GitHub Pages at *
 
 This repo uses `topher416` — `Topher Rasmussen <topher416@gmail.com>`.
 
+## GitHub Auth Guardrail (Required Before Push)
+
+Always verify GitHub auth context before pushing:
+
+1. `gh auth status` (active account must be `topher416`)
+2. If needed: `gh auth switch -u topher416`
+3. Confirm repo credential helper includes `!gh auth git-credential`:
+   - `git config --local --get-all credential.helper`
+4. If missing, set it:
+   - `git config --local credential.helper ""`
+   - `git config --local --add credential.helper "!gh auth git-credential"`
+
+If push fails with `403` and message `denied to thtopher`, re-run step 2 and step 4, then retry push.
+
 ## Repository Structure
 
 ```
