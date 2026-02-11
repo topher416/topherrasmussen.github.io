@@ -54,7 +54,10 @@
 
     var filtered = activeCategory === 'all'
       ? catalog
-      : catalog.filter(function (e) { return e.category === activeCategory; });
+      : catalog.filter(function (e) {
+          if (e.categories) return e.categories.indexOf(activeCategory) !== -1;
+          return e.category === activeCategory;
+        });
 
     if (filtered.length === 0) {
       container.innerHTML = '<p class="catalog-empty">Nothing here yet.</p>';
@@ -98,7 +101,8 @@
 
         // Meta line: category + badge
         html += '<div class="entry-meta">';
-        html += '<span class="entry-category">' + formatCategory(entry.category) + '</span>';
+        var displayCat = entry.categories ? entry.categories[0] : entry.category;
+        html += '<span class="entry-category">' + formatCategory(displayCat) + '</span>';
         if (isComingSoon) {
           html += '<span class="badge-coming-soon">Coming soon</span>';
         }
