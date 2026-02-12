@@ -196,5 +196,16 @@
     "image": null,
     "status": "live",
     "tags": ["psychoanalysis", "ai", "jekyll", "research"]
+  },
+  {
+    "id": "unmastered-recordings",
+    "title": "Unmastered Recordings of Unfinished Song Fragments / Loops That Loop Too Long",
+    "year": 2019,
+    "category": "music",
+    "description": "Nine lo-fi bedroom recordings made with a guitar, a loop pedal, a Fender amp, and a phone. Ambient loops, slowgaze fragments, and song sketches that never quite became songs \u2014 recorded late 2015 through early 2016 in Salt Lake City. Track titles do most of the talking.",
+    "url": "https://topherrasmussen.bandcamp.com/album/unmastered-recordings-of-unfininshed-song-fragments-loops-that-loop-too-long",
+    "image": null,
+    "status": "live",
+    "tags": ["lo-fi", "ambient", "loops", "slowgaze", "bandcamp"]
   }
 ]
