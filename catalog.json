@@ -66,6 +66,105 @@
     "tags": ["canvas", "generative"]
   },
   {
+    "id": "slop-bucket",
+    "title": "Notes from the Slop Bucket",
+    "year": 2025,
+    "category": "writing",
+    "description": "A confessional essay about the shame of using AI to write. Works through the anxiety that assisted prose might not count, argues that flawed work you actually struggled with has a kind of value that clean output doesn't, and tries not to let that argument become its own form of cope.",
+    "url": "https://medium.com/@topher416/notes-from-the-slop-bucket-023ff889a76c",
+    "image": null,
+    "status": "live",
+    "tags": ["essay", "ai", "psychoanalysis", "medium"]
+  },
+  {
+    "id": "willing-surrender",
+    "title": "The Willing Surrender: What We Really Want From AI",
+    "year": 2025,
+    "category": "writing",
+    "description": "A psychoanalytic argument that people adopt AI cognitive tools not because they're forced to but because they want to stop thinking. Examines the desire for cognitive surrender — the relief of handing off the existential burden of composition — and what that reveals about our ambivalence toward intellectual autonomy.",
+    "url": "https://medium.com/@topher416/the-willing-surrender-what-we-really-want-from-ai-162f584849ad",
+    "image": null,
+    "status": "live",
+    "tags": ["essay", "ai", "psychoanalysis", "medium"]
+  },
+  {
+    "id": "tools-change-minds",
+    "title": "Do Our Tools Change Our Minds?",
+    "year": 2025,
+    "category": "writing",
+    "description": "Documents the subtle cognitive shifts that happen when AI writing assistance is always available — skill atrophy, altered emotional engagement with language, the way knowing you can generate text changes how you approach the blank page. Less polemic than observation.",
+    "url": "https://medium.com/@topher416/do-our-tools-change-our-minds-1f3c631e8497",
+    "image": null,
+    "status": "live",
+    "tags": ["essay", "ai", "medium"]
+  },
+  {
+    "id": "subject-supposed-to-write",
+    "title": "The Subject Supposed to Write: A Lacanian Analysis of AI Writing Assistance",
+    "year": 2025,
+    "category": "writing",
+    "description": "Applies Lacan's three registers to AI writing tools — the Imaginary mirror of fluent output, the disruption of the Symbolic order when authorship fragments, and the way AI obscures encounters with the Real. Argues that genuine writing involves a kind of jouissance that assistance forecloses.",
+    "url": "https://medium.com/@topher416/the-subject-supposed-to-write-a-lacanian-analysis-of-ai-writing-assistance-8cf24e552eb8",
+    "image": null,
+    "status": "live",
+    "tags": ["essay", "ai", "psychoanalysis", "lacan", "medium"]
+  },
+  {
+    "id": "between-making-reading",
+    "title": "Between Making and Reading: A Personal Exploration of Artificial Intelligence",
+    "year": 2025,
+    "category": "writing",
+    "description": "An etymological meditation on the words 'artifice' and 'intelligence' that follows the recursive loop of making and reading in AI interaction. Less about what the technology does than what the act of using it reveals about human creativity and discernment.",
+    "url": "https://medium.com/@topher416/between-making-and-reading-a-personal-exploration-of-artificial-intelligence-263d1b984f99",
+    "image": null,
+    "status": "live",
+    "tags": ["essay", "ai", "medium"]
+  },
+  {
+    "id": "fragments-mirror",
+    "title": "Fragments from the Mirror: An Attempt at Honest Reflection",
+    "year": 2025,
+    "category": "writing",
+    "description": "Raw, deliberately unpolished writing about anxiety, imposter syndrome, and the difficulty of staying honest while an algorithm is smoothing your sentences in real time. Resists the impulse to turn rough thought into coherent argument — the roughness is the point.",
+    "url": "https://medium.com/@topher416/fragments-from-the-mirror-an-attempt-at-honest-reflection-3c6a0717a219",
+    "image": null,
+    "status": "live",
+    "tags": ["essay", "ai", "psychoanalysis", "medium"]
+  },
+  {
+    "id": "recursive-machine",
+    "title": "The Pleasure of the Recursive Machine: On Loops, Language, and the Desire for Meaning",
+    "year": 2025,
+    "category": "writing",
+    "description": "A psychoanalytic reading of why people keep prompting — not for answers but for the pleasure of perpetual deferral. Argues that AI interaction is structured like desire itself: you keep going not because the loop resolves but because it doesn't.",
+    "url": "https://medium.com/@topher416/the-pleasure-of-the-recursive-machine-on-loops-language-and-the-desire-for-meaning-1581394d1b6f",
+    "image": null,
+    "status": "live",
+    "tags": ["essay", "ai", "psychoanalysis", "lacan", "medium"]
+  },
+  {
+    "id": "illusion-ai-therapy",
+    "title": "The Illusion of AI \"Therapy\": A Critical Examination",
+    "year": 2025,
+    "category": "writing",
+    "description": "A clinical social worker's critique of AI mental health platforms. Argues they commodify distress, simulate care without providing it, and obscure the systemic causes of psychological suffering behind the appearance of a technological fix.",
+    "url": "https://medium.com/@topher416/the-illusion-of-ai-therapy-a-critical-examination-of-its-state-and-limitations-143fd08e6748",
+    "image": null,
+    "status": "live",
+    "tags": ["essay", "ai", "psychoanalysis", "clinical", "medium"]
+  },
+  {
+    "id": "ai-psychoanalysis-mediated-self",
+    "title": "On AI, Psychoanalysis, and the Mediated Self",
+    "year": 2025,
+    "category": "writing",
+    "description": "Positions the author as a clinician watching technology entangle itself with mental life. Examines the tension between AI's logic of efficiency and psychoanalysis's insistence on the unconscious, while reflecting on what it means to think about mediation while being mediated.",
+    "url": "https://medium.com/@topher416/on-ai-psychoanalysis-and-the-mediated-self-e1ef152f781e",
+    "image": null,
+    "status": "live",
+    "tags": ["essay", "ai", "psychoanalysis", "medium"]
+  },
+  {
     "id": "fm-noggin",
     "title": "FM Noggin",
     "year": 2026,
