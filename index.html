@@ -100,6 +100,7 @@
             text-transform: uppercase;
             color: var(--accent);
             margin-bottom: 10px;
+            transition: opacity 0.22s ease;
         }
 
         .bio-name {
@@ -122,11 +123,44 @@
             color: var(--ink-muted);
         }
 
+        .bio-register {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            color: var(--ink-muted);
+            background: none;
+            border: 1px solid transparent;
+            border-radius: 999px;
+            padding: 4px 10px;
+            margin-top: 10px;
+            cursor: pointer;
+            transition: border-color 0.22s ease, color 0.22s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .bio-register:hover {
+            border-color: var(--line-soft);
+            color: var(--ink-soft);
+        }
+
+        .bio-register .cycle-icon {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .bio-register:hover .cycle-icon {
+            transform: rotate(90deg);
+        }
+
         .bio-text {
             font-size: clamp(1rem, 1.2vw, 1.1rem);
             color: var(--ink-soft);
             max-width: 66ch;
             text-wrap: pretty;
+            transition: opacity 0.22s ease;
         }
 
         .bio-links {
@@ -482,15 +516,19 @@
     <div class="container">
 
         <!-- Bio -->
-        <section class="bio">
+        <section class="bio" id="bio">
             <div class="bio-head">
-                <p class="bio-eyebrow">Personal Site / Work + Writing + Music</p>
+                <p class="bio-eyebrow" id="bio-eyebrow">Personal Site / Work + Writing + Music</p>
                 <h1 class="bio-name">Topher Rasmussen</h1>
                 <p class="bio-location">Chicago, IL</p>
+                <button class="bio-register" id="bio-register" type="button" aria-label="Change bio tone">
+                    <span id="register-label">casual</span>
+                    <span class="cycle-icon" aria-hidden="true">&#x21bb;</span>
+                </button>
             </div>
             <div class="bio-copy">
-                <p class="bio-text">
-                    Claude Code power user and neurotic creative technologist with an interdisciplinary non-technical background — which is a jargon-heavy way of saying I did theater and music, got an MSW, and now I make websites and write essays about psychoanalysis for fun. I also play in the Radiohead Ensemble at Old Town School of Folk Music. This is my personal site. None of it is that serious.
+                <p class="bio-text" id="bio-text">
+                    I did theater and music, got a social work degree, and now I make websites and write long essays about psychoanalysis at unreasonable hours. I play Radiohead covers at Old Town School of Folk Music, which is somehow a real thing I do with my life. This is my personal site. None of it is that serious.
                 </p>
                 <div class="bio-links">
                     <a href="mailto:topher416@gmail.com">Email</a>
@@ -521,6 +559,93 @@
         </footer>
 
     </div>
+
+    <script>
+    (function () {
+        var modes = [
+            {
+                key: 'casual',
+                eyebrow: 'Personal Site / Work + Writing + Music',
+                text: 'I did theater and music, got a social work degree, and now I make websites and write long essays about psychoanalysis at unreasonable hours. I play Radiohead covers at Old Town School of Folk Music, which is somehow a real thing I do with my life. This is my personal site. None of it is that serious.'
+            },
+            {
+                key: 'academic',
+                eyebrow: 'Research + Practice / Interdisciplinary',
+                text: 'Interdisciplinary practitioner working across clinical theory, computational systems, and creative production. Holds an MSW with a psychoanalytic orientation; current research examines structural homologies between Lacanian formalism and transformer architectures. Additional work spans interactive web development, long-form writing on authorship and subjectivity, and ensemble musicianship. Based in Chicago.'
+            },
+            {
+                key: 'technical',
+                eyebrow: 'Developer / Stack + Architecture',
+                text: 'Full-stack developer building with React 19, Vite, Three.js, and Tone.js. Current projects: a WebGL shader pipeline with generative audio, an AI source separation tool powered by Demucs, and a computational research framework for psychoanalytic text analysis. Claude Code power user. Comfortable from Python data pipelines to GPU-intensive browser rendering.'
+            },
+            {
+                key: 'professional',
+                eyebrow: 'Portfolio / Creative Technology',
+                text: 'Creative technologist with a background in clinical social work, theater, and music. I build interactive web experiences and write about the places where psychoanalytic theory meets emerging technology. Recent work includes a WebGL-driven horror film tarot app, an AI literacy course for non-technical teams, and a research project mapping Lacanian structures onto transformer architectures.'
+            },
+            {
+                key: 'insecure',
+                eyebrow: "Personal Site / I Guess",
+                text: "honestly not sure what I am at this point? I have a social work degree but I build websites. I write 8,000-word essays that like four people read. I made a tarot card app for horror movies which sounds like a bit but I spent way too long on it. I\u2019m also doing this Lacan-meets-LLMs research project that I can\u2019t explain to anyone at parties. I play in a Radiohead cover ensemble. it\u2019s fine. everything\u2019s fine."
+            }
+        ];
+
+        var current = 0;
+        var transitioning = false;
+        var bioEl = document.getElementById('bio');
+        var eyebrowEl = document.getElementById('bio-eyebrow');
+        var textEl = document.getElementById('bio-text');
+        var registerBtn = document.getElementById('bio-register');
+        var labelEl = document.getElementById('register-label');
+
+        function cycleMode(direction) {
+            if (transitioning) return;
+            transitioning = true;
+            current = (current + direction + modes.length) % modes.length;
+            var mode = modes[current];
+
+            eyebrowEl.style.opacity = '0';
+            textEl.style.opacity = '0';
+
+            setTimeout(function () {
+                eyebrowEl.textContent = mode.eyebrow;
+                textEl.textContent = mode.text;
+                labelEl.textContent = mode.key;
+                eyebrowEl.style.opacity = '1';
+                textEl.style.opacity = '1';
+                transitioning = false;
+            }, 220);
+        }
+
+        registerBtn.addEventListener('click', function () {
+            cycleMode(1);
+        });
+
+        // Swipe support
+        var touchStartX = 0;
+        bioEl.addEventListener('touchstart', function (e) {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        bioEl.addEventListener('touchend', function (e) {
+            var diff = touchStartX - e.changedTouches[0].screenX;
+            if (Math.abs(diff) > 50) {
+                cycleMode(diff > 0 ? 1 : -1);
+            }
+        });
+
+        // Arrow keys when register button is focused
+        registerBtn.addEventListener('keydown', function (e) {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                e.preventDefault();
+                cycleMode(1);
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                cycleMode(-1);
+            }
+        });
+    })();
+    </script>
 
     <script src="/catalog.js"></script>
     <script>
