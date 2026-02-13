@@ -499,6 +499,290 @@
             }
         }
 
+        /* ── Dark theme ── */
+        [data-theme="dark"] {
+            --bg: #141210;
+            --bg-soft: #1c1a17;
+            --card: #1f1d19;
+            --ink-strong: #e8e2d6;
+            --ink-soft: #b5ad9e;
+            --ink-muted: #8a8175;
+            --line-strong: #e8e2d6;
+            --line-soft: #3a352e;
+            --accent: #d26b56;
+            --accent-soft: #e8937f;
+            color-scheme: dark;
+        }
+
+        [data-theme="dark"] body {
+            background-image:
+                radial-gradient(circle at 10% -5%, rgba(210, 107, 86, 0.12), transparent 42%),
+                radial-gradient(circle at 100% 0%, rgba(87, 104, 125, 0.1), transparent 38%),
+                linear-gradient(160deg, var(--bg) 0%, var(--bg-soft) 100%);
+        }
+
+        [data-theme="dark"] body::before {
+            opacity: 0.06;
+        }
+
+        [data-theme="dark"] .bio-links a {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        [data-theme="dark"] .filter-btn {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        [data-theme="dark"] .filter-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        [data-theme="dark"] .entry {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        [data-theme="dark"] .entry:hover {
+            box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
+        }
+
+        [data-theme="dark"] .entry-category {
+            background: rgba(30, 27, 22, 0.9);
+        }
+
+        [data-theme="dark"] .badge-coming-soon {
+            background: rgba(30, 27, 22, 0.6);
+        }
+
+        [data-theme="dark"] .entry-image {
+            background: linear-gradient(160deg, #2a2520, #1f1d19);
+        }
+
+        /* ── Brutalist theme ── */
+        [data-theme="brutalist"] {
+            --bg: #ffffff;
+            --bg-soft: #ffffff;
+            --card: #ffffff;
+            --ink-strong: #000000;
+            --ink-soft: #000000;
+            --ink-muted: #000000;
+            --line-strong: #000000;
+            --line-soft: #000000;
+            --accent: #0000ff;
+            --accent-soft: #0000ff;
+        }
+
+        [data-theme="brutalist"] body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.4;
+            background-image: none;
+            padding: 20px;
+            -webkit-font-smoothing: auto;
+            text-rendering: auto;
+        }
+
+        [data-theme="brutalist"] body::before {
+            display: none;
+        }
+
+        [data-theme="brutalist"] .bio::after {
+            display: none;
+        }
+
+        [data-theme="brutalist"] .bio-eyebrow,
+        [data-theme="brutalist"] .bio-location,
+        [data-theme="brutalist"] .bio-register,
+        [data-theme="brutalist"] .filter-label,
+        [data-theme="brutalist"] .counter {
+            font-family: 'Courier New', monospace;
+            letter-spacing: 0;
+            text-transform: none;
+        }
+
+        [data-theme="brutalist"] .bio-name {
+            font-family: 'Times New Roman', Times, serif;
+            letter-spacing: 0;
+        }
+
+        [data-theme="brutalist"] .bio-links {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1rem;
+        }
+
+        [data-theme="brutalist"] .bio-links a {
+            border: none;
+            border-radius: 0;
+            background: none;
+            padding: 0;
+            min-height: 0;
+            color: #0000ff;
+            text-decoration: underline;
+        }
+
+        [data-theme="brutalist"] .bio-links a:hover {
+            background: none;
+            color: #ff0000;
+            border: none;
+        }
+
+        [data-theme="brutalist"] .bio-links a:visited {
+            color: #800080;
+        }
+
+        [data-theme="brutalist"] .filter-btn {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1rem;
+            border: 1px solid #000;
+            border-radius: 0;
+            background: #fff;
+            padding: 4px 8px;
+            min-height: 0;
+            letter-spacing: 0;
+        }
+
+        [data-theme="brutalist"] .filter-btn:hover {
+            background: #000;
+            color: #fff;
+        }
+
+        [data-theme="brutalist"] .filter-btn.active {
+            background: #000;
+            color: #fff;
+            border-color: #000;
+        }
+
+        [data-theme="brutalist"] .catalog-heading {
+            font-family: 'Times New Roman', Times, serif;
+            letter-spacing: 0;
+        }
+
+        [data-theme="brutalist"] .entry {
+            border: 1px solid #000;
+            box-shadow: none;
+            padding: 10px;
+        }
+
+        [data-theme="brutalist"] .entry:hover {
+            transform: none;
+            box-shadow: none;
+            border-color: #000;
+            background: #ffffcc;
+        }
+
+        [data-theme="brutalist"] .entry-title {
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        [data-theme="brutalist"] .entry-title a {
+            color: #0000ff;
+            text-decoration: underline;
+            text-decoration-color: currentColor;
+        }
+
+        [data-theme="brutalist"] .entry-title a:hover {
+            color: #ff0000;
+        }
+
+        [data-theme="brutalist"] .entry-title a:visited {
+            color: #800080;
+        }
+
+        [data-theme="brutalist"] .entry-category {
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            border-radius: 0;
+            background: #e0e0e0;
+        }
+
+        [data-theme="brutalist"] .badge-coming-soon {
+            font-family: 'Courier New', monospace;
+            border-radius: 0;
+            background: #ffffcc;
+            color: #000;
+            border-color: #000;
+        }
+
+        [data-theme="brutalist"] .entry-description {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 1rem;
+        }
+
+        [data-theme="brutalist"] .entry-image {
+            background: #c0c0c0;
+            border: 1px solid #000;
+        }
+
+        [data-theme="brutalist"] .bio-register {
+            border-radius: 0;
+            border: 1px solid #000;
+        }
+
+        [data-theme="brutalist"] .bio-register:hover {
+            background: #000;
+            color: #fff;
+            border-color: #000;
+        }
+
+        [data-theme="brutalist"] *,
+        [data-theme="brutalist"] *::before,
+        [data-theme="brutalist"] *::after {
+            animation: none !important;
+            transition: none !important;
+        }
+
+        /* ── Theme toggle ── */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+            display: flex;
+            gap: 0;
+            border: 1px solid var(--line-soft);
+            border-radius: 999px;
+            overflow: hidden;
+            background: var(--card);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.04em;
+        }
+
+        .theme-toggle button {
+            font: inherit;
+            border: none;
+            background: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            color: var(--ink-muted);
+            transition: background-color 0.18s ease, color 0.18s ease;
+            white-space: nowrap;
+        }
+
+        .theme-toggle button:hover {
+            color: var(--ink-strong);
+        }
+
+        .theme-toggle button.active {
+            background: var(--line-strong);
+            color: var(--card);
+        }
+
+        [data-theme="brutalist"] .theme-toggle {
+            border-radius: 0;
+            box-shadow: none;
+            border: 2px solid #000;
+            font-family: 'Courier New', monospace;
+        }
+
+        [data-theme="brutalist"] .theme-toggle button {
+            transition: none;
+        }
+
+        [data-theme="brutalist"] .theme-toggle button.active {
+            background: #000;
+            color: #fff;
+        }
+
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation: none !important;
@@ -643,6 +927,49 @@
                 e.preventDefault();
                 cycleMode(-1);
             }
+        });
+    })();
+    </script>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" id="theme-toggle" role="radiogroup" aria-label="Theme switcher">
+        <button type="button" data-theme="warm" class="active" role="radio" aria-checked="true">Warm</button>
+        <button type="button" data-theme="dark" role="radio" aria-checked="false">Dark</button>
+        <button type="button" data-theme="brutalist" role="radio" aria-checked="false">Brutalist</button>
+    </div>
+
+    <script>
+    (function () {
+        var themes = ['warm', 'dark', 'brutalist'];
+        var stored = localStorage.getItem('theme');
+        var current = themes.indexOf(stored) !== -1 ? stored : 'warm';
+
+        function apply(theme) {
+            current = theme;
+            if (theme === 'warm') {
+                document.documentElement.removeAttribute('data-theme');
+                document.documentElement.style.colorScheme = 'light';
+            } else {
+                document.documentElement.setAttribute('data-theme', theme);
+                document.documentElement.style.colorScheme = theme === 'dark' ? 'dark' : 'light';
+            }
+            localStorage.setItem('theme', theme);
+
+            var btns = document.querySelectorAll('#theme-toggle button');
+            for (var i = 0; i < btns.length; i++) {
+                var isActive = btns[i].getAttribute('data-theme') === theme;
+                btns[i].classList.toggle('active', isActive);
+                btns[i].setAttribute('aria-checked', isActive ? 'true' : 'false');
+            }
+        }
+
+        // Apply saved theme immediately
+        apply(current);
+
+        document.getElementById('theme-toggle').addEventListener('click', function (e) {
+            var btn = e.target.closest('button');
+            if (!btn) return;
+            apply(btn.getAttribute('data-theme'));
         });
     })();
     </script>
