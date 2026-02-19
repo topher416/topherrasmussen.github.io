@@ -9,6 +9,31 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,700&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/site.css">
+    <style>
+        .writing-card__pdf {
+            width: 100%;
+            height: 70vh;
+            border: 1px solid var(--line);
+            background: var(--bg-card);
+            margin-top: 16px;
+        }
+        .writing-card__download {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.74rem;
+            color: var(--accent);
+            text-decoration: none;
+            border: 1px solid var(--accent);
+            border-radius: 999px;
+            padding: 8px 16px;
+            display: inline-flex;
+            margin-top: 12px;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+        .writing-card__download:hover {
+            background: var(--accent);
+            color: var(--text-bright);
+        }
+    </style>
 </head>
 <body>
     <nav class="room-nav">
@@ -54,6 +79,11 @@
 
             if (entry.description) {
                 html += '<p class="writing-card__excerpt">' + entry.description + '</p>';
+            }
+
+            if (entry.pdf) {
+                html += '<a href="' + entry.pdf + '" class="writing-card__download" download>Download PDF</a>';
+                html += '<iframe src="' + entry.pdf + '" class="writing-card__pdf" title="' + entry.title + '"></iframe>';
             }
 
             html += '<p class="writing-card__year">' + entry.year + '</p>';
