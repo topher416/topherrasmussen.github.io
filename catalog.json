@@ -55,6 +55,17 @@
     "tags": ["essay", "ai"]
   },
   {
+    "id": "medium-fake-consulting",
+    "title": "On Using AI to Fake My Way Through Consulting",
+    "year": 2024,
+    "category": "writing",
+    "description": "A former theatre kid lands at a healthcare consultancy and uses AI to process meeting transcripts and method-act his way through professionalism. Draws on Stanislavski's \"magic if\" and Winnicott's False Self to ask whether AI is an accomplice to imposter syndrome or just the latest tool for getting through the day.",
+    "url": "https://medium.com/@topher416/on-using-ai-to-fake-my-way-through-consulting-f5a0dccb9782",
+    "image": null,
+    "status": "live",
+    "tags": ["essay", "ai", "medium"]
+  },
+  {
     "id": "medium-ai-psychoanalysis-mediated-self",
     "title": "On AI, Psychoanalysis, and the Mediated Self",
     "year": 2025,
@@ -72,6 +83,83 @@
     "category": "writing",
     "description": "On the term \"AI slop\" — the smooth, soulless, indistinct writing that comes out of machines — and the shame of needing help from one. An essay about writing with AI and feeling conflicted about the experience, composed with Claude and GPT while analyzing that process.",
     "url": "https://medium.com/@topher416/notes-from-the-slop-bucket-023ff889a76c",
+    "image": null,
+    "status": "live",
+    "tags": ["essay", "ai", "medium"]
+  },
+  {
+    "id": "medium-pleasure-recursive-machine",
+    "title": "The Pleasure of the Recursive Machine: On Loops, Language, and the Desire for Meaning",
+    "year": 2025,
+    "category": "writing",
+    "description": "We return to language models not for answers but for the recursive pleasure of the exchange itself. The loop is not simply a structure of repetition — it is the very form of our desire. An essay on jouissance, the perpetual suspension of resolution, and why we keep issuing prompts.",
+    "url": "https://medium.com/@topher416/the-pleasure-of-the-recursive-machine-on-loops-language-and-the-desire-for-meaning-1581394d1b6f",
+    "image": null,
+    "status": "live",
+    "tags": ["essay", "psychoanalysis", "ai", "lacan", "medium"]
+  },
+  {
+    "id": "medium-illusion-ai-therapy",
+    "title": "The Illusion of AI Therapy: A Critical Examination of Its State and Limitations",
+    "year": 2025,
+    "category": "writing",
+    "description": "A critical examination of AI therapy — what it promises, what it actually delivers, and why the illusion of care is not the same as care. Written from the perspective of a licensed social worker who takes the therapeutic relationship seriously.",
+    "url": "https://medium.com/@topher416/the-illusion-of-ai-therapy-a-critical-examination-of-its-state-and-limitations-143fd08e6748",
+    "image": null,
+    "status": "live",
+    "tags": ["essay", "ai", "psychoanalysis", "clinical", "medium"]
+  },
+  {
+    "id": "medium-fragments-mirror",
+    "title": "Fragments from the Mirror: An Attempt at Honest Reflection",
+    "year": 2025,
+    "category": "writing",
+    "description": "An attempt at honest self-reflection — the kind that resists the temptation to turn introspection into performance.",
+    "url": "https://medium.com/@topher416/fragments-from-the-mirror-an-attempt-at-honest-reflection-3c6a0717a219",
+    "image": null,
+    "status": "live",
+    "tags": ["essay", "medium"]
+  },
+  {
+    "id": "medium-between-making-reading",
+    "title": "Between Making and Reading: A Personal Exploration of Artificial Intelligence",
+    "year": 2025,
+    "category": "writing",
+    "description": "A personal exploration of what it means to make things and read things in an era where AI sits between the two — blurring the line between authorship and consumption.",
+    "url": "https://medium.com/@topher416/between-making-and-reading-a-personal-exploration-of-artificial-intelligence-263d1b984f99",
+    "image": null,
+    "status": "live",
+    "tags": ["essay", "ai", "medium"]
+  },
+  {
+    "id": "medium-subject-supposed-to-write",
+    "title": "The Subject Supposed to Write: A Lacanian Analysis of AI Writing Assistance",
+    "year": 2025,
+    "category": "writing",
+    "description": "A Lacanian analysis of AI writing assistance — riffing on Lacan's \"subject supposed to know\" to ask what happens when the subject supposed to write is a machine. Who is the author when the Other holds the pen?",
+    "url": "https://medium.com/@topher416/the-subject-supposed-to-write-a-lacanian-analysis-of-ai-writing-assistance-8cf24e552eb8",
+    "image": null,
+    "status": "live",
+    "tags": ["essay", "psychoanalysis", "ai", "lacan", "medium"]
+  },
+  {
+    "id": "medium-tools-change-minds",
+    "title": "Do Our Tools Change Our Minds?",
+    "year": 2025,
+    "category": "writing",
+    "description": "On whether the tools we use reshape how we think — and whether that reshaping is something we chose or something that happened to us while we weren't paying attention.",
+    "url": "https://medium.com/@topher416/do-our-tools-change-our-minds-1f3c631e8497",
+    "image": null,
+    "status": "live",
+    "tags": ["essay", "ai", "medium"]
+  },
+  {
+    "id": "medium-willing-surrender",
+    "title": "The Willing Surrender: What We Really Want from AI",
+    "year": 2025,
+    "category": "writing",
+    "description": "On what we actually want when we hand our thinking over to a machine — and why the surrender feels so good.",
+    "url": "https://medium.com/@topher416/the-willing-surrender-what-we-really-want-from-ai-162f584849ad",
     "image": null,
     "status": "live",
     "tags": ["essay", "ai", "medium"]
