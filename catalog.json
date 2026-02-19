@@ -24,13 +24,13 @@
   {
     "id": "analytic-introspections",
     "title": "Analytic Introspections from an Actor's Perspective",
-    "year": 2025,
+    "year": 2020,
     "category": "writing",
-    "description": "Long-form writing about psychoanalytic ideas taken seriously inside a rehearsal room — attention, resistance, transference, the body as text. Currently being reworked from the ground up.",
-    "url": "/analyticintrospections/",
+    "description": "Senior thesis in Theatre Arts and Psychology. An attempt to capture what it feels like to be a 28-year-old actor/psychology student writing about acting and psychology — hypotheses, preparation, enactment, rumination, chronesthesia, rehearsal, and collapse.",
+    "url": "/analytic-introspections-thesis.html",
     "image": null,
-    "status": "coming-soon",
-    "tags": ["psychoanalysis", "acting", "react"]
+    "status": "live",
+    "tags": ["psychoanalysis", "acting", "thesis"]
   },
   {
     "id": "map-territory",
