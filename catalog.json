@@ -66,6 +66,17 @@
     "tags": ["psychoanalysis", "ai", "lacan", "essay"]
   },
   {
+    "id": "substack-spectral-author",
+    "title": "The Spectral Author: LLMs and the Liminal Space of AI-Human Writing",
+    "year": 2025,
+    "category": "writing",
+    "description": "On the \"spectral author\" — a presence that exists between human and machine creation. Draws on Barthes, Benjamin, and Bloom to argue that AI doesn't eliminate human creativity but reconfigures it into an ecological model where human intention and machine capability operate interdependently. Published in GHOSTWRITING on Substack.",
+    "url": "https://gh0stwriting.substack.com/p/the-spectral-author",
+    "image": null,
+    "status": "live",
+    "tags": ["essay", "ai", "substack"]
+  },
+  {
     "id": "medium-fake-consulting",
     "title": "On Using AI to Fake My Way Through Consulting",
     "year": 2024,
