@@ -55,6 +55,28 @@
     "tags": ["essay", "ai"]
   },
   {
+    "id": "medium-ai-psychoanalysis-mediated-self",
+    "title": "On AI, Psychoanalysis, and the Mediated Self",
+    "year": 2025,
+    "category": "writing",
+    "description": "An exploration of how AI exposes the fragility of our belief in unique subjectivity. If an algorithm can mimic speech patterns, anticipate desires, and produce texts indistinguishable from human writing, what does that say about our presumed autonomy? Psychoanalysis and AI converge in their capacity to unsettle traditional notions of human agency.",
+    "url": "https://medium.com/@topher416/on-ai-psychoanalysis-and-the-mediated-self-e1ef152f781e",
+    "image": null,
+    "status": "live",
+    "tags": ["essay", "psychoanalysis", "ai", "medium"]
+  },
+  {
+    "id": "medium-notes-slop-bucket",
+    "title": "Notes from the Slop Bucket",
+    "year": 2025,
+    "category": "writing",
+    "description": "On the term \"AI slop\" — the smooth, soulless, indistinct writing that comes out of machines — and the shame of needing help from one. An essay about writing with AI and feeling conflicted about the experience, composed with Claude and GPT while analyzing that process.",
+    "url": "https://medium.com/@topher416/notes-from-the-slop-bucket-023ff889a76c",
+    "image": null,
+    "status": "live",
+    "tags": ["essay", "ai", "medium"]
+  },
+  {
     "id": "radiohead-invite",
     "title": "Radiohead Ensemble Invitation",
     "year": 2025,
