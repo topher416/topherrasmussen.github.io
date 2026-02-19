@@ -23,6 +23,12 @@
             display: block;
             margin-top: 20px;
         }
+        .writing-card__pdf-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 14px;
+        }
         .writing-card__download {
             font-family: 'IBM Plex Mono', monospace;
             font-size: 0.7rem;
@@ -33,6 +39,28 @@
         }
         .writing-card__download:hover {
             color: var(--accent);
+        }
+        .writing-card__open {
+            display: none;
+        }
+        @media (max-width: 768px) {
+            .writing-card__pdf { display: none; }
+            .writing-card--has-pdf { padding-bottom: clamp(24px, 4vw, 36px); }
+            .writing-card__open {
+                display: inline-flex;
+                font-family: 'IBM Plex Mono', monospace;
+                font-size: 0.74rem;
+                color: var(--accent);
+                text-decoration: none;
+                border: 1px solid var(--accent);
+                border-radius: 999px;
+                padding: 10px 20px;
+                transition: background 0.2s ease, color 0.2s ease;
+            }
+            .writing-card__open:hover {
+                background: var(--accent);
+                color: var(--text-bright);
+            }
         }
     </style>
 </head>
@@ -84,8 +112,11 @@
             }
 
             if (entry.pdf) {
+                html += '<div class="writing-card__pdf-actions">';
                 html += '<a href="' + entry.pdf + '" class="writing-card__download" download>Download PDF &darr;</a>';
-                html += '<iframe src="' + entry.pdf + '#toolbar=0&navpanes=0&view=FitH" class="writing-card__pdf" title="' + entry.title + '"></iframe>';
+                html += '<a href="' + entry.pdf + '" class="writing-card__open" target="_blank">Read PDF &rarr;</a>';
+                html += '</div>';
+                html += '<iframe src="' + entry.pdf + '#toolbar=0&navpanes=0&view=FitH" class="writing-card__pdf" title="' + entry.title + '" loading="lazy"></iframe>';
             }
 
             html += '<p class="writing-card__year">' + entry.year + '</p>';
