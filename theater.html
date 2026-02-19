@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theater — Topher Rasmussen</title>
+    <meta name="description" content="Theater credits — acting, directing, dramaturgy, and new play development across Salt Lake Acting Company, Plan-B Theatre, Grassroots Shakespeare, and more.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,700&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site.css">
+</head>
+<body>
+    <nav class="room-nav">
+        <a href="/" class="room-nav__home">TR</a>
+        <a href="/theater.html" class="room-nav__link room-nav__link--active">Theater</a>
+        <a href="/writing.html" class="room-nav__link">Writing</a>
+        <a href="/music.html" class="room-nav__link">Music</a>
+        <a href="/visual.html" class="room-nav__link">Visual</a>
+        <a href="/experiments.html" class="room-nav__link">Experiments</a>
+    </nav>
+
+    <main class="room">
+        <header class="room__header">
+            <h1 class="room__title">Theater</h1>
+            <p class="room__subtitle">Acting, directing, dramaturgy, and new play development across Salt Lake Acting Company, Plan-B Theatre, Grassroots Shakespeare, The Sting & Honey Company, and others. 2008–2022.</p>
+        </header>
+        <div id="room-entries"></div>
+    </main>
+
+    <footer class="room-footer">
+        <div class="counter">
+            Visitor count: <span class="counter-display">00000000</span>
+        </div>
+    </footer>
+
+    <script src="/room.js"></script>
+    <script>
+    initRoom('theater', function (entries) {
+        var container = document.getElementById('room-entries');
+        var groups = groupByYear(entries);
+        var html = '';
+
+        groups.forEach(function (group) {
+            html += '<div class="year-group">';
+            html += '<h3 class="year-label">' + group.year + '</h3>';
+
+            group.entries.forEach(function (entry) {
+                var hasImage = !!entry.image;
+                var quote = extractQuote(entry.description);
+                var desc = stripQuote(entry.description);
+                var cls = 'entry' + (hasImage ? ' entry--featured' : '');
+
+                html += '<div class="' + cls + '">';
+
+                if (hasImage) {
+                    html += '<div class="entry__image"><img src="' + entry.image + '" alt="' + entry.title + '" loading="lazy"></div>';
+                }
+
+                html += '<div>';
+                html += '<h4 class="entry__title"><span>' + entry.title + '</span></h4>';
+
+                // Tags
+                var tags = entry.tags || [];
+                var displayTags = [];
+                for (var i = 0; i < tags.length; i++) {
+                    var t = tags[i];
+                    if (['acting', 'directing', 'producing', 'dramaturgy', 'teaching', 'playwriting', 'award'].indexOf(t) !== -1) {
+                        displayTags.push(t);
+                    }
+                }
+                if (displayTags.length > 0) {
+                    html += '<div class="entry__meta">';
+                    for (var j = 0; j < displayTags.length; j++) {
+                        html += '<span class="entry__tag">' + displayTags[j] + '</span>';
+                    }
+                    html += '</div>';
+                }
+
+                if (desc) {
+                    html += '<p class="entry__description">' + desc + '</p>';
+                }
+
+                if (quote) {
+                    html += '<blockquote class="entry__quote">&ldquo;' + quote + '&rdquo;</blockquote>';
+                }
+
+                html += '</div>';
+                html += '</div>';
+            });
+
+            html += '</div>';
+        });
+
+        container.innerHTML = html;
+    });
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var s = document.createElement('script');
+        var t = new Date().getTime();
+        s.src = 'https://script.google.com/macros/s/AKfycbwOYJRKO_zOwkLpCR4U_ENMiD7bgPtuWmXVe6ZTuT913aTHJ0c5Op3OEdfzJQAGUHdv/exec?action=increment&callback=displayCount&t=' + t;
+        document.body.appendChild(s);
+    });
+    </script>
+</body>
+</html>

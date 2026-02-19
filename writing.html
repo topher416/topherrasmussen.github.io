@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Writing — Topher Rasmussen</title>
+    <meta name="description" content="Essays on psychoanalysis, AI, authorship, and the places where clinical theory meets emerging technology.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,700&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site.css">
+</head>
+<body>
+    <nav class="room-nav">
+        <a href="/" class="room-nav__home">TR</a>
+        <a href="/theater.html" class="room-nav__link">Theater</a>
+        <a href="/writing.html" class="room-nav__link room-nav__link--active">Writing</a>
+        <a href="/music.html" class="room-nav__link">Music</a>
+        <a href="/visual.html" class="room-nav__link">Visual</a>
+        <a href="/experiments.html" class="room-nav__link">Experiments</a>
+    </nav>
+
+    <main class="room">
+        <header class="room__header">
+            <h1 class="room__title">Writing</h1>
+            <p class="room__subtitle">Essays on psychoanalysis, AI, authorship, and the gap between understanding yourself and actually living.</p>
+        </header>
+        <div id="room-entries"></div>
+    </main>
+
+    <footer class="room-footer">
+        <div class="counter">
+            Visitor count: <span class="counter-display">00000000</span>
+        </div>
+    </footer>
+
+    <script src="/room.js"></script>
+    <script>
+    initRoom('writing', function (entries) {
+        var container = document.getElementById('room-entries');
+        var html = '';
+
+        entries.forEach(function (entry) {
+            var isComingSoon = entry.status === 'coming-soon';
+            html += '<div class="writing-card">';
+
+            if (entry.url && !isComingSoon) {
+                var external = entry.url.indexOf('http') === 0;
+                var target = external ? ' target="_blank" rel="noopener noreferrer"' : '';
+                html += '<h3 class="writing-card__title"><a href="' + entry.url + '"' + target + '>' + entry.title + '</a></h3>';
+            } else {
+                html += '<h3 class="writing-card__title">' + entry.title + (isComingSoon ? ' <span class="entry__tag">Coming soon</span>' : '') + '</h3>';
+            }
+
+            if (entry.description) {
+                html += '<p class="writing-card__excerpt">' + entry.description + '</p>';
+            }
+
+            html += '<p class="writing-card__year">' + entry.year + '</p>';
+            html += '</div>';
+        });
+
+        container.innerHTML = html;
+    });
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var s = document.createElement('script');
+        var t = new Date().getTime();
+        s.src = 'https://script.google.com/macros/s/AKfycbwOYJRKO_zOwkLpCR4U_ENMiD7bgPtuWmXVe6ZTuT913aTHJ0c5Op3OEdfzJQAGUHdv/exec?action=increment&callback=displayCount&t=' + t;
+        document.body.appendChild(s);
+    });
+    </script>
+</body>
+</html>
