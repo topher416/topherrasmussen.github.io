@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>objet petit a(i) — Topher Rasmussen</title>
+    <meta name="description" content="Desire and Lack in the Age of Machine-Assisted Authorship. A psychoanalytic examination of what happens to the writing subject when AI enters the process.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,700&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site.css">
+    <style>
+        .pdf-viewer {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 clamp(20px, 4vw, 48px) 48px;
+            animation: fadeSlide 0.5s ease both;
+        }
+        .pdf-viewer__header {
+            padding: clamp(32px, 5vw, 56px) 0 clamp(20px, 3vw, 32px);
+        }
+        .pdf-viewer__title {
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: clamp(2.2rem, 6vw, 3.6rem);
+            font-weight: 700;
+            font-style: italic;
+            line-height: 0.95;
+            letter-spacing: -0.02em;
+            color: var(--text-bright);
+            margin-bottom: 10px;
+        }
+        .pdf-viewer__subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            max-width: 55ch;
+            margin-bottom: 16px;
+        }
+        .pdf-viewer__download {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.74rem;
+            color: var(--accent);
+            text-decoration: none;
+            border: 1px solid var(--accent);
+            border-radius: 999px;
+            padding: 8px 16px;
+            display: inline-flex;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+        .pdf-viewer__download:hover {
+            background: var(--accent);
+            color: var(--text-bright);
+        }
+        .pdf-viewer__frame {
+            width: 100%;
+            height: 85vh;
+            border: 1px solid var(--line);
+            background: var(--bg-card);
+        }
+    </style>
+</head>
+<body>
+    <nav class="room-nav">
+        <a href="/" class="room-nav__home">TR</a>
+        <a href="/theater.html" class="room-nav__link">Theater</a>
+        <a href="/writing.html" class="room-nav__link room-nav__link--active">Writing</a>
+        <a href="/music.html" class="room-nav__link">Music</a>
+        <a href="/visual.html" class="room-nav__link">Visual</a>
+        <a href="/experiments.html" class="room-nav__link">Experiments</a>
+    </nav>
+
+    <main class="pdf-viewer">
+        <header class="pdf-viewer__header">
+            <h1 class="pdf-viewer__title">objet petit a(i)</h1>
+            <p class="pdf-viewer__subtitle">Desire and Lack in the Age of Machine-Assisted Authorship</p>
+            <a href="/objet-petit-ai.pdf" class="pdf-viewer__download" download>Download PDF</a>
+        </header>
+        <iframe src="/objet-petit-ai.pdf" class="pdf-viewer__frame" title="objet petit a(i) — full text"></iframe>
+    </main>
+
+    <footer class="room-footer">
+        <div class="counter">
+            Visitor count: <span class="counter-display">00000000</span>
+        </div>
+    </footer>
+
+    <script>
+    window.displayCount = function (count) {
+        var el = document.querySelector('.counter-display');
+        if (el) el.textContent = count.toString().padStart(8, '0');
+    };
+    document.addEventListener('DOMContentLoaded', function () {
+        var s = document.createElement('script');
+        var t = new Date().getTime();
+        s.src = 'https://script.google.com/macros/s/AKfycbwOYJRKO_zOwkLpCR4U_ENMiD7bgPtuWmXVe6ZTuT913aTHJ0c5Op3OEdfzJQAGUHdv/exec?action=increment&callback=displayCount&t=' + t;
+        document.body.appendChild(s);
+    });
+    </script>
+</body>
+</html>

@@ -55,6 +55,17 @@
     "tags": ["essay", "ai"]
   },
   {
+    "id": "objet-petit-ai",
+    "title": "objet petit a(i): Desire and Lack in the Age of Machine-Assisted Authorship",
+    "year": 2025,
+    "category": "writing",
+    "description": "A 111-page psychoanalytic examination of what happens to the writing subject when AI enters the process. Covers the writerly unconscious, AI as narcissistic object, the illusion of intersubjectivity, jouissance interrupted, unconscious defenses against the machine, authorship in crisis, clinical applications, and toward an integrated psychic economy of writer and machine.",
+    "url": "/objet-petit-ai.html",
+    "image": null,
+    "status": "live",
+    "tags": ["psychoanalysis", "ai", "lacan", "essay"]
+  },
+  {
     "id": "medium-fake-consulting",
     "title": "On Using AI to Fake My Way Through Consulting",
     "year": 2024,
