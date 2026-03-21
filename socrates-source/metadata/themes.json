@@ -1,0 +1,204 @@
+{
+  "themes": [
+    {
+      "id": "justice",
+      "name_english": "Justice",
+      "name_greek": "δικαιοσύνη",
+      "description": "What is justice? Is it better to suffer injustice than to commit it? What is the relationship between justice and happiness?",
+      "primary_texts": ["plato-republic", "plato-gorgias", "plato-crito"],
+      "secondary_texts": ["plato-apology", "plato-euthyphro", "plato-alcibiades-i", "plato-clitophon", "plato-hippias-minor"]
+    },
+    {
+      "id": "virtue",
+      "name_english": "Virtue",
+      "name_greek": "ἀρετή",
+      "description": "What is virtue? Can it be taught? Is virtue knowledge? Are the virtues unified or distinct?",
+      "primary_texts": ["plato-meno", "plato-protagoras", "plato-laches", "plato-charmides"],
+      "secondary_texts": ["plato-republic", "plato-gorgias", "plato-euthydemus", "xenophon-memorabilia"]
+    },
+    {
+      "id": "piety",
+      "name_english": "Piety",
+      "name_greek": "εὐσέβεια / ὁσιότης",
+      "description": "What is piety? What is the relationship between the gods and the good? Is what is holy loved by the gods because it is holy, or holy because it is loved?",
+      "primary_texts": ["plato-euthyphro"],
+      "secondary_texts": ["plato-apology", "xenophon-memorabilia"]
+    },
+    {
+      "id": "death",
+      "name_english": "Death",
+      "name_greek": "θάνατος",
+      "description": "Is death to be feared? Is the soul immortal? What happens after death? Is philosophy preparation for dying?",
+      "primary_texts": ["plato-phaedo", "plato-apology"],
+      "secondary_texts": ["plato-crito", "plato-gorgias", "plato-republic", "xenophon-apology"]
+    },
+    {
+      "id": "knowledge",
+      "name_english": "Knowledge",
+      "name_greek": "ἐπιστήμη",
+      "description": "What is knowledge? How is it different from true belief? Is knowledge recollection? What can we know?",
+      "primary_texts": ["plato-theaetetus", "plato-meno"],
+      "secondary_texts": ["plato-republic", "plato-phaedo", "plato-phaedrus", "plato-philebus"]
+    },
+    {
+      "id": "love",
+      "name_english": "Love / Eros",
+      "name_greek": "ἔρως",
+      "description": "What is love? What is the relationship between love, beauty, and philosophy? What is the ascent from physical to intellectual love?",
+      "primary_texts": ["plato-symposium", "plato-phaedrus", "plato-lysis"],
+      "secondary_texts": ["plato-alcibiades-i", "xenophon-symposium"]
+    },
+    {
+      "id": "rhetoric",
+      "name_english": "Rhetoric",
+      "name_greek": "ῥητορική",
+      "description": "What is rhetoric? Is it an art or a knack? What is the relationship between rhetoric, truth, and power?",
+      "primary_texts": ["plato-gorgias", "plato-phaedrus", "plato-menexenus"],
+      "secondary_texts": ["plato-apology", "plato-protagoras", "plato-euthydemus"]
+    },
+    {
+      "id": "forms",
+      "name_english": "Forms / Ideas",
+      "name_greek": "εἴδη / ἰδέαι",
+      "description": "Do abstract Forms exist independently of particular things? What is the relationship between Forms and sensible objects? The 'Third Man' problem.",
+      "primary_texts": ["plato-phaedo", "plato-republic", "plato-parmenides", "plato-symposium"],
+      "secondary_texts": ["plato-phaedrus", "plato-philebus", "plato-timaeus"]
+    },
+    {
+      "id": "soul",
+      "name_english": "Soul",
+      "name_greek": "ψυχή",
+      "description": "What is the soul? Is it immortal? What are its parts? What is the relationship between soul and body?",
+      "primary_texts": ["plato-phaedo", "plato-republic", "plato-phaedrus"],
+      "secondary_texts": ["plato-timaeus", "plato-philebus", "plato-gorgias"]
+    },
+    {
+      "id": "education",
+      "name_english": "Education",
+      "name_greek": "παιδεία",
+      "description": "What is the proper education? How should the young be raised? What role do poetry, music, and gymnastics play?",
+      "primary_texts": ["plato-republic", "plato-protagoras", "plato-meno"],
+      "secondary_texts": ["plato-laches", "plato-euthydemus", "aristophanes-clouds", "xenophon-memorabilia"]
+    },
+    {
+      "id": "sophistry",
+      "name_english": "Sophistry",
+      "name_greek": "σοφιστική",
+      "description": "What is a sophist? How do sophists differ from philosophers? What is eristic argument?",
+      "primary_texts": ["plato-sophist", "plato-euthydemus", "plato-protagoras", "plato-gorgias"],
+      "secondary_texts": ["plato-hippias-major", "plato-hippias-minor", "aristophanes-clouds"]
+    },
+    {
+      "id": "courage",
+      "name_english": "Courage",
+      "name_greek": "ἀνδρεία",
+      "description": "What is courage? Is it a form of knowledge? How does courage relate to the other virtues?",
+      "primary_texts": ["plato-laches", "plato-protagoras"],
+      "secondary_texts": ["plato-republic", "plato-apology"]
+    },
+    {
+      "id": "temperance",
+      "name_english": "Temperance / Self-Knowledge",
+      "name_greek": "σωφροσύνη",
+      "description": "What is temperance or moderation? What does 'know thyself' mean? Is self-knowledge possible?",
+      "primary_texts": ["plato-charmides", "plato-alcibiades-i"],
+      "secondary_texts": ["plato-republic", "plato-protagoras", "xenophon-memorabilia"]
+    },
+    {
+      "id": "beauty",
+      "name_english": "Beauty",
+      "name_greek": "τὸ καλόν",
+      "description": "What is beauty? Is beauty objective? What is the relationship between beauty, goodness, and truth?",
+      "primary_texts": ["plato-hippias-major", "plato-symposium", "plato-phaedrus"],
+      "secondary_texts": ["plato-gorgias", "plato-philebus"]
+    },
+    {
+      "id": "language",
+      "name_english": "Language & Naming",
+      "name_greek": "ὀνόματα",
+      "description": "Do words have a natural connection to their referents, or is language purely conventional?",
+      "primary_texts": ["plato-cratylus"],
+      "secondary_texts": ["plato-sophist", "plato-theaetetus"]
+    },
+    {
+      "id": "pleasure",
+      "name_english": "Pleasure",
+      "name_greek": "ἡδονή",
+      "description": "Is pleasure the good? Are all pleasures equal? What is the relationship between pleasure and knowledge in the good life?",
+      "primary_texts": ["plato-philebus", "plato-protagoras", "plato-gorgias"],
+      "secondary_texts": ["plato-republic"]
+    },
+    {
+      "id": "politics",
+      "name_english": "Politics & Statesmanship",
+      "name_greek": "πολιτική",
+      "description": "What is the art of ruling? Who should rule? What is the ideal political arrangement?",
+      "primary_texts": ["plato-republic", "plato-statesman", "plato-gorgias"],
+      "secondary_texts": ["plato-alcibiades-i", "plato-menexenus", "plato-protagoras"]
+    },
+    {
+      "id": "poetry",
+      "name_english": "Poetry & Inspiration",
+      "name_greek": "ποίησις",
+      "description": "What is the source of poetic creation? Is poetry knowledge or divine inspiration? Should poets be censored?",
+      "primary_texts": ["plato-ion", "plato-republic"],
+      "secondary_texts": ["plato-phaedrus", "plato-symposium", "plato-hippias-minor"]
+    },
+    {
+      "id": "cosmology",
+      "name_english": "Cosmology & Nature",
+      "name_greek": "κοσμολογία",
+      "description": "How was the universe created? What are the fundamental elements? What is the role of the Demiurge?",
+      "primary_texts": ["plato-timaeus", "plato-critias"],
+      "secondary_texts": ["aristophanes-clouds"]
+    },
+    {
+      "id": "friendship",
+      "name_english": "Friendship",
+      "name_greek": "φιλία",
+      "description": "What is friendship? Do we love what is like us or what is unlike us? What is the object of love?",
+      "primary_texts": ["plato-lysis"],
+      "secondary_texts": ["plato-crito", "plato-phaedrus", "xenophon-memorabilia"]
+    },
+    {
+      "id": "being",
+      "name_english": "Being & Non-Being",
+      "name_greek": "τὸ ὄν",
+      "description": "What is Being? Can we speak of what is not? How do the greatest kinds (Being, Same, Different, Rest, Motion) relate?",
+      "primary_texts": ["plato-sophist", "plato-parmenides"],
+      "secondary_texts": ["plato-theaetetus", "plato-timaeus"]
+    },
+    {
+      "id": "examined-life",
+      "name_english": "The Examined Life",
+      "name_greek": "ὁ ἐξεταστικὸς βίος",
+      "description": "The unexamined life is not worth living. Socratic questioning, elenchus, and the philosophical life.",
+      "primary_texts": ["plato-apology"],
+      "secondary_texts": ["plato-crito", "plato-clitophon", "plato-euthydemus", "xenophon-memorabilia"]
+    },
+    {
+      "id": "daimonion",
+      "name_english": "The Divine Sign",
+      "name_greek": "δαιμόνιον",
+      "description": "Socrates' inner divine voice that warns him against certain actions. A key element of the impiety charges.",
+      "primary_texts": ["plato-apology"],
+      "secondary_texts": ["plato-euthyphro", "plato-phaedrus", "plato-theaetetus", "xenophon-apology", "xenophon-memorabilia"]
+    },
+    {
+      "id": "household",
+      "name_english": "Household Management",
+      "name_greek": "οἰκονομία",
+      "description": "How to manage a household, estate, and marriage. Practical wisdom applied to domestic life.",
+      "primary_texts": ["xenophon-oeconomicus"],
+      "secondary_texts": ["xenophon-memorabilia"]
+    },
+    {
+      "id": "definition",
+      "name_english": "The Search for Definitions",
+      "name_greek": "τί ἐστιν;",
+      "description": "Socrates' characteristic method of asking 'What is X?' and testing proposed definitions through counterexamples.",
+      "primary_texts": ["plato-euthyphro", "plato-laches", "plato-charmides", "plato-hippias-major", "plato-meno"],
+      "secondary_texts": ["plato-theaetetus", "plato-republic"]
+    }
+  ]
+}

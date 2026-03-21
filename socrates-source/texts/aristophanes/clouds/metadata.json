@@ -1,0 +1,18 @@
+{
+  "text_id": "aristophanes.clouds",
+  "author": "Aristophanes",
+  "author_greek": "Ἀριστοφάνης",
+  "title": "The Clouds",
+  "title_greek": "Νεφέλαι",
+  "tlg_author": "tlg0019",
+  "tlg_work": "tlg003",
+  "language": "grc",
+  "edition": "Hall & Geldart, Aristophanis Comoediae, OCT 1906-1907",
+  "source": "Perseus Digital Library",
+  "license": "CC BY-SA 3.0 US",
+  "text_file": "text.md",
+  "character_count": 67084,
+  "word_count": 10416,
+  "section_count": 68,
+  "related_texts": []
+}

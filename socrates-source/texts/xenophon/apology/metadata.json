@@ -1,0 +1,22 @@
+{
+  "text_id": "xenophon.apology",
+  "author": "Xenophon",
+  "author_greek": "Ξενοφῶν",
+  "title": "Apology of Socrates",
+  "title_greek": "Ἀπολογία Σωκράτους",
+  "tlg_author": "tlg0032",
+  "tlg_work": "tlg011",
+  "language": "grc",
+  "edition": "Marchant, Xenophontis Opera Omnia, OCT 1900-1920",
+  "source": "Perseus Digital Library",
+  "license": "CC BY-SA 3.0 US",
+  "text_file": "text.md",
+  "character_count": 26120,
+  "word_count": 3860,
+  "section_count": 102,
+  "related_texts": [
+    "xenophon.memorabilia",
+    "xenophon.symposium",
+    "xenophon.oeconomicus"
+  ]
+}

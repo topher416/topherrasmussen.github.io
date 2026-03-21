@@ -1,0 +1,85 @@
+{
+  "cross_references": [
+    {
+      "type": "dramatic_sequence",
+      "texts": ["plato-euthyphro", "plato-apology", "plato-crito", "plato-phaedo"],
+      "description": "The 'last days' sequence: Euthyphro (before trial) → Apology (trial) → Crito (in prison) → Phaedo (death). These four dialogues cover the final days of Socrates' life in 399 BCE."
+    },
+    {
+      "type": "parallel_account",
+      "texts": ["plato-apology", "xenophon-apology"],
+      "description": "Two independent accounts of the trial of Socrates in 399 BCE. Plato's version emphasizes philosophical argument and the examined life; Xenophon's emphasizes Socrates' deliberate choice of death over the indignities of old age."
+    },
+    {
+      "type": "parallel_event",
+      "texts": ["plato-symposium", "xenophon-symposium"],
+      "description": "Two accounts of drinking parties featuring Socrates. These are different events — Plato's is set at Agathon's house in 416 BCE, Xenophon's at Callias's house in 422 BCE — but both portray Socrates in convivial philosophical discussion about love."
+    },
+    {
+      "type": "satirical_counterpoint",
+      "texts": ["aristophanes-clouds"],
+      "related_to": ["plato-apology"],
+      "description": "Aristophanes' comic portrayal of Socrates as a sophist and natural philosopher (423 BCE). Socrates references this play directly in the Apology (19c) as having prejudiced the jury against him over many years."
+    },
+    {
+      "type": "dramatic_trilogy",
+      "texts": ["plato-theaetetus", "plato-sophist", "plato-statesman"],
+      "description": "A connected trilogy. The Theaetetus ends inconclusively on the nature of knowledge. The next day, the same group meets again for the Sophist and Statesman, but the Eleatic Stranger takes over from Socrates as lead questioner."
+    },
+    {
+      "type": "cosmological_pair",
+      "texts": ["plato-timaeus", "plato-critias"],
+      "description": "The Timaeus and Critias form a pair (possibly intended as a trilogy with a never-written 'Hermocrates'). Socrates listens while Timaeus describes the creation of the universe and Critias tells the story of Atlantis."
+    },
+    {
+      "type": "thematic_pair",
+      "texts": ["plato-sophist", "plato-statesman"],
+      "description": "Companion dialogues using the method of collection and division to define, respectively, the sophist and the statesman. The Eleatic Stranger leads both conversations."
+    },
+    {
+      "type": "thematic_pair",
+      "texts": ["plato-hippias-major", "plato-hippias-minor"],
+      "description": "Two dialogues featuring Hippias of Elis. The Major investigates beauty; the Minor investigates voluntary wrongdoing and the paradox that the person who does wrong willingly is better than one who does so unwillingly."
+    },
+    {
+      "type": "virtue_dialogues",
+      "texts": ["plato-laches", "plato-charmides", "plato-euthyphro", "plato-meno"],
+      "description": "The 'definitional dialogues' — each attempts to define a specific virtue (courage, temperance, piety, virtue itself) and ends in aporia. These demonstrate the Socratic elenchus at its purest."
+    },
+    {
+      "type": "anti_sophist",
+      "texts": ["plato-protagoras", "plato-gorgias", "plato-euthydemus", "plato-hippias-major", "plato-hippias-minor"],
+      "description": "Dialogues where Socrates engages with named sophists. Together they develop Plato's critique of sophistry as a practice that prioritizes persuasion over truth."
+    },
+    {
+      "type": "shared_character_alcibiades",
+      "texts": ["plato-symposium", "plato-alcibiades-i", "plato-protagoras"],
+      "description": "Alcibiades appears across these dialogues. In the Symposium, his famous speech reveals his tortured relationship with Socrates. In Alcibiades I, young Alcibiades is counseled about political ambition. In the Protagoras, he is present as a young man."
+    },
+    {
+      "type": "shared_character_critias",
+      "texts": ["plato-charmides", "plato-timaeus", "plato-critias", "plato-protagoras"],
+      "description": "Critias appears as a young intellectual in the Charmides and Protagoras, and as the narrator of the Atlantis story in the Timaeus-Critias. Dramatic irony: this future tyrant discusses temperance with Socrates."
+    },
+    {
+      "type": "xenophon_corpus",
+      "texts": ["xenophon-memorabilia", "xenophon-apology", "xenophon-symposium", "xenophon-oeconomicus"],
+      "description": "Xenophon's four Socratic works present a more practical, less metaphysical Socrates than Plato's. The Memorabilia serves as a comprehensive defense of Socrates' character and influence; the others record specific conversations."
+    },
+    {
+      "type": "republic_prelude",
+      "texts": ["plato-clitophon", "plato-republic"],
+      "description": "The Clitophon was traditionally placed just before the Republic in ancient editions. Clitophon criticizes Socrates for being merely protreptic — a challenge the Republic's positive political philosophy may be seen as answering."
+    },
+    {
+      "type": "recollection_theme",
+      "texts": ["plato-meno", "plato-phaedo", "plato-phaedrus"],
+      "description": "The theory of recollection (anamnesis) — that learning is remembering what the soul knew before embodiment — appears in all three dialogues. The Meno demonstrates it with the slave boy; the Phaedo and Phaedrus connect it to the theory of Forms."
+    },
+    {
+      "type": "young_socrates",
+      "texts": ["plato-parmenides"],
+      "description": "Uniquely, the Parmenides depicts a young Socrates (perhaps in his twenties) whose early version of the theory of Forms is critiqued by the elderly Parmenides. This is the only dialogue where Socrates is the student rather than the teacher."
+    }
+  ]
+}

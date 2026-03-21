@@ -1,0 +1,172 @@
+{
+  "timeline": {
+    "description": "Chronological ordering of texts by their dramatic dates — when the conversations they depict are set, not when they were written. Many dates are approximate or debated.",
+    "events": [
+      {
+        "dramatic_date": "c. 450 BCE",
+        "text_id": "plato-parmenides",
+        "description": "A young Socrates (c. 20 years old) meets the elderly Parmenides and Zeno at the Greater Panathenaea in Athens. Parmenides critiques Socrates' early theory of Forms."
+      },
+      {
+        "dramatic_date": "c. 433 BCE",
+        "text_id": "plato-protagoras",
+        "description": "Socrates visits the house of Callias, where the great sophist Protagoras is staying. They debate whether virtue can be taught."
+      },
+      {
+        "dramatic_date": "c. 432 BCE",
+        "text_id": "plato-charmides",
+        "description": "Set just after the Battle of Potidaea. Socrates returns to Athens and visits a palaestra where he meets the young Charmides. They discuss temperance."
+      },
+      {
+        "dramatic_date": "c. 424–420 BCE",
+        "text_id": "plato-laches",
+        "description": "A discussion about military education leads to an examination of courage. Set during the Peloponnesian War."
+      },
+      {
+        "dramatic_date": "c. 423 BCE",
+        "text_id": "aristophanes-clouds",
+        "description": "Aristophanes' comedy first performed at the City Dionysia. Satirizes Socrates as running a 'Thinkery' where students learn to make the weaker argument stronger."
+      },
+      {
+        "dramatic_date": "c. 422 BCE",
+        "text_id": "xenophon-symposium",
+        "description": "A drinking party at the house of Callias, celebrating the young Autolycus's victory at the Panathenaea."
+      },
+      {
+        "dramatic_date": "c. 421 BCE",
+        "text_id": "plato-lysis",
+        "description": "Socrates encounters young boys at a palaestra and discusses the nature of friendship."
+      },
+      {
+        "dramatic_date": "c. 420 BCE",
+        "text_id": "plato-republic",
+        "description": "Socrates walks down to the Piraeus for a festival and is drawn into a marathon discussion about justice, the ideal city, and the nature of the good. Set at the house of Cephalus."
+      },
+      {
+        "dramatic_date": "c. 420 BCE",
+        "text_id": "plato-euthydemus",
+        "description": "Socrates encounters the sophist brothers Euthydemus and Dionysodorus at the Lyceum, where they demonstrate eristic argumentation."
+      },
+      {
+        "dramatic_date": "c. 416 BCE",
+        "text_id": "plato-symposium",
+        "description": "A drinking party at the house of Agathon, celebrating his first tragic victory at the Lenaea. Guests deliver speeches on the nature of love. Alcibiades arrives drunk and delivers his famous speech about Socrates."
+      },
+      {
+        "dramatic_date": "c. 416 BCE",
+        "text_id": "plato-ion",
+        "description": "Socrates meets the rhapsode Ion, fresh from a victory at the festival of Asclepius at Epidaurus, and questions him about the nature of his art."
+      },
+      {
+        "dramatic_date": "c. 416 BCE",
+        "text_id": "plato-alcibiades-i",
+        "description": "Socrates approaches the young Alcibiades, about to begin his political career, and questions him about self-knowledge and the nature of political expertise."
+      },
+      {
+        "dramatic_date": "c. 415 BCE",
+        "text_id": "plato-hippias-major",
+        "description": "Socrates encounters Hippias of Elis and they attempt to define beauty."
+      },
+      {
+        "dramatic_date": "c. 415 BCE",
+        "text_id": "plato-hippias-minor",
+        "description": "After a display by Hippias about Homer, Socrates raises the paradox of voluntary wrongdoing."
+      },
+      {
+        "dramatic_date": "c. 410 BCE",
+        "text_id": "plato-cratylus",
+        "description": "Socrates joins a discussion between Hermogenes and Cratylus about whether names are natural or conventional."
+      },
+      {
+        "dramatic_date": "c. 405–400 BCE",
+        "text_id": "plato-gorgias",
+        "description": "Socrates visits Gorgias, the famous rhetorician, and engages him, Polus, and Callicles in a searing debate about rhetoric, justice, and whether it is better to suffer or commit injustice."
+      },
+      {
+        "dramatic_date": "c. 402 BCE",
+        "text_id": "plato-menexenus",
+        "description": "Socrates delivers a mock funeral oration, claiming to have learned it from Aspasia."
+      },
+      {
+        "dramatic_date": "c. 402 BCE",
+        "text_id": "plato-meno",
+        "description": "Meno asks Socrates whether virtue can be taught. Features the famous slave boy geometry demonstration and the theory of recollection."
+      },
+      {
+        "dramatic_date": "c. 400 BCE",
+        "text_id": "plato-phaedrus",
+        "description": "A rare outdoor dialogue. Socrates and Phaedrus walk along the Ilissus river, discussing love, rhetoric, and the nature of the soul."
+      },
+      {
+        "dramatic_date": "c. 399 BCE",
+        "text_id": "plato-theaetetus",
+        "description": "Set shortly before Socrates' trial. Socrates discusses the nature of knowledge with the young mathematician Theaetetus."
+      },
+      {
+        "dramatic_date": "c. 399 BCE (day after Theaetetus)",
+        "text_id": "plato-sophist",
+        "description": "The day after the Theaetetus. The Eleatic Stranger attempts to define the sophist while Socrates listens."
+      },
+      {
+        "dramatic_date": "c. 399 BCE (day after Sophist)",
+        "text_id": "plato-statesman",
+        "description": "Continues from the Sophist. The Eleatic Stranger now attempts to define the statesman."
+      },
+      {
+        "dramatic_date": "399 BCE — before the trial",
+        "text_id": "plato-euthyphro",
+        "description": "Socrates meets Euthyphro at the King Archon's court. Socrates is there to answer the charges against him; Euthyphro is prosecuting his own father. They discuss piety."
+      },
+      {
+        "dramatic_date": "399 BCE — the trial",
+        "text_id": "plato-apology",
+        "description": "Socrates' defense speech before the Athenian jury of 501. He is found guilty of impiety and corrupting the youth, and sentenced to death."
+      },
+      {
+        "dramatic_date": "399 BCE — the trial",
+        "text_id": "xenophon-apology",
+        "description": "Xenophon's account of the trial. Emphasizes Socrates' daimonion and his view that death at his age was preferable to the decline of old age."
+      },
+      {
+        "dramatic_date": "399 BCE — in prison",
+        "text_id": "plato-crito",
+        "description": "Early morning in Socrates' prison cell. Crito urges Socrates to escape; Socrates argues that he must obey the laws of Athens."
+      },
+      {
+        "dramatic_date": "399 BCE — execution day",
+        "text_id": "plato-phaedo",
+        "description": "Socrates' final conversation and death. He discusses the immortality of the soul with Simmias and Cebes, then drinks the hemlock surrounded by his friends."
+      },
+      {
+        "dramatic_date": "uncertain",
+        "text_id": "plato-philebus",
+        "description": "Socrates discusses whether pleasure or knowledge constitutes the good life. The dramatic date is not specified in the text."
+      },
+      {
+        "dramatic_date": "uncertain",
+        "text_id": "plato-clitophon",
+        "description": "Clitophon criticizes Socrates for urging virtue but never explaining what justice actually is. Brief, dramatic date unclear."
+      },
+      {
+        "dramatic_date": "uncertain",
+        "text_id": "plato-timaeus",
+        "description": "Socrates listens while Timaeus delivers an account of the creation of the universe. May be set the day after the Republic's conversation."
+      },
+      {
+        "dramatic_date": "uncertain",
+        "text_id": "plato-critias",
+        "description": "Critias tells the story of Atlantis and ancient Athens. Continues from the Timaeus. The dialogue breaks off unfinished."
+      },
+      {
+        "dramatic_date": "various (multi-year scope)",
+        "text_id": "xenophon-memorabilia",
+        "description": "Xenophon's collection of Socratic conversations spanning many years. Serves as a defense of Socrates' character and a record of his teachings on practical virtue."
+      },
+      {
+        "dramatic_date": "various",
+        "text_id": "xenophon-oeconomicus",
+        "description": "Socrates discusses household management with Critobulus, then reports a conversation with the gentleman farmer Ischomachus."
+      }
+    ]
+  }
+}

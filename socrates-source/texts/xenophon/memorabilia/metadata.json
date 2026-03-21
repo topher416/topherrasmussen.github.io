@@ -1,0 +1,22 @@
+{
+  "text_id": "xenophon.memorabilia",
+  "author": "Xenophon",
+  "author_greek": "Ξενοφῶν",
+  "title": "Memorabilia",
+  "title_greek": "Ἀπομνημονεύματα",
+  "tlg_author": "tlg0032",
+  "tlg_work": "tlg002",
+  "language": "grc",
+  "edition": "Marchant, Xenophontis Opera Omnia, OCT 1900-1920",
+  "source": "Perseus Digital Library",
+  "license": "CC BY-SA 3.0 US",
+  "text_file": "text.md",
+  "character_count": 222769,
+  "word_count": 35865,
+  "section_count": 643,
+  "related_texts": [
+    "xenophon.apology",
+    "xenophon.symposium",
+    "xenophon.oeconomicus"
+  ]
+}

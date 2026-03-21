@@ -1,0 +1,180 @@
+{
+  "description": "Index of Socrates' role and speaking presence across all texts in the corpus. Texts are categorized by the degree of Socrates' participation.",
+  "categories": {
+    "primary_speaker": {
+      "description": "Socrates is the main speaker or narrator, dominating the conversation",
+      "texts": [
+        {
+          "text_id": "plato-apology",
+          "speaking_percentage": 95,
+          "notes": "Defense speech. Socrates speaks almost continuously, with brief cross-examination of Meletus."
+        },
+        {
+          "text_id": "plato-crito",
+          "speaking_percentage": 65,
+          "notes": "Dialogue with Crito. Includes the extended prosopopoeia of the Laws of Athens."
+        },
+        {
+          "text_id": "plato-phaedo",
+          "speaking_percentage": 70,
+          "notes": "Socrates leads discussion on death and immortality. Phaedo narrates the frame."
+        },
+        {
+          "text_id": "plato-euthyphro",
+          "speaking_percentage": 60,
+          "notes": "Socrates questions Euthyphro about the nature of piety."
+        },
+        {
+          "text_id": "plato-meno",
+          "speaking_percentage": 65,
+          "notes": "Socrates leads. Includes the slave boy geometry demonstration."
+        },
+        {
+          "text_id": "plato-protagoras",
+          "speaking_percentage": 50,
+          "notes": "Socrates and Protagoras share roughly equal time. Socrates narrates the frame."
+        },
+        {
+          "text_id": "plato-gorgias",
+          "speaking_percentage": 55,
+          "notes": "Socrates engages three interlocutors in sequence: Gorgias, Polus, Callicles."
+        },
+        {
+          "text_id": "plato-republic",
+          "speaking_percentage": 70,
+          "notes": "Socrates narrates the entire dialogue and leads the conversation across all 10 books."
+        },
+        {
+          "text_id": "plato-symposium",
+          "speaking_percentage": 30,
+          "notes": "Socrates delivers one of seven speeches on love, plus reports Diotima's teaching. Apollodorus narrates."
+        },
+        {
+          "text_id": "plato-phaedrus",
+          "speaking_percentage": 65,
+          "notes": "Socrates delivers two speeches on love and leads the discussion of rhetoric."
+        },
+        {
+          "text_id": "plato-theaetetus",
+          "speaking_percentage": 55,
+          "notes": "Socrates leads the inquiry into knowledge, playing intellectual midwife."
+        },
+        {
+          "text_id": "plato-philebus",
+          "speaking_percentage": 65,
+          "notes": "Socrates leads the discussion on pleasure vs. knowledge."
+        },
+        {
+          "text_id": "plato-cratylus",
+          "speaking_percentage": 70,
+          "notes": "Socrates delivers extensive etymological analyses."
+        },
+        {
+          "text_id": "plato-ion",
+          "speaking_percentage": 60,
+          "notes": "Socrates questions Ion about the nature of rhapsodic art."
+        },
+        {
+          "text_id": "plato-hippias-major",
+          "speaking_percentage": 55,
+          "notes": "Socrates questions Hippias about beauty, also role-playing a 'tough questioner'."
+        },
+        {
+          "text_id": "plato-hippias-minor",
+          "speaking_percentage": 55,
+          "notes": "Socrates argues the paradox that the voluntary wrongdoer is better."
+        },
+        {
+          "text_id": "plato-laches",
+          "speaking_percentage": 50,
+          "notes": "Socrates leads inquiry into courage with Laches and Nicias."
+        },
+        {
+          "text_id": "plato-charmides",
+          "speaking_percentage": 55,
+          "notes": "Socrates examines Charmides and Critias on temperance."
+        },
+        {
+          "text_id": "plato-lysis",
+          "speaking_percentage": 55,
+          "notes": "Socrates discusses friendship with young boys at a palaestra."
+        },
+        {
+          "text_id": "plato-euthydemus",
+          "speaking_percentage": 40,
+          "notes": "Socrates narrates but the sophist brothers take significant speaking time."
+        },
+        {
+          "text_id": "plato-menexenus",
+          "speaking_percentage": 85,
+          "notes": "Socrates delivers an extended funeral oration."
+        },
+        {
+          "text_id": "plato-alcibiades-i",
+          "speaking_percentage": 60,
+          "notes": "Socrates questions young Alcibiades about self-knowledge and political ambition."
+        },
+        {
+          "text_id": "xenophon-memorabilia",
+          "speaking_percentage": 60,
+          "notes": "Collection of Socratic conversations. Socrates is the central speaker throughout."
+        },
+        {
+          "text_id": "xenophon-apology",
+          "speaking_percentage": 70,
+          "notes": "Socrates' words at and around the trial, as reported by Xenophon."
+        },
+        {
+          "text_id": "xenophon-symposium",
+          "speaking_percentage": 40,
+          "notes": "Socrates is a prominent participant but shares the conversation with many guests."
+        },
+        {
+          "text_id": "xenophon-oeconomicus",
+          "speaking_percentage": 50,
+          "notes": "Socrates discusses household management, then reports Ischomachus's teachings."
+        }
+      ]
+    },
+    "present_but_not_leading": {
+      "description": "Socrates is present in the dialogue but is not the primary speaker",
+      "texts": [
+        {
+          "text_id": "plato-sophist",
+          "speaking_percentage": 5,
+          "notes": "Socrates speaks in the opening exchange, then the Eleatic Stranger leads the conversation. Socrates is present but silent."
+        },
+        {
+          "text_id": "plato-statesman",
+          "speaking_percentage": 3,
+          "notes": "Socrates speaks very briefly. The Eleatic Stranger leads the discussion with Young Socrates (a different character)."
+        },
+        {
+          "text_id": "plato-timaeus",
+          "speaking_percentage": 5,
+          "notes": "Socrates speaks at the opening, summarizing the previous day's discussion. Timaeus then delivers the cosmological monologue."
+        },
+        {
+          "text_id": "plato-critias",
+          "speaking_percentage": 2,
+          "notes": "Socrates is present but barely speaks. Critias narrates the Atlantis story."
+        },
+        {
+          "text_id": "plato-parmenides",
+          "speaking_percentage": 20,
+          "notes": "Young Socrates speaks significantly in Part I (discussing Forms with Parmenides). In Part II, Parmenides leads an extended dialectical exercise."
+        },
+        {
+          "text_id": "plato-clitophon",
+          "speaking_percentage": 10,
+          "notes": "Clitophon does most of the speaking, criticizing Socrates. Socrates barely responds."
+        },
+        {
+          "text_id": "aristophanes-clouds",
+          "speaking_percentage": 25,
+          "notes": "Socrates is a significant character but the play centers on Strepsiades. This is a satirical portrayal — Aristophanes' Socrates is a composite of sophists and natural philosophers."
+        }
+      ]
+    }
+  }
+}

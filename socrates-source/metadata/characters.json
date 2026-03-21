@@ -1,0 +1,409 @@
+{
+  "characters": [
+    {
+      "name_english": "Socrates",
+      "name_greek": "Σωκράτης",
+      "historical_dates": "c. 470–399 BCE",
+      "description": "Athenian philosopher. Never wrote anything. Central figure in all texts in this corpus. Son of Sophroniscus (stonemason) and Phaenarete (midwife). Executed by hemlock after trial for impiety and corrupting the youth.",
+      "appears_in": [
+        "plato-euthyphro", "plato-apology", "plato-crito", "plato-phaedo",
+        "plato-cratylus", "plato-theaetetus", "plato-sophist", "plato-statesman",
+        "plato-parmenides", "plato-philebus", "plato-symposium", "plato-phaedrus",
+        "plato-alcibiades-i", "plato-charmides", "plato-laches", "plato-lysis",
+        "plato-euthydemus", "plato-protagoras", "plato-gorgias", "plato-meno",
+        "plato-hippias-major", "plato-hippias-minor", "plato-ion", "plato-menexenus",
+        "plato-clitophon", "plato-republic", "plato-timaeus", "plato-critias",
+        "xenophon-memorabilia", "xenophon-apology", "xenophon-symposium", "xenophon-oeconomicus",
+        "aristophanes-clouds"
+      ],
+      "primary_speaker_in": [
+        "plato-euthyphro", "plato-apology", "plato-crito", "plato-phaedo",
+        "plato-cratylus", "plato-theaetetus", "plato-philebus", "plato-phaedrus",
+        "plato-alcibiades-i", "plato-charmides", "plato-laches", "plato-lysis",
+        "plato-euthydemus", "plato-protagoras", "plato-gorgias", "plato-meno",
+        "plato-hippias-major", "plato-hippias-minor", "plato-ion", "plato-menexenus",
+        "plato-republic",
+        "xenophon-memorabilia", "xenophon-apology", "xenophon-symposium", "xenophon-oeconomicus"
+      ],
+      "historical_person": true
+    },
+    {
+      "name_english": "Plato",
+      "name_greek": "Πλάτων",
+      "historical_dates": "c. 428–348 BCE",
+      "description": "Athenian philosopher, student of Socrates, founder of the Academy. Author of 28 dialogues in this corpus. Never appears as a character in his own dialogues (mentioned once in the Apology as present at the trial).",
+      "appears_in": [],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Crito",
+      "name_greek": "Κρίτων",
+      "historical_dates": "c. 469–? BCE",
+      "description": "Wealthy Athenian, close friend of Socrates from the same deme (Alopece). Offered to help Socrates escape from prison.",
+      "appears_in": ["plato-crito", "plato-phaedo", "plato-euthydemus"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Euthyphro",
+      "name_greek": "Εὐθύφρων",
+      "historical_dates": "5th century BCE",
+      "description": "Athenian religious expert (mantis) who was prosecuting his own father for murder, encountered by Socrates before the trial.",
+      "appears_in": ["plato-euthyphro"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Phaedo",
+      "name_greek": "Φαίδων",
+      "historical_dates": "c. 418–? BCE",
+      "description": "From Elis, captured in war and enslaved in Athens. Freed through Socrates' circle. Narrator of Socrates' final conversation and death.",
+      "appears_in": ["plato-phaedo"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Simmias",
+      "name_greek": "Σιμμίας",
+      "historical_dates": "5th–4th century BCE",
+      "description": "Theban philosopher, student of Philolaus the Pythagorean. Present at Socrates' death.",
+      "appears_in": ["plato-phaedo"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Cebes",
+      "name_greek": "Κέβης",
+      "historical_dates": "5th–4th century BCE",
+      "description": "Theban philosopher, student of Philolaus. Present at Socrates' death. Raises the strongest objections to the immortality of the soul.",
+      "appears_in": ["plato-phaedo"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Meno",
+      "name_greek": "Μένων",
+      "historical_dates": "c. 423–400 BCE",
+      "description": "Thessalian aristocrat and military commander. Student of Gorgias. Later served under Cyrus the Younger and was captured by the Persians.",
+      "appears_in": ["plato-meno"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Protagoras",
+      "name_greek": "Πρωταγόρας",
+      "historical_dates": "c. 490–420 BCE",
+      "description": "Sophist from Abdera. Most famous of the sophists. Known for 'Man is the measure of all things.' Charged exorbitant fees for teaching.",
+      "appears_in": ["plato-protagoras", "plato-theaetetus"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Gorgias",
+      "name_greek": "Γοργίας",
+      "historical_dates": "c. 483–375 BCE",
+      "description": "Rhetorician and sophist from Leontini (Sicily). Famous for his ornate rhetorical style and his claim that rhetoric is the greatest of arts.",
+      "appears_in": ["plato-gorgias"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Callicles",
+      "name_greek": "Καλλικλῆς",
+      "historical_dates": "5th century BCE",
+      "description": "Athenian aristocrat who argues that natural justice means the strong should dominate the weak. May be a fictional character created by Plato.",
+      "appears_in": ["plato-gorgias"],
+      "primary_speaker_in": [],
+      "historical_person": false
+    },
+    {
+      "name_english": "Polus",
+      "name_greek": "Πῶλος",
+      "historical_dates": "5th century BCE",
+      "description": "Student of Gorgias from Agrigentum. Argues that rhetoric gives power and that tyrants are happy.",
+      "appears_in": ["plato-gorgias"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Thrasymachus",
+      "name_greek": "Θρασύμαχος",
+      "historical_dates": "c. 459–400 BCE",
+      "description": "Sophist from Chalcedon. Famous for his aggressive argument that justice is the interest of the stronger.",
+      "appears_in": ["plato-republic"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Glaucon",
+      "name_greek": "Γλαύκων",
+      "historical_dates": "c. 445–? BCE",
+      "description": "Plato's older brother. Primary interlocutor in the Republic. Presents the Ring of Gyges thought experiment.",
+      "appears_in": ["plato-republic", "plato-symposium"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Adeimantus",
+      "name_greek": "Ἀδείμαντος",
+      "historical_dates": "c. 443–? BCE",
+      "description": "Plato's older brother. Interlocutor in the Republic, raises objections about poetry's effect on character.",
+      "appears_in": ["plato-republic"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Alcibiades",
+      "name_greek": "Ἀλκιβιάδης",
+      "historical_dates": "c. 450–404 BCE",
+      "description": "Brilliant, controversial Athenian statesman and general. Ward of Pericles. His speech in the Symposium reveals his complex relationship with Socrates.",
+      "appears_in": ["plato-symposium", "plato-alcibiades-i", "plato-protagoras"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Agathon",
+      "name_greek": "Ἀγάθων",
+      "historical_dates": "c. 448–400 BCE",
+      "description": "Athenian tragic poet. Host of the drinking party in Plato's Symposium, celebrating his first victory at the Lenaea.",
+      "appears_in": ["plato-symposium"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Diotima",
+      "name_greek": "Διοτίμα",
+      "historical_dates": "uncertain",
+      "description": "Priestess from Mantinea. Teacher of Socrates in the art of love, as reported by Socrates in the Symposium. Possibly fictional.",
+      "appears_in": ["plato-symposium"],
+      "primary_speaker_in": [],
+      "historical_person": false
+    },
+    {
+      "name_english": "Phaedrus",
+      "name_greek": "Φαῖδρος",
+      "historical_dates": "c. 444–393 BCE",
+      "description": "Athenian aristocrat, enthusiast of rhetoric and speeches. Appears in both the Phaedrus and the Symposium.",
+      "appears_in": ["plato-phaedrus", "plato-symposium"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Theaetetus",
+      "name_greek": "Θεαίτητος",
+      "historical_dates": "c. 417–369 BCE",
+      "description": "Young Athenian mathematician. Interlocutor in both the Theaetetus and the Sophist. Made important contributions to geometry.",
+      "appears_in": ["plato-theaetetus", "plato-sophist"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Parmenides",
+      "name_greek": "Παρμενίδης",
+      "historical_dates": "c. 515–? BCE",
+      "description": "Pre-Socratic philosopher from Elea. Founder of the Eleatic school. Argues for the unity and unchangeability of Being. In the dialogue, he cross-examines the young Socrates about the theory of Forms.",
+      "appears_in": ["plato-parmenides"],
+      "primary_speaker_in": ["plato-parmenides"],
+      "historical_person": true
+    },
+    {
+      "name_english": "Eleatic Stranger",
+      "name_greek": "Ξένος Ἐλεάτης",
+      "historical_dates": "fictional",
+      "description": "Unnamed philosopher from Elea, follower of Parmenides. Leads the discussions in the Sophist and Statesman.",
+      "appears_in": ["plato-sophist", "plato-statesman"],
+      "primary_speaker_in": ["plato-sophist", "plato-statesman"],
+      "historical_person": false
+    },
+    {
+      "name_english": "Timaeus",
+      "name_greek": "Τίμαιος",
+      "historical_dates": "5th century BCE",
+      "description": "Philosopher-statesman from Locri (southern Italy). Pythagorean thinker. Delivers the cosmological account in the Timaeus.",
+      "appears_in": ["plato-timaeus", "plato-critias"],
+      "primary_speaker_in": ["plato-timaeus"],
+      "historical_person": true
+    },
+    {
+      "name_english": "Critias",
+      "name_greek": "Κριτίας",
+      "historical_dates": "c. 460–403 BCE",
+      "description": "Athenian politician, poet, and philosopher. Plato's mother's cousin. Later became one of the Thirty Tyrants. Narrator of the Atlantis story.",
+      "appears_in": ["plato-critias", "plato-timaeus", "plato-charmides", "plato-protagoras"],
+      "primary_speaker_in": ["plato-critias"],
+      "historical_person": true
+    },
+    {
+      "name_english": "Hippias",
+      "name_greek": "Ἱππίας",
+      "historical_dates": "c. 460–399 BCE",
+      "description": "Sophist from Elis. Polymath who claimed expertise in every subject. Known for prodigious memory and practical skills.",
+      "appears_in": ["plato-hippias-major", "plato-hippias-minor", "plato-protagoras"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Ion",
+      "name_greek": "Ἴων",
+      "historical_dates": "5th century BCE",
+      "description": "Rhapsode from Ephesus, specialist in reciting Homer. His craft raises questions about the nature of knowledge and divine inspiration.",
+      "appears_in": ["plato-ion"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Laches",
+      "name_greek": "Λάχης",
+      "historical_dates": "c. 475–418 BCE",
+      "description": "Athenian general known for bravery. Killed at the Battle of Mantinea. Discusses the nature of courage with Socrates.",
+      "appears_in": ["plato-laches"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Nicias",
+      "name_greek": "Νικίας",
+      "historical_dates": "c. 470–413 BCE",
+      "description": "Athenian general and statesman. Led the disastrous Sicilian Expedition. Discusses courage in the Laches.",
+      "appears_in": ["plato-laches"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Charmides",
+      "name_greek": "Χαρμίδης",
+      "historical_dates": "c. 450–403 BCE",
+      "description": "Plato's uncle. Handsome young Athenian aristocrat. Later became one of the Thirty Tyrants. Discusses temperance with Socrates.",
+      "appears_in": ["plato-charmides", "plato-symposium"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Lysis",
+      "name_greek": "Λύσις",
+      "historical_dates": "5th century BCE",
+      "description": "Young Athenian boy. Discusses friendship with Socrates in a wrestling school.",
+      "appears_in": ["plato-lysis"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Euthydemus",
+      "name_greek": "Εὐθύδημος",
+      "historical_dates": "5th century BCE",
+      "description": "Sophist from Chios. Along with his brother Dionysodorus, demonstrates eristic (competitive) argumentation.",
+      "appears_in": ["plato-euthydemus"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Hermogenes",
+      "name_greek": "Ἑρμογένης",
+      "historical_dates": "5th century BCE",
+      "description": "Son of Hipponicus, brother of Callias. Interlocutor in the Cratylus and companion of Socrates in Xenophon's works.",
+      "appears_in": ["plato-cratylus", "xenophon-apology", "xenophon-symposium"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Cratylus",
+      "name_greek": "Κρατύλος",
+      "historical_dates": "5th century BCE",
+      "description": "Follower of Heraclitus. Argues that names have a natural correctness. Later tradition says he was an early teacher of Plato.",
+      "appears_in": ["plato-cratylus"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Anytus",
+      "name_greek": "Ἄνυτος",
+      "historical_dates": "5th century BCE",
+      "description": "Wealthy Athenian politician and tanner. One of Socrates' three accusers at trial. Appears briefly in the Meno.",
+      "appears_in": ["plato-meno", "plato-apology"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Meletus",
+      "name_greek": "Μέλητος",
+      "historical_dates": "5th century BCE",
+      "description": "Young Athenian poet. The primary accuser of Socrates. Cross-examined by Socrates in the Apology.",
+      "appears_in": ["plato-apology", "plato-euthyphro"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Strepsiades",
+      "name_greek": "Στρεψιάδης",
+      "historical_dates": "fictional",
+      "description": "Old Athenian farmer, protagonist of Aristophanes' Clouds. Enrolls in Socrates' 'Thinkery' to learn how to avoid paying debts.",
+      "appears_in": ["aristophanes-clouds"],
+      "primary_speaker_in": ["aristophanes-clouds"],
+      "historical_person": false
+    },
+    {
+      "name_english": "Pheidippides",
+      "name_greek": "Φειδιππίδης",
+      "historical_dates": "fictional",
+      "description": "Son of Strepsiades in the Clouds. His horse-racing debts drive the plot. Eventually learns the 'Unjust Argument' and beats his father.",
+      "appears_in": ["aristophanes-clouds"],
+      "primary_speaker_in": [],
+      "historical_person": false
+    },
+    {
+      "name_english": "Protarchus",
+      "name_greek": "Πρώταρχος",
+      "historical_dates": "5th century BCE",
+      "description": "Son of Callias. Takes over from Philebus as Socrates' interlocutor on whether pleasure or knowledge constitutes the good life.",
+      "appears_in": ["plato-philebus"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Clitophon",
+      "name_greek": "Κλειτοφῶν",
+      "historical_dates": "5th century BCE",
+      "description": "Associate of both Socrates and Thrasymachus. In the dialogue bearing his name, he criticizes Socrates for being merely protreptic without providing positive doctrine.",
+      "appears_in": ["plato-clitophon", "plato-republic"],
+      "primary_speaker_in": ["plato-clitophon"],
+      "historical_person": true
+    },
+    {
+      "name_english": "Apollodorus",
+      "name_greek": "Ἀπολλόδωρος",
+      "historical_dates": "5th century BCE",
+      "description": "Devoted follower of Socrates. Narrator of Plato's Symposium. Present at Socrates' death in the Phaedo. Known for his emotional temperament.",
+      "appears_in": ["plato-symposium", "plato-phaedo"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Ischomachus",
+      "name_greek": "Ἰσχόμαχος",
+      "historical_dates": "5th century BCE",
+      "description": "Wealthy Athenian gentleman farmer. Primary interlocutor in the second half of Xenophon's Oeconomicus, where he describes ideal household management.",
+      "appears_in": ["xenophon-oeconomicus"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Critobulus",
+      "name_greek": "Κριτόβουλος",
+      "historical_dates": "5th century BCE",
+      "description": "Son of Crito, friend of Socrates. Interlocutor in Xenophon's Oeconomicus and present in the Symposium.",
+      "appears_in": ["xenophon-oeconomicus", "xenophon-symposium"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    },
+    {
+      "name_english": "Menexenus",
+      "name_greek": "Μενέξενος",
+      "historical_dates": "5th century BCE",
+      "description": "Young Athenian. Appears in the dialogue bearing his name and in the Lysis. Socrates delivers a mock funeral oration for his benefit.",
+      "appears_in": ["plato-menexenus", "plato-lysis"],
+      "primary_speaker_in": [],
+      "historical_person": true
+    }
+  ]
+}
