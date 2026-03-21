@@ -1,0 +1,22 @@
+{
+  "text_id": "xenophon.oeconomicus",
+  "author": "Xenophon",
+  "author_greek": "Ξενοφῶν",
+  "title": "Oeconomicus",
+  "title_greek": "Οἰκονομικός",
+  "tlg_author": "tlg0032",
+  "tlg_work": "tlg003",
+  "language": "grc",
+  "edition": "Marchant, Xenophontis Opera Omnia, OCT 1900-1920",
+  "source": "Perseus Digital Library",
+  "license": "CC BY-SA 3.0 US",
+  "text_file": "text.md",
+  "character_count": 116635,
+  "word_count": 17822,
+  "section_count": 417,
+  "related_texts": [
+    "xenophon.memorabilia",
+    "xenophon.apology",
+    "xenophon.symposium"
+  ]
+}
