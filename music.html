@@ -53,6 +53,22 @@
                 html += '<iframe style="border: 0; width: 100%; height: 120px; margin-top: 16px;" src="https://bandcamp.com/EmbeddedPlayer/album=1996498799/size=large/bgcol=0f0d0b/linkcol=c45a3c/tracklist=false/artwork=small/transparent=true/" seamless loading="lazy"></iframe>';
             }
 
+            // Embed YouTube videos for entries with a videos array
+            if (entry.videos && entry.videos.length > 0) {
+                html += '<div class="video-grid">';
+                entry.videos.forEach(function (v, i) {
+                    var title = v.title || (entry.title + ' — Video ' + (i + 1));
+                    if (v.title) {
+                        html += '<p class="video-embed__title">' + v.title + '</p>';
+                    }
+                    html += '<div class="video-wrapper">';
+                    html += '<iframe src="https://www.youtube.com/embed/' + v.id + '?rel=0" title="' + title + '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>';
+                    html += '</div>';
+                    html += '</div>';
+                });
+                html += '</div>';
+            }
+
             if (entry.url) {
                 var external = entry.url.indexOf('http') === 0;
                 var target = external ? ' target="_blank" rel="noopener noreferrer"' : '';
