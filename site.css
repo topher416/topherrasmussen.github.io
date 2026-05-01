@@ -733,6 +733,59 @@ img { display: block; max-width: 100%; }
     box-shadow: 0 2px 8px rgba(0,0,0,0.55);
 }
 
+/* Homepage — featured video section */
+.featured-video {
+    padding: clamp(24px, 4vw, 48px) clamp(16px, 4vw, 48px);
+    border: 1px solid var(--line);
+    background: var(--bg-card);
+    margin: 0;
+}
+
+.featured-video__header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.featured-video__title {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: clamp(1.3rem, 2vw, 1.8rem);
+    font-weight: 500;
+    color: var(--text-bright);
+    margin: 0;
+}
+
+.featured-video__tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    color: #fff;
+    background: var(--accent);
+    padding: 3px 8px;
+    border-radius: 2px;
+}
+
+.featured-video__embed {
+    margin-bottom: 12px;
+}
+
+.featured-video__caption {
+    margin: 8px 0 0 0;
+    text-align: right;
+}
+
+.featured-video__caption a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.74rem;
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.featured-video__caption a:hover {
+    text-decoration: underline;
+}
+
 /* Placeholder room */
 .room-placeholder {
     text-align: center;
