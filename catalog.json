@@ -251,9 +251,9 @@
     "categories": ["music", "experiments"],
     "description": "Full-session Radiohead ensemble performances at Old Town School of Folk Music, Szold Hall. 40+ minute live sets — multiple songs per session.",
     "videos": [
-      { "id": "PxPT1nA3-Ns", "title": "Radiohead Ensemble Session 3" },
+      { "id": "hmkRxeVZ_EI", "title": "Radiohead Ensemble Session 3" },
       { "id": "E-yYJg4qOQs", "title": "Radiohead Ensemble Session 2" },
-      { "id": "hmkRxeVZ_EI", "title": "Radiohead Ensemble Session 1" }
+      { "id": "PxPT1nA3-Ns", "title": "Radiohead Ensemble Session 1" }
     ],
     "status": "live",
     "tags": ["radiohead", "old-town-school", "live", "covers", "ensemble"]
