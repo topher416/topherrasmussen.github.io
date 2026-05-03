@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Here — Topher Rasmussen</title>
+    <meta name="description" content="The throughline — what this work is actually about, and how the pieces connect.">
+    <link rel="canonical" href="https://topherrasmussen.com/start-here.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,700&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site.css">
+    <meta property="og:title" content="Start Here — Topher Rasmussen">
+    <meta property="og:description" content="The throughline — what this work is actually about, and how the pieces connect.">
+    <meta property="og:url" content="https://topherrasmussen.com/start-here.html">
+    <meta property="og:type" content="website">
+    <style>
+        .start-here {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: clamp(48px, 8vw, 80px) clamp(24px, 4vw, 48px) clamp(64px, 10vw, 120px);
+            animation: fadeSlide 0.6s ease both;
+        }
+
+        .start-here__intro {
+            margin-bottom: clamp(40px, 6vw, 64px);
+        }
+
+        .start-here__label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .start-here__title {
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: clamp(2.2rem, 6vw, 3.4rem);
+            font-weight: 700;
+            line-height: 0.95;
+            letter-spacing: -0.02em;
+            color: var(--text-bright);
+            margin-bottom: 24px;
+        }
+
+        .start-here__subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            max-width: 55ch;
+        }
+
+        .start-here__body {
+            font-size: 1.05rem;
+            line-height: 1.75;
+        }
+
+        .start-here__body p {
+            margin-bottom: 1.4em;
+        }
+
+        .start-here__body h2 {
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+            font-weight: 600;
+            color: var(--text-bright);
+            margin: clamp(32px, 5vw, 48px) 0 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--line);
+        }
+
+        .start-here__body h2:first-of-type {
+            border-top: none;
+            padding-top: 0;
+            margin-top: 0;
+        }
+
+        .start-here__body strong {
+            color: var(--text-bright);
+            font-weight: 600;
+        }
+
+        .start-here__body em {
+            font-style: italic;
+            color: var(--text);
+        }
+
+        .start-here__body blockquote {
+            margin: 1.6em 0;
+            padding-left: 20px;
+            border-left: 3px solid var(--accent);
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* Thread markers — numbered waypoints */
+        .thread {
+            display: flex;
+            gap: 20px;
+            margin: 24px 0;
+            padding: 20px 24px;
+            background: var(--bg-raised);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+        }
+
+        .thread__number {
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+            flex-shrink: 0;
+            width: 32px;
+        }
+
+        .thread__body {
+            flex: 1;
+        }
+
+        .thread__title {
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 4px;
+        }
+
+        .thread__title a {
+            text-decoration: none;
+            border-bottom: 1px solid var(--line-strong);
+            transition: border-color 0.2s ease;
+        }
+
+        .thread__title a:hover {
+            border-color: var(--accent);
+        }
+
+        .thread__year {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            margin-bottom: 6px;
+        }
+
+        .thread__excerpt {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Essay grid — reading path */
+        .reading-path {
+            margin: 32px 0;
+        }
+
+        .reading-path__heading {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 16px;
+        }
+
+        .essay-link {
+            display: block;
+            padding: 16px 20px;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            margin-bottom: 10px;
+            text-decoration: none;
+            transition: border-color 0.2s ease, background 0.2s ease;
+        }
+
+        .essay-link:hover {
+            border-color: var(--accent);
+            background: var(--bg-card);
+        }
+
+        .essay-link__title {
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--text-bright);
+            margin-bottom: 4px;
+        }
+
+        .essay-link__meta {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+        }
+
+        .essay-link__desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+            line-height: 1.5;
+        }
+
+        .journal-note {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 16px 20px;
+            background: var(--bg-raised);
+            border: 1px dashed var(--line-strong);
+            border-radius: 6px;
+            margin-top: 16px;
+        }
+
+        .journal-note__icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            width: 24px;
+            text-align: center;
+        }
+
+        .journal-note__text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .journal-note__text a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s ease;
+        }
+
+        .journal-note__text a:hover {
+            border-bottom-color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <nav class="room-nav">
+        <a href="/" class="room-nav__home">TR</a>
+        <a href="/theater.html" class="room-nav__link">Theater</a>
+        <a href="/writing.html" class="room-nav__link room-nav__link--active">Writing</a>
+        <a href="/music.html" class="room-nav__link">Music</a>
+        <a href="/visual.html" class="room-nav__link">Visual</a>
+        <a href="/experiments.html" class="room-nav__link">Experiments</a>
+    </nav>
+
+    <main class="start-here">
+
+        <div class="start-here__intro">
+            <p class="start-here__label">The Throughline</p>
+            <h1 class="start-here__title">What This Work Is Actually About</h1>
+            <p class="start-here__subtitle">The gap between understanding yourself and actually living — and what happens when something stands between you and your expression.</p>
+        </div>
+
+        <div class="start-here__body">
+
+            <h2>The Thread</h2>
+
+            <p>My work doesn't live in one discipline. It moves across theater, writing, code, and music — but it's not scattered. There's a single question running through everything, even when it's dressed differently:</p>
+
+            <p><strong>What happens when mediation enters the space between intention and expression?</strong></p>
+
+            <p>When you stand on stage and the director tells you to "just be yourself" — which self? When you sit down to write and the machine finishes your sentence — whose thought is that? When the analyst listens to you and you hear yourself say something you didn't plan to say — who spoke?</p>
+
+            <p>The thread goes like this:</p>
+
+            <h2>I. The Actor's Problem (2016–2020)</h2>
+
+            <p>Stanislavski asks the actor to use the <em>"magic if"</em> — <em>if</em> you were in this situation, what would you feel? It's a deliberate fiction that produces genuine emotion. The paradox is the point: you have to fake it to make it real.</p>
+
+            <p>Winnicott names the same structure in development: the <em>False Self</em> that protects the True Self by learning to anticipate what the environment needs. Polite, functional, alive — but not <em>yours</em>, exactly. The gap between the self you perform and the self you can't name is where the work begins.</p>
+
+            <p>This was my undergraduate thesis in Theatre Arts and Psychology — <a href="/analytic-introspections-thesis.html">Analytic Introspections from an Actor's Perspective</a> — written while I was acting in Chekhov at Salt Lake Acting Company and trying to understand why my own rehearsal anxiety kept showing up as a kind of intellectual performance about anxiety. The thesis documents the real thing. Not an analysis of it — the thing itself, happening on the page.</p>
+
+            <div class="thread">
+                <span class="thread__number">0</span>
+                <div class="thread__body">
+                    <p class="thread__title"><a href="/analytic-introspections-thesis.html">Analytic Introspections from an Actor's Perspective</a></p>
+                    <p class="thread__year">2020 · Senior Thesis · 68 pages</p>
+                    <p class="thread__excerpt">The origin point. An unedited attempt to capture what it feels like to be a 28-year-old actor/psychology student writing about acting and psychology — hypotheses, preparation, enactment, rumination, and collapse. Raw, nonlinear, vulnerable. The intellectual/emotional origin point for all later work.</p>
+                </div>
+            </div>
+
+            <h2>II. The Mediated Self (2024–2025)</h2>
+
+            <p>Then I got a job in consulting and used AI to survive meetings I wasn't equipped for. Method acting, but for professionalism. That's when the question changed shape: if Stanislavski's actor mediates through the "magic if" and Winnicott's child mediates through the False Self — what does the <em>adult</em> mediate through when the tool is a language model?</p>
+
+            <p>AI doesn't just mediate expression. It <em>exposes</em> the mediation that was already there. Lacan says the unconscious is structured like a language — not that language represents the unconscious, but that the unconscious <em>is</em> a structural operation, and language is where we encounter it. The Other speaks through us. AI makes this visible: if an algorithm can mimic speech patterns, anticipate desires, and produce texts indistinguishable from human writing, what was "yours" about the original act of speaking?</p>
+
+            <div class="thread">
+                <span class="thread__number">1</span>
+                <div class="thread__body">
+                    <p class="thread__title"><a href="/essay.html">The Fantasy of Machine-Assisted Authorship</a></p>
+                    <p class="thread__year">2025 · ~8,000 words</p>
+                    <p class="thread__excerpt">The cornerstone essay. Written with the help of several machines, about what gets lost when you let a machine write your sentences. Introduces "linguistic money laundering" — raw thought in, clean prose out, fingerprints wiped away. An honest investigation authored through the very problem it examines.</p>
+                </div>
+            </div>
+
+            <div class="thread">
+                <span class="thread__number">2</span>
+                <div class="thread__body">
+                    <p class="thread__title"><a href="/objet-petit-ai.html">objet petit a(i): Desire and Lack in the Age of Machine-Assisted Authorship</a></p>
+                    <p class="thread__year">2025 · 111 pages</p>
+                    <p class="thread__excerpt">The full psychoanalytic treatment. What happens to the writing subject when AI enters the process? Covers the writerly unconscious, AI as narcissistic object, jouissance interrupted, unconscious defenses against the machine, and toward an integrated psychic economy of writer and machine.</p>
+                </div>
+            </div>
+
+            <div class="thread">
+                <span class="thread__number">3</span>
+                <div class="thread__body">
+                    <p class="thread__title"><a href="/map-territory.html">The Map and the Territory: Five Parables</a></p>
+                    <p class="thread__year">2025 · Five parables</p>
+                    <p class="thread__excerpt">The gap between understanding yourself and actually living, dressed as fable. A cartographer who can't stop mapping, a man made entirely of wounds, an analyst who analyzes the analysis. Psychoanalytic thinking that quietly undermines its own authority.</p>
+                </div>
+            </div>
+
+            <h2>III. The Research Trajectory (2026–)</h2>
+
+            <p>The essays above are thinking finished on the page. Below is thinking <em>in progress</em> — research that hasn't found its final form yet but is driving everything forward:</p>
+
+            <div class="thread">
+                <span class="thread__number">4</span>
+                <div class="thread__body">
+                    <p class="thread__title"><a href="https://structuredlikealanguage.org">Structured Like a Language</a></p>
+                    <p class="thread__year">2026 · Research project · Phase 1 of 5</p>
+                    <p class="thread__excerpt">Testing whether transformer LLMs structurally instantiate the operations Lacan attributed to the unconscious. Formal mappings, falsifiable predictions. The hypothesis is audacious: if it's right, it reframes the relationship between psychoanalysis and AI entirely.</p>
+                </div>
+            </div>
+
+            <div class="thread">
+                <span class="thread__number">5</span>
+                <div class="thread__body">
+                    <p class="thread__title"><a href="/anteroom.html">The Analytic Anteroom</a></p>
+                    <p class="thread__year">2026 · Concept proposal</p>
+                    <p class="thread__excerpt">Could voice-based AI prepare psychotherapy trainees for their first patient hours? Not a product — a research direction exploring whether emerging voice technology can reduce the shock of first contact in clinical education. The "anteroom" as liminal space between knowledge and practice.</p>
+                </div>
+            </div>
+
+            <h2>The Journal</h2>
+
+            <p>The <a href="/writing.html">essays</a> above are the finished versions. But the thinking that seeds them is messier — fragments, false starts, half-formed connections that haven't earned the right to be essays yet. That's what the <strong>journal</strong> will be: the working notebook, open for anyone who wants to see the process.</p>
+
+            <p>Eventually, each essay will link back to the journal entries that seeded it. That's what will make this site feel alive instead of like a museum — the finished work connected to the living thought behind it.</p>
+
+            <div class="journal-note">
+                <span class="journal-note__icon">✎</span>
+                <p class="journal-note__text">The journal system is coming soon. For now, the <a href="/writing.html">writing page</a> collects everything — essays, research, and eventually the journal entries that connect them.</p>
+            </div>
+
+            <h2>Where to Go From Here</h2>
+
+            <div class="reading-path">
+                <p class="reading-path__heading">If you want the full arc — read in order:</p>
+
+                <a href="/analytic-introspections-thesis.html" class="essay-link">
+                    <p class="essay-link__title">Analytic Introspections from an Actor's Perspective</p>
+                    <p class="essay-link__meta">2020 · Senior Thesis</p>
+                    <p class="essay-link__desc">Where it began. The intellectual/emotional origin point — raw rehearsal anxiety processed through Stanislavski, Chekhov, and Jung.</p>
+                </a>
+
+                <a href="/essay.html" class="essay-link">
+                    <p class="essay-link__title">The Fantasy of Machine-Assisted Authorship</p>
+                    <p class="essay-link__meta">2025 · ~8,000 words</p>
+                    <p class="essay-link__desc">The pivot. AI enters the frame and the question "who speaks?" becomes operational.</p>
+                </a>
+
+                <a href="/objet-petit-ai.html" class="essay-link">
+                    <p class="essay-link__title">objet petit a(i)</p>
+                    <p class="essay-link__meta">2025 · 111 pages</p>
+                    <p class="essay-link__desc">The deep dive. Full Lacanian treatment of desire, lack, and the writing subject in the age of machine co-authorship.</p>
+                </a>
+
+                <a href="/map-territory.html" class="essay-link">
+                    <p class="essay-link__title">The Map and the Territory: Five Parables</p>
+                    <p class="essay-link__meta">2025 · Five parables</p>
+                    <p class="essay-link__desc">The fable version. Theory disguised as story, each parable undermining its own authority.</p>
+                </a>
+
+                <a href="https://structuredlikealanguage.org" class="essay-link">
+                    <p class="essay-link__title">Structured Like a Language</p>
+                    <p class="essay-link__meta">2026 · Research project</p>
+                    <p class="essay-link__desc">The research frontier. Formalizing the hypothesis that LLMs instantiate unconscious operations.</p>
+                </a>
+            </div>
+
+            <p style="margin-top: 2em; color: var(--text-dim); font-size: 0.95rem;">Or start anywhere and follow the thread back. It all connects to the same question: <em>what happens when something stands between you and your expression — and why that gap might be the most honest part of who you are.</em></p>
+
+        </div>
+
+    </main>
+
+    <footer class="room-footer">
+        <div class="counter">
+            Visitor count: <span class="counter-display">00000000</span>
+        </div>
+    </footer>
+
+    <script>
+    window.displayCount = function (count) {
+        var el = document.querySelector('.counter-display');
+        if (el) el.textContent = count.toString().padStart(8, '0');
+    };
+    document.addEventListener('DOMContentLoaded', function () {
+        var s = document.createElement('script');
+        var t = new Date().getTime();
+        s.src = 'https://script.google.com/macros/s/AKfycbwOYJRKO_zOwkLpCR4U_ENMiD7bgPtuWmXVe6ZTuT913aTHJ0c5Op3OEdfzJQAGUHdv/exec?action=increment&callback=displayCount&t=' + t;
+        document.body.appendChild(s);
+    });
+    </script>
+</body>
+</html>

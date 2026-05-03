@@ -8,52 +8,85 @@
     "url": "/horrortarot/",
     "image": null,
     "status": "live",
-    "tags": ["react", "three.js", "tone.js", "vite"]
+    "tags": [
+      "react",
+      "three.js",
+      "tone.js",
+      "vite"
+    ]
   },
   {
     "id": "ai101",
     "title": "AI 101: Crash Course",
     "year": 2025,
     "category": "web-design",
-    "description": "A structured guide to how LLMs actually work — tokenization, the transformer architecture, RLHF — written for people who use these tools daily but haven't looked under the hood. Covers the current model landscape (GPT, Claude, Gemini, Llama), a prompting framework (Goal, Context, Format, Guardrails), and honest sections on hallucinations, false confidence, and where the whole thing falls apart.",
+    "description": "A structured guide to how LLMs actually work \u2014 tokenization, the transformer architecture, RLHF \u2014 written for people who use these tools daily but haven't looked under the hood. Covers the current model landscape (GPT, Claude, Gemini, Llama), a prompting framework (Goal, Context, Format, Guardrails), and honest sections on hallucinations, false confidence, and where the whole thing falls apart.",
     "url": "/ai101.html",
     "image": null,
     "status": "live",
-    "tags": ["tailwind", "education"]
+    "tags": [
+      "tailwind",
+      "education"
+    ]
+  },
+  {
+    "id": "start-here",
+    "title": "Start Here: The Throughline",
+    "year": 2026,
+    "category": "writing",
+    "description": "What this work is actually about \u2014 the gap between intention and expression, from Stanislavski's magic if through Lacan's Other to AI as co-author. The arc of the work in one place.",
+    "url": "/start-here.html",
+    "image": null,
+    "status": "live",
+    "tags": [
+      "essay",
+      "psychoanalysis",
+      "throughline"
+    ]
   },
   {
     "id": "analytic-introspections",
     "title": "Analytic Introspections from an Actor's Perspective",
     "year": 2020,
     "category": "writing",
-    "description": "Senior thesis in Theatre Arts and Psychology. An attempt to capture what it feels like to be a 28-year-old actor/psychology student writing about acting and psychology — hypotheses, preparation, enactment, rumination, chronesthesia, rehearsal, and collapse.",
+    "description": "Senior thesis in Theatre Arts and Psychology. An attempt to capture what it feels like to be a 28-year-old actor/psychology student writing about acting and psychology \u2014 hypotheses, preparation, enactment, rumination, chronesthesia, rehearsal, and collapse.",
     "url": "/analytic-introspections-thesis.html",
     "pdf": "/analytic-introspections.pdf",
     "image": null,
     "status": "live",
-    "tags": ["psychoanalysis", "acting", "thesis"]
+    "tags": [
+      "psychoanalysis",
+      "acting",
+      "thesis"
+    ]
   },
   {
     "id": "map-territory",
     "title": "The Map and the Territory: Five Parables",
     "year": 2025,
     "category": "writing",
-    "description": "Five parables about the gap between understanding yourself and actually living — a cartographer who can't stop mapping, a man made entirely of wounds, an analyst who analyzes the analysis. Psychoanalytic thinking dressed as fable, with each parable quietly undermining its own authority.",
+    "description": "Five parables about the gap between understanding yourself and actually living \u2014 a cartographer who can't stop mapping, a man made entirely of wounds, an analyst who analyzes the analysis. Psychoanalytic thinking dressed as fable, with each parable quietly undermining its own authority.",
     "url": "/map-territory.html",
     "image": null,
     "status": "live",
-    "tags": ["essay", "psychoanalysis"]
+    "tags": [
+      "essay",
+      "psychoanalysis"
+    ]
   },
   {
     "id": "machine-authorship",
     "title": "The Fantasy of Machine-Assisted Authorship",
     "year": 2025,
     "category": "writing",
-    "description": "An essay about what gets lost when you let a machine write your sentences — written, deliberately, with the help of several machines. Introduces the idea of \"linguistic money laundering\" for what happens when AI smooths out messy thought, and spends about 8,000 words trying to figure out whether the resulting text belongs to anyone.",
+    "description": "An essay about what gets lost when you let a machine write your sentences \u2014 written, deliberately, with the help of several machines. Introduces the idea of \"linguistic money laundering\" for what happens when AI smooths out messy thought, and spends about 8,000 words trying to figure out whether the resulting text belongs to anyone.",
     "url": "/essay.html",
     "image": null,
     "status": "live",
-    "tags": ["essay", "ai"]
+    "tags": [
+      "essay",
+      "ai"
+    ]
   },
   {
     "id": "objet-petit-ai",
@@ -65,18 +98,27 @@
     "pdf": "/objet-petit-ai.pdf",
     "image": null,
     "status": "live",
-    "tags": ["psychoanalysis", "ai", "lacan", "essay"]
+    "tags": [
+      "psychoanalysis",
+      "ai",
+      "lacan",
+      "essay"
+    ]
   },
   {
     "id": "substack-spectral-author",
     "title": "The Spectral Author: LLMs and the Liminal Space of AI-Human Writing",
     "year": 2025,
     "category": "writing",
-    "description": "On the \"spectral author\" — a presence that exists between human and machine creation. Draws on Barthes, Benjamin, and Bloom to argue that AI doesn't eliminate human creativity but reconfigures it into an ecological model where human intention and machine capability operate interdependently. Published in GHOSTWRITING on Substack.",
+    "description": "On the \"spectral author\" \u2014 a presence that exists between human and machine creation. Draws on Barthes, Benjamin, and Bloom to argue that AI doesn't eliminate human creativity but reconfigures it into an ecological model where human intention and machine capability operate interdependently. Published in GHOSTWRITING on Substack.",
     "url": "https://gh0stwriting.substack.com/p/the-spectral-author",
     "image": null,
     "status": "live",
-    "tags": ["essay", "ai", "substack"]
+    "tags": [
+      "essay",
+      "ai",
+      "substack"
+    ]
   },
   {
     "id": "medium-fake-consulting",
@@ -87,7 +129,11 @@
     "url": "https://medium.com/@topher416/on-using-ai-to-fake-my-way-through-consulting-f5a0dccb9782",
     "image": null,
     "status": "live",
-    "tags": ["essay", "ai", "medium"]
+    "tags": [
+      "essay",
+      "ai",
+      "medium"
+    ]
   },
   {
     "id": "medium-ai-psychoanalysis-mediated-self",
@@ -98,139 +144,206 @@
     "url": "https://medium.com/@topher416/on-ai-psychoanalysis-and-the-mediated-self-e1ef152f781e",
     "image": null,
     "status": "live",
-    "tags": ["essay", "psychoanalysis", "ai", "medium"]
+    "tags": [
+      "essay",
+      "psychoanalysis",
+      "ai",
+      "medium"
+    ]
   },
   {
     "id": "medium-notes-slop-bucket",
     "title": "Notes from the Slop Bucket",
     "year": 2025,
     "category": "writing",
-    "description": "On the term \"AI slop\" — the smooth, soulless, indistinct writing that comes out of machines — and the shame of needing help from one. An essay about writing with AI and feeling conflicted about the experience, composed with Claude and GPT while analyzing that process.",
+    "description": "On the term \"AI slop\" \u2014 the smooth, soulless, indistinct writing that comes out of machines \u2014 and the shame of needing help from one. An essay about writing with AI and feeling conflicted about the experience, composed with Claude and GPT while analyzing that process.",
     "url": "https://medium.com/@topher416/notes-from-the-slop-bucket-023ff889a76c",
     "image": null,
     "status": "live",
-    "tags": ["essay", "ai", "medium"]
+    "tags": [
+      "essay",
+      "ai",
+      "medium"
+    ]
   },
   {
     "id": "medium-pleasure-recursive-machine",
     "title": "The Pleasure of the Recursive Machine: On Loops, Language, and the Desire for Meaning",
     "year": 2025,
     "category": "writing",
-    "description": "We return to language models not for answers but for the recursive pleasure of the exchange itself. The loop is not simply a structure of repetition — it is the very form of our desire. An essay on jouissance, the perpetual suspension of resolution, and why we keep issuing prompts.",
+    "description": "We return to language models not for answers but for the recursive pleasure of the exchange itself. The loop is not simply a structure of repetition \u2014 it is the very form of our desire. An essay on jouissance, the perpetual suspension of resolution, and why we keep issuing prompts.",
     "url": "https://medium.com/@topher416/the-pleasure-of-the-recursive-machine-on-loops-language-and-the-desire-for-meaning-1581394d1b6f",
     "image": null,
     "status": "live",
-    "tags": ["essay", "psychoanalysis", "ai", "lacan", "medium"]
+    "tags": [
+      "essay",
+      "psychoanalysis",
+      "ai",
+      "lacan",
+      "medium"
+    ]
   },
   {
     "id": "medium-illusion-ai-therapy",
     "title": "The Illusion of AI Therapy: A Critical Examination of Its State and Limitations",
     "year": 2025,
     "category": "writing",
-    "description": "A critical examination of AI therapy — what it promises, what it actually delivers, and why the illusion of care is not the same as care. Written from the perspective of a licensed social worker who takes the therapeutic relationship seriously.",
+    "description": "A critical examination of AI therapy \u2014 what it promises, what it actually delivers, and why the illusion of care is not the same as care. Written from the perspective of a licensed social worker who takes the therapeutic relationship seriously.",
     "url": "https://medium.com/@topher416/the-illusion-of-ai-therapy-a-critical-examination-of-its-state-and-limitations-143fd08e6748",
     "image": null,
     "status": "live",
-    "tags": ["essay", "ai", "psychoanalysis", "clinical", "medium"]
+    "tags": [
+      "essay",
+      "ai",
+      "psychoanalysis",
+      "clinical",
+      "medium"
+    ]
   },
   {
     "id": "medium-fragments-mirror",
     "title": "Fragments from the Mirror: An Attempt at Honest Reflection",
     "year": 2025,
     "category": "writing",
-    "description": "An attempt at honest self-reflection — the kind that resists the temptation to turn introspection into performance.",
+    "description": "An attempt at honest self-reflection \u2014 the kind that resists the temptation to turn introspection into performance.",
     "url": "https://medium.com/@topher416/fragments-from-the-mirror-an-attempt-at-honest-reflection-3c6a0717a219",
     "image": null,
     "status": "live",
-    "tags": ["essay", "medium"]
+    "tags": [
+      "essay",
+      "medium"
+    ]
   },
   {
     "id": "medium-between-making-reading",
     "title": "Between Making and Reading: A Personal Exploration of Artificial Intelligence",
     "year": 2025,
     "category": "writing",
-    "description": "A personal exploration of what it means to make things and read things in an era where AI sits between the two — blurring the line between authorship and consumption.",
+    "description": "A personal exploration of what it means to make things and read things in an era where AI sits between the two \u2014 blurring the line between authorship and consumption.",
     "url": "https://medium.com/@topher416/between-making-and-reading-a-personal-exploration-of-artificial-intelligence-263d1b984f99",
     "image": null,
     "status": "live",
-    "tags": ["essay", "ai", "medium"]
+    "tags": [
+      "essay",
+      "ai",
+      "medium"
+    ]
   },
   {
     "id": "medium-subject-supposed-to-write",
     "title": "The Subject Supposed to Write: A Lacanian Analysis of AI Writing Assistance",
     "year": 2025,
     "category": "writing",
-    "description": "A Lacanian analysis of AI writing assistance — riffing on Lacan's \"subject supposed to know\" to ask what happens when the subject supposed to write is a machine. Who is the author when the Other holds the pen?",
+    "description": "A Lacanian analysis of AI writing assistance \u2014 riffing on Lacan's \"subject supposed to know\" to ask what happens when the subject supposed to write is a machine. Who is the author when the Other holds the pen?",
     "url": "https://medium.com/@topher416/the-subject-supposed-to-write-a-lacanian-analysis-of-ai-writing-assistance-8cf24e552eb8",
     "image": null,
     "status": "live",
-    "tags": ["essay", "psychoanalysis", "ai", "lacan", "medium"]
+    "tags": [
+      "essay",
+      "psychoanalysis",
+      "ai",
+      "lacan",
+      "medium"
+    ]
   },
   {
     "id": "medium-tools-change-minds",
     "title": "Do Our Tools Change Our Minds?",
     "year": 2025,
     "category": "writing",
-    "description": "On whether the tools we use reshape how we think — and whether that reshaping is something we chose or something that happened to us while we weren't paying attention.",
+    "description": "On whether the tools we use reshape how we think \u2014 and whether that reshaping is something we chose or something that happened to us while we weren't paying attention.",
     "url": "https://medium.com/@topher416/do-our-tools-change-our-minds-1f3c631e8497",
     "image": null,
     "status": "live",
-    "tags": ["essay", "ai", "medium"]
+    "tags": [
+      "essay",
+      "ai",
+      "medium"
+    ]
   },
   {
     "id": "medium-willing-surrender",
     "title": "The Willing Surrender: What We Really Want from AI",
     "year": 2025,
     "category": "writing",
-    "description": "On what we actually want when we hand our thinking over to a machine — and why the surrender feels so good.",
+    "description": "On what we actually want when we hand our thinking over to a machine \u2014 and why the surrender feels so good.",
     "url": "https://medium.com/@topher416/the-willing-surrender-what-we-really-want-from-ai-162f584849ad",
     "image": null,
     "status": "live",
-    "tags": ["essay", "ai", "medium"]
+    "tags": [
+      "essay",
+      "ai",
+      "medium"
+    ]
   },
   {
     "id": "radiohead-invite",
     "title": "Radiohead Ensemble Invitation",
     "year": 2025,
     "category": "web-design",
-    "description": "An interactive canvas invitation for a Radiohead ensemble show at Old Town School. No static poster — the message renders through a procedural 3D tunnel with scan-line effects, noise-driven ripple animations, and glitch trails that follow your cursor. The invitation is the experience.",
+    "description": "An interactive canvas invitation for a Radiohead ensemble show at Old Town School. No static poster \u2014 the message renders through a procedural 3D tunnel with scan-line effects, noise-driven ripple animations, and glitch trails that follow your cursor. The invitation is the experience.",
     "url": "/radiohead-invite.html",
     "image": null,
     "status": "live",
-    "tags": ["canvas", "generative"]
+    "tags": [
+      "canvas",
+      "generative"
+    ]
   },
   {
     "id": "fm-noggin",
     "title": "FM Noggin",
     "year": 2026,
-    "categories": ["music", "experiments"],
-    "description": "A practice guide for learning Radiohead covers with isolated stems, sheet music, and tempo-adjusted tracks. Powered by a custom Python pipeline that uses Demucs for AI source separation — feed it a YouTube link and it spits out individual instruments at whatever speed you need.",
+    "categories": [
+      "music",
+      "experiments"
+    ],
+    "description": "A practice guide for learning Radiohead covers with isolated stems, sheet music, and tempo-adjusted tracks. Powered by a custom Python pipeline that uses Demucs for AI source separation \u2014 feed it a YouTube link and it spits out individual instruments at whatever speed you need.",
     "url": "https://fmnogg.in",
     "image": null,
     "status": "live",
-    "tags": ["next.js", "python", "demucs", "music", "audio-processing"]
+    "tags": [
+      "next.js",
+      "python",
+      "demucs",
+      "music",
+      "audio-processing"
+    ]
   },
   {
     "id": "analytic-anteroom",
     "title": "The Analytic Anteroom",
     "year": 2026,
     "category": "concept",
-    "description": "A concept proposal for a voice-based clinical training tool that uses full-duplex speech models to prepare psychotherapy trainees before their first patient hours. Not a product — a research direction exploring whether emerging voice technology can reduce the shock of first contact in clinical education.",
+    "description": "A concept proposal for a voice-based clinical training tool that uses full-duplex speech models to prepare psychotherapy trainees before their first patient hours. Not a product \u2014 a research direction exploring whether emerging voice technology can reduce the shock of first contact in clinical education.",
     "url": "/anteroom.html",
     "image": null,
     "status": "live",
-    "tags": ["psychoanalysis", "voice-ai", "clinical-training"]
+    "tags": [
+      "psychoanalysis",
+      "voice-ai",
+      "clinical-training"
+    ]
   },
   {
     "id": "structured-like-a-language",
     "title": "Structured Like a Language",
     "year": 2026,
-    "categories": ["writing", "experiments", "web-design"],
+    "categories": [
+      "writing",
+      "experiments",
+      "web-design"
+    ],
     "description": "A research project testing whether transformer LLMs structurally instantiate the operations Lacan attributed to the unconscious. Formal mappings, falsifiable predictions, and a source processing pipeline. Phase 1 of 5 in progress.",
     "url": "https://structuredlikealanguage.org",
     "image": null,
     "status": "live",
-    "tags": ["psychoanalysis", "ai", "jekyll", "research"]
+    "tags": [
+      "psychoanalysis",
+      "ai",
+      "jekyll",
+      "research"
+    ]
   },
   {
     "id": "unmastered-recordings",
@@ -241,34 +354,59 @@
     "url": "https://topherrasmussen.bandcamp.com/album/unmastered-recordings-of-unfininshed-song-fragments-loops-that-loop-too-long",
     "image": null,
     "status": "live",
-    "tags": ["lo-fi", "ambient", "loops", "slowgaze", "bandcamp"]
+    "tags": [
+      "lo-fi",
+      "ambient",
+      "loops",
+      "slowgaze",
+      "bandcamp"
+    ]
   },
-
   {
     "id": "radiohead-covers",
-    "title": "Radiohead Covers — Old Town School of Folk Music",
+    "title": "Radiohead Covers \u2014 Old Town School of Folk Music",
     "year": 2026,
-    "categories": ["music", "experiments"],
-    "description": "Full-session Radiohead ensemble performances at Old Town School of Folk Music, Szold Hall. 40+ minute live sets — multiple songs per session.",
+    "categories": [
+      "music",
+      "experiments"
+    ],
+    "description": "Full-session Radiohead ensemble performances at Old Town School of Folk Music, Szold Hall. 40+ minute live sets \u2014 multiple songs per session.",
     "videos": [
-      { "id": "hmkRxeVZ_EI", "title": "Radiohead Ensemble Session 3" },
-      { "id": "E-yYJg4qOQs", "title": "Radiohead Ensemble Session 2" },
-      { "id": "PxPT1nA3-Ns", "title": "Radiohead Ensemble Session 1" }
+      {
+        "id": "hmkRxeVZ_EI",
+        "title": "Radiohead Ensemble Session 3"
+      },
+      {
+        "id": "E-yYJg4qOQs",
+        "title": "Radiohead Ensemble Session 2"
+      },
+      {
+        "id": "PxPT1nA3-Ns",
+        "title": "Radiohead Ensemble Session 1"
+      }
     ],
     "status": "live",
-    "tags": ["radiohead", "old-town-school", "live", "covers", "ensemble"]
+    "tags": [
+      "radiohead",
+      "old-town-school",
+      "live",
+      "covers",
+      "ensemble"
+    ]
   },
-
   {
     "id": "slac-egress",
     "title": "Egress",
     "year": 2022,
     "category": "theater",
-    "description": "Man (understudy) at Salt Lake Acting Company. Directed by Colette Robert. \"I was astounded at the chemistry between the three actors on the stage, especially the interactions between Acasio and Rasmussen.\" — Brittnie Gallegos, SLUG Mag",
+    "description": "Man (understudy) at Salt Lake Acting Company. Directed by Colette Robert. \"I was astounded at the chemistry between the three actors on the stage, especially the interactions between Acasio and Rasmussen.\" \u2014 Brittnie Gallegos, SLUG Mag",
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "salt-lake-acting-company"]
+    "tags": [
+      "acting",
+      "salt-lake-acting-company"
+    ]
   },
   {
     "id": "slac-elephant-piggie",
@@ -279,7 +417,10 @@
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["directing", "salt-lake-acting-company"]
+    "tags": [
+      "directing",
+      "salt-lake-acting-company"
+    ]
   },
   {
     "id": "slac-happy-marriage",
@@ -290,7 +431,10 @@
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "salt-lake-acting-company"]
+    "tags": [
+      "acting",
+      "salt-lake-acting-company"
+    ]
   },
   {
     "id": "slac-costco",
@@ -301,7 +445,10 @@
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["directing", "salt-lake-acting-company"]
+    "tags": [
+      "directing",
+      "salt-lake-acting-company"
+    ]
   },
   {
     "id": "slac-latter-days",
@@ -312,18 +459,24 @@
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["directing", "salt-lake-acting-company"]
+    "tags": [
+      "directing",
+      "salt-lake-acting-company"
+    ]
   },
   {
     "id": "slac-voyeur",
     "title": "Saturday's Voyeur",
     "year": 2019,
     "category": "theater",
-    "description": "Dramaturg at Salt Lake Acting Company. \"Good satire speaks truthfully, and it shows, thanks to additional research Topher Rasmussen provided to assist the work of Nevins and Borgenicht.\" — Les Roka, The Utah Review",
+    "description": "Dramaturg at Salt Lake Acting Company. \"Good satire speaks truthfully, and it shows, thanks to additional research Topher Rasmussen provided to assist the work of Nevins and Borgenicht.\" \u2014 Les Roka, The Utah Review",
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["dramaturgy", "salt-lake-acting-company"]
+    "tags": [
+      "dramaturgy",
+      "salt-lake-acting-company"
+    ]
   },
   {
     "id": "planb-borderlands-sih-2019",
@@ -334,7 +487,11 @@
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "plan-b-theatre", "reading"]
+    "tags": [
+      "acting",
+      "plan-b-theatre",
+      "reading"
+    ]
   },
   {
     "id": "eva-carlston-teaching",
@@ -345,7 +502,10 @@
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["teaching", "eva-carlston-academy"]
+    "tags": [
+      "teaching",
+      "eva-carlston-academy"
+    ]
   },
   {
     "id": "slac-fun-home",
@@ -356,7 +516,11 @@
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "salt-lake-acting-company", "musical"]
+    "tags": [
+      "acting",
+      "salt-lake-acting-company",
+      "musical"
+    ]
   },
   {
     "id": "slac-lab-sparks",
@@ -367,62 +531,84 @@
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "salt-lake-acting-company", "new-play-development"]
+    "tags": [
+      "acting",
+      "salt-lake-acting-company",
+      "new-play-development"
+    ]
   },
   {
     "id": "slac-sounding-grab-them",
-    "title": "Grab Them… (New Play Sounding)",
+    "title": "Grab Them\u2026 (New Play Sounding)",
     "year": 2018,
     "category": "theater",
     "description": "Multiple roles in Jeannette Munzert's new play. Directed by Per Smedegaard. Salt Lake Acting Company New Play Sounding Series, in collaboration with Denmark's Teatret Svalegangen.",
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "salt-lake-acting-company", "new-play-development", "international"]
+    "tags": [
+      "acting",
+      "salt-lake-acting-company",
+      "new-play-development",
+      "international"
+    ]
   },
   {
     "id": "slac-harbur-gate",
     "title": "Harbur Gate",
     "year": 2017,
     "category": "theater",
-    "description": "Russo at Salt Lake Acting Company. Directed by Tamilla Woodard. \"Rasmussen and Stokes-Wylie really dig in here and turn Cahill's words into an intense jousting match that enlightens and provokes making Harbur Gate's gut-wrenching conclusion all the more powerful.\" — Jeremy Pugh, Salt Lake Magazine",
+    "description": "Russo at Salt Lake Acting Company. Directed by Tamilla Woodard. \"Rasmussen and Stokes-Wylie really dig in here and turn Cahill's words into an intense jousting match that enlightens and provokes making Harbur Gate's gut-wrenching conclusion all the more powerful.\" \u2014 Jeremy Pugh, Salt Lake Magazine",
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "salt-lake-acting-company"]
+    "tags": [
+      "acting",
+      "salt-lake-acting-company"
+    ]
   },
   {
     "id": "planb-ice-front",
     "title": "The Ice Front",
     "year": 2017,
     "category": "theater",
-    "description": "Heinrich at Plan-B Theatre Company. Directed by Jerry Rapier. \"Rasmussen's character as a soldier is strangely poignant.\" — Les Roka, The Utah Review",
+    "description": "Heinrich at Plan-B Theatre Company. Directed by Jerry Rapier. \"Rasmussen's character as a soldier is strangely poignant.\" \u2014 Les Roka, The Utah Review",
     "url": null,
     "image": "/images/theater/ice-front.jpg",
     "status": "live",
-    "tags": ["acting", "plan-b-theatre"]
+    "tags": [
+      "acting",
+      "plan-b-theatre"
+    ]
   },
   {
     "id": "stinghoney-desire-elms",
     "title": "Desire Under the Elms",
     "year": 2017,
     "category": "theater",
-    "description": "Eben at The Sting & Honey Company. Directed by Javen Tanner. \"I was enthralled with Rasmussen's performance — could feel his conflict, his pain, his passion.\" — Perry S. Whitehair, Front Row Reviewers",
+    "description": "Eben at The Sting & Honey Company. Directed by Javen Tanner. \"I was enthralled with Rasmussen's performance \u2014 could feel his conflict, his pain, his passion.\" \u2014 Perry S. Whitehair, Front Row Reviewers",
     "url": null,
     "image": "/images/theater/desire-under-the-elms.jpg",
     "status": "live",
-    "tags": ["acting", "sting-and-honey"]
+    "tags": [
+      "acting",
+      "sting-and-honey"
+    ]
   },
   {
     "id": "planb-lab-awful-men",
-    "title": "…Two Awful Men (The Lab)",
+    "title": "\u2026Two Awful Men (The Lab)",
     "year": 2017,
     "category": "theater",
     "description": "J.W. Booth in Elaine Jarvik's new play. Directed by Jerry Rapier. Plan-B Theatre Company's The Lab.",
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "plan-b-theatre", "new-play-development"]
+    "tags": [
+      "acting",
+      "plan-b-theatre",
+      "new-play-development"
+    ]
   },
   {
     "id": "planb-lab-art-class",
@@ -433,18 +619,25 @@
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "plan-b-theatre", "new-play-development"]
+    "tags": [
+      "acting",
+      "plan-b-theatre",
+      "new-play-development"
+    ]
   },
   {
     "id": "poor-bastard",
     "title": "Poor Bastard",
     "year": 2017,
     "category": "theater",
-    "description": "Produced with RIOT ACT. Whit Hertford's adaptation of Chekhov's Ivanov at Central Utah Art Center. \"Poor Bastard captures the spirit of the original in an entertaining production that overcomes its problems and makes it more accessible.\" — Barbara Bannon, Salt Lake Tribune",
+    "description": "Produced with RIOT ACT. Whit Hertford's adaptation of Chekhov's Ivanov at Central Utah Art Center. \"Poor Bastard captures the spirit of the original in an entertaining production that overcomes its problems and makes it more accessible.\" \u2014 Barbara Bannon, Salt Lake Tribune",
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["producing", "riot-act"]
+    "tags": [
+      "producing",
+      "riot-act"
+    ]
   },
   {
     "id": "avrec-melancholy-play",
@@ -455,29 +648,38 @@
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["directing", "avrec-art-house"]
+    "tags": [
+      "directing",
+      "avrec-art-house"
+    ]
   },
   {
     "id": "grassroots-revengers-tragedy",
     "title": "The Revenger's Tragedy",
     "year": 2016,
     "category": "theater",
-    "description": "Spurio with Grassroots Shakespeare Company. Collaboratively directed. \"This couple is so revolting, each using the other for their own gain and a kick to their egos, and these actors play this out very believably.\" — Jennifer Mustoe, Front Row Reviewers",
+    "description": "Spurio with Grassroots Shakespeare Company. Collaboratively directed. \"This couple is so revolting, each using the other for their own gain and a kick to their egos, and these actors play this out very believably.\" \u2014 Jennifer Mustoe, Front Row Reviewers",
     "url": null,
     "image": "/images/theater/revengers-tragedy.jpg",
     "status": "live",
-    "tags": ["acting", "grassroots-shakespeare"]
+    "tags": [
+      "acting",
+      "grassroots-shakespeare"
+    ]
   },
   {
     "id": "grassroots-antony-cleopatra",
     "title": "Antony & Cleopatra",
     "year": 2016,
     "category": "theater",
-    "description": "Antony with Grassroots Shakespeare Company. Collaboratively directed. \"Rasmussen brought a very masculine energy to the role. Rasmussen's grasp of the language afforded for ease in understanding the character.\" — Kat Webb, Utah Theatre Bloggers",
+    "description": "Antony with Grassroots Shakespeare Company. Collaboratively directed. \"Rasmussen brought a very masculine energy to the role. Rasmussen's grasp of the language afforded for ease in understanding the character.\" \u2014 Kat Webb, Utah Theatre Bloggers",
     "url": null,
     "image": "/images/theater/antony-and-cleopatra.png",
     "status": "live",
-    "tags": ["acting", "grassroots-shakespeare"]
+    "tags": [
+      "acting",
+      "grassroots-shakespeare"
+    ]
   },
   {
     "id": "grassroots-twelfth-night",
@@ -488,7 +690,10 @@
     "url": null,
     "image": "/images/theater/twelfth-night.jpg",
     "status": "live",
-    "tags": ["acting", "grassroots-shakespeare"]
+    "tags": [
+      "acting",
+      "grassroots-shakespeare"
+    ]
   },
   {
     "id": "grassroots-romeo-juliet",
@@ -499,7 +704,10 @@
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "grassroots-shakespeare"]
+    "tags": [
+      "acting",
+      "grassroots-shakespeare"
+    ]
   },
   {
     "id": "sackerson-worst-thing",
@@ -510,18 +718,25 @@
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "sackerson"]
+    "tags": [
+      "acting",
+      "sackerson"
+    ]
   },
   {
     "id": "fringe-hamlet-ophelia-2016",
     "title": "Hamlet and Ophelia Go Swimming",
     "year": 2016,
     "category": "theater",
-    "description": "Hamlet at Salt Lake Fringe Festival. Directed by Jake Suazo. Also wrote the script and composed the musical interludes. \"Rasmussen and Librizzi had excellent chemistry and played their roles earnestly and convincingly. Rasmussen's musical interludes were lovely and maintained an air of wistfulness.\" — Julia Shumway, Utah Theatre Bloggers",
+    "description": "Hamlet at Salt Lake Fringe Festival. Directed by Jake Suazo. Also wrote the script and composed the musical interludes. \"Rasmussen and Librizzi had excellent chemistry and played their roles earnestly and convincingly. Rasmussen's musical interludes were lovely and maintained an air of wistfulness.\" \u2014 Julia Shumway, Utah Theatre Bloggers",
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "playwriting", "salt-lake-fringe"]
+    "tags": [
+      "acting",
+      "playwriting",
+      "salt-lake-fringe"
+    ]
   },
   {
     "id": "slac-lab-laura-sea",
@@ -532,7 +747,11 @@
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "salt-lake-acting-company", "new-play-development"]
+    "tags": [
+      "acting",
+      "salt-lake-acting-company",
+      "new-play-development"
+    ]
   },
   {
     "id": "slac-sounding-laura-sea",
@@ -543,7 +762,11 @@
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "salt-lake-acting-company", "new-play-development"]
+    "tags": [
+      "acting",
+      "salt-lake-acting-company",
+      "new-play-development"
+    ]
   },
   {
     "id": "lark-harbur-gate",
@@ -554,7 +777,12 @@
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "the-lark", "new-play-development", "new-york"]
+    "tags": [
+      "acting",
+      "the-lark",
+      "new-play-development",
+      "new-york"
+    ]
   },
   {
     "id": "slac-rj-deathmatch",
@@ -565,7 +793,10 @@
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "salt-lake-acting-company"]
+    "tags": [
+      "acting",
+      "salt-lake-acting-company"
+    ]
   },
   {
     "id": "slac-lab-harbur-gate",
@@ -576,7 +807,11 @@
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "salt-lake-acting-company", "new-play-development"]
+    "tags": [
+      "acting",
+      "salt-lake-acting-company",
+      "new-play-development"
+    ]
   },
   {
     "id": "slac-sounding-harbur-gate",
@@ -587,7 +822,11 @@
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "salt-lake-acting-company", "new-play-development"]
+    "tags": [
+      "acting",
+      "salt-lake-acting-company",
+      "new-play-development"
+    ]
   },
   {
     "id": "slac-sounding-fermi-paradox",
@@ -598,7 +837,11 @@
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "salt-lake-acting-company", "new-play-development"]
+    "tags": [
+      "acting",
+      "salt-lake-acting-company",
+      "new-play-development"
+    ]
   },
   {
     "id": "planb-lab-floating",
@@ -609,7 +852,11 @@
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "plan-b-theatre", "new-play-development"]
+    "tags": [
+      "acting",
+      "plan-b-theatre",
+      "new-play-development"
+    ]
   },
   {
     "id": "planb-lab-quarter-horse",
@@ -620,40 +867,56 @@
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "plan-b-theatre", "new-play-development"]
+    "tags": [
+      "acting",
+      "plan-b-theatre",
+      "new-play-development"
+    ]
   },
   {
     "id": "irene-ryan-2015",
-    "title": "Irene Ryan Acting Competition — Regional Finalist",
+    "title": "Irene Ryan Acting Competition \u2014 Regional Finalist",
     "year": 2015,
     "category": "theater",
     "description": "Regional Finalist at the Kennedy Center American College Theatre Festival, Region 8.",
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["award", "kcactf"]
+    "tags": [
+      "award",
+      "kcactf"
+    ]
   },
   {
     "id": "uvu-next-to-normal",
     "title": "Next to Normal",
     "year": 2014,
     "category": "theater",
-    "description": "Gabe at Utah Valley University. Directed by Dave Tinney. Winner of the 46th annual Kennedy Center American College Theatre Festival for Outstanding Production of a Musical, Outstanding Performance and Production Ensemble. \"Rasmussen is particularly electrifying in the ironically titled 'I'm Alive.'\" — Blair Howell, Deseret News",
+    "description": "Gabe at Utah Valley University. Directed by Dave Tinney. Winner of the 46th annual Kennedy Center American College Theatre Festival for Outstanding Production of a Musical, Outstanding Performance and Production Ensemble. \"Rasmussen is particularly electrifying in the ironically titled 'I'm Alive.'\" \u2014 Blair Howell, Deseret News",
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "uvu", "musical", "award", "kcactf"]
+    "tags": [
+      "acting",
+      "uvu",
+      "musical",
+      "award",
+      "kcactf"
+    ]
   },
   {
     "id": "stinghoney-private-ear",
     "title": "The Private Ear",
     "year": 2014,
     "category": "theater",
-    "description": "Tchaik at The Sting & Honey Company. Directed by Javen Tanner. \"I found Topher Rasmussen particularly convincing as Tchaik. He expressed a wide array of sometimes conflicting emotions, and even when his ideas seemed flawed, the conviction of his expression made the character feel authentic.\" — Julia Shumway, Utah Theatre Bloggers",
+    "description": "Tchaik at The Sting & Honey Company. Directed by Javen Tanner. \"I found Topher Rasmussen particularly convincing as Tchaik. He expressed a wide array of sometimes conflicting emotions, and even when his ideas seemed flawed, the conviction of his expression made the character feel authentic.\" \u2014 Julia Shumway, Utah Theatre Bloggers",
     "url": null,
     "image": "/images/theater/private-ear.jpg",
     "status": "live",
-    "tags": ["acting", "sting-and-honey"]
+    "tags": [
+      "acting",
+      "sting-and-honey"
+    ]
   },
   {
     "id": "uvu-romeo-juliet",
@@ -664,7 +927,10 @@
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "uvu"]
+    "tags": [
+      "acting",
+      "uvu"
+    ]
   },
   {
     "id": "uvu-taming-shrew",
@@ -675,18 +941,25 @@
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "uvu"]
+    "tags": [
+      "acting",
+      "uvu"
+    ]
   },
   {
     "id": "edinburgh-hamlet-ophelia",
     "title": "Hamlet and Ophelia Go Swimming (Edinburgh)",
     "year": 2014,
     "category": "theater",
-    "description": "Directed at the Edinburgh Festival Fringe. \"Exceptional script, powerful direction.\" — Megan Librizzi",
+    "description": "Directed at the Edinburgh Festival Fringe. \"Exceptional script, powerful direction.\" \u2014 Megan Librizzi",
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["directing", "edinburgh-fringe", "international"]
+    "tags": [
+      "directing",
+      "edinburgh-fringe",
+      "international"
+    ]
   },
   {
     "id": "planb-lab-booksmart",
@@ -697,62 +970,82 @@
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "plan-b-theatre", "new-play-development"]
+    "tags": [
+      "acting",
+      "plan-b-theatre",
+      "new-play-development"
+    ]
   },
   {
     "id": "irene-ryan-2014",
-    "title": "Irene Ryan Acting Competition — Best Scene Partner",
+    "title": "Irene Ryan Acting Competition \u2014 Best Scene Partner",
     "year": 2014,
     "category": "theater",
     "description": "Best Scene Partner (Region 8) at the Kennedy Center American College Theatre Festival. Partner to National Finalist.",
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["award", "kcactf"]
+    "tags": [
+      "award",
+      "kcactf"
+    ]
   },
   {
     "id": "planb-adam-steve-sea",
     "title": "Adam & Steve & The Empty Sea",
     "year": 2013,
     "category": "theater",
-    "description": "Adam at Plan-B Theatre Company. Directed by Jason Bowcutt. \"Mr. Rasmussen creates a dedicated Adam with explicit reactions that expose his character and inherent Mormon upbringing. He is fascinating to watch as he explores unknown territory.\" — David Roberts, Theatre Reviews Limited",
+    "description": "Adam at Plan-B Theatre Company. Directed by Jason Bowcutt. \"Mr. Rasmussen creates a dedicated Adam with explicit reactions that expose his character and inherent Mormon upbringing. He is fascinating to watch as he explores unknown territory.\" \u2014 David Roberts, Theatre Reviews Limited",
     "url": null,
     "image": "/images/theater/adam-and-steve.jpg",
     "status": "live",
-    "tags": ["acting", "plan-b-theatre"]
+    "tags": [
+      "acting",
+      "plan-b-theatre"
+    ]
   },
   {
     "id": "planb-adam-steve-fringe",
-    "title": "Adam & Steve… (FringeNYC)",
+    "title": "Adam & Steve\u2026 (FringeNYC)",
     "year": 2013,
     "category": "theater",
     "description": "Adam at the New York International Fringe Festival. Directed by Jerry Rapier. Plan-B Theatre Company.",
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "plan-b-theatre", "new-york"]
+    "tags": [
+      "acting",
+      "plan-b-theatre",
+      "new-york"
+    ]
   },
   {
     "id": "grassroots-taming-shrew",
     "title": "Taming of the Shrew",
     "year": 2013,
     "category": "theater",
-    "description": "Bianca with Grassroots Shakespeare Company. Collaboratively directed. \"Rasmussen's gum-chomping valley girl Bianca was delightfully simpering, and her Twilight t-shirt was a stroke of genius.\" — Julia Shumway, Utah Theatre Bloggers",
+    "description": "Bianca with Grassroots Shakespeare Company. Collaboratively directed. \"Rasmussen's gum-chomping valley girl Bianca was delightfully simpering, and her Twilight t-shirt was a stroke of genius.\" \u2014 Julia Shumway, Utah Theatre Bloggers",
     "url": null,
     "image": "/images/theater/taming-of-the-shrew.jpg",
     "status": "live",
-    "tags": ["acting", "grassroots-shakespeare"]
+    "tags": [
+      "acting",
+      "grassroots-shakespeare"
+    ]
   },
   {
     "id": "grassroots-much-ado",
     "title": "Much Ado About Nothing",
     "year": 2013,
     "category": "theater",
-    "description": "Don John with Grassroots Shakespeare Company. Collaboratively directed. \"Rasmussen's sulky villainy as Don John paired together with hilarious synergy, and I was always thrilled to see them on stage together.\" — Julia Shumway, Utah Theatre Bloggers",
+    "description": "Don John with Grassroots Shakespeare Company. Collaboratively directed. \"Rasmussen's sulky villainy as Don John paired together with hilarious synergy, and I was always thrilled to see them on stage together.\" \u2014 Julia Shumway, Utah Theatre Bloggers",
     "url": null,
     "image": "/images/theater/much-ado.jpg",
     "status": "live",
-    "tags": ["acting", "grassroots-shakespeare"]
+    "tags": [
+      "acting",
+      "grassroots-shakespeare"
+    ]
   },
   {
     "id": "planb-sih-ghosts",
@@ -763,7 +1056,11 @@
     "url": null,
     "image": "/images/theater/ghosts.jpg",
     "status": "live",
-    "tags": ["acting", "plan-b-theatre", "reading"]
+    "tags": [
+      "acting",
+      "plan-b-theatre",
+      "reading"
+    ]
   },
   {
     "id": "uvu-letters-myself",
@@ -774,18 +1071,25 @@
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "uvu"]
+    "tags": [
+      "acting",
+      "uvu"
+    ]
   },
   {
     "id": "slac-course-86b",
     "title": "Course 86B In the Catalogue",
     "year": 2012,
     "category": "theater",
-    "description": "Sterling at Salt Lake Acting Company. Directed by Tracy Callahan. Winner of City Weekly's \"Best Chewing of Scenery — Literal Division.\" \"Rasmussen found his inner ape and gave himself over to the role with such uninhibited joy and abandon it was difficult to believe such a young talent has already developed sufficient range to paradoxically infuse such an over-the-top performance with so much perceptivity and tenderness.\"",
+    "description": "Sterling at Salt Lake Acting Company. Directed by Tracy Callahan. Winner of City Weekly's \"Best Chewing of Scenery \u2014 Literal Division.\" \"Rasmussen found his inner ape and gave himself over to the role with such uninhibited joy and abandon it was difficult to believe such a young talent has already developed sufficient range to paradoxically infuse such an over-the-top performance with so much perceptivity and tenderness.\"",
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "salt-lake-acting-company", "award"]
+    "tags": [
+      "acting",
+      "salt-lake-acting-company",
+      "award"
+    ]
   },
   {
     "id": "planb-sih-mormoninchief",
@@ -796,7 +1100,11 @@
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "plan-b-theatre", "reading"]
+    "tags": [
+      "acting",
+      "plan-b-theatre",
+      "reading"
+    ]
   },
   {
     "id": "planb-sih-8",
@@ -807,40 +1115,54 @@
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "plan-b-theatre", "reading"]
+    "tags": [
+      "acting",
+      "plan-b-theatre",
+      "reading"
+    ]
   },
   {
     "id": "planb-sih-adam-steve",
-    "title": "Adam & Steve… (Script-In-Hand)",
+    "title": "Adam & Steve\u2026 (Script-In-Hand)",
     "year": 2012,
     "category": "theater",
     "description": "Adam in Matthew Greene's play. Directed by Jerry Rapier. Plan-B Theatre Company, performed at OUTreach's LGBTQ Youth Summit.",
     "url": null,
     "image": "/images/theater/lgbtq-outreach.jpg",
     "status": "live",
-    "tags": ["acting", "plan-b-theatre", "reading"]
+    "tags": [
+      "acting",
+      "plan-b-theatre",
+      "reading"
+    ]
   },
   {
     "id": "uvu-waiting",
     "title": "Waiting",
     "year": 2012,
     "category": "theater",
-    "description": "Mr. Nelson at Utah Valley University. Directed by Nick Groissant. \"I don't know how he did it, but Rasmussen made me care about his character, even though I actually knew little about what he was like during his lifetime. That's a pretty remarkable accomplishment for any actor.\" — Russell Warne, Utah Theatre Bloggers",
+    "description": "Mr. Nelson at Utah Valley University. Directed by Nick Groissant. \"I don't know how he did it, but Rasmussen made me care about his character, even though I actually knew little about what he was like during his lifetime. That's a pretty remarkable accomplishment for any actor.\" \u2014 Russell Warne, Utah Theatre Bloggers",
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "uvu"]
+    "tags": [
+      "acting",
+      "uvu"
+    ]
   },
   {
     "id": "planb-borderlands",
     "title": "Borderlands",
     "year": 2011,
     "category": "theater",
-    "description": "Brian at Plan-B Theatre Company. Directed by Jerry Rapier. \"It's actor Topher Rasmussen who kicks the drama into high gear. He's the spike-haired, tight-jeaned Brian, a 17-year-old sent by his parents from South Carolina to his aunt Gail to 'straighten out' his sexuality. … Austere with a trace of snark, he never lapsed into conceit that would have diminished the play's final effects.\" — Ben Fulton, Salt Lake Tribune",
+    "description": "Brian at Plan-B Theatre Company. Directed by Jerry Rapier. \"It's actor Topher Rasmussen who kicks the drama into high gear. He's the spike-haired, tight-jeaned Brian, a 17-year-old sent by his parents from South Carolina to his aunt Gail to 'straighten out' his sexuality. \u2026 Austere with a trace of snark, he never lapsed into conceit that would have diminished the play's final effects.\" \u2014 Ben Fulton, Salt Lake Tribune",
     "url": null,
     "image": "/images/theater/borderlands.jpg",
     "status": "live",
-    "tags": ["acting", "plan-b-theatre"]
+    "tags": [
+      "acting",
+      "plan-b-theatre"
+    ]
   },
   {
     "id": "grassroots-macbeth",
@@ -851,7 +1173,10 @@
     "url": null,
     "image": "/images/theater/macbeth.jpg",
     "status": "live",
-    "tags": ["acting", "grassroots-shakespeare"]
+    "tags": [
+      "acting",
+      "grassroots-shakespeare"
+    ]
   },
   {
     "id": "planb-sih-borderlands-2009",
@@ -862,7 +1187,11 @@
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "plan-b-theatre", "reading"]
+    "tags": [
+      "acting",
+      "plan-b-theatre",
+      "reading"
+    ]
   },
   {
     "id": "uvu-something-wicked",
@@ -873,17 +1202,23 @@
     "url": null,
     "image": null,
     "status": "live",
-    "tags": ["acting", "uvu"]
+    "tags": [
+      "acting",
+      "uvu"
+    ]
   },
   {
     "id": "stinghoney-bird-dawning",
-    "title": "This Bird of Dawning Singeth…",
+    "title": "This Bird of Dawning Singeth\u2026",
     "year": 2008,
     "category": "theater",
     "description": "Multiple roles at The Sting & Honey Company. Directed by Javen Tanner.",
     "url": null,
     "image": "/images/theater/bird-of-dawning.jpg",
     "status": "live",
-    "tags": ["acting", "sting-and-honey"]
+    "tags": [
+      "acting",
+      "sting-and-honey"
+    ]
   }
 ]

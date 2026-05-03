@@ -2,9 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://topherrasmussen.com/</loc>
-    <lastmod>2026-05-02</lastmod>
+    <lastmod>2026-05-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://topherrasmussen.com/start-here.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://topherrasmussen.com/journal.html</loc>
@@ -57,7 +62,7 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://topherrasmussen.com/horrortarot.html</loc>
+    <loc>https://topherrasmussen.com/horrortarot/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>

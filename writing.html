@@ -43,6 +43,19 @@
         .writing-card__open {
             display: none;
         }
+        .writing-card--start-here {
+            border: 2px solid var(--accent);
+            background: var(--bg-card);
+        }
+        .writing-card__start-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
         @media (max-width: 768px) {
             .writing-card__pdf { display: none; }
             .writing-card--has-pdf { padding-bottom: clamp(24px, 4vw, 36px); }
@@ -69,6 +82,7 @@
         <a href="/" class="room-nav__home">TR</a>
         <a href="/theater.html" class="room-nav__link">Theater</a>
         <a href="/writing.html" class="room-nav__link room-nav__link--active">Writing</a>
+        <a href="/start-here.html" class="room-nav__link">Start Here</a>
         <a href="/music.html" class="room-nav__link">Music</a>
         <a href="/journal.html" class="room-nav__link">Journal</a>
         <a href="/visual.html" class="room-nav__link">Visual</a>
@@ -96,14 +110,19 @@
         var html = '';
 
         entries.forEach(function (entry) {
+            var isStartHere = entry.id === 'start-here';
             var isComingSoon = entry.status === 'coming-soon';
             var hasPdf = !!entry.pdf;
-            html += '<div class="writing-card' + (hasPdf ? ' writing-card--has-pdf' : '') + '">';
+            html += '<div class="writing-card' + (hasPdf ? ' writing-card--has-pdf' : '') + (isStartHere ? ' writing-card--start-here' : '') + '">';
+
+            if (isStartHere) {
+                html += '<div class="writing-card__start-label">The Throughline</div>';
+            }
 
             if (entry.url && !isComingSoon) {
                 var external = entry.url.indexOf('http') === 0;
                 var target = external ? ' target="_blank" rel="noopener noreferrer"' : '';
-                html += '<h3 class="writing-card__title"><a href="' + entry.url + '"' + target + '>' + entry.title + '</a></h3>';
+                html += '<h3 class="writing-card__title"><a href="' + entry.url + '"' + target + '>' + entry.title + '</a>' + (external ? ' <span class="entry__tag">External</span>' : '') + '</h3>';
             } else {
                 html += '<h3 class="writing-card__title">' + entry.title + (isComingSoon ? ' <span class="entry__tag">Coming soon</span>' : '') + '</h3>';
             }
