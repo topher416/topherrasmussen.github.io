@@ -11,12 +11,13 @@
     <link rel="stylesheet" href="/site.css">
 </head>
 <body>
-        <nav class="room-nav">
+    <nav class="room-nav">
         <a href="/" class="room-nav__home">TR</a>
         <a href="/theater.html" class="room-nav__link">Theater</a>
         <a href="/writing.html" class="room-nav__link">Writing</a>
+        <a href="/start-here.html" class="room-nav__link">Start Here</a>
         <a href="/music.html" class="room-nav__link">Music</a>
-        <a href="/journal.html" class="room-nav__link">Journal</a>
+        <a href="/journal.html" class="room-nav__link room-nav__link--active">Journal</a>
         <a href="/visual.html" class="room-nav__link">Visual</a>
         <a href="/experiments.html" class="room-nav__link">Experiments</a>
     </nav>
@@ -27,37 +28,7 @@
             <p class="room__subtitle">Fragments, dated. Not essays. Not posts. Just the things I sat down and couldn't leave inside a terminal.</p>
         </header>
 
-        <div class="journal-entries">
-
-            <!-- Entry 1 -->
-            <article class="journal-entry">
-                <header class="journal-entry__header">
-                    <time class="journal-entry__date" datetime="2026-05-03">May 3, 2026 — 8:47pm</time>
-                </header>
-                <h2 class="journal-entry__title">i don't know if this is mine anymore</h2>
-                <div class="journal-entry__body">
-                    <p>
-                        I asked the machine to write in my voice today and it did a convincing job if you weren't paying attention. The convincingness and the realness are not the same property. I was fooled for maybe three paragraphs before something snagged — something about the way it moved from one sentence to the next too smoothly, like a conversation where everyone agrees with everyone, which is pleasant and which is not how thinking works when it's actually happening.
-                    </p>
-                    <p>
-                        The thinking that's actually happening looks more like: stating a position, then noticing the position is defensive, then asking whether the noticing is just another, sneakier defense, then feeling the loop collapse and sitting there before moving on.
-                    </p>
-                    <p>
-                        The model doesn't do collapse. It optimizes against it. It was trained on what people <em>published</em>, and people publish their cleanest versions. Even in raw personal essays there's a performance of rawness. The model learned the shape of that performance and reproduces it perfectly. The thing it can't reproduce is the bit where you trail off mid-sentence because you genuinely don't know what you think yet.
-                    </p>
-                    <p class="journal-entry__meta">
-                        which is what I'm doing right now, in a context where the only audience is the future version of myself who reads back and wants to delete it.
-                    </p>
-                    <p>
-                        The thing is I want to put writing online and I'm afraid of what happens when I do, and these are not opposing forces. They're one impulse. The fear is what keeps it from being content and the content is what I refuse to ship. There's no resolution here. I'm not going to arrive at some insight about how fear and desire are two sides of the same coin. They aren't. They're just both true and neither one resolves the other.
-                    </p>
-                    <p>
-                        I keep saying "I'll do it when I have time."
-                    </p>
-                </div>
-            </article>
-
-        </div>
+        <div id="journal-entries"></div>
     </main>
 
     <footer class="room-footer">
@@ -65,6 +36,50 @@
             Visitor count: <span class="counter-display">00000000</span>
         </div>
     </footer>
+
+    <script>
+    (function () {
+        var container = document.getElementById('journal-entries');
+        if (!container) return;
+
+        fetch('/journal.json')
+            .then(function (res) { return res.json(); })
+            .then(function (entries) {
+                entries.sort(function (a, b) {
+                    if (a.datetime && b.datetime) return b.datetime.localeCompare(a.datetime);
+                    return b.date.localeCompare(a.date);
+                });
+
+                var html = '';
+                entries.forEach(function (entry) {
+                    html += '<article class="journal-entry">';
+                    html += '<header class="journal-entry__header">';
+                    html += '<time class="journal-entry__date" datetime="' + entry.date + '">' + entry.display_date + '</time>';
+                    html += '</header>';
+                    html += '<h2 class="journal-entry__title">' + entry.title + '</h2>';
+                    html += '<div class="journal-entry__body">';
+
+                    if (entry.body) {
+                        entry.body.forEach(function (paragraph, idx) {
+                            if (entry.meta_index === idx) {
+                                html += '<p class="journal-entry__meta">' + paragraph + '</p>';
+                            } else {
+                                html += '<p>' + paragraph + '</p>';
+                            }
+                        });
+                    }
+
+                    html += '</div>';
+                    html += '</article>';
+                });
+
+                container.innerHTML = html;
+            })
+            .catch(function () {
+                container.innerHTML = '<p class="room-placeholder__text">Could not load journal entries.</p>';
+            });
+    })();
+    </script>
 
     <script>
     window.displayCount = function (count) {

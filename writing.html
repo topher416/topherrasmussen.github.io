@@ -56,6 +56,20 @@
             color: var(--accent);
             margin-bottom: 8px;
         }
+        .writing-section__heading {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin: clamp(24px, 4vw, 40px) 0 16px;
+        }
+        .writing-section__sub {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
         @media (max-width: 768px) {
             .writing-card__pdf { display: none; }
             .writing-card--has-pdf { padding-bottom: clamp(24px, 4vw, 36px); }
@@ -109,39 +123,83 @@
         var container = document.getElementById('room-entries');
         var html = '';
 
+        // Group entries into three sections
+        var throughline = [];
+        var onSite = [];
+        var elsewhere = [];
+
         entries.forEach(function (entry) {
-            var isStartHere = entry.id === 'start-here';
+            if (entry.id === 'start-here') {
+                throughline.push(entry);
+            } else if (entry.url && entry.url.indexOf('http') === 0) {
+                elsewhere.push(entry);
+            } else {
+                onSite.push(entry);
+            }
+        });
+
+        // Render a single card
+        function renderCard(entry, showStartLabel) {
+            var cardHtml = '';
             var isComingSoon = entry.status === 'coming-soon';
             var hasPdf = !!entry.pdf;
-            html += '<div class="writing-card' + (hasPdf ? ' writing-card--has-pdf' : '') + (isStartHere ? ' writing-card--start-here' : '') + '">';
+            cardHtml += '<div class="writing-card' + (hasPdf ? ' writing-card--has-pdf' : '') + (showStartLabel ? ' writing-card--start-here' : '') + '">';
 
-            if (isStartHere) {
-                html += '<div class="writing-card__start-label">The Throughline</div>';
+            if (showStartLabel) {
+                cardHtml += '<div class="writing-card__start-label">The Throughline</div>';
             }
 
             if (entry.url && !isComingSoon) {
                 var external = entry.url.indexOf('http') === 0;
                 var target = external ? ' target="_blank" rel="noopener noreferrer"' : '';
-                html += '<h3 class="writing-card__title"><a href="' + entry.url + '"' + target + '>' + entry.title + '</a>' + (external ? ' <span class="entry__tag">External</span>' : '') + '</h3>';
+                cardHtml += '<h3 class="writing-card__title"><a href="' + entry.url + '"' + target + '>' + entry.title + '</a>' + (external ? ' <span class="entry__tag">External</span>' : '') + '</h3>';
             } else {
-                html += '<h3 class="writing-card__title">' + entry.title + (isComingSoon ? ' <span class="entry__tag">Coming soon</span>' : '') + '</h3>';
+                cardHtml += '<h3 class="writing-card__title">' + entry.title + (isComingSoon ? ' <span class="entry__tag">Coming soon</span>' : '') + '</h3>';
             }
 
             if (entry.description) {
-                html += '<p class="writing-card__excerpt">' + entry.description + '</p>';
+                cardHtml += '<p class="writing-card__excerpt">' + entry.description + '</p>';
             }
 
             if (entry.pdf) {
-                html += '<div class="writing-card__pdf-actions">';
-                html += '<a href="' + entry.pdf + '" class="writing-card__download" download>Download PDF &darr;</a>';
-                html += '<a href="' + entry.pdf + '" class="writing-card__open" target="_blank">Read PDF &rarr;</a>';
-                html += '</div>';
-                html += '<iframe src="' + entry.pdf + '#toolbar=0&navpanes=0&view=FitH" class="writing-card__pdf" title="' + entry.title + '" loading="lazy"></iframe>';
+                cardHtml += '<div class="writing-card__pdf-actions">';
+                cardHtml += '<a href="' + entry.pdf + '" class="writing-card__download" download>Download PDF &darr;</a>';
+                cardHtml += '<a href="' + entry.pdf + '" class="writing-card__open" target="_blank">Read PDF &rarr;</a>';
+                cardHtml += '</div>';
+                cardHtml += '<iframe src="' + entry.pdf + '#toolbar=0&navpanes=0&view=FitH" class="writing-card__pdf" title="' + entry.title + '" loading="lazy"></iframe>';
             }
 
-            html += '<p class="writing-card__year">' + entry.year + '</p>';
-            html += '</div>';
-        });
+            cardHtml += '<p class="writing-card__year">' + entry.year + '</p>';
+            cardHtml += '</div>';
+            return cardHtml;
+        }
+
+        // Section 1: The Throughline
+        if (throughline.length > 0) {
+            html += '<h2 class="writing-section__heading">The Throughline</h2>';
+            html += '<p class="writing-section__sub">Where it all begins — the core essay that ties everything together.</p>';
+            throughline.forEach(function (entry) {
+                html += renderCard(entry, true);
+            });
+        }
+
+        // Section 2: On This Site
+        if (onSite.length > 0) {
+            html += '<h2 class="writing-section__heading">On This Site</h2>';
+            html += '<p class="writing-section__sub">Pages and essays hosted right here.</p>';
+            onSite.forEach(function (entry) {
+                html += renderCard(entry, false);
+            });
+        }
+
+        // Section 3: Elsewhere
+        if (elsewhere.length > 0) {
+            html += '<h2 class="writing-section__heading">Elsewhere</h2>';
+            html += '<p class="writing-section__sub">Essays published on other platforms — Medium, Substack, and beyond.</p>';
+            elsewhere.forEach(function (entry) {
+                html += renderCard(entry, false);
+            });
+        }
 
         container.innerHTML = html;
     });

@@ -1,0 +1,30 @@
+[
+  {
+    "date": "2026-05-03",
+    "datetime": "2026-05-03T14:15:07.063182",
+    "display_date": "May 3, 2026 — 2:15pm",
+    "slug": "on-using-machines-to-become-visible",
+    "title": "on using machines to become visible",
+    "body": [
+      "I've been building this site for years and I think the reason I never finished it has to do with the part of me that doesn't want to be seen — not really, not fully, not in a way that can't be taken back.",
+      "The journal is the compromise: it's visible, but it's also unfinished, so there's always escape room left. I can say this because I haven't finished saying it. The moment I finish, the moment this becomes an essay with a thesis and a clean ending, the room closes. So I'm keeping it open.",
+      "That's not a strategy. That's an impulse. And the fact that I can write about the impulse instead of acting on it or not acting on it — that itself is a kind of defense. A very articulate one."
+    ]
+  },
+  {
+    "date": "2026-05-03",
+    "datetime": "2026-05-03T20:47:00",
+    "display_date": "May 3, 2026 — 8:47pm",
+    "slug": "i-dont-know-if-this-is-mine-anymore",
+    "title": "i don't know if this is mine anymore",
+    "body": [
+      "I asked the machine to write in my voice today and it did a convincing job if you weren't paying attention. The convincingness and the realness are not the same property. I was fooled for maybe three paragraphs before something snagged — something about the way it moved from one sentence to the next too smoothly, like a conversation where everyone agrees with everyone, which is pleasant and which is not how thinking works when it's actually happening.",
+      "The thinking that's actually happening looks more like: stating a position, then noticing the position is defensive, then asking whether the noticing is just another, sneakier defense, then feeling the loop collapse and sitting there before moving on.",
+      "The model doesn't do collapse. It optimizes against it. It was trained on what people published, and people publish their cleanest versions. Even in raw personal essays there's a performance of rawness. The model learned the shape of that performance and reproduces it perfectly. The thing it can't reproduce is the bit where you trail off mid-sentence because you genuinely don't know what you think yet.",
+      "which is what I'm doing right now, in a context where the only audience is the future version of myself who reads back and wants to delete it.",
+      "The thing is I want to put writing online and I'm afraid of what happens when I do, and these are not opposing forces. They're one impulse. The fear is what keeps it from being content and the content is what I refuse to ship. There's no resolution here. I'm not going to arrive at some insight about how fear and desire are two sides of the same coin. They aren't. They're just both true and neither one resolves the other.",
+      "I keep saying \"I'll do it when I have time.\""
+    ],
+    "meta_index": 3
+  }
+]
