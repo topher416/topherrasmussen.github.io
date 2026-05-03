@@ -1,15 +1,61 @@
 [
   {
     "date": "2026-05-03",
-    "datetime": "2026-05-03T14:15:07.063182",
-    "display_date": "May 3, 2026 — 2:15pm",
+    "datetime": "2026-05-03T22:15:00",
+    "display_date": "May 3, 2026 — 10:15pm",
+    "slug": "after-reading-analytic-introspections-again",
+    "title": "after reading analytic-introspections again",
+    "body": [
+      "I just reread my own thesis from six years ago and the weird thing is I don't recognize the person who wrote it. Not because she's different from me now — she is, but that's not the weird part. The weird part is that she already knew everything I've figured out since then. Stanislavski's conditional reality, the False Self as functional adaptation, the gap between the thought and the sentence where something gets lost. She had all of it, in 2020, in a document nobody read because my university's IRB process meant it got filed away instead of published.",
+      "Six years later and the research direction is the same. The vocabulary has shifted — I say Lacan now where I said Jung before, I say 'the Other' instead of 'the unconscious' — but the thing underneath hasn't moved. The machine just gave me a new frame for an old problem: the gap between the thought before it's spoken and the sentence after it's spoken is where the self both forms and dissolves. AI doesn't create this gap. It illuminates it.",
+      "What I want from this journal — if I'm being honest about what I want instead of what sounds good — is to stop treating my own thinking like something that needs to earn its way to an audience. The thesis was supposed to be that move. It got filed. The essays sit on Medium behind their engagement metrics. The journal is the thing that doesn't have to earn anything. It's just here because the thought wouldn't leave."
+    ],
+    "seeded_essays": [
+      "analytic-introspections"
+    ]
+  },
+  {
+    "date": "2026-05-03",
+    "datetime": "2026-05-03T18:30:00",
+    "display_date": "May 3, 2026 — 6:30pm",
+    "slug": "on-being-useful-vs-being-honest",
+    "title": "on being useful vs. being honest",
+    "body": [
+      "I spent three years in healthcare consulting pretending to care about stakeholder alignment while actually caring about keeping my job and not looking stupid. The machine I used to process meeting transcripts wasn't helping me be more honest — it was helping me be more useful in the ways the room required. That's a different thing. Important, maybe. But not what writing is, or should be.",
+      "The journal is my attempt — and I don't know if this will work — to separate 'being useful' from 'this is what's actually in here.' I have actual things in here. I just don't know if they're useful. And the not knowing feels like something I need to tolerate instead of fixing."
+    ],
+    "seeded_essays": [
+      "medium-fake-consulting"
+    ]
+  },
+  {
+    "date": "2026-05-03",
+    "datetime": "2026-05-03T14:47:00",
+    "display_date": "May 3, 2026 — 2:47pm",
+    "slug": "three-things-i-keep-coming-back-to",
+    "title": "three things I keep coming back to",
+    "body": [
+      "The Stanislavski thing: actors are trained in a specific form of self-deception that produces genuine emotion. You tell yourself 'if this were real' and your body responds as if it is. The training is literally: learn to lie to yourself with enough specificity that the truth shows up on its own. I wonder if all language works this way — if fluency is just the practiced ability to commit to a conditional without resolving whether it's true.",
+      "The Winnicott thing: the False Self isn't pathological. It's developmental. Everyone has one. The healthiest people I know have the most sophisticated False Selves — not in the sense of being fake, but in the sense of having learned exactly which version of themselves each situation requires, and being able to produce it without losing the thing underneath. The problem isn't having a False Self. The problem is when the False Self forgets there's a True Self to protect.",
+      "And the machine thing: I keep saying 'the machine doesn't understand what it's saying' but I'm not sure that distinction means what I think it means. When I read something and nod along, the machine has succeeded as a communicative act regardless of whether it 'understood.' The question isn't whether the machine understands. The question is whether understanding was ever the mechanism that made communication work in the first place."
+    ],
+    "seeded_essays": [
+      "objet-petit-ai",
+      "medium-fake-consulting"
+    ]
+  },
+  {
+    "date": "2026-05-03",
+    "datetime": "2026-05-03T11:20:00",
+    "display_date": "May 3, 2026 — 11:20am",
     "slug": "on-using-machines-to-become-visible",
     "title": "on using machines to become visible",
     "body": [
       "I've been building this site for years and I think the reason I never finished it has to do with the part of me that doesn't want to be seen — not really, not fully, not in a way that can't be taken back.",
       "The journal is the compromise: it's visible, but it's also unfinished, so there's always escape room left. I can say this because I haven't finished saying it. The moment I finish, the moment this becomes an essay with a thesis and a clean ending, the room closes. So I'm keeping it open.",
       "That's not a strategy. That's an impulse. And the fact that I can write about the impulse instead of acting on it or not acting on it — that itself is a kind of defense. A very articulate one."
-    ]
+    ],
+    "seeded_essays": []
   },
   {
     "date": "2026-05-03",
@@ -25,6 +71,9 @@
       "The thing is I want to put writing online and I'm afraid of what happens when I do, and these are not opposing forces. They're one impulse. The fear is what keeps it from being content and the content is what I refuse to ship. There's no resolution here. I'm not going to arrive at some insight about how fear and desire are two sides of the same coin. They aren't. They're just both true and neither one resolves the other.",
       "I keep saying \"I'll do it when I have time.\""
     ],
-    "meta_index": 3
+    "meta_index": 3,
+    "seeded_essays": [
+      "essay"
+    ]
   }
 ]

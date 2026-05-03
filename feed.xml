@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Topher Rasmussen — Writing &amp; Journal</title>
+  <link>https://topherrasmussen.com/</link>
+  <description>Essays on psychoanalysis, AI, authorship, and the gap between understanding yourself and actually living.</description>
+  <language>en-us</language>
+  <atom:link href="https://topherrasmussen.com/feed.xml" rel="self" type="application/rss+xml"/>
+  <lastBuildDate>2026-05-03 22:15:00 -0500</lastBuildDate>
+
+  <item>
+    <title>after reading analytic-introspections again</title>
+    <link>https://topherrasmussen.com/journal.html#after-reading-analytic-introspections-again</link>
+    <guid>journal-after-reading-analytic-introspections-again</guid>
+    <pubDate>2026-05-03 22:15:00 -0500</pubDate>
+    <description>I just reread my own thesis from six years ago and the weird thing is I don't recognize the person who wrote it. Not because she's different from me now — she is, but that's not the weird part. The we</description>
+    <category>Journal</category>
+  </item>
+  <item>
+    <title>i don't know if this is mine anymore</title>
+    <link>https://topherrasmussen.com/journal.html#i-dont-know-if-this-is-mine-anymore</link>
+    <guid>journal-i-dont-know-if-this-is-mine-anymore</guid>
+    <pubDate>2026-05-03 20:47:00 -0500</pubDate>
+    <description>I asked the machine to write in my voice today and it did a convincing job if you weren't paying attention. The convincingness and the realness are not the same property. I was fooled for maybe three </description>
+    <category>Journal</category>
+  </item>
+  <item>
+    <title>on being useful vs. being honest</title>
+    <link>https://topherrasmussen.com/journal.html#on-being-useful-vs-being-honest</link>
+    <guid>journal-on-being-useful-vs-being-honest</guid>
+    <pubDate>2026-05-03 18:30:00 -0500</pubDate>
+    <description>I spent three years in healthcare consulting pretending to care about stakeholder alignment while actually caring about keeping my job and not looking stupid. The machine I used to process meeting tra</description>
+    <category>Journal</category>
+  </item>
+  <item>
+    <title>three things I keep coming back to</title>
+    <link>https://topherrasmussen.com/journal.html#three-things-i-keep-coming-back-to</link>
+    <guid>journal-three-things-i-keep-coming-back-to</guid>
+    <pubDate>2026-05-03 14:47:00 -0500</pubDate>
+    <description>The Stanislavski thing: actors are trained in a specific form of self-deception that produces genuine emotion. You tell yourself 'if this were real' and your body responds as if it is. The training is</description>
+    <category>Journal</category>
+  </item>
+  <item>
+    <title>on using machines to become visible</title>
+    <link>https://topherrasmussen.com/journal.html#on-using-machines-to-become-visible</link>
+    <guid>journal-on-using-machines-to-become-visible</guid>
+    <pubDate>2026-05-03 11:20:00 -0500</pubDate>
+    <description>I've been building this site for years and I think the reason I never finished it has to do with the part of me that doesn't want to be seen — not really, not fully, not in a way that can't be taken b</description>
+    <category>Journal</category>
+  </item>
+  <item>
+    <title>Start Here: The Throughline</title>
+    <link>https://topherrasmussen.com/start-here.html</link>
+    <guid>writing-start-here</guid>
+    <pubDate>2026-01-01 00:00:00 -0500</pubDate>
+    <description>What this work is actually about — the gap between intention and expression, from Stanislavski's magic if through Lacan's Other to AI as co-author. The arc of the work in one place.</description>
+    <category>Essay</category>
+  </item>
+  <item>
+    <title>Structured Like a Language</title>
+    <link>https://structuredlikealanguage.org</link>
+    <guid>writing-structured-like-a-language</guid>
+    <pubDate>2026-01-01 00:00:00 -0500</pubDate>
+    <description>A research project testing whether transformer LLMs structurally instantiate the operations Lacan attributed to the unconscious. Formal mappings, falsifiable predictions, and a source processing pipel</description>
+    <category>Essay</category>
+  </item>
+  <item>
+    <title>The Map and the Territory: Five Parables</title>
+    <link>https://topherrasmussen.com/map-territory.html</link>
+    <guid>writing-map-territory</guid>
+    <pubDate>2025-01-01 00:00:00 -0500</pubDate>
+    <description>Five parables about the gap between understanding yourself and actually living — a cartographer who can't stop mapping, a man made entirely of wounds, an analyst who analyzes the analysis. Psychoanaly</description>
+    <category>Essay</category>
+  </item>
+  <item>
+    <title>The Fantasy of Machine-Assisted Authorship</title>
+    <link>https://topherrasmussen.com/essay.html</link>
+    <guid>writing-machine-authorship</guid>
+    <pubDate>2025-01-01 00:00:00 -0500</pubDate>
+    <description>An essay about what gets lost when you let a machine write your sentences — written, deliberately, with the help of several machines. Introduces the idea of &quot;linguistic money laundering&quot; for what happ</description>
+    <category>Essay</category>
+  </item>
+  <item>
+    <title>objet petit a(i): Desire and Lack in the Age of Machine-Assisted Authorship</title>
+    <link>https://topherrasmussen.com/objet-petit-ai.html</link>
+    <guid>writing-objet-petit-ai</guid>
+    <pubDate>2025-01-01 00:00:00 -0500</pubDate>
+    <description>A 111-page psychoanalytic examination of what happens to the writing subject when AI enters the process. Covers the writerly unconscious, AI as narcissistic object, the illusion of intersubjectivity, </description>
+    <category>Essay</category>
+  </item>
+  <item>
+    <title>The Spectral Author: LLMs and the Liminal Space of AI-Human Writing</title>
+    <link>https://gh0stwriting.substack.com/p/the-spectral-author</link>
+    <guid>writing-substack-spectral-author</guid>
+    <pubDate>2025-01-01 00:00:00 -0500</pubDate>
+    <description>On the &quot;spectral author&quot; — a presence that exists between human and machine creation. Draws on Barthes, Benjamin, and Bloom to argue that AI doesn't eliminate human creativity but reconfigures it into</description>
+    <category>Essay</category>
+  </item>
+  <item>
+    <title>On AI, Psychoanalysis, and the Mediated Self</title>
+    <link>https://medium.com/@topher416/on-ai-psychoanalysis-and-the-mediated-self-e1ef152f781e</link>
+    <guid>writing-medium-ai-psychoanalysis-mediated-self</guid>
+    <pubDate>2025-01-01 00:00:00 -0500</pubDate>
+    <description>An exploration of how AI exposes the fragility of our belief in unique subjectivity. If an algorithm can mimic speech patterns, anticipate desires, and produce texts indistinguishable from human writi</description>
+    <category>Essay</category>
+  </item>
+  <item>
+    <title>Notes from the Slop Bucket</title>
+    <link>https://medium.com/@topher416/notes-from-the-slop-bucket-023ff889a76c</link>
+    <guid>writing-medium-notes-slop-bucket</guid>
+    <pubDate>2025-01-01 00:00:00 -0500</pubDate>
+    <description>On the term &quot;AI slop&quot; — the smooth, soulless, indistinct writing that comes out of machines — and the shame of needing help from one. An essay about writing with AI and feeling conflicted about the ex</description>
+    <category>Essay</category>
+  </item>
+  <item>
+    <title>The Pleasure of the Recursive Machine: On Loops, Language, and the Desire for Meaning</title>
+    <link>https://medium.com/@topher416/the-pleasure-of-the-recursive-machine-on-loops-language-and-the-desire-for-meaning-1581394d1b6f</link>
+    <guid>writing-medium-pleasure-recursive-machine</guid>
+    <pubDate>2025-01-01 00:00:00 -0500</pubDate>
+    <description>We return to language models not for answers but for the recursive pleasure of the exchange itself. The loop is not simply a structure of repetition — it is the very form of our desire. An essay on jo</description>
+    <category>Essay</category>
+  </item>
+  <item>
+    <title>The Illusion of AI Therapy: A Critical Examination of Its State and Limitations</title>
+    <link>https://medium.com/@topher416/the-illusion-of-ai-therapy-a-critical-examination-of-its-state-and-limitations-143fd08e6748</link>
+    <guid>writing-medium-illusion-ai-therapy</guid>
+    <pubDate>2025-01-01 00:00:00 -0500</pubDate>
+    <description>A critical examination of AI therapy — what it promises, what it actually delivers, and why the illusion of care is not the same as care. Written from the perspective of a licensed social worker who t</description>
+    <category>Essay</category>
+  </item>
+  <item>
+    <title>Fragments from the Mirror: An Attempt at Honest Reflection</title>
+    <link>https://medium.com/@topher416/fragments-from-the-mirror-an-attempt-at-honest-reflection-3c6a0717a219</link>
+    <guid>writing-medium-fragments-mirror</guid>
+    <pubDate>2025-01-01 00:00:00 -0500</pubDate>
+    <description>An attempt at honest self-reflection — the kind that resists the temptation to turn introspection into performance.</description>
+    <category>Essay</category>
+  </item>
+  <item>
+    <title>Between Making and Reading: A Personal Exploration of Artificial Intelligence</title>
+    <link>https://medium.com/@topher416/between-making-and-reading-a-personal-exploration-of-artificial-intelligence-263d1b984f99</link>
+    <guid>writing-medium-between-making-reading</guid>
+    <pubDate>2025-01-01 00:00:00 -0500</pubDate>
+    <description>A personal exploration of what it means to make things and read things in an era where AI sits between the two — blurring the line between authorship and consumption.</description>
+    <category>Essay</category>
+  </item>
+  <item>
+    <title>The Subject Supposed to Write: A Lacanian Analysis of AI Writing Assistance</title>
+    <link>https://medium.com/@topher416/the-subject-supposed-to-write-a-lacanian-analysis-of-ai-writing-assistance-8cf24e552eb8</link>
+    <guid>writing-medium-subject-supposed-to-write</guid>
+    <pubDate>2025-01-01 00:00:00 -0500</pubDate>
+    <description>A Lacanian analysis of AI writing assistance — riffing on Lacan's &quot;subject supposed to know&quot; to ask what happens when the subject supposed to write is a machine. Who is the author when the Other holds</description>
+    <category>Essay</category>
+  </item>
+  <item>
+    <title>Do Our Tools Change Our Minds?</title>
+    <link>https://medium.com/@topher416/do-our-tools-change-our-minds-1f3c631e8497</link>
+    <guid>writing-medium-tools-change-minds</guid>
+    <pubDate>2025-01-01 00:00:00 -0500</pubDate>
+    <description>On whether the tools we use reshape how we think — and whether that reshaping is something we chose or something that happened to us while we weren't paying attention.</description>
+    <category>Essay</category>
+  </item>
+  <item>
+    <title>The Willing Surrender: What We Really Want from AI</title>
+    <link>https://medium.com/@topher416/the-willing-surrender-what-we-really-want-from-ai-162f584849ad</link>
+    <guid>writing-medium-willing-surrender</guid>
+    <pubDate>2025-01-01 00:00:00 -0500</pubDate>
+    <description>On what we actually want when we hand our thinking over to a machine — and why the surrender feels so good.</description>
+    <category>Essay</category>
+  </item>
+  <item>
+    <title>On Using AI to Fake My Way Through Consulting</title>
+    <link>https://medium.com/@topher416/on-using-ai-to-fake-my-way-through-consulting-f5a0dccb9782</link>
+    <guid>writing-medium-fake-consulting</guid>
+    <pubDate>2024-01-01 00:00:00 -0500</pubDate>
+    <description>A former theatre kid lands at a healthcare consultancy and uses AI to process meeting transcripts and method-act his way through professionalism. Draws on Stanislavski's &quot;magic if&quot; and Winnicott's Fal</description>
+    <category>Essay</category>
+  </item>
+  <item>
+    <title>Analytic Introspections from an Actor's Perspective</title>
+    <link>https://topherrasmussen.com/analytic-introspections-thesis.html</link>
+    <guid>writing-analytic-introspections</guid>
+    <pubDate>2020-01-01 00:00:00 -0500</pubDate>
+    <description>Senior thesis in Theatre Arts and Psychology. An attempt to capture what it feels like to be a 28-year-old actor/psychology student writing about acting and psychology — hypotheses, preparation, enact</description>
+    <category>Essay</category>
+  </item>
+</channel>
+</rss>

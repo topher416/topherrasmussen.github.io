@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,700&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/site.css">
+    <link rel="alternate" type="application/rss+xml" title="Topher Rasmussen — Writing &amp; Journal" href="/feed.xml">
 </head>
 <body>
     <nav class="room-nav">
@@ -39,44 +40,82 @@
 
     <script>
     (function () {
-        var container = document.getElementById('journal-entries');
-        if (!container) return;
 
-        fetch('/journal.json')
-            .then(function (res) { return res.json(); })
-            .then(function (entries) {
-                entries.sort(function (a, b) {
-                    if (a.datetime && b.datetime) return b.datetime.localeCompare(a.datetime);
-                    return b.date.localeCompare(a.date);
-                });
-
-                var html = '';
-                entries.forEach(function (entry) {
-                    html += '<article class="journal-entry">';
-                    html += '<header class="journal-entry__header">';
-                    html += '<time class="journal-entry__date" datetime="' + entry.date + '">' + entry.display_date + '</time>';
-                    html += '</header>';
-                    html += '<h2 class="journal-entry__title">' + entry.title + '</h2>';
-                    html += '<div class="journal-entry__body">';
-
-                    if (entry.body) {
-                        entry.body.forEach(function (paragraph, idx) {
-                            if (entry.meta_index === idx) {
-                                html += '<p class="journal-entry__meta">' + paragraph + '</p>';
-                            } else {
-                                html += '<p>' + paragraph + '</p>';
-                            }
-                        });
+        function resolveEssays(entry, catalog) {
+            if (!entry.seeded_essays || !catalog || !entry.seeded_essays.length) return [];
+            var resolved = [];
+            for (var i = 0; i < catalog.length; i++) {
+                for (var j = 0; j < entry.seeded_essays.length; j++) {
+                    if (catalog[i].id === entry.seeded_essays[j]) {
+                        resolved.push({ title: catalog[i].title, url: catalog[i].url });
+                        break;
                     }
+                }
+            }
+            return resolved;
+        }
 
+        function renderEntries(entries, catalog) {
+            var container = document.getElementById('journal-entries');
+            if (!container) return;
+
+            entries.sort(function (a, b) {
+                if (a.datetime && b.datetime) return b.datetime.localeCompare(a.datetime);
+                return b.date.localeCompare(a.date);
+            });
+
+            var html = '';
+            entries.forEach(function (entry) {
+                html += '<article class="journal-entry"';
+                if (entry.slug) html += ' id="' + entry.slug + '"';
+                html += '>';
+                html += '<header class="journal-entry__header">';
+                html += '<time class="journal-entry__date" datetime="' + entry.date + '">' + entry.display_date + '</time>';
+                html += '</header>';
+                html += '<h2 class="journal-entry__title">' + entry.title + '</h2>';
+                html += '<div class="journal-entry__body">';
+
+                if (entry.body) {
+                    entry.body.forEach(function (paragraph, idx) {
+                        if (entry.meta_index === idx) {
+                            html += '<p class="journal-entry__meta">' + paragraph + '</p>';
+                        } else {
+                            html += '<p>' + paragraph + '</p>';
+                        }
+                    });
+                }
+
+                // Seeded essays cross-links
+                var essays = resolveEssays(entry, catalog);
+                if (essays.length > 0) {
+                    html += '<div class="journal-entry__seeded-label">Seeded:</div>';
+                    html += '<div class="journal-entry__seeded-links">';
+                    essays.forEach(function (essay) {
+                        var isExternal = essay.url.indexOf('http') === 0;
+                        var target = isExternal ? ' target="_blank" rel="noopener noreferrer"' : '';
+                        html += '<a class="journal-entry__seeded-link" href="' + essay.url + '"' + target + '>' + essay.title + '</a>';
+                    });
                     html += '</div>';
-                    html += '</article>';
-                });
+                }
 
-                container.innerHTML = html;
+                html += '</div>';
+                html += '</article>';
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Fetch both journal and catalog
+        var journalPromise = fetch('/journal.json').then(function (res) { return res.json(); });
+        var catalogPromise = fetch('/catalog.json').then(function (res) { return res.json(); }).catch(function () { return null; });
+
+        Promise.all([journalPromise, catalogPromise])
+            .then(function (results) {
+                renderEntries(results[0], results[1]);
             })
             .catch(function () {
-                container.innerHTML = '<p class="room-placeholder__text">Could not load journal entries.</p>';
+                var container = document.getElementById('journal-entries');
+                if (container) container.innerHTML = '<p class="room-placeholder__text">Could not load journal entries.</p>';
             });
     })();
     </script>
