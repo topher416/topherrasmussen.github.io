@@ -69,13 +69,16 @@
   </style>
 </head>
 <body>
-    <div class="navbar">
-        <a href="index.html">Home</a> |
-        <a href="writing.html">Writing</a> |
-        <a href="start-here.html">Start Here</a> |
-        <a href="essay.html">Essay</a> |
-        <a href="mailto:topher416@gmail.com">Contact</a>
-    </div>
+    <nav class="room-nav">
+        <a href="/" class="room-nav__home">TR</a>
+        <a href="/theater.html" class="room-nav__link">Theater</a>
+        <a href="/writing.html" class="room-nav__link room-nav__link--active">Writing</a>
+        <a href="/start-here.html" class="room-nav__link">Start Here</a>
+        <a href="/music.html" class="room-nav__link">Music</a>
+        <a href="/journal.html" class="room-nav__link">Journal</a>
+        <a href="/visual.html" class="room-nav__link">Visual</a>
+        <a href="/experiments.html" class="room-nav__link">Experiments</a>
+    </nav>
     
     <header>
         <h1>The Fantasy of Machine-Assisted Authorship</h1>
@@ -293,8 +296,7 @@
         }
     </style>
     <script>
-    // Define some color palettes
-const colorSchemes = [
+    const colorSchemes = [
     {
         title: "Dark Mode",
         background: "#1E1E1E", // Eerie Black
