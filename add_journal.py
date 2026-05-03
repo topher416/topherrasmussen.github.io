@@ -10,6 +10,7 @@ import datetime
 import json
 import os
 import re
+import subprocess
 import sys
 import unicodedata
 
@@ -108,6 +109,13 @@ def main():
     print(f"Added entry: \"{title}\"")
     print(f"  Slug: {entry['slug']}")
     print(f"  Date: {entry['date']}")
+
+    # Regenerate RSS feed
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    subprocess.run(
+        [sys.executable, os.path.join(script_dir, "scripts", "generate_feed.py")],
+        cwd=script_dir,
+    )
 
 
 if __name__ == "__main__":

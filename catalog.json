@@ -170,7 +170,7 @@
     "year": 2025,
     "category": "writing",
     "description": "On the term \"AI slop\" — the smooth, soulless, indistinct writing that comes out of machines — and the shame of needing help from one. An essay about writing with AI and feeling conflicted about the experience, composed with Claude and GPT while analyzing that process.",
-    "url": "https://medium.com/@topher416/notes-from-the-slop-bucket-023ff889a76c",
+    "url": "/slop-bucket.html",
     "image": null,
     "status": "live",
     "tags": [
@@ -248,7 +248,7 @@
     "year": 2025,
     "category": "writing",
     "description": "A Lacanian analysis of AI writing assistance — riffing on Lacan's \"subject supposed to know\" to ask what happens when the subject supposed to write is a machine. Who is the author when the Other holds the pen?",
-    "url": "https://medium.com/@topher416/the-subject-supposed-to-write-a-lacanian-analysis-of-ai-writing-assistance-8cf24e552eb8",
+    "url": "/subject-supposed-to-write.html",
     "image": null,
     "status": "live",
     "tags": [
