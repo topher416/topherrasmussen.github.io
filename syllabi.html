@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syllabi — Topher Rasmussen</title>
+    <meta name="description" content="Teaching and pedagogical work — from acting courses to clinical training syllabi and AI-based education tools. Knowing something and teaching it are different disciplines.">
+    <link rel="canonical" href="https://topherrasmussen.com/syllabi.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,700&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site.css">
+    <link rel="alternate" type="application/rss+xml" title="Topher Rasmussen — Writing &amp; Journal" href="/feed.xml">
+    <meta property="og:title" content="Syllabi — Topher Rasmussen">
+    <meta property="og:description" content="Teaching and pedagogical work — from acting courses to clinical training syllabi and AI-based education tools.">
+    <meta property="og:url" content="https://topherrasmussen.com/syllabi.html">
+    <meta property="og:type" content="website">
+    <style>
+        .syllabi-intro {
+            margin-bottom: clamp(40px, 6vw, 64px);
+        }
+
+        .syllabi-intro__text {
+            font-size: 1.05rem;
+            line-height: 1.75;
+            max-width: 65ch;
+        }
+
+        .syllabi-intro__text p {
+            margin-bottom: 1.4em;
+        }
+
+        .syllabi-intro__text em {
+            font-style: italic;
+            color: var(--text);
+        }
+
+        .syllabi-intro__text strong {
+            color: var(--text-bright);
+            font-weight: 600;
+        }
+
+        .syllabi-intro__text a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s ease;
+        }
+
+        .syllabi-intro__text a:hover {
+            border-bottom-color: var(--accent);
+        }
+
+        .syllabi-section {
+            margin-bottom: clamp(36px, 5vw, 56px);
+        }
+
+        .syllabi-section__heading {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 4px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .syllabi-section__sub {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            max-width: 55ch;
+            line-height: 1.6;
+        }
+
+        .syllabi-card {
+            padding: 20px 24px;
+            border: 1px solid var(--line);
+            background: var(--bg-card);
+            margin-bottom: 12px;
+            transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .syllabi-card:hover {
+            border-color: var(--line-strong);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+        }
+
+        .syllabi-card__title {
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: clamp(1.1rem, 1.3vw, 1.3rem);
+            font-weight: 500;
+            line-height: 1.3;
+            color: var(--text-bright);
+            margin-bottom: 6px;
+        }
+
+        .syllabi-card__title a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .syllabi-card__title a:hover {
+            color: var(--accent);
+        }
+
+        .syllabi-card__meta {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            margin-bottom: 8px;
+        }
+
+        .syllabi-card__excerpt {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+            margin-bottom: 10px;
+        }
+
+        .syllabi-card__source {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        .syllabi-card__source a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s ease;
+        }
+
+        .syllabi-card__source a:hover {
+            border-bottom-color: var(--accent);
+        }
+
+        .thread-narrative {
+            padding: 24px 28px;
+            background: var(--bg-raised);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            margin-top: 20px;
+        }
+
+        .thread-narrative p {
+            font-size: 0.98rem;
+            line-height: 1.75;
+            color: var(--text-muted);
+            margin-bottom: 1em;
+        }
+
+        .thread-narrative p:last-child {
+            margin-bottom: 0;
+        }
+
+        .thread-narrative strong {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .thread-narrative em {
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <nav class="room-nav">
+        <a href="/" class="room-nav__home">TR</a>
+        <a href="/theater.html" class="room-nav__link">Theater</a>
+        <a href="/writing.html" class="room-nav__link">Writing</a>
+        <a href="/start-here.html" class="room-nav__link">Start Here</a>
+        <a href="/music.html" class="room-nav__link">Music</a>
+        <a href="/journal.html" class="room-nav__link">Journal</a>
+        <a href="/visual.html" class="room-nav__link">Visual</a>
+        <a href="/experiments.html" class="room-nav__link">Experiments</a>
+    </nav>
+
+    <main class="room">
+        <header class="room__header">
+            <h1 class="room__title">Syllabi</h1>
+            <p class="room__subtitle">Teaching, curriculum design, and pedagogical work — across acting, clinical practice, and AI-driven training.</p>
+        </header>
+
+        <div class="syllabi-intro">
+            <div class="syllabi-intro__text">
+                <p>Knowing something and teaching it are <strong>different disciplines</strong>. You can have a deep intuition for something — an acting technique, a clinical framework, a way of listening to yourself — and still not know how to hand it to somebody else without breaking it in the process.</p>
+
+                <p>Everything here started as something I <em>needed</em> to figure out for myself first. Not from a position of expertise, but from the honest gap between understanding a thing and building a structure that someone else could walk through and find something useful on the other side.</p>
+
+                <p>Some of these are real syllabi with week-by-week readings. Some are concept proposals for tools that don't exist yet. The ones that exist are open, because teaching should be. The ones that don't exist yet — they're honest about what they're trying to become.</p>
+            </div>
+        </div>
+
+        <!-- Clinical Training -->
+        <section class="syllabi-section">
+            <h2 class="syllabi-section__heading">Clinical Training</h2>
+            <p class="syllabi-section__sub">Open-source clinical education — psychodynamic practice for social workers and voice-AI training for therapy students.</p>
+
+            <div class="syllabi-card">
+                <h3 class="syllabi-card__title"><a href="https://github.com/topher416/psychodynamic-sw-practice" target="_blank" rel="noopener noreferrer">Psychodynamic Social Work Practice</a></h3>
+                <p class="syllabi-card__meta">14-week open-source syllabus · 2024</p>
+                <p class="syllabi-card__excerpt">A 14-week open-source syllabus on psychodynamic social work practice, designed for pre-licensed clinical social workers. Covers transference, countertransference, defense mechanisms, and the therapist-as-instrument — structured to help trainees move from theory into clinical presence.</p>
+                <p class="syllabi-card__source">Source: <a href="https://github.com/topher416/psychodynamic-sw-practice" target="_blank" rel="noopener noreferrer">github.com/topher416/psychodynamic-sw-practice →</a></p>
+            </div>
+
+            <div class="syllabi-card">
+                <h3 class="syllabi-card__title"><a href="/anteroom.html">The Analytic Anteroom</a></h3>
+                <p class="syllabi-card__meta">Concept proposal · 2026</p>
+                <p class="syllabi-card__excerpt">A voice-based clinical training tool using full-duplex speech models to prepare psychotherapy trainees before their first patient hours. Not a product — a research direction exploring whether emerging voice technology can reduce the shock of first contact in clinical education. The "anteroom" as liminal space between knowledge and practice.</p>
+                <p class="syllabi-card__source">Catalog: <a href="/anteroom.html#analytic-anteroom">analytic-anteroom →</a></p>
+            </div>
+        </section>
+
+        <!-- Acting & Pedagogy -->
+        <section class="syllabi-section">
+            <h2 class="syllabi-section__heading">Acting &amp; Pedagogy</h2>
+            <p class="syllabi-section__sub">Teaching acting as an integration of mindfulness, somatic awareness, and exploratory performance.</p>
+
+            <div class="syllabi-card">
+                <h3 class="syllabi-card__title">Exploratory Acting: Mindfulness &amp; Somatics</h3>
+                <p class="syllabi-card__meta">Eva Carlston Academy · 2019</p>
+                <p class="syllabi-card__excerpt">Acting course designed and taught at the Eva Carlston Academy, integrating mindfulness practices and somatic awareness into exploratory acting techniques. The course was built for students who needed to connect with their bodies before they could connect with a character — a kind of pre-Stanislavski, post-trauma approach that I only later understood had a name.</p>
+                <p class="syllabi-card__source">Catalog: <a href="catalog.json#eva-carlston-teaching">eva-carlston-teaching →</a></p>
+            </div>
+        </section>
+
+        <!-- The Thread -->
+        <section class="syllabi-section">
+            <h2 class="syllabi-section__heading">The Thread</h2>
+            <p class="syllabi-section__sub">How teaching connects across the work.</p>
+
+            <div class="thread-narrative">
+                <p>In <strong>2019</strong>, I was teaching an acting course at the Eva Carlston Academy. The students there — many with histories I don't need to summarize — couldn't access characters because they couldn't access themselves. So I built something from mindfulness practice and somatic work, without really knowing what I was doing, just knowing what I <em>needed</em> when I was in that room. That's honest pedagogy: not the theory of it, but the necessity.</p>
+
+                <p>In <strong>2024</strong>, I was in clinical social work, preparing to become licensed. The same gap appeared from the other side: <em>how do you teach someone to sit with another person's pain without trying to fix it?</em> The psychodynamic social work syllabus I started building was an answer to that. Open-source because clinical education shouldn't be paywalled. 14 weeks because that's how long it takes to unlearn the reflex of helping.</p>
+
+                <p>In <strong>2026</strong>, I'm thinking about the Analytic Anteroom — a tool for voice-based clinical training. Same question again: what's the space between knowing and doing? Can a machine fill the gap between classroom and first patient? I don't know the answer. But the Anteroom is the honest next step — not pretending I have one, but building the doorway anyway.</p>
+
+                <p>The throughline is simple: <strong>teaching is the discipline of building structures for other people's honest encounters with themselves.</strong> Whether it's acting or clinical practice or AI training, the goal is always the same — create the conditions where something real can happen.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="room-footer">
+        <div class="counter">
+            Visitor count: <span class="counter-display">00000000</span>
+        </div>
+    </footer>
+
+    <script>
+    window.displayCount = function (count) {
+        var el = document.querySelector('.counter-display');
+        if (el) el.textContent = count.toString().padStart(8, '0');
+    };
+    document.addEventListener('DOMContentLoaded', function () {
+        var s = document.createElement('script');
+        var t = new Date().getTime();
+        s.src = 'https://script.google.com/macros/s/AKfycbwOYJRKO_zOwkLpCR4U_ENMiD7bgPtuWmXVe6ZTuT913aTHJ0c5Op3OEdfzJQAGUHdv/exec?action=increment&callback=displayCount&t=' + t;
+        document.body.appendChild(s);
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Research — Lacanian psychoanalysis meets transformer AI. The Analytic Introspections thesis, objet petit a(i) psychoanalytic examination, Structured Like a Language research project, and the Analytic Anteroom clinical training concept.">
+    <link rel="canonical" href="https://topherrasmussen.com/research.html">
+    <meta property="og:title" content="Research — Topher Rasmussen">
+    <meta property="og:description" content="Lacanian psychoanalysis meets transformer AI — a research program running from theater and acting anxiety through psychoanalysis to clinical AI concepts.">
+    <meta property="og:url" content="https://topherrasmussen.com/research.html">
+    <meta property="og:type" content="article">
+    <meta name="theme-color" content="#f5f2ed">
+    <title>Research — Topher Rasmussen</title>
+    <link rel="alternate" type="application/rss+xml" title="Topher Rasmussen — Writing &amp; Journal" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,700&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site.css">
+    <style>
+        .research-intro {
+            max-width: 60ch;
+            font-size: 1.05rem;
+            line-height: 1.75;
+            color: var(--text-muted);
+            margin-bottom: clamp(32px, 5vw, 48px);
+        }
+        .research-section__heading {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin: clamp(32px, 5vw, 48px) 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--line);
+        }
+        .research-section__sub {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            margin-top: -8px;
+        }
+        .research-card {
+            padding: clamp(24px, 4vw, 36px);
+            border: 1px solid var(--line);
+            background: var(--bg-card);
+            margin-bottom: 16px;
+            transition: border-color 0.25s ease, transform 0.25s ease;
+        }
+        .research-card:hover {
+            border-color: var(--line-strong);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(0,0,0,0.05);
+        }
+        .research-card__title {
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: clamp(1.3rem, 1.8vw, 1.6rem);
+            font-weight: 500;
+            color: var(--text-bright);
+            margin-bottom: 12px;
+        }
+        .research-card__title a {
+            color: var(--text-bright);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .research-card__title a:hover { color: var(--accent); }
+        .research-card__excerpt {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+            max-width: 60ch;
+            margin-bottom: 14px;
+        }
+        .research-card__year {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+        }
+        .research-card__link {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.74rem;
+            color: var(--text-bright);
+            text-decoration: none;
+            border: 1px solid var(--text-dim);
+            border-radius: 999px;
+            padding: 8px 16px;
+            display: inline-flex;
+            margin-top: 12px;
+            transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+        }
+        .research-card__link:hover {
+            background: var(--text-bright);
+            color: var(--bg);
+            border-color: var(--text-bright);
+        }
+        .research-card__pdf-link {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            letter-spacing: 0.04em;
+            transition: color 0.2s ease;
+            margin-left: 12px;
+        }
+        .research-card__pdf-link:hover { color: var(--accent); }
+        .research-arc {
+            max-width: 60ch;
+            font-size: 0.95rem;
+            line-height: 1.75;
+            color: var(--text);
+            margin-bottom: clamp(24px, 4vw, 36px);
+            padding: 20px 24px;
+            border-left: 3px solid var(--accent);
+            background: var(--bg-raised);
+        }
+    </style>
+</head>
+<body>
+    <nav class="room-nav">
+        <a href="/" class="room-nav__home">TR</a>
+        <a href="/theater.html" class="room-nav__link">Theater</a>
+        <a href="/writing.html" class="room-nav__link">Writing</a>
+        <a href="/start-here.html" class="room-nav__link">Start Here</a>
+        <a href="/music.html" class="room-nav__link">Music</a>
+        <a href="/journal.html" class="room-nav__link">Journal</a>
+        <a href="/visual.html" class="room-nav__link">Visual</a>
+        <a href="/experiments.html" class="room-nav__link">Experiments</a>
+    </nav>
+
+    <main class="room">
+        <header class="room__header">
+            <h1 class="room__title">Research</h1>
+            <p class="room__subtitle">Lacanian psychoanalysis meets transformer architecture. The intellectual thread from performance anxiety to machine-assisted authorship to clinical AI concepts.</p>
+        </header>
+
+        <p class="research-intro">This is genuinely unusual work. There are not many people — maybe nobody — doing public research that asks whether the operations Lacan attributed to the unconscious are structurally instantiated in transformer neural networks. This didn't emerge from nowhere. It emerged from a very concrete, very personal problem: the gap between intention and expression that theater and acting kept bringing into sharp relief.</p>
+
+        <div class="research-arc">
+            The arc runs like this: <strong>theater and acting anxiety</strong> &rarr; <strong>psychoanalytic theory to explain the gap</strong> &rarr; <strong>Lacan, the Other, and the split subject</strong> &rarr; <strong>AI as a new version of the same problem</strong>: what happens when the Other writes back? This page collects the work that traces that arc.
+        </div>
+
+        <!-- The Thesis -->
+        <h2 class="research-section__heading">The Thesis</h2>
+        <p class="research-section__sub">Where it began — an attempt to capture what it feels like to be an actor/psychology student thinking about the gap between intention and expression.</p>
+
+        <div class="research-card">
+            <h3 class="research-card__title"><a href="/analytic-introspections-thesis.html">Analytic Introspections from an Actor's Perspective</a></h3>
+            <p class="research-card__excerpt">
+                Senior thesis in Theatre Arts and Psychology, completed in 2020. An attempt to capture what it feels like to be a 28-year-old actor/psychology student writing about acting and psychology — hypotheses, preparation, enactment, rumination, chronesthesia, rehearsal, and collapse. It is both the thing it describes and a description of the thing.
+            </p>
+            <p class="research-card__year">2020</p>
+            <a href="/analytic-introspections-thesis.html" class="research-card__link">Read the thesis &rarr;</a>
+            <a href="/analytic-introspections.pdf" class="research-card__pdf-link" download>Download PDF &darr;</a>
+        </div>
+
+        <!-- The Research Project -->
+        <h2 class="research-section__heading">The Research Project</h2>
+        <p class="research-section__sub">The central research question: do transformer LLMs structurally instantiate the operations Lacan attributed to the unconscious?</p>
+
+        <div class="research-card">
+            <h3 class="research-card__title"><a href="https://structuredlikealanguage.org" target="_blank" rel="noopener noreferrer">Structured Like a Language</a></h3>
+            <p class="research-card__excerpt">
+                A research project testing whether transformer LLMs structurally instantiate the operations Lacan attributed to the unconscious. Formal mappings, falsifiable predictions, and a source processing pipeline. Phase 1 of 5 in progress. This is not metaphor — it is a claim about structural homology between the linguistic operations Lacan described and the attention mechanisms inside transformer models.
+            </p>
+            <p class="research-card__year">2026</p>
+            <a href="https://structuredlikealanguage.org" target="_blank" rel="noopener noreferrer" class="research-card__link">Visit structuredlikealanguage.org &rarr;</a>
+        </div>
+
+        <div class="research-card">
+            <h3 class="research-card__title"><a href="/objet-petit-ai.html">objet petit a(i): Desire and Lack in the Age of Machine-Assisted Authorship</a></h3>
+            <p class="research-card__excerpt">
+                A 111-page psychoanalytic examination of what happens to the writing subject when AI enters the process. Covers the writerly unconscious, AI as narcissistic object, the illusion of intersubjectivity, jouissance interrupted, unconscious defenses against the machine, authorship in crisis, clinical applications, and toward an integrated psychic economy of writer and machine.
+            </p>
+            <p class="research-card__year">2025</p>
+            <a href="/objet-petit-ai.html" class="research-card__link">Read the paper &rarr;</a>
+            <a href="/objet-petit-ai.pdf" class="research-card__pdf-link" download>Download PDF &darr;</a>
+        </div>
+
+        <!-- The AI Work -->
+        <h2 class="research-section__heading">The AI Work</h2>
+        <p class="research-section__sub">Essays and analyses that sit alongside the research — public writing about what it means to write with machines.</p>
+
+        <div class="research-card">
+            <h3 class="research-card__title"><a href="/subject-supposed-to-write.html">The Subject Supposed to Write: A Lacanian Analysis of AI Writing Assistance</a></h3>
+            <p class="research-card__excerpt">
+                A Lacanian analysis of AI writing assistance — riffing on Lacan's "subject supposed to know" to ask what happens when the subject supposed to write is a machine. Who is the author when the Other holds the pen?
+            </p>
+            <p class="research-card__year">2025</p>
+            <a href="/subject-supposed-to-write.html" class="research-card__link">Read the essay &rarr;</a>
+        </div>
+
+        <!-- The Clinical Concept -->
+        <h2 class="research-section__heading">The Clinical Concept</h2>
+        <p class="research-section__sub">A research direction exploring whether emerging voice technology can reduce the shock of first contact in clinical education.</p>
+
+        <div class="research-card">
+            <h3 class="research-card__title"><a href="/anteroom.html">The Analytic Anteroom</a></h3>
+            <p class="research-card__excerpt">
+                A concept proposal for a voice-based clinical training tool that uses full-duplex speech models to prepare psychotherapy trainees before their first patient hours. Not a product — a research direction exploring whether emerging voice technology can reduce the shock of first contact in clinical education.
+            </p>
+            <p class="research-card__year">2026</p>
+            <a href="/anteroom.html" class="research-card__link">Read the concept proposal &rarr;</a>
+        </div>
+    </main>
+
+    <footer class="room-footer">
+        <div class="counter">
+            Visitor count: <span class="counter-display">00000000</span>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var s = document.createElement('script');
+        var t = new Date().getTime();
+        s.src = 'https://script.google.com/macros/s/AKfycbwOYJRKO_zOwkLpCR4U_ENMiD7bgPtuWmXVe6ZTuT913aTHJ0c5Op3OEdfzJQAGUHdv/exec?action=increment&callback=displayCount&t=' + t;
+        document.body.appendChild(s);
+    });
+    </script>
+</body>
+</html>

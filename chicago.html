@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Chicago — the Logan Square chapter. What happened when Topher moved from Utah to Chicago, from performing to building, 2024–2026.">
+    <link rel="canonical" href="https://topherrasmussen.com/chicago.html">
+    <meta property="og:title" content="Chicago — Topher Rasmussen">
+    <meta property="og:description" content="The Logan Square chapter. What this place made possible.">
+    <meta property="og:url" content="https://topherrasmussen.com/chicago.html">
+    <meta property="og:type" content="article">
+    <meta name="theme-color" content="#f5f2ed">
+    <title>Chicago — Topher Rasmussen</title>
+    <link rel="alternate" type="application/rss+xml" title="Topher Rasmussen — Writing &amp; Journal" href="/feed.xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,700&amp;family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site.css">
+    <style>
+        .chicago__intro {
+            max-width: 58ch;
+            font-size: 1.05rem;
+            line-height: 1.75;
+            color: var(--text-muted);
+            margin-bottom: clamp(32px, 5vw, 48px);
+        }
+        .chicago__intro p + p {
+            margin-top: 16px;
+        }
+        .chicago__intro em {
+            color: var(--text);
+            font-style: normal;
+            border-bottom: 1px solid var(--accent-soft);
+        }
+
+        .chicago__section {
+            margin-bottom: clamp(40px, 6vw, 64px);
+        }
+
+        .chicago__section-title {
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 700;
+            color: var(--text-bright);
+            margin-bottom: 6px;
+            letter-spacing: -0.01em;
+        }
+
+        .chicago__section-subtitle {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            max-width: 52ch;
+            margin-bottom: 20px;
+        }
+
+        .chicago__divider {
+            border: none;
+            border-top: 1px solid var(--line);
+            margin: clamp(32px, 5vw, 48px) 0;
+        }
+
+        .chicago__item {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            padding: 18px 20px;
+            border: 1px solid var(--line);
+            background: var(--bg-card);
+            margin-bottom: 12px;
+            transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .chicago__item:hover {
+            border-color: var(--line-strong);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+        }
+
+        .chicago__item a.chicago__item-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .chicago__item-title {
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-bright);
+            line-height: 1.3;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chicago__item-link .chicago__item-title {
+            transition: color 0.2s ease;
+        }
+
+        .chicago__item-link:hover .chicago__item-title {
+            color: var(--accent);
+        }
+
+        .chicago__item-arrow {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .chicago__item-link:hover .chicago__item-arrow {
+            color: var(--accent);
+            transform: translateX(2px);
+        }
+
+        .chicago__item-desc {
+            font-size: 0.88rem;
+            line-height: 1.6;
+            color: var(--text-muted);
+        }
+
+        .chicago__item-tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.64rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--accent-soft);
+        }
+
+        .chicago__external {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.62rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 2px 7px;
+        }
+
+        .chicago__epigraph {
+            font-family: 'Newsreader', Georgia, serif;
+            font-style: italic;
+            font-size: 1.05rem;
+            line-height: 1.65;
+            color: var(--text-muted);
+            max-width: 50ch;
+            margin: clamp(32px, 5vw, 48px) 0;
+            padding-left: 18px;
+            border-left: 2px solid var(--accent-soft);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="room-nav">
+        <a href="/" class="room-nav__home">TR</a>
+        <a href="/theater.html" class="room-nav__link">Theater</a>
+        <a href="/writing.html" class="room-nav__link">Writing</a>
+        <a href="/start-here.html" class="room-nav__link">Start Here</a>
+        <a href="/music.html" class="room-nav__link">Music</a>
+        <a href="/journal.html" class="room-nav__link">Journal</a>
+        <a href="/visual.html" class="room-nav__link">Visual</a>
+        <a href="/experiments.html" class="room-nav__link">Experiments</a>
+    </nav>
+
+    <main class="room">
+        <header class="room__header">
+            <p class="year-label">Logan Square, Chicago</p>
+            <h1 class="room__title">Chicago</h1>
+            <p class="room__subtitle">What this place made possible.</p>
+        </header>
+
+        <!-- Intro -->
+        <div class="chicago__intro">
+            <p>
+                I moved to Chicago in 2024 from Utah, which sounds simple on paper but turned out to be the kind of geographic decision that rewires everything. In Salt Lake, I was still thinking of myself as primarily a performer — an actor who happened to write essays and build websites on the side. Chicago doesn't work that way. The city doesn't hand you a stage. It asks what you'll <em>build</em>.
+            </p>
+            <p>
+                So I changed what I was making. The shift wasn't dramatic — no announcement, no clean break. It was more like the ground moved half a degree and I kept walking in the direction it pointed. Less about performing, more about constructing: websites, research frameworks, music practice tools, things that existed after I stopped working on them. The kind of things that other people could actually use.
+            </p>
+            <p>
+                Everything in this chapter is stuff that either wouldn't have been built, or wouldn't have been built the same way, in any other place. Chicago is the context that made these things possible — the wind, the L train, the apartment in Logan Square, the Old Town School of Folk Music on the North Side. I'm cataloguing it here because geography matters, and because <em>what this place made possible</em> feels like a more honest way to organize work than categories ever were.
+            </p>
+        </div>
+
+        <hr class="chicago__divider">
+
+        <!-- SECTION 1: The code I'm writing now -->
+        <section class="chicago__section">
+            <h2 class="chicago__section-title">The code I'm writing now</h2>
+            <p class="chicago__section-subtitle">Things I've built from scratch in this apartment, between walks down Fullerton and the blue line.</p>
+
+            <div class="chicago__item">
+                <a href="https://logansqtonight.com" target="_blank" rel="noopener noreferrer" class="chicago__item-link">
+                    <div class="chicago__item-title">
+                        Logan Sq Tonight
+                        <span class="chicago__external">External</span>
+                        <span class="chicago__item-arrow">&rarr;</span>
+                    </div>
+                </a>
+                <p class="chicago__item-desc">
+                    A neighborhood events aggregator for Logan Square, deployed on Vercel. What to do tonight, filtered by what's actually happening right here — not the broader "Chicago events" feed that drowns out local shows at the Logan, the Empty Bottle, or whatever's happening in a basement on Kedzie. Built because I wanted to know what was going on around the corner without scrolling through a hundred irrelevant listings.
+                </p>
+                <span class="chicago__item-tag">Local discovery &middot; Vercel</span>
+            </div>
+
+            <div class="chicago__item">
+                <a href="/horrortarot/" class="chicago__item-link">
+                    <div class="chicago__item-title">
+                        Horror Movie Tarot
+                        <span class="chicago__item-arrow">&rarr;</span>
+                    </div>
+                </a>
+                <p class="chicago__item-desc">
+                    A divination app that shuffles 142 horror films into a tarot deck. Draw cards one at a time, flip them to reveal poster art with rarity tiers and streaming links, while a generative ambient organ soundtrack plays underneath a live WebGL shader background. Built with React, Three.js, and Tone.js — the most Chicago thing I've built, in that it combines something earnest with something deeply unserious.
+                </p>
+                <span class="chicago__item-tag">Web design &middot; React &middot; Three.js &middot; Tone.js</span>
+            </div>
+
+            <div class="chicago__item">
+                <a href="https://fmnogg.in" target="_blank" rel="noopener noreferrer" class="chicago__item-link">
+                    <div class="chicago__item-title">
+                        FM Noggin
+                        <span class="chicago__external">External</span>
+                        <span class="chicago__item-arrow">&rarr;</span>
+                    </div>
+                </a>
+                <p class="chicago__item-desc">
+                    A practice guide for learning Radiohead covers with isolated stems, sheet music, and tempo-adjusted tracks. Powered by a custom Python pipeline that uses Demucs for AI source separation — feed it a YouTube link and it spits out individual instruments at whatever speed you need. Built directly out of the Radiohead ensemble sessions at Old Town School, where showing up unprepared is a very particular kind of embarrassment.
+                </p>
+                <span class="chicago__item-tag">Music &middot; Next.js &middot; Python &middot; Demucs</span>
+            </div>
+        </section>
+
+        <hr class="chicago__divider">
+
+        <!-- SECTION 2: The writing I'm doing here -->
+        <section class="chicago__section">
+            <h2 class="chicago__section-title">The writing I'm doing here</h2>
+            <p class="chicago__section-subtitle">Essays and research projects that emerged from being in a city that treats ideas as a public good.</p>
+
+            <div class="chicago__item">
+                <a href="/essay.html" class="chicago__item-link">
+                    <div class="chicago__item-title">
+                        The Fantasy of Machine-Assisted Authorship
+                        <span class="chicago__item-arrow">&rarr;</span>
+                    </div>
+                </a>
+                <p class="chicago__item-desc">
+                    An essay about what gets lost when you let a machine write your sentences — written, deliberately, with the help of several machines. Introduces the idea of "linguistic money laundering" for what happens when AI smooths out messy thought, and spends about 8,000 words trying to figure out whether the resulting text belongs to anyone.
+                </p>
+                <span class="chicago__item-tag">Essay &middot; Authorship</span>
+            </div>
+
+            <div class="chicago__item">
+                <a href="https://structuredlikealanguage.org" target="_blank" rel="noopener noreferrer" class="chicago__item-link">
+                    <div class="chicago__item-title">
+                        Structured Like a Language
+                        <span class="chicago__external">External</span>
+                        <span class="chicago__item-arrow">&rarr;</span>
+                    </div>
+                </a>
+                <p class="chicago__item-desc">
+                    A research project testing whether transformer LLMs structurally instantiate the operations Lacan attributed to the unconscious. Formal mappings, falsifiable predictions, and a source processing pipeline. The kind of project that could only have been written in a city that has bookstores open past midnight and therapy isn't something you apologize for.
+                </p>
+                <span class="chicago__item-tag">Research &middot; Psychoanalysis &middot; AI</span>
+            </div>
+
+            <div class="chicago__item">
+                <a href="/anteroom.html" class="chicago__item-link">
+                    <div class="chicago__item-title">
+                        The Analytic Anteroom
+                        <span class="chicago__item-arrow">&rarr;</span>
+                    </div>
+                </a>
+                <p class="chicago__item-desc">
+                    A concept proposal for a voice-based clinical training tool that uses full-duplex speech models to prepare psychotherapy trainees before their first patient hours. Not a product — a research direction exploring whether emerging voice technology can reduce the shock of first contact in clinical education. Born from my social work training and the Chicago clinical scene.
+                </p>
+                <span class="chicago__item-tag">Voice AI &middot; Clinical training &middot; Concept</span>
+            </div>
+        </section>
+
+        <hr class="chicago__divider">
+
+        <!-- SECTION 3: The music I'm making -->
+        <section class="chicago__section">
+            <h2 class="chicago__section-title">The music I'm making</h2>
+            <p class="chicago__section-subtitle">Playing Radiohead covers at Old Town School of Folk Music, which is somehow a real thing I do with my life.</p>
+
+            <div class="chicago__item">
+                <a href="/music.html#radiohead-covers" class="chicago__item-link">
+                    <div class="chicago__item-title">
+                        Radiohead Covers — Old Town School of Folk Music
+                        <span class="chicago__item-arrow">&rarr;</span>
+                    </div>
+                </a>
+                <p class="chicago__item-desc">
+                    Full-session Radiohead ensemble performances at Old Town School of Folk Music, Szold Hall. 40+ minute live sets — multiple songs per session. Three recorded sessions, each a different lineup of people who all decided this was a good way to spend a weeknight. The kind of community music-making that only really works in a city that still believes in showing up in person.
+                </p>
+                <span class="chicago__item-tag">Live sessions &middot; Radiohead &middot; Ensemble</span>
+            </div>
+
+            <div class="chicago__item">
+                <a href="https://fmnogg.in" target="_blank" rel="noopener noreferrer" class="chicago__item-link">
+                    <div class="chicago__item-title">
+                        FM Noggin — Practice Packs
+                        <span class="chicago__external">External</span>
+                        <span class="chicago__item-arrow">&rarr;</span>
+                    </div>
+                </a>
+                <p class="chicago__item-desc">
+                    The companion practice packs for the Radiohead covers — isolated stems, tempo-adjusted tracks, and sheet music, powered by the Demucs pipeline. Built because showing up to Old Town School with sheet music but no idea how to play your part is its own genre of Chicago experience.
+                </p>
+                <span class="chicago__item-tag">Music practice &middot; Stem separation</span>
+            </div>
+        </section>
+
+        <hr class="chicago__divider">
+
+        <!-- SECTION 4: The company we're building -->
+        <section class="chicago__section">
+            <h2 class="chicago__section-title">The company we're building</h2>
+            <p class="chicago__section-subtitle">A theater company founded with Cassie — because the natural next step after leaving the stage is to build one from scratch.</p>
+
+            <div class="chicago__item">
+                <a href="/theater.html" class="chicago__item-link">
+                    <div class="chicago__item-title">
+                        Third Horizon Theatre Company
+                        <span class="chicago__item-arrow">&rarr;</span>
+                    </div>
+                </a>
+                <p class="chicago__item-desc">
+                    A new theater company founded with Cassie, built from the ground up in Chicago. The name says it — the third horizon is the one you can't quite see yet, the thing that exists in the space between now and what comes next. It's still early days, but the work of founding something is its own kind of performance, just with more spreadsheets and fewer spotlights.
+                </p>
+                <span class="chicago__item-tag">Theater &middot; Founding &middot; Chicago</span>
+            </div>
+
+            <p class="chicago__epigraph">
+                After years of performing in other people's companies — Plan-B Theatre Company, Salt Lake Acting Company — Chicago is where we decided to stop waiting for someone else to give us a stage and just build one. The third horizon.
+            </p>
+        </section>
+
+        <hr class="chicago__divider">
+
+        <div class="chicago__intro" style="margin-bottom: 0;">
+            <p>
+                That's what Chicago has done so far. There's more to come — there always is here. Every time I ride the blue line from Logan to downtown, or walk past the Logan Theater, or sit in the front row at Old Town School listening to someone who's way better than me play a part I'm still learning, I'm reminded that cities don't just house your life. They shape the questions you get to ask.
+            </p>
+        </div>
+    </main>
+
+    <footer class="room-footer">
+        <div class="counter">
+            Visitor count: <span class="counter-display">00000000</span>
+        </div>
+    </footer>
+
+    <script>
+    window.displayCount = function (count) {
+        var el = document.querySelector('.counter-display');
+        if (el) el.textContent = count.toString().padStart(8, '0');
+    };
+    document.addEventListener('DOMContentLoaded', function () {
+        var s = document.createElement('script');
+        var t = new Date().getTime();
+        s.src = 'https://script.google.com/macros/s/AKfycbwOYJRKO_zOwkLpCR4U_ENMiD7bgPtuWmXVe6ZTuT913aTHJ0c5Op3OEdfzJQAGUHdv/exec?action=increment&callback=displayCount&t=' + t;
+        document.body.appendChild(s);
+    });
+    </script>
+</body>
+</html>

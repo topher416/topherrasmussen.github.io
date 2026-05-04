@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theater Gallery — Topher Rasmussen</title>
+    <meta name="description" content="The complete gallery of 57 theater credits — press reviews, production photos, and the full record of 14 years of showing up to rehearsal rooms.">
+    <link rel="canonical" href="https://topherrasmussen.com/theater-gallery.html">
+    <meta property="og:title" content="Theater Gallery — Topher Rasmussen">
+    <meta property="og:description" content="The complete gallery of 57 theater credits — press reviews, production photos, and the full record of 14 years of showing up to rehearsal rooms.">
+    <meta property="og:url" content="https://topherrasmussen.com/theater-gallery.html">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,700&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site.css">
+    <link rel="alternate" type="application/rss+xml" title="Topher Rasmussen — Writing &amp; Journal" href="/feed.xml">
+    <style>
+        /* Gallery-specific styles */
+        .gallery-intro {
+            max-width: 60ch;
+            margin-bottom: 32px;
+        }
+        .gallery-intro p {
+            font-size: 1rem;
+            line-height: 1.75;
+            color: var(--text-muted);
+        }
+
+        .gallery-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 28px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .gallery-filter {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 6px 12px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: var(--bg-card);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+        }
+
+        .gallery-filter:hover {
+            border-color: var(--line-strong);
+            color: var(--text);
+        }
+
+        .gallery-filter--active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--bg);
+        }
+
+        .gallery-count {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--text-dim);
+            margin-bottom: 20px;
+        }
+
+        .gallery-card {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+            padding: 18px 20px;
+            border: 1px solid var(--line);
+            background: var(--bg-card);
+            margin-bottom: 12px;
+            transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .gallery-card:hover {
+            border-color: var(--line-strong);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+        }
+
+        .gallery-card--featured {
+            grid-template-columns: 200px 1fr;
+        }
+
+        .gallery-card__image {
+            width: 100%;
+            height: 150px;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            border-radius: 2px;
+        }
+
+        .gallery-card__image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-card__year {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            color: var(--accent);
+            text-transform: uppercase;
+        }
+
+        .gallery-card__title {
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: clamp(1.1rem, 1.3vw, 1.3rem);
+            font-weight: 500;
+            line-height: 1.25;
+            letter-spacing: -0.01em;
+            color: var(--text-bright);
+            margin-bottom: 6px;
+        }
+
+        .gallery-card__details {
+            font-size: 0.92rem;
+            line-height: 1.65;
+            color: var(--text);
+            max-width: 65ch;
+        }
+
+        .gallery-card__venue {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.66rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-dim);
+            margin-top: 4px;
+        }
+
+        .gallery-card__tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .gallery-card__tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.62rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--text-muted);
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 2px 7px;
+            background: var(--bg-raised);
+        }
+
+        .gallery-card__quote {
+            font-family: 'Newsreader', Georgia, serif;
+            font-style: italic;
+            font-size: 0.92rem;
+            line-height: 1.55;
+            color: var(--text);
+            border-left: 3px solid var(--accent);
+            padding-left: 14px;
+            margin-top: 10px;
+            max-width: 60ch;
+        }
+
+        .gallery-card__quote-source {
+            display: block;
+            font-family: 'IBM Plex Mono', monospace;
+            font-style: normal;
+            font-size: 0.74rem;
+            color: var(--text-dim);
+            margin-top: 4px;
+        }
+
+        .gallery-card--hidden {
+            display: none;
+        }
+
+        @media (max-width: 740px) {
+            .gallery-card--featured {
+                grid-template-columns: 1fr;
+            }
+            .gallery-card__image {
+                height: 180px;
+            }
+            .gallery-filters {
+                gap: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="room-nav">
+        <a href="/" class="room-nav__home">TR</a>
+        <a href="/theater.html" class="room-nav__link room-nav__link--active">Theater</a>
+        <a href="/writing.html" class="room-nav__link">Writing</a>
+        <a href="/start-here.html" class="room-nav__link">Start Here</a>
+        <a href="/music.html" class="room-nav__link">Music</a>
+        <a href="/journal.html" class="room-nav__link">Journal</a>
+        <a href="/visual.html" class="room-nav__link">Visual</a>
+        <a href="/experiments.html" class="room-nav__link">Experiments</a>
+    </nav>
+
+    <main class="room">
+        <header class="room__header">
+            <h1 class="room__title">Theater Gallery</h1>
+            <p class="room__subtitle">The full record — 57 credits, press quotes, production photos. 2008–2022.</p>
+        </header>
+
+        <section class="gallery-intro">
+            <p>This is the complete list — every stage credit I can account for. 14 years of showing up to rehearsal rooms, forgetting my blocking, accidentally stepping on other people's lines, and occasionally, against all odds, doing the thing I was supposed to do.</p>
+            <p>Some of these had photos taken. A handful got reviewed. Most of them were just a room full of people trying very hard to tell the truth on purpose. Filter by venue below, or just scroll.</p>
+        </section>
+
+        <div class="gallery-filters" id="gallery-filters">
+            <button class="gallery-filter gallery-filter--active" data-venue="all">All (57)</button>
+            <button class="gallery-filter" data-venue="slac">SLAC (17)</button>
+            <button class="gallery-filter" data-venue="planb">Plan-B (15)</button>
+            <button class="gallery-filter" data-venue="grassroots">Grassroots (7)</button>
+            <button class="gallery-filter" data-venue="uvu">UVU (6)</button>
+            <button class="gallery-filter" data-venue="stinghoney">Sting &amp; Honey (3)</button>
+            <button class="gallery-filter" data-venue="edinburgh">Fringe (2)</button>
+            <button class="gallery-filter" data-venue="other">Other (7)</button>
+        </div>
+
+        <div class="gallery-count" id="gallery-count"></div>
+
+        <div id="gallery-cards"></div>
+    </main>
+
+    <footer class="room-footer">
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">
+            This is the gallery view. <a href="/theater.html" style="color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent);">Back to the Theater page →</a>
+        </p>
+        <div class="counter">
+            Visitor count: <span class="counter-display">00000000</span>
+        </div>
+    </footer>
+
+    <script src="/room.js"></script>
+    <script>
+    (function() {
+        'use strict';
+
+        // Venue classification
+        function getVenue(entry) {
+            var tags = entry.tags || [];
+            for (var i = 0; i < tags.length; i++) {
+                var t = tags[i];
+                if (t === 'salt-lake-acting-company') return 'slac';
+                if (t === 'plan-b-theatre') return 'planb';
+                if (t === 'grassroots-shakespeare') return 'grassroots';
+                if (t === 'uvu') return 'uvu';
+                if (t === 'sting-and-honey') return 'stinghoney';
+                if (t === 'edinburgh-fringe' || t === 'salt-lake-fringe') return 'edinburgh';
+            }
+            return 'other';
+        }
+
+        function getVenueName(venue) {
+            var names = {
+                slac: 'Salt Lake Acting Company',
+                planb: 'Plan-B Theatre Company',
+                grassroots: 'Grassroots Shakespeare Company',
+                uvu: 'Utah Valley University',
+                stinghoney: 'The Sting & Honey Company',
+                edinburgh: 'Edinburgh Festival Fringe',
+                other: 'Independent'
+            };
+            return names[venue] || venue;
+        }
+
+        // Extract full quote with attribution
+        function extractFullQuote(desc) {
+            if (!desc) return null;
+            // Try curly quotes first
+            var match = desc.match(/\u201c([^\u201d]+)\u201d\s*\u2014\s*(.+)$/m);
+            if (match) return { text: match[1], source: match[2] };
+            // Try straight quotes
+            match = desc.match(/"([^"]+)"\s*—\s*(.+)$/m);
+            if (match) return { text: match[1], source: match[2] };
+            // Just the quote text with no attribution
+            match = desc.match(/\u201c([^\u201d]+)\u201d/);
+            if (match) return { text: match[1], source: null };
+            match = desc.match(/"([^"]+)"/);
+            if (match) return { text: match[1], source: null };
+            return null;
+        }
+
+        function stripQuote(desc) {
+            if (!desc) return '';
+            return desc.replace(/\s*"[^"]*"\s*—\s*[^"]*$/, '')
+                       .replace(/\s*\u201c[^\u201d]*\u201d\s*\u2014\s*.*$/, '')
+                       .replace(/\s*$/, '');
+        }
+
+        function loadGallery(entries) {
+            var container = document.getElementById('gallery-cards');
+            var countEl = document.getElementById('gallery-count');
+
+            // Classify and sort (newest first)
+            entries.sort(function(a, b) { return b.year - a.year; });
+
+            var html = '';
+            entries.forEach(function(entry) {
+                var venue = getVenue(entry);
+                var hasImage = !!entry.image;
+                var quote = extractFullQuote(entry.description);
+                var desc = stripQuote(entry.description);
+                var cardClass = 'gallery-card' + (hasImage ? ' gallery-card--featured' : '');
+
+                html += '<div class="' + cardClass + '" data-venue="' + venue + '">';
+
+                // Image column (for featured cards)
+                if (hasImage) {
+                    html += '<div class="gallery-card__image"><img src="' + entry.image + '" alt="Production photo from ' + entry.title + '" loading="lazy"></div>';
+                }
+
+                // Content
+                html += '<div>';
+                html += '<span class="gallery-card__year">' + entry.year + '</span>';
+                html += '<h3 class="gallery-card__title">' + entry.title + '</h3>';
+
+                // Tags (role type)
+                var tags = entry.tags || [];
+                var displayTags = [];
+                var roleTags = ['acting', 'directing', 'producing', 'dramaturgy', 'teaching', 'playwriting', 'award', 'reading'];
+                for (var i = 0; i < tags.length; i++) {
+                    if (roleTags.indexOf(tags[i]) !== -1) {
+                        displayTags.push(tags[i]);
+                    }
+                }
+                if (displayTags.length > 0) {
+                    html += '<div class="gallery-card__tags">';
+                    for (var j = 0; j < displayTags.length; j++) {
+                        html += '<span class="gallery-card__tag">' + displayTags[j] + '</span>';
+                    }
+                    html += '</div>';
+                }
+
+                // Description (role, director, etc.)
+                if (desc) {
+                    html += '<p class="gallery-card__details">' + desc + '</p>';
+                }
+
+                // Venue label
+                html += '<p class="gallery-card__venue">' + getVenueName(venue) + '</p>';
+
+                // Press quote
+                if (quote) {
+                    html += '<blockquote class="gallery-card__quote">&ldquo;' + quote.text + '&rdquo;';
+                    if (quote.source) {
+                        html += '<span class="gallery-card__quote-source">&mdash; ' + quote.source + '</span>';
+                    }
+                    html += '</blockquote>';
+                }
+
+                html += '</div>';
+                html += '</div>';
+            });
+
+            container.innerHTML = html;
+            countEl.textContent = entries.length + ' total credits';
+
+            // Set up filtering
+            var buttons = document.querySelectorAll('.gallery-filter');
+            buttons.forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    var venue = this.getAttribute('data-venue');
+
+                    // Update active button
+                    buttons.forEach(function(b) { b.classList.remove('gallery-filter--active'); });
+                    this.classList.add('gallery-filter--active');
+
+                    // Filter cards
+                    var cards = container.querySelectorAll('.gallery-card');
+                    var visibleCount = 0;
+                    cards.forEach(function(card) {
+                        var cardVenue = card.getAttribute('data-venue');
+                        if (venue === 'all' || cardVenue === venue) {
+                            card.classList.remove('gallery-card--hidden');
+                            visibleCount++;
+                        } else {
+                            card.classList.add('gallery-card--hidden');
+                        }
+                    });
+                    countEl.textContent = visibleCount + ' credit' + (visibleCount !== 1 ? 's' : '');
+                });
+            });
+        }
+
+        // Load theater entries from catalog
+        fetch('/catalog.json')
+            .then(function(res) { return res.json(); })
+            .then(function(data) {
+                var theaterEntries = data.filter(function(entry) {
+                    var cats = entry.categories || [entry.category];
+                    return cats.indexOf('theater') !== -1;
+                });
+                loadGallery(theaterEntries);
+            })
+            .catch(function() {
+                document.getElementById('gallery-cards').innerHTML =
+                    '<p class="room-placeholder__text">Could not load gallery entries.</p>';
+            });
+    })();
+    </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var s = document.createElement('script');
+        var t = new Date().getTime();
+        s.src = 'https://script.google.com/macros/s/AKfycbwOYJRKO_zOwkLpCR4U_ENMiD7bgPtuWmXVe6ZTuT913aTHJ0c5Op3OEdfzJQAGUHdv/exec?action=increment&callback=displayCount&t=' + t;
+        document.body.appendChild(s);
+    });
+    </script>
+</body>
+</html>

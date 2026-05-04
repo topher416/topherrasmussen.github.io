@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essays — Topher Rasmussen</title>
+    <meta name="description" content="Complete index of essays published on Medium and Substack — psychoanalysis, AI, authorship, and the gap between thinking and publishing.">
+    <link rel="canonical" href="https://topherrasmussen.com/medium-essays.html">
+    <meta property="og:title" content="Essays — Topher Rasmussen">
+    <meta property="og:description" content="Complete index of essays published on Medium and Substack — psychoanalysis, AI, authorship, and the gap between thinking and publishing.">
+    <meta property="og:url" content="https://topherrasmussen.com/medium-essays.html">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Essays — Topher Rasmussen">
+    <meta name="twitter:description" content="Complete index of essays published on Medium and Substack — psychoanalysis, AI, authorship, and the gap between thinking and publishing.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,700&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/site.css">
+    <link rel="alternate" type="application/rss+xml" title="Topher Rasmussen — Writing &amp; Journal" href="/feed.xml">
+    <style>
+        .essay-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .essay-card {
+            padding: 18px 20px;
+            border: 1px solid var(--line);
+            background: var(--bg-card);
+            transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .essay-card:hover {
+            border-color: var(--line-strong);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+        }
+        .essay-card__title {
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: clamp(1.05rem, 1.3vw, 1.25rem);
+            font-weight: 500;
+            line-height: 1.25;
+            letter-spacing: -0.01em;
+            margin-bottom: 6px;
+        }
+        .essay-card__title a {
+            color: var(--text-bright);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .essay-card__title a:hover {
+            color: var(--accent);
+        }
+        .essay-card__desc {
+            font-size: clamp(0.88rem, 0.2vw + 0.86rem, 0.95rem);
+            line-height: 1.65;
+            color: var(--text-muted);
+            max-width: 65ch;
+        }
+        .essay-card__year {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-top: 10px;
+        }
+        .arc-note {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            max-width: 60ch;
+            line-height: 1.75;
+            padding: 16px 20px;
+            border-left: 2px solid var(--accent-soft);
+            margin: 0 0 24px;
+            background: var(--bg-raised);
+        }
+        .platform-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin: clamp(24px, 4vw, 40px) 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--line);
+        }
+        .migration-hint {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            font-style: italic;
+            margin-top: 24px;
+        }
+        .back-to-writing {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-top: 32px;
+            padding: 8px 0;
+            transition: color 0.2s ease;
+        }
+        .back-to-writing:hover {
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <nav class="room-nav">
+        <a href="/" class="room-nav__home">TR</a>
+        <a href="/theater.html" class="room-nav__link">Theater</a>
+        <a href="/writing.html" class="room-nav__link">Writing</a>
+        <a href="/start-here.html" class="room-nav__link">Start Here</a>
+        <a href="/music.html" class="room-nav__link">Music</a>
+        <a href="/journal.html" class="room-nav__link">Journal</a>
+        <a href="/visual.html" class="room-nav__link">Visual</a>
+        <a href="/experiments.html" class="room-nav__link">Experiments</a>
+    </nav>
+
+    <main class="room">
+        <header class="room__header">
+            <h1 class="room__title">Essays</h1>
+            <p class="room__subtitle">Essays published on external platforms, collected here for the archive.</p>
+        </header>
+
+        <p class="arc-note">
+            These essays live primarily on Medium because that's where Google can find them. This site keeps an index so nothing gets lost. Over time some essays will migrate here in full — the ones already hosted locally are linked below.
+        </p>
+
+        <!-- ON MEDIUM -->
+        <div class="platform-label">On Medium</div>
+        <div class="essay-list">
+
+            <div class="essay-card">
+                <h3 class="essay-card__title"><a href="https://medium.com/@topher416/the-pleasure-of-the-recursive-machine-on-loops-language-and-the-desire-for-meaning-1581394d1b6f" target="_blank" rel="noopener noreferrer">The Pleasure of the Recursive Machine: On Loops, Language, and the Desire for Meaning</a></h3>
+                <p class="essay-card__desc">We return to language models not for answers but for the recursive pleasure of the exchange itself. The loop is not simply a structure of repetition — it is the very form of our desire. An essay on jouissance, the perpetual suspension of resolution, and why we keep issuing prompts.</p>
+                <p class="essay-card__year">2025</p>
+            </div>
+
+            <div class="essay-card">
+                <h3 class="essay-card__title"><a href="https://medium.com/@topher416/the-willing-surrender-what-we-really-want-from-ai-162f584849ad" target="_blank" rel="noopener noreferrer">The Willing Surrender: What We Really Want from AI</a></h3>
+                <p class="essay-card__desc">On what we actually want when we hand our thinking over to a machine — and why the surrender feels so good.</p>
+                <p class="essay-card__year">2025</p>
+            </div>
+
+            <div class="essay-card">
+                <h3 class="essay-card__title"><a href="https://medium.com/@topher416/the-subject-supposed-to-write-a-lacanian-analysis-of-ai-writing-assistance-8cf24e552eb8" target="_blank" rel="noopener noreferrer">The Subject Supposed to Write: A Lacanian Analysis of AI Writing Assistance</a></h3>
+                <p class="essay-card__desc">Riffing on Lacan's "subject supposed to know" to ask what happens when the subject supposed to write is a machine. Who is the author when the Other holds the pen?</p>
+                <p class="essay-card__year">2025</p>
+            </div>
+
+            <div class="essay-card">
+                <h3 class="essay-card__title"><a href="/subject-supposed-to-write.html">The Subject Supposed to Write: A Lacanian Analysis of AI Writing Assistance</a></h3>
+                <p class="essay-card__desc">Also hosted locally — a companion landing page with the essay's core argument and related reading.</p>
+                <p class="essay-card__year">2025 <span class="entry__tag">On this site</span></p>
+            </div>
+
+            <div class="essay-card">
+                <h3 class="essay-card__title"><a href="https://medium.com/@topher416/the-illusion-of-ai-therapy-a-critical-examination-of-its-state-and-limitations-143fd08e6748" target="_blank" rel="noopener noreferrer">The Illusion of AI Therapy: A Critical Examination of Its State and Limitations</a></h3>
+                <p class="essay-card__desc">A critical examination of AI therapy — what it promises, what it actually delivers, and why the illusion of care is not the same as care. Written from the perspective of a licensed social worker who takes the therapeutic relationship seriously.</p>
+                <p class="essay-card__year">2025</p>
+            </div>
+
+            <div class="essay-card">
+                <h3 class="essay-card__title"><a href="/slop-bucket.html">Notes from the Slop Bucket</a></h3>
+                <p class="essay-card__desc">On the term "AI slop" — the smooth, soulless, indistinct writing that comes out of machines — and the shame of needing help from one. Composed with Claude and GPT while analyzing that process.</p>
+                <p class="essay-card__year">2025 <span class="entry__tag">Migration in progress</span></p>
+            </div>
+
+            <div class="essay-card">
+                <h3 class="essay-card__title"><a href="https://medium.com/@topher416/do-our-tools-change-our-minds-1f3c631e8497" target="_blank" rel="noopener noreferrer">Do Our Tools Change Our Minds?</a></h3>
+                <p class="essay-card__desc">On whether the tools we use reshape how we think — and whether that reshaping is something we chose or something that happened to us while we weren't paying attention.</p>
+                <p class="essay-card__year">2025</p>
+            </div>
+
+            <div class="essay-card">
+                <h3 class="essay-card__title"><a href="https://medium.com/@topher416/between-making-and-reading-a-personal-exploration-of-artificial-intelligence-263d1b984f99" target="_blank" rel="noopener noreferrer">Between Making and Reading: A Personal Exploration of Artificial Intelligence</a></h3>
+                <p class="essay-card__desc">A personal exploration of what it means to make things and read things in an era where AI sits between the two — blurring the line between authorship and consumption.</p>
+                <p class="essay-card__year">2025</p>
+            </div>
+
+            <div class="essay-card">
+                <h3 class="essay-card__title"><a href="https://medium.com/@topher416/fragments-from-the-mirror-an-attempt-at-honest-reflection-3c6a0717a219" target="_blank" rel="noopener noreferrer">Fragments from the Mirror: An Attempt at Honest Reflection</a></h3>
+                <p class="essay-card__desc">An attempt at honest self-reflection — the kind that resists the temptation to turn introspection into performance.</p>
+                <p class="essay-card__year">2025</p>
+            </div>
+
+            <div class="essay-card">
+                <h3 class="essay-card__title"><a href="https://medium.com/@topher416/on-ai-psychoanalysis-and-the-mediated-self-e1ef152f781e" target="_blank" rel="noopener noreferrer">On AI, Psychoanalysis, and the Mediated Self</a></h3>
+                <p class="essay-card__desc">How AI exposes the fragility of our belief in unique subjectivity. If an algorithm can mimic speech patterns, anticipate desires, and produce texts indistinguishable from human writing, what does that say about our presumed autonomy?</p>
+                <p class="essay-card__year">2025</p>
+            </div>
+
+            <div class="essay-card">
+                <h3 class="essay-card__title"><a href="https://medium.com/@topher416/on-using-ai-to-fake-my-way-through-consulting-f5a0dccb9782" target="_blank" rel="noopener noreferrer">On Using AI to Fake My Way Through Consulting</a></h3>
+                <p class="essay-card__desc">A former theatre kid lands at a healthcare consultancy and uses AI to process meeting transcripts and method-act his way through professionalism. Draws on Stanislavski's "magic if" and Winnicott's False Self to ask whether AI is an accomplice to imposter syndrome or just the latest tool for getting through the day.</p>
+                <p class="essay-card__year">2024</p>
+            </div>
+
+        </div>
+
+        <!-- ON SUBSTACK -->
+        <div class="platform-label">On Substack</div>
+        <div class="essay-list">
+
+            <div class="essay-card">
+                <h3 class="essay-card__title"><a href="https://gh0stwriting.substack.com/p/the-spectral-author" target="_blank" rel="noopener noreferrer">The Spectral Author: LLMs and the Liminal Space of AI-Human Writing</a></h3>
+                <p class="essay-card__desc">On the "spectral author" — a presence that exists between human and machine creation. Draws on Barthes, Benjamin, and Bloom to argue that AI doesn't eliminate human creativity but reconfigures it into an ecological model where human intention and machine capability operate interdependently. Published in GHOSTWRITING on Substack.</p>
+                <p class="essay-card__year">2025</p>
+            </div>
+
+        </div>
+
+        <p class="migration-hint">
+            Full-text migrations are underway. Essays marked with "On this site" already have a landing page here. The rest will follow.
+        </p>
+
+        <a href="/writing.html" class="back-to-writing">&larr; Back to Writing</a>
+    </main>
+
+    <footer class="room-footer">
+        <div class="counter">
+            Visitor count: <span class="counter-display">00000000</span>
+        </div>
+    </footer>
+
+    <script>
+    window.displayCount = function (count) {
+        var el = document.querySelector('.counter-display');
+        if (el) el.textContent = count.toString().padStart(8, '0');
+    };
+    document.addEventListener('DOMContentLoaded', function () {
+        var s = document.createElement('script');
+        var t = new Date().getTime();
+        s.src = 'https://script.google.com/macros/s/AKfycbwOYJRKO_zOwkLpCR4U_ENMiD7bgPtuWmXVe6ZTuT913aTHJ0c5Op3OEdfzJQAGUHdv/exec?action=increment&callback=displayCount&t=' + t;
+        document.body.appendChild(s);
+    });
+    </script>
+
+</body>
+</html>
