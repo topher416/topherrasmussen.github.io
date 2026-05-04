@@ -10,6 +10,67 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,700&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/site.css">
     <link rel="alternate" type="application/rss+xml" title="Topher Rasmussen — Writing &amp; Journal" href="/feed.xml">
+    <style>
+        .more-section {
+            max-width: 960px;
+            width: 100%;
+            margin: clamp(24px, 3vw, 40px) auto clamp(16px, 3vw, 32px);
+            animation: fadeSlide 0.7s ease 0.25s both;
+            padding: 0 clamp(20px, 4vw, 48px);
+        }
+        .more-section__heading {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.68rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 16px;
+        }
+        .more-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+            gap: 8px;
+        }
+        .more-pill {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            padding: 12px 16px;
+            border: 1px solid var(--line);
+            background: var(--bg-card);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .more-pill:hover {
+            border-color: var(--line-strong);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+        }
+        .more-pill__title {
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--text-bright);
+            line-height: 1.3;
+        }
+        .more-pill__desc {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            line-height: 1.4;
+        }
+
+        @media (max-width: 740px) {
+            .doorways {
+                grid-template-columns: 1fr;
+                grid-template-rows: 260px 220px;
+            }
+            .door--theater { grid-column: 1; grid-row: 1; }
+            .door--writing { grid-column: 1; grid-row: 2; }
+            .more-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
     <div class="homepage">
@@ -19,9 +80,10 @@
             <p class="hero__location">Chicago, IL</p>
         </header>
 
+        <!-- Top 3 Doors -->
         <div class="doorways">
 
-            <!-- Start Here -->
+            <!-- Start Here (primary) -->
             <a href="/start-here.html" class="door door--writing">
                 <p class="door__excerpt">What this work is actually about — the gap between intention and expression, from Stanislavski through Lacan to AI as co-author&hellip;</p>
                 <span class="door__label">Start Here</span>
@@ -44,24 +106,50 @@
                 <span class="door__label">Writing</span>
             </a>
 
-            <!-- Music -->
-            <a href="/music.html" class="door door--music">
-                <div class="waveform" aria-hidden="true">
-                    <span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span>
-                </div>
-                <span class="door__label">Music</span>
-            </a>
-
-            <!-- Experiments -->
-            <a href="/experiments.html" class="door door--experiments">
-                <span class="door__glitch" data-text="Horror Movie Tarot">Horror Movie Tarot</span>
-                <span class="door__label">Web / Experiments</span>
-            </a>
-
         </div>
+
+        <!-- More section — compact pills for remaining pages -->
+        <section class="more-section">
+            <h2 class="more-section__heading">Explore</h2>
+            <div class="more-grid">
+                <a href="/theater-gallery.html" class="more-pill">
+                    <span class="more-pill__title">Gallery</span>
+                    <span class="more-pill__desc">57 theater credits, press quotes, photos</span>
+                </a>
+                <a href="/directing.html" class="more-pill">
+                    <span class="more-pill__title">Directing</span>
+                    <span class="more-pill__desc">Directing work and approach</span>
+                </a>
+                <a href="https://medium.com/@topher416" class="more-pill">
+                    <span class="more-pill__title">Essays</span>
+                    <span class="more-pill__desc">Long-form writing on Medium</span>
+                </a>
+                <a href="/research.html" class="more-pill">
+                    <span class="more-pill__title">Research</span>
+                    <span class="more-pill__desc">Lacan + AI — structured like a language</span>
+                </a>
+                <a href="/recordings.html" class="more-pill">
+                    <span class="more-pill__title">Recordings</span>
+                    <span class="more-pill__desc">Music performances and sessions</span>
+                </a>
+                <a href="/syllabi.html" class="more-pill">
+                    <span class="more-pill__title">Syllabi</span>
+                    <span class="more-pill__desc">Teaching materials and course outlines</span>
+                </a>
+                <a href="/awards.html" class="more-pill">
+                    <span class="more-pill__title">Awards</span>
+                    <span class="more-pill__desc">KC-ACTF and other recognitions</span>
+                </a>
+                <a href="/chicago.html" class="more-pill">
+                    <span class="more-pill__title">Chicago</span>
+                    <span class="more-pill__desc">Full map of Chicago work and connections</span>
+                </a>
+                <a href="/archive.html" class="more-pill">
+                    <span class="more-pill__title">Archive</span>
+                    <span class="more-pill__desc">Everything, all in one place</span>
+                </a>
+            </div>
+        </section>
 
         <!-- Featured: Radiohead Covers -->
         <section class="featured-video">
@@ -79,11 +167,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Visual — full-width below grid -->
-        <a href="/visual.html" class="door door--visual">
-            <span class="door__label">Visual</span>
-        </a>
 
         <footer class="homepage-footer">
             <div class="about">
