@@ -15,6 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -26,6 +27,7 @@
             -webkit-user-select: none;
             user-select: none;
         }
+        #nav-wrap { position: relative; z-index: 2; }
         #wrapper {
             position: relative;
             width: 100vw;
@@ -33,11 +35,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            z-index: 1;
         }
         canvas {
             display: block;
-            image-rendering: pixelated;
+            image-rendering: auto;
             border: 1px solid #ddd7d1;
+            border-radius: 4px;
         }
         #ui-top {
             position: absolute;
@@ -48,37 +52,55 @@
             font-size: 11px;
             color: #7a726a;
             pointer-events: none;
+            z-index: 3;
         }
+        #room-text {
+            position: absolute;
+            bottom: 100px;
+            left: 16px;
+            right: 16px;
+            text-align: center;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            color: #7a726a;
+            pointer-events: none;
+            z-index: 3;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        #room-text.visible { opacity: 1; }
         #touch-controls {
             position: absolute;
             bottom: 16px;
             left: 0; right: 0;
-            display: flex;
+            display: none;
             justify-content: center;
-            gap: 8px;
-            padding: 0 16px;
+            gap: 12px;
             pointer-events: auto;
+            z-index: 3;
         }
-        @media (min-width: 768px) {
-            #touch-controls { display: none; }
+        @media (max-width: 767px) {
+            #touch-controls { display: flex; }
+            #room-text { bottom: 110px; font-size: 10px; }
+            canvas { border: none; }
         }
         .touch-btn {
-            width: 64px;
-            height: 64px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
-            background: rgba(61, 56, 50, 0.12);
-            border: 1.5px solid rgba(61, 56, 50, 0.2);
+            background: rgba(61, 56, 50, 0.15);
+            border: 1.5px solid rgba(61, 56, 50, 0.25);
             color: #3d3832;
             font-family: 'IBM Plex Mono', monospace;
-            font-size: 22px;
+            font-size: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             -webkit-tap-highlight-color: transparent;
+            touch-action: none;
         }
-        .touch-btn:active { background: rgba(61, 56, 50, 0.25); }
-        .touch-btn--action { border-color: #b8442a; color: #b8442a; }
+        .touch-btn:active { background: rgba(61, 56, 50, 0.35); }
 
         #title-screen, #death-screen {
             position: absolute;
@@ -90,6 +112,7 @@
             justify-content: center;
             padding: 24px;
             text-align: center;
+            z-index: 10;
         }
         .hidden { display: none !important; }
         #title-screen h1, #death-screen h1 {
@@ -97,7 +120,6 @@
             font-size: clamp(2.5rem, 10vw, 5rem);
             color: #1a1816;
             margin-bottom: 12px;
-            letter-spacing: -0.02em;
         }
         #title-screen p, #death-screen p {
             font-family: 'IBM Plex Mono', monospace;
@@ -116,25 +138,13 @@
             color: #b8442a;
             border-radius: 999px;
             cursor: pointer;
+            transition: all 0.2s ease;
         }
         .pill-btn:hover { background: #b8442a; color: #f5f2ed; }
-        #room-text {
-            position: absolute;
-            bottom: 80px;
-            left: 16px;
-            right: 16px;
-            text-align: center;
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 11px;
-            color: #a89f96;
-            pointer-events: none;
-        }
-        @media (max-width: 767px) {
-            #room-text { bottom: 100px; }
-        }
     </style>
 </head>
 <body>
+    <div id="nav-wrap">
     <nav class="room-nav">
         <a href="/" class="room-nav__home">TR</a>
         <a href="/theater.html" class="room-nav__link">Theater</a>
@@ -145,21 +155,22 @@
         <a href="/journal.html" class="room-nav__link">Journal</a>
         <a href="/visual.html" class="room-nav__link">Visual</a>
     </nav>
+    </div>
 
     <div id="wrapper">
         <canvas id="c"></canvas>
-        <div id="ui-top"><span id="ui-run">run 1</span> &middot; room <span id="ui-room">1</span></div>
+        <div id="ui-top"><span id="ui-run">run 1</span> &middot; room <span id="ui-room">1</span> &middot; <span id="ui-type"></span></div>
         <div id="room-text"></div>
         <div id="touch-controls">
-            <button class="touch-btn" data-key="left">←</button>
-            <button class="touch-btn" data-key="up">↑</button>
-            <button class="touch-btn" data-key="down">↓</button>
-            <button class="touch-btn" data-key="right">→</button>
+            <button class="touch-btn" data-key="left" style="order:1">←</button>
+            <button class="touch-btn" data-key="up" style="order:2">↑</button>
+            <button class="touch-btn" data-key="down" style="order:3">↓</button>
+            <button class="touch-btn" data-key="right" style="order:4">→</button>
         </div>
 
         <div id="title-screen">
             <h1>The Gaze</h1>
-            <p>you move through rooms the arrangement shifts each time you look. don't catch your reflection. don't stop moving.</p>
+            <p>you move through rooms the arrangement shifts each time. don't catch your reflection. don't stop moving.</p>
             <button class="pill-btn" id="start-btn">begin</button>
         </div>
 
@@ -185,44 +196,45 @@
     </script>
 
     <script>
-    // Simple seeded RNG
-    function rng(seed) {
-        var s = seed || Date.now();
+    // ===== SEEDED RNG =====
+    function mkRng(seed) {
+        var s = seed || 42;
         return function() {
-            s = (s * 16807 + 0) % 2147483647;
+            s = (s * 16807) % 2147483647;
             return (s - 1) / 2147483646;
         };
     }
 
+    // ==== CONSTANTS ====
     var TILE = 28;
     var RW = 24, RH = 14;
-    var VW, VH;
-    var seed = 0, run = 1, room = 0;
-    var state = 'title'; // title, playing, dead
-    var map = [];
-    var elements = [];
-    var exits = [];
-    var player = { x: 0, y: 0, dx: 0, dy: 0, dir: 1, looking: true };
+    var W, H, VW, VH;
+    var seed, run = 0, roomNum = 0;
+    var state = 'title';
+    var map = [], elements = [], exits = [];
+    var px = 1, py = 1, dir = 1, looking = true;
     var cam = { x: 0, y: 0 };
     var frame = 0;
-    var moveTimer = 0, moveCD = 140;
+    var moveTimer = 0, moveCD = 100;
     var gazeT = 0, gazeOn = false, gazeX = 0, gazeY = 0;
     var deathMsg = '';
     var roomType = '';
+    var nearText = null;
+    var rng;
+    var keys = {};
+    var tkeys = { left: false, right: false, up: false, down: false };
+
     var texts = [
         "the mirror stage",
         "desire is the desire of the Other",
         "the unconscious is structured like a language",
-        "there is no sexual relationship",
         "the real resists symbolization",
         "objet petit a — the cause of desire",
-        "you are looking at me from a point where I am not",
+        "you are looking at me from where I am not",
         "lack is the condition of desire",
-        "the gaze is not a look but a disturbance"
+        "the gaze is not a look but a disturbance",
+        "the subject is split"
     ];
-    var keys = {};
-    var tkeys = {};
-    var r = rng();
 
     var canvas = document.getElementById('c');
     var ctx = canvas.getContext('2d');
@@ -230,223 +242,270 @@
     function resize() {
         var maxW = Math.min(window.innerWidth - 32, 672);
         var maxH = Math.min(window.innerHeight - 140, 392);
-        canvas.width = maxW - (maxW % TILE);
-        canvas.height = maxH - (maxH % TILE);
-        VW = canvas.width / TILE;
-        VH = canvas.height / TILE;
+        W = Math.floor(maxW / TILE) * TILE;
+        H = Math.floor(maxH / TILE) * TILE;
+        canvas.width = W;
+        canvas.height = H;
+        VW = W / TILE;
+        VH = H / TILE;
     }
     window.addEventListener('resize', resize);
     resize();
 
-    function makeMap() {
+    // ===== MAP GENERATION =====
+    function genMap() {
         map = [];
+        var r = rng;
+        // Fill with walls
         for (var y = 0; y < RH; y++) {
             map[y] = [];
             for (var x = 0; x < RW; x++) {
-                if (y === 0 || y === RH - 1 || x === 0 || x === RW - 1) {
-                    map[y][x] = 1;
-                } else {
-                    map[y][x] = r() > 0.65 ? 1 : 0;
+                map[y][x] = 1;
+            }
+        }
+        // Carve corridors
+        var midY = Math.floor(RH / 2);
+        // Main horizontal
+        for (var x = 1; x < RW - 1; x++) {
+            for (var dy = -1; dy <= 1; dy++) {
+                var my = midY + dy;
+                if (my > 0 && my < RH - 1) {
+                    map[my][x] = r() > 0.3 ? 0 : 1;
                 }
             }
         }
-        // Carve open paths (simple corridor carving)
-        // Horizontal corridor through middle
-        var midY = Math.floor(RH / 2);
-        for (var x = 1; x < RW - 1; x++) {
-            map[midY][x] = 0;
-            if (midY > 1) map[midY - 1][x] = r() > 0.3 ? 0 : 1;
-            if (midY < RH - 2) map[midY + 1][x] = r() > 0.3 ? 0 : 1;
-        }
-        // Vertical corridors at thirds
-        for (var q = 1; q < RW - 1; q += Math.floor((RW - 2) / 2)) {
-            for (var yy = 1; yy < RH - 1; yy++) {
-                map[yy][q] = 0;
-                if (q > 0) map[yy][q - 1] = r() > 0.5 ? 0 : 1;
-                if (q < RW - 2) map[yy][q + 1] = r() > 0.5 ? 0 : 1;
+        // Vertical corridors
+        var vPositions = [3, 8, 14, 19];
+        for (var vi = 0; vi < vPositions.length; vi++) {
+            var vx = vPositions[vi];
+            for (var vy = 1; vy < RH - 1; vy++) {
+                map[vy][vx] = 0;
+                if (vx - 1 > 0) map[vy][vx - 1] = r() > 0.4 ? 0 : 1;
+                if (vx + 1 < RW - 1) map[vy][vx + 1] = r() > 0.4 ? 0 : 1;
             }
         }
-        // Random open rooms
-        for (var i = 0; i < 4; i++) {
-            var sx = 2 + Math.floor(r() * (RW - 6));
-            var sy = 2 + Math.floor(r() * (RH - 6));
-            var sw = 2 + Math.floor(r() * 3);
+        // Random rooms
+        for (var i = 0; i < 5; i++) {
+            var sx = 1 + Math.floor(r() * (RW - 5));
+            var sy = 1 + Math.floor(r() * (RH - 5));
+            var sw = 2 + Math.floor(r() * 4);
             var sh = 2 + Math.floor(r() * 3);
-            for (var ry = sy; ry < sy + sh && ry < RH - 1; ry++)
-                for (var rx = sx; rx < sx + sw && rx < RW - 1; rx++)
+            for (var ry = sy; ry < sy + sh && ry < RH - 1; ry++) {
+                for (var rx = sx; rx < sx + sw && rx < RW - 1; rx++) {
                     map[ry][rx] = 0;
+                }
+            }
+        }
+        // Random open spaces
+        for (var j = 0; j < 20; j++) {
+            var jx = 1 + Math.floor(r() * (RW - 2));
+            var jy = 1 + Math.floor(r() * (RH - 2));
+            map[jy][jx] = 0;
         }
 
-        // Place player at top-left open space
-        player.x = 1; player.y = 1;
-        while (map[player.y][player.x] === 1) { player.x++; if (player.x > RW - 2) { player.x = 1; player.y++; } }
+        // Place player
+        px = 1; py = 1;
+        var attempts = 0;
+        while (map[py][px] === 1 && attempts < 100) {
+            // Find nearest open space
+            for (var fy = 1; fy < RH - 1; fy++) {
+                for (var fx = 1; fx < RW - 1; fx++) {
+                    if (map[fy][fx] === 0) {
+                        px = fx; py = fy;
+                        fy = RH; fx = RW; // break both
+                    }
+                }
+            }
+            attempts = 999;
+        }
 
-        // Room types
+        // Room type
         var types = ['mirror', 'drive', 'gaze', 'empty'];
         roomType = types[Math.floor(r() * types.length)];
+        document.getElementById('ui-type').textContent = roomType;
 
         elements = [];
 
         if (roomType === 'mirror') {
-            // Place mirror somewhere reachable
-            elements.push({ type: 'mirror', x: Math.floor(RW * 0.75), y: midY });
-            // Mirror reflection that follows player slowly
-            elements.push({ type: 'reflection', x: player.x + 5, y: player.y });
+            // Mirror at far end
+            var mx = Math.floor(RW * 0.75);
+            var my = midY;
+            while (map[my][mx] === 1 && mx > 2) mx--;
+            while (map[my][mx] === 1 && my > 2) my--;
+            if (map[my][mx] === 1) { my = midY; mx = RW - 3; }
+            elements.push({ type: 'mirror', x: mx, y: my });
+            elements.push({ type: 'reflection', x: px + 4, y: py, speed: 0.3 });
         } else if (roomType === 'drive') {
-            elements.push({ type: 'objet', x: Math.floor(RW * 0.7), y: midY, shift: 0 });
+            var ox = RW - 3, oy = midY;
+            while (map[oy][ox] === 1 && oy > 2) oy--;
+            elements.push({ type: 'objet', x: ox, y: oy, shiftCount: 0 });
         } else if (roomType === 'gaze') {
             gazeOn = false; gazeT = 0;
         }
 
-        // Place text fragments
-        if (r() > 0.3) {
-            var tx, ty, attempts = 0;
+        // Text fragment
+        if (r() > 0.2) {
+            var tx, ty, ta = 0;
             do {
                 tx = 2 + Math.floor(r() * (RW - 4));
                 ty = 2 + Math.floor(r() * (RH - 4));
-                attempts++;
-            } while (map[ty][tx] === 1 && attempts < 20);
+                ta++;
+            } while (map[ty][tx] === 1 && ta < 30);
             if (map[ty][tx] === 0) {
-                elements.push({ type: 'text', x: tx, y: ty, text: texts[Math.floor(r() * texts.length)], read: false });
+                elements.push({ type: 'text', x: tx, y: ty, text: texts[Math.floor(r() * texts.length)] });
             }
         }
 
-        // Place exit
+        // Exit at far right
         var ex = RW - 2, ey = midY;
-        while (map[ey][ex] === 1 && ey > 1) ey--;
+        while (map[ey][ex] === 1 && ey < RH - 2) ey++;
+        while (map[ey][ex] === 1 && ex > 2) ex--;
+        map[ey][ex] = 0;
         exits = [{ x: ex, y: ey }];
     }
 
-    function lookScratch(ctx, x, y, w, h, density, color) {
-        var lines = Math.floor(density * Math.min(w, h));
-        for (var i = 0; i < lines; i++) {
-            var angle = r() * Math.PI;
-            var len = r() * Math.min(w, h) * 0.7;
-            var cx = x + r() * w;
-            var cy = y + r() * h;
-            var steps = Math.floor(len / 2);
-            ctx.strokeStyle = color || 'rgba(26,24,22,0.25)';
-            ctx.lineWidth = 0.3 + r() * 1;
+    // ===== RENDERING =====
+    function scratch(ctx, x, y, w, h, density, r, g, b, a) {
+        var n = Math.floor(density * Math.min(w, h));
+        for (var i = 0; i < n; i++) {
+            var ang = rng() * Math.PI * 2;
+            var len = rng() * Math.min(w, h);
+            var cx = x + rng() * w;
+            var cy = y + rng() * h;
+            ctx.strokeStyle = 'rgba(' + (r||26) + ',' + (g||24) + ',' + (b||22) + ',' + (a||0.3) + ')';
+            ctx.lineWidth = 0.3 + rng() * 1.2;
             ctx.beginPath();
-            ctx.moveTo(cx + (r() - 0.5) * 1, cy + (r() - 0.5) * 1);
-            ctx.lineTo(cx + Math.cos(angle) * len + (r() - 0.5) * 1, cy + Math.sin(angle) * len + (r() - 0.5) * 1);
+            ctx.moveTo(cx + (rng() - 0.5), cy + (rng() - 0.5));
+            ctx.lineTo(cx + Math.cos(ang) * len + (rng() - 0.5), cy + Math.sin(ang) * len + (rng() - 0.5));
             ctx.stroke();
         }
     }
 
-    function drawWall(ctx, px, py) {
-        ctx.fillStyle = 'rgba(61,56,50,0.08)';
-        ctx.fillRect(px, py, TILE, TILE);
-        lookScratch(ctx, px, py, TILE, TILE, 0.35);
-        // Ink bleed edges
-        for (var i = 0; i < 3; i++) {
-            ctx.strokeStyle = 'rgba(26,24,22,0.15)';
+    function drawTile(x, y) {
+        var px = x * TILE - cam.x * TILE;
+        var py = y * TILE - cam.y * TILE;
+
+        if (px + TILE < 0 || px > W || py + H < 0 || py > H) return;
+
+        if (map[y][x] === 1) {
+            ctx.fillStyle = 'rgba(45,40,35,0.15)';
+            ctx.fillRect(px, py, TILE, TILE);
+            // Heavy crosshatch for walls
+            scratch(ctx, px, py, TILE, TILE, 0.6, 26, 24, 22, 0.35);
+            scratch(ctx, px, py, TILE, TILE, 0.3, 26, 24, 22, 0.2);
+            // Ink bleed edges
+            ctx.strokeStyle = 'rgba(26,24,22,0.2)';
             ctx.lineWidth = 0.5;
-            ctx.beginPath();
-            ctx.moveTo(px + r() * TILE, py);
-            ctx.lineTo(px + r() * TILE, py + TILE);
-            ctx.stroke();
+            for (var i = 0; i < 4; i++) {
+                ctx.beginPath();
+                ctx.moveTo(px + rng() * TILE, py + rng() * TILE);
+                ctx.lineTo(px + rng() * TILE, py + rng() * TILE);
+                ctx.stroke();
+            }
+        } else {
+            ctx.fillStyle = '#f5f2ed';
+            ctx.fillRect(px, py, TILE, TILE);
+            // Light paper texture
+            if (rng() < 0.05) {
+                scratch(ctx, px + 4, py + 4, TILE - 8, TILE - 8, 0.05, 61, 56, 50, 0.06);
+            }
         }
     }
 
-    function drawFloor(ctx, px, py) {
-        ctx.fillStyle = '#f5f2ed';
-        ctx.fillRect(px, py, TILE, TILE);
-        if (r() < 0.08) {
-            ctx.strokeStyle = 'rgba(61,56,50,0.06)';
-            ctx.lineWidth = 0.5;
-            ctx.beginPath();
-            ctx.moveTo(px + r() * TILE, py + r() * TILE);
-            ctx.lineTo(px + r() * TILE, py + r() * TILE);
-            ctx.stroke();
-        }
-    }
+    function drawEl(ctx, ex, ey, type) {
+        var px = ex * TILE - cam.x * TILE + TILE / 2;
+        var py = ey * TILE - cam.y * TILE + TILE / 2;
 
-    function drawSprite(ctx, px, py, type, frame) {
+        // Skip if offscreen
+        if (px + TILE < 0 || px - TILE > W || py + TILE < 0 || py - TILE > H) return;
+
         ctx.save();
-        ctx.translate(px + TILE / 2, py + TILE / 2);
+        ctx.translate(px, py);
 
         if (type === 'player') {
-            // Scratchboard figure
-            lookScratch(ctx, -7, -11, 14, 22, 0.5);
-            ctx.strokeStyle = 'rgba(26,24,22,0.85)';
-            ctx.lineWidth = 1.2;
+            // Body
+            scratch(ctx, -6, -12, 12, 24, 0.7);
+            ctx.strokeStyle = '#1a1816';
+            ctx.lineWidth = 1.5;
             // Head
             ctx.beginPath();
-            ctx.ellipse(0, -8, 3, 4, 0, 0, Math.PI * 2);
+            ctx.ellipse(0, -10, 4, 4, 0, 0, Math.PI * 2);
             ctx.stroke();
             // Body
             ctx.beginPath();
-            ctx.moveTo(0, -4);
-            ctx.lineTo(player.dir * 2, 7);
+            ctx.moveTo(0, -6);
+            ctx.lineTo(dir * 3, 8);
             ctx.stroke();
             // Arms
             ctx.beginPath();
-            ctx.moveTo(-1, -1); ctx.lineTo(-5, 2);
-            ctx.moveTo(1, -1); ctx.lineTo(5, 2);
+            ctx.moveTo(-2, -2); ctx.lineTo(-6, 2);
+            ctx.moveTo(2, -2); ctx.lineTo(6, 2);
             ctx.stroke();
-            // Eyes
-            if (player.looking) {
-                ctx.fillStyle = 'rgba(184,68,42,0.7)';
-                ctx.fillRect(player.dir > 0 ? 1 : -3, -9, 1, 1);
-            }
+            // Eye direction
+            ctx.fillStyle = '#b8442a';
+            ctx.fillRect(dir > 0 ? 1 : -3, -11, 1.5, 1.5);
         } else if (type === 'mirror') {
-            var fl = Math.sin(frame * 0.15) * 0.5;
-            ctx.strokeStyle = 'rgba(26,24,22,0.8)';
+            var fl = Math.sin(frame * 0.15) * 2;
+            ctx.strokeStyle = '#1a1816';
             ctx.lineWidth = 2;
-            ctx.strokeRect(-9 + fl, -13 + fl, 18, 26);
-            ctx.strokeRect(-9 - fl, -13 - fl, 18, 26);
-            lookScratch(ctx, -7, -11, 14, 22, 0.2, 'rgba(26,24,22,0.15)');
+            ctx.strokeRect(-10 + fl, -15 + fl, 20, 30);
+            ctx.strokeRect(-10 - fl, -15 - fl, 20, 30);
+            scratch(ctx, -8, -13, 16, 26, 0.25, 26, 24, 22, 0.15);
+            // Mirror line
+            ctx.beginPath();
+            ctx.moveTo(-8, 0);
+            ctx.lineTo(8, 0);
+            ctx.strokeStyle = 'rgba(184,68,42,0.4)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
         } else if (type === 'reflection') {
-            // Ghost version of player
-            ctx.globalAlpha = 0.35;
-            lookScratch(ctx, -7, -11, 14, 22, 0.3);
-            ctx.strokeStyle = 'rgba(26,24,22,0.4)';
+            ctx.globalAlpha = 0.3;
+            scratch(ctx, -6, -12, 12, 24, 0.4);
+            ctx.strokeStyle = '#1a1816';
             ctx.lineWidth = 1;
             ctx.beginPath();
-            ctx.ellipse(0, -8, 3, 4, 0, 0, Math.PI * 2);
+            ctx.ellipse(0, -10, 3, 3, 0, 0, Math.PI * 2);
             ctx.stroke();
             ctx.beginPath();
-            ctx.moveTo(0, -4);
-            ctx.lineTo(-player.dir * 2, 7);
+            ctx.moveTo(0, -7);
+            ctx.lineTo(-dir * 2, 7);
             ctx.stroke();
             ctx.globalAlpha = 1;
         } else if (type === 'objet') {
-            var pulse = Math.sin(frame * 0.25) * 2;
+            var pulse = Math.sin(frame * 0.2) * 2;
             ctx.strokeStyle = '#b8442a';
             ctx.lineWidth = 1.5;
             ctx.beginPath();
-            ctx.arc(pulse, 0, 3 + pulse, 0, Math.PI * 2);
+            ctx.ellipse(pulse, 0, 5 + pulse, 3 + pulse, 0, 0, Math.PI * 2);
             ctx.stroke();
-            lookScratch(ctx, -3, -3, 6, 6, 0.2, 'rgba(184,68,42,0.2)');
+            scratch(ctx, -4, -3, 8, 6, 0.2, 184, 68, 42, 0.25);
+            // Rust dot
+            ctx.fillStyle = '#b8442a';
+            ctx.beginPath();
+            ctx.arc(0, 0, 1, 0, Math.PI * 2);
+            ctx.fill();
         } else if (type === 'gaze') {
             // The Eye
-            ctx.strokeStyle = 'rgba(26,24,22,0.9)';
+            ctx.strokeStyle = '#1a1816';
             ctx.lineWidth = 2;
             ctx.beginPath();
-            ctx.ellipse(0, 0, 10, 6, 0, 0, Math.PI * 2);
+            ctx.ellipse(0, 0, 12, 7, 0, 0, Math.PI * 2);
             ctx.stroke();
             ctx.beginPath();
             ctx.arc(0, 0, 2, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(26,24,22,0.8)';
+            ctx.fillStyle = '#1a1816';
             ctx.fill();
-            lookScratch(ctx, -8, -4, 16, 8, 0.12);
+            // Crosshatch iris
+            scratch(ctx, -9, -5, 18, 10, 0.15, 26, 24, 22, 0.2);
         } else if (type === 'text') {
-            ctx.font = '10px "IBM Plex Mono", monospace';
-            ctx.fillStyle = 'rgba(122,114,106,0.5)';
-            ctx.textAlign = 'center';
-            var t = frame < 30 ? '...' : 'the mirror stage';
-            ctx.fillText(t, 0, 0);
+            // Ink splatter
+            scratch(ctx, -4, -4, 8, 8, 0.15, 122, 114, 106, 0.2);
         }
 
         ctx.restore();
     }
 
-    function getTile(x, y) {
-        if (x < 0 || x >= RW || y < 0 || y >= RH) return 1;
-        return map[y][x];
-    }
-
+    // ===== UPDATE =====
     function update(dt) {
         if (state !== 'playing') return;
         frame++;
@@ -454,224 +513,264 @@
 
         // Input
         var dx = 0, dy = 0;
-        if (keys['arrowleft'] || keys['a'] || tkeys['left']) dx = -1;
-        if (keys['arrowright'] || keys['d'] || tkeys['right']) dx = 1;
-        if (keys['arrowup'] || keys['w'] || tkeys['up']) dy = -1;
-        if (keys['arrowdown'] || keys['s'] || tkeys['down']) dy = 1;
+        if (keys['arrowleft'] || keys['a'] || tkeys.left) dx = -1;
+        if (keys['arrowright'] || keys['d'] || tkeys.right) dx = 1;
+        if (keys['arrowup'] || keys['w'] || tkeys.up) dy = -1;
+        if (keys['arrowdown'] || keys['s'] || tkeys.down) dy = 1;
 
         if (dx !== 0 || dy !== 0) {
-            if (dx !== 0) player.dir = dx > 0 ? 1 : -1;
-            player.looking = (dx !== 0 || dy !== 0);
+            if (dx !== 0) dir = dx;
+            looking = true;
 
             if (moveTimer >= moveCD) {
-                var nx = player.x + dx;
-                var ny = player.y + dy;
+                var nx = px + dx;
+                var ny = py + dy;
 
-                if (getTile(nx, ny) === 0) {
-                    player.x = nx;
-                    player.y = ny;
+                if (nx >= 0 && nx < RW && ny >= 0 && ny < RH && map[ny][nx] === 0) {
+                    px = nx;
+                    py = ny;
                     moveTimer = 0;
+                    // Footstep sound
+                    playStep();
                 }
             }
         } else {
-            // Not moving
-            player.looking = false;
+            looking = false;
         }
 
-        // Mirror logic: reflection follows player
-        var refl = elements.find(function(e) { return e.type === 'reflection'; });
-        if (refl) {
-            if (frame % 30 === 0) {
-                var rdx = Math.sign(player.x - refl.x);
-                var rdy = Math.sign(player.y - refl.y);
-                var rnx = refl.x + rdx;
-                var rny = refl.y + rdy;
-                if (getTile(rnx, rny) === 0) {
-                    refl.x = rnx;
-                    refl.y = rny;
-                } else if (getTile(refl.x + rdy, refl.y - rdx) === 0) {
-                    refl.x = refl.x + rdy;
-                    refl.y = refl.y - rdx;
+        // Mirror: reflection moves toward player
+        for (var i = 0; i < elements.length; i++) {
+            var el = elements[i];
+            if (el.type === 'reflection' && frame % 3 === 0) {
+                var rdx = Math.sign(px - el.x);
+                var rdy = Math.sign(py - el.y);
+                var rnx = el.x + rdx;
+                var rny = el.y + rdy;
+                if (map[rny][rnx] === 0) {
+                    el.x = rnx;
+                    el.y = rny;
+                } else {
+                    // Try alternate
+                    if (rnx !== el.x && map[el.y][rnx] === 0) el.x = rnx;
+                    else if (rny !== el.y && map[rny][el.x] === 0) el.y = rny;
+                }
+                // Death check
+                if (Math.abs(px - el.x) <= 1 && Math.abs(py - el.y) <= 1 && looking) {
+                    deathMsg = 'your reflection caught you. you looked.';
+                    die();
                 }
             }
-            // Death if reflection catches player
-            if (Math.abs(player.x - refl.x) < 1.5 && Math.abs(player.y - refl.y) < 1.5 && player.looking) {
-                deathMsg = 'your reflection caught you. you looked.';
+
+            // Drive: objet a shifts walls
+            if (el.type === 'objet') {
+                if (frame % 80 === 0) {
+                    el.shiftCount++;
+                    // Flip a random wall tile
+                    var wx = 2 + Math.floor(rng() * (RW - 4));
+                    var wy = 2 + Math.floor(rng() * (RH - 4));
+                    if (wx !== px || wy !== py) {
+                        map[wy][wx] = map[wy][wx] === 0 ? 1 : 0;
+                    }
+                    // Push objet further
+                    el.x = Math.max(2, Math.min(RW - 2, el.x + dir * 2));
+                }
+            }
+        }
+
+        // Gaze
+        if (roomType === 'gaze') {
+            gazeT += dt;
+            if (gazeT > 3000 && !gazeOn) {
+                gazeOn = true;
+                gazeX = px + (dir > 0 ? 7 : -7);
+                gazeY = py + Math.floor((rng() - 0.5) * 6);
+                gazeX = Math.max(1, Math.min(RW - 2, gazeX));
+                gazeY = Math.max(1, Math.min(RH - 2, gazeY));
+            }
+            if (gazeOn && dx === 0 && dy === 0 && gazeT > 6000) {
+                deathMsg = 'you stood still. the Real looked back.';
+                die();
+            }
+            if (gazeT > 12000) {
+                deathMsg = 'the gaze does not blink. it found you.';
                 die();
             }
         }
 
-        // Drive logic: objet a shifts room walls
-        var objet = elements.find(function(e) { return e.type === 'objet'; });
-        if (objet) {
-            if (frame % 60 === 0) {
-                objet.shift++;
-                var wx, wy, att = 0;
-                do {
-                    wx = 2 + Math.floor(r() * (RW - 4));
-                    wy = 2 + Math.floor(r() * (RH - 4));
-                    att++;
-                } while ((wx === player.x && wy === player.y) && att < 10);
-                if (att < 10) {
-                    map[wy][wx] = map[wy][wx] === 0 ? 1 : 0;
-                }
-                // Move objet further away
-                objet.x = Math.max(2, Math.min(RW - 2, objet.x + player.dir * 2));
-            }
-        }
-
-        // Gaze logic
-        if (roomType === 'gaze') {
-            gazeT += dt;
-            if (gazeT > 4000 && !gazeOn) {
-                gazeOn = true;
-                gazeX = player.x + (player.dir > 0 ? 6 : -6);
-                gazeY = player.y + Math.floor((r() - 0.5) * 6);
-                if (gazeX < 1) gazeX = 1;
-                if (gazeX >= RW - 1) gazeX = RW - 2;
-                if (gazeY < 1) gazeY = 1;
-                if (gazeY >= RH - 1) gazeY = RH - 2;
-            }
-            if (gazeOn) {
-                // Death if gaze catches player standing still
-                if (dx === 0 && dy === 0 && gazeT > 8000) {
-                    deathMsg = 'you stood still. the Real looked back.';
-                    die();
-                }
-                if (gazeT > 15000) {
-                    deathMsg = 'the gaze does not blink. eventually it found you.';
-                    die();
+        // Text proximity
+        nearText = null;
+        for (var j = 0; j < elements.length; j++) {
+            if (elements[j].type === 'text') {
+                var d = Math.abs(px - elements[j].x) + Math.abs(py - elements[j].y);
+                if (d < 4) {
+                    nearText = elements[j].text;
+                    break;
                 }
             }
         }
+        var rtEl = document.getElementById('room-text');
+        if (nearText) {
+            rtEl.textContent = nearText;
+            rtEl.classList.add('visible');
+        } else {
+            rtEl.classList.remove('visible');
+        }
 
-        // Check exit
+        // Exit
         var ex = exits[0];
-        if (player.x === ex.x && player.y === ex.y) {
-            room++;
-            makeMap();
+        if (px === ex.x && py === ex.y) {
+            roomNum++;
+            genMap();
         }
 
-        // Camera
-        var tcx = player.x - VW / 2;
-        var tcy = player.y - VH / 2;
-        cam.x += (tcx - cam.x) * 0.08;
-        cam.y += (tcy - cam.y) * 0.08;
+        // Camera smooth
+        var tcx = px - VW / 2;
+        var tcy = py - VH / 2;
+        cam.x += (tcx - cam.x) * 0.1;
+        cam.y += (tcy - cam.y) * 0.1;
         cam.x = Math.max(0, Math.min(RW - VW, cam.x));
         cam.y = Math.max(0, Math.min(RH - VH, cam.y));
+
+        // UI
+        document.getElementById('ui-run').textContent = 'run ' + run;
+        document.getElementById('ui-room').textContent = String(roomNum + 1);
+        document.getElementById('ui-type').textContent = roomType;
     }
 
+    // ===== RENDER =====
     function render() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.clearRect(0, 0, W, H);
         ctx.fillStyle = '#f5f2ed';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillRect(0, 0, W, H);
 
         var sx = Math.floor(cam.x), sy = Math.floor(cam.y);
-        var ex = Math.min(sx + VW + 1, RW), ey = Math.min(sy + VH + 1, RH);
+        var ex = Math.min(sx + VW + 2, RW), ey = Math.min(sy + VH + 2, RH);
 
         for (var y = sy; y < ey; y++) {
             for (var x = sx; x < ex; x++) {
-                var px = (x - cam.x) * TILE;
-                var py = (y - cam.y) * TILE;
-                if (map[y][x] === 1) drawWall(ctx, px, py);
-                else drawFloor(ctx, px, py);
+                drawTile(x, y);
             }
         }
 
         // Exit marker
         var e = exits[0];
-        var exPx = (e.x - cam.x) * TILE;
-        var eyPy = (e.y - cam.y) * TILE;
-        ctx.fillStyle = 'rgba(184,68,42,0.2)';
-        ctx.fillRect(exPx, eyPy, TILE, TILE);
+        var ePx = (e.x - cam.x) * TILE;
+        var ePy = (e.y - cam.y) * TILE;
+        ctx.fillStyle = 'rgba(184,68,42,0.15)';
+        ctx.fillRect(ePx, ePy, TILE, TILE);
         ctx.strokeStyle = 'rgba(184,68,42,0.5)';
         ctx.lineWidth = 1;
-        ctx.strokeRect(exPx + 2, eyPy + 2, TILE - 4, TILE - 4);
+        ctx.strokeRect(ePx + 1, ePy + 1, TILE - 2, TILE - 2);
 
-        // Elements
+        // Draw elements behind player
+        drawEl(ctx, px, py, 'player');
         for (var i = 0; i < elements.length; i++) {
-            var el = elements[i];
-            if (el.type === 'text' && el.read) continue;
-            var ePx = (el.x - cam.x) * TILE;
-            var ePy = (el.y - cam.y) * TILE;
-
-            // Distance-based fade
-            var dist = Math.abs(player.x - el.x) + Math.abs(player.y - el.y);
-            if (dist > VW / 2 + 2) continue;
-
-            drawSprite(ctx, ePx, ePy, el.type, frame);
+            drawEl(ctx, elements[i].x, elements[i].y, elements[i].type);
         }
-
-        // Player
-        var pPx = (player.x - cam.x) * TILE;
-        var pPy = (player.y - cam.y) * TILE;
-        drawSprite(ctx, pPx, pPy, 'player', frame);
 
         // Gaze overlay
         if (gazeOn) {
-            var gPx = (gazeX - cam.x) * TILE;
-            var gPy = (gazeY - cam.y) * TILE;
-            drawSprite(ctx, gPx, gPy, 'gaze', frame);
-            // Screen tint
-            ctx.fillStyle = 'rgba(26,24,22,' + (0.02 + Math.sin(Date.now() * 0.005) * 0.02) + ')';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            drawEl(ctx, gazeX, gazeY, 'gaze');
+            // Vignette
+            ctx.fillStyle = 'rgba(26,24,22,' + (0.03 + Math.sin(Date.now() * 0.003) * 0.02) + ')';
+            ctx.fillRect(0, 0, W, H);
         }
 
-        // Room type indicator
-        var rt = document.getElementById('room-text');
-        if (roomType === 'mirror') rt.textContent = "don't look at your reflection";
-        else if (roomType === 'drive') rt.textContent = "the object always moves ahead";
-        else if (roomType === 'gaze') rt.textContent = "keep moving";
-        else rt.textContent = '';
-
-        // UI
-        document.getElementById('ui-run').textContent = 'run ' + run;
-        document.getElementById('ui-room').textContent = String(room + 1);
+        // Vignette always
+        var grad = ctx.createRadialGradient(W/2, H/2, W*0.3, W/2, H/2, W*0.7);
+        grad.addColorStop(0, 'rgba(245,242,237,0)');
+        grad.addColorStop(1, 'rgba(245,242,237,0.3)');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, W, H);
     }
 
+    // ===== DEATH =====
     function die() {
         state = 'dead';
         document.getElementById('death-msg').textContent = deathMsg;
-        document.getElementById('death-stats').textContent = 'run ' + run + ' &middot; room ' + (room + 1);
+        document.getElementById('death-stats').textContent = 'run ' + run + ' • room ' + (roomNum + 1);
         document.getElementById('death-screen').classList.remove('hidden');
+        playDeath();
+    }
+
+    // ===== AUDIO =====
+    var synth, noise, drum;
+    var audioInit = false;
+
+    function initAudio() {
+        if (audioInit) return;
+        try {
+            // Footstep: short noise burst
+            noise = new Tone.NoiseSynth({
+                noise: { type: 'brown' },
+                envelope: { attack: 0.001, decay: 0.08, sustain: 0, release: 0.1 }
+            }).toDestination();
+            noise.volume.value = -18;
+
+            // Death: low tone
+            synth = new Tone.MembraneSynth().toDestination();
+            synth.volume.value = -10;
+
+            // Ambient drone
+            var drone = new Tone.Oscillator(55, 'sine').toDestination();
+            drone.volume.value = -30;
+
+            audioInit = true;
+        } catch(e) {}
+    }
+
+    function playStep() {
+        if (audioInit && noise) {
+            noise.triggerAttackRelease('16n');
+        }
+    }
+
+    function playDeath() {
+        if (audioInit && synth) {
+            synth.triggerAttackRelease('C1', '2n');
+        }
     }
 
     function startGame() {
+        initAudio();
         document.getElementById('title-screen').classList.add('hidden');
         document.getElementById('death-screen').classList.add('hidden');
         state = 'playing';
         seed = Date.now();
-        r = rng(seed);
-        frame = 0; moveTimer = 0; gazeT = 0; gazeOn = false; room = 0;
-        makeMap();
+        rng = mkRng(seed);
+        frame = 0; moveTimer = 0; gazeT = 0; gazeOn = false; roomNum = 0; cam = { x: 0, y: 0 };
+        if (run === 0) run = 1;
+        genMap();
     }
 
-    // Input handlers
+    // ===== INPUT =====
     window.addEventListener('keydown', function(e) {
-        keys[e.key.toLowerCase()] = true;
-        if (['arrowleft','arrowright','arrowup','arrowdown',' '].indexOf(e.key.toLowerCase()) !== -1) e.preventDefault();
+        var k = e.key.toLowerCase();
+        keys[k] = true;
+        if (['arrowleft','arrowright','arrowup','arrowdown',' '].includes(k)) e.preventDefault();
     });
-    window.addEventListener('keyup', function(e) { keys[e.key.toLowerCase()] = false; });
+    window.addEventListener('keyup', function(e) {
+        keys[e.key.toLowerCase()] = false;
+    });
 
     // Touch
-    var btns = document.querySelectorAll('.touch-btn');
-    for (var i = 0; i < btns.length; i++) {
+    var tbtns = document.querySelectorAll('.touch-btn');
+    for (var i = 0; i < tbtns.length; i++) {
         (function(btn) {
             var k = btn.getAttribute('data-key');
             btn.addEventListener('touchstart', function(e) { e.preventDefault(); tkeys[k] = true; });
             btn.addEventListener('touchend', function(e) { e.preventDefault(); tkeys[k] = false; });
-            btn.addEventListener('touchcancel', function(e) { tkeys[k] = false; });
-        })(btns[i]);
+            btn.addEventListener('touchcancel', function() { tkeys[k] = false; });
+        })(tbtns[i]);
     }
 
-    // Buttons
     document.getElementById('start-btn').addEventListener('click', startGame);
     document.getElementById('restart-btn').addEventListener('click', function() {
         run++;
         startGame();
     });
 
-    // Game loop
+    // Loop
     var last = 0;
     function loop(ts) {
         var dt = ts - last;
