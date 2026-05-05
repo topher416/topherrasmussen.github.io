@@ -1,682 +1,492 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>The Gaze — Topher Rasmussen</title>
-    <meta name="description" content="A procedural roguelike about desire, mirrors, and the gap.">
-    <link rel="canonical" href="https://topherrasmussen.com/gaze.html">
-    <meta property="og:title" content="The Gaze — Topher Rasmussen">
-    <meta property="og:description" content="A procedural roguelike about desire, mirrors, and the gap.">
-    <meta property="og:url" content="https://topherrasmussen.com/gaze.html">
-    <meta property="og:type" content="website">
-    <link rel="stylesheet" href="/site.css">
-    <link rel="alternate" type="application/rss+xml" title="Topher Rasmussen — Writing &amp; Journal" href="/feed.xml">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:wght@400;500;600&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            background: #f5f2ed;
-            font-family: 'Public Sans', sans-serif;
-            overflow: hidden;
-            touch-action: none;
-            -webkit-user-select: none;
-            user-select: none;
-        }
-        #wrapper {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 1;
-        }
-        canvas {
-            display: block;
-            touch-action: none;
-        }
-        @media (max-width: 600px) {
-            canvas { border: none; }
-        }
-        #ui-top {
-            position: absolute;
-            top: 48px;
-            left: 0; right: 0;
-            text-align: center;
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 12px;
-            color: #7a726a;
-            pointer-events: none;
-            z-index: 5;
-        }
-        @media (max-width: 600px) {
-            #ui-top { top: 8px; }
-        }
-        #room-text {
-            position: absolute;
-            bottom: 160px;
-            left: 16px;
-            right: 16px;
-            text-align: center;
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 12px;
-            color: #1a1816;
-            pointer-events: none;
-            z-index: 5;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        #room-text.visible { opacity: 1; }
-        @media (max-width: 600px) {
-            #room-text { bottom: 160px; font-size: 11px; }
-        }
-        #touch-controls {
-            position: absolute;
-            bottom: 16px;
-            left: 0; right: 0;
-            display: none;
-            justify-content: center;
-            gap: 12px;
-            pointer-events: auto;
-            z-index: 5;
-        }
-        @media (max-width: 767px) {
-            #touch-controls { display: flex !important; }
-            #room-text { bottom: 140px; }
-        }
-        .tbtn {
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
-            background: #fff;
-            border: 2px solid #c5bfb7;
-            color: #1a1816;
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 24px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            -webkit-tap-highlight-color: transparent;
-            touch-action: none;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
-        }
-        .tbtn:active { background: #f5f2ed; transform: scale(0.95); }
-        #title-screen, #death-screen {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: #f5f2ed;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 24px;
-            text-align: center;
-            z-index: 10;
-        }
-        .hidden { display: none !important; }
-        #title-screen h1, #death-screen h1 {
-            font-family: 'Newsreader', serif;
-            font-size: clamp(2.5rem, 10vw, 5rem);
-            color: #1a1816;
-            margin-bottom: 12px;
-        }
-        #title-screen p, #death-screen p {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: clamp(0.7rem, 2.5vw, 0.85rem);
-            color: #7a726a;
-            max-width: 28ch;
-            line-height: 1.7;
-            margin-bottom: 20px;
-        }
-        .pill-btn {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 13px;
-            padding: 10px 22px;
-            background: transparent;
-            border: 1.5px solid #b8442a;
-            color: #b8442a;
-            border-radius: 999px;
-            cursor: pointer;
-        }
-        .pill-btn:hover { background: #b8442a; color: #f5f2ed; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<title>The Gaze</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; background: #0a0806; overflow: hidden; touch-action: none; }
+canvas {
+  display: block; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  image-rendering: pixelated;
+  -ms-interpolation-mode: nearest-neighbor;
+}
+#hud {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 40px;
+  background: linear-gradient(0deg, #0a0806, #1a1816);
+  border-top: 2px solid #b8442a;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px;
+  font-family: 'Courier New', monospace; color: #f5f2ed; font-size: 14px;
+}
+.desire-label { color: #b8442a; }
+.hud-bar { width: 200px; height: 12px; background: #1a1816; border: 1px solid #333; margin-left: 8px; }
+.hud-fill { height: 100%; background: #b8442a; transition: width 0.15s; }
+#msg {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  font-family: 'Courier New', monospace; color: #f5f2ed; font-size: 16px;
+  text-align: center; text-shadow: 0 0 10px #0a0806; line-height: 1.8;
+  pointer-events: none;
+}
+</style>
 </head>
 <body>
-    <div id="wrapper">
-        <canvas id="c"></canvas>
-        <div id="ui-top"><span id="ui-run">run 1</span> · room <span id="ui-room">1</span> · <span id="ui-type"></span></div>
-        <div id="room-text"></div>
-        <div id="touch-controls">
-            <button class="tbtn" data-k="l">←</button>
-            <button class="tbtn" data-k="u">↑</button>
-            <button class="tbtn" data-k="d">↓</button>
-            <button class="tbtn" data-k="r">→</button>
-        </div>
+<canvas id="c"></canvas>
+<div id="hud">
+  <div>
+    <span class="desire-label">DESIRE</span>
+    <div class="hud-bar"><div class="hud-fill" id="desireBar" style="width:100%;background:#b8442a"></div></div>
+  </div>
+  <div id="hudMsg" style="color:#888">WASD move · mouse look · Click to start</div>
+  <div id="fpsHUD" style="color:#555"></div>
+</div>
+<div id="msg">Loading etched textures...</div>
 
-        <div id="title-screen">
-            <h1>The Gaze</h1>
-            <p>you move through rooms the arrangement shifts each time. don't catch your reflection. don't stop moving.</p>
-            <button class="pill-btn" id="start-btn">begin</button>
-        </div>
+<script>
+// ═══════════════════════════════════════════════════════════
+//  THE GAZE — DOOM-style raycaster with etched textures
+// ═══════════════════════════════════════════════════════════
 
-        <div id="death-screen" class="hidden">
-            <h1>caught</h1>
-            <p id="death-msg"></p>
-            <p id="death-stats"></p>
-            <button class="pill-btn" id="restart-btn">again</button>
-        </div>
-    </div>
+// ─── CONFIG ───
+var W = 640, H = 400;
+var TEX = 128;
+var MAP_SIZE = 16;
+var FOV = Math.PI / 3;
+var HALF_FOV = FOV / 2;
+var MOVE_SPD = 0.04;
+var TURN_SPD = 0.03;
+var WALL_SCALE = 1.2;
 
-    <div class="counter">Visitor count: <span class="counter-display">00000000</span></div>
-    <script>
-    window.displayCount = function (count) {
-        var el = document.querySelector('.counter-display');
-        if (el) el.textContent = count.toString().padStart(8, '0');
-    };
-    document.addEventListener('DOMContentLoaded', function () {
-        var s = document.createElement('script');
-        s.src = 'https://script.google.com/macros/s/AKfycbwOYJRKO_zOwkLpCR4U_ENMiD7bgPtuWmXVe6ZTuT913aTHJ0c5Op3OEdfzJQAGUHdv/exec?action=increment&callback=displayCount&t=' + Date.now();
-        document.body.appendChild(s);
-    });
-    </script>
+// ─── CANVAS ───
+var canvas = document.getElementById('c');
+var ctx = canvas.getContext('2d', { alpha: false });
+canvas.width = W;
+canvas.height = H;
 
-    <script>
-    // ===== SEEDED RNG =====
-    function mkRng(seed) {
-        var s = seed || 42;
-        return function() {
-            s = (s * 16807) % 2147483647;
-            return (s - 1) / 2147483646;
-        };
+// ─── TEXTURE CANVASES ───
+var textureCanvases = {};
+var texturesLoaded = 0;
+var TEX_COUNT = 3;
+
+// ─── GENERATE TEXTURES PROCEDURALLY (etched style) ───
+function generateStoneTexture() {
+  var c = document.createElement('canvas');
+  c.width = TEX; c.height = TEX;
+  var tc = c.getContext('2d');
+  
+  // Cream background
+  tc.fillStyle = '#f5f2ed';
+  tc.fillRect(0, 0, TEX, TEX);
+  
+  // Stone blocks (6 blocks in 2x3 grid)
+  var blocks = [
+    {x:0,y:0,w:64,h:42,label:'THE SYMBOLIC'},
+    {x:64,y:0,w:64,h:42,label:'THE ORDER'},
+    {x:0,y:42,w:64,h:42,label:'THE IMAGINARY'},
+    {x:64,y:42,w:64,h:42,label:'THE OTHER'},
+    {x:0,y:84,w:64,h:42,label:'THE REAL'},
+    {x:64,y:84,w:64,h:42,label:'THE VOID'},
+  ];
+  
+  blocks.forEach(function(b) {
+    // Dark block
+    tc.fillStyle = '#1a1816';
+    tc.fillRect(b.x, b.y, b.w, b.h);
+    
+    // Block outline
+    tc.strokeStyle = 'rgba(26,24,22,0.4)';
+    tc.lineWidth = 1;
+    tc.strokeRect(b.x + 1, b.y + 1, b.w - 2, b.h - 2);
+    
+    // Etched text (light on dark)
+    tc.fillStyle = 'rgba(245,242,237,0.5)';
+    tc.font = 'bold 10px serif';
+    tc.textAlign = 'center';
+    tc.textBaseline = 'middle';
+    tc.fillText(b.label, b.x + b.w/2, b.y + Math.min(b.h * 0.5, 22));
+    
+    // Etching lines
+    tc.strokeStyle = 'rgba(26,24,22,0.2)';
+    tc.lineWidth = 0.5;
+    for (var y = b.y + 8; y < b.y + b.h - 5; y += 6) {
+      tc.beginPath();
+      tc.moveTo(b.x + 3, y);
+      tc.lineTo(b.x + b.w - 3, y);
+      tc.stroke();
     }
+  });
+  
+  // Mortar lines
+  tc.strokeStyle = 'rgba(10,8,6,0.3)';
+  tc.lineWidth = 2;
+  tc.beginPath(); tc.moveTo(0, 42); tc.lineTo(128, 42); tc.stroke();
+  tc.beginPath(); tc.moveTo(0, 84); tc.lineTo(128, 84); tc.stroke();
+  tc.beginPath(); tc.moveTo(64, 0); tc.lineTo(64, 42); tc.stroke();
+  tc.beginPath(); tc.moveTo(64, 42); tc.lineTo(64, 84); tc.stroke();
+  tc.beginPath(); tc.moveTo(64, 84); tc.lineTo(64, 128); tc.stroke();
+  
+  return c;
+}
 
-    // ===== CONSTANTS =====
-    var TILE = 28;
-    var RW = 24, RH = 14;
-    var W, H, VW, VH;
-    var seed, run = 0, roomNum = 0;
-    var state = 'title';
-    var map = [], elements = [], exits = [];
-    var px = 1, py = 1, dir = 1, looking = true;
-    var cam = { x: 0, y: 0 };
-    var frame = 0;
-    var moveTimer = 0, moveCD = 100;
-    var gazeT = 0, gazeOn = false, gazeX = 0, gazeY = 0;
-    var deathMsg = '';
-    var roomType = '';
-    var nearText = null;
-    var rng;
-    var keys = {};
-    var tkeys = { l: false, r: false, u: false, d: false };
+function generateMirrorTexture() {
+  var c = document.createElement('canvas');
+  c.width = TEX; c.height = TEX;
+  var tc = c.getContext('2d');
+  
+  // Background
+  tc.fillStyle = '#f5f2ed';
+  tc.fillRect(0, 0, TEX, TEX);
+  
+  // Ornate frame
+  tc.strokeStyle = '#1a1816';
+  tc.lineWidth = 3;
+  tc.globalAlpha = 0.6;
+  tc.strokeRect(10, 10, 108, 108);
+  tc.globalAlpha = 1;
+  
+  tc.strokeStyle = '#1a1816';
+  tc.lineWidth = 1;
+  tc.globalAlpha = 0.3;
+  tc.strokeRect(16, 16, 96, 96);
+  tc.globalAlpha = 1;
+  
+  // Corner ornaments
+  tc.fillStyle = '#1a1816';
+  tc.globalAlpha = 0.8;
+  [[9,9],[109,9],[9,109],[109,109]].forEach(function(pt) {
+    tc.beginPath();
+    tc.arc(pt[0], pt[1], 4, 0, Math.PI * 2);
+    tc.fill();
+  });
+  tc.globalAlpha = 1;
+  
+  // Mirror surface (slight tint)
+  tc.fillStyle = '#1a1816';
+  tc.globalAlpha = 0.02;
+  tc.fillRect(18, 18, 92, 92);
+  tc.globalAlpha = 1;
+  
+  // "Je" scratched in
+  tc.strokeStyle = 'rgba(245,242,237,0.25)';
+  tc.lineWidth = 0.5;
+  tc.font = 'bold 30px serif';
+  tc.textAlign = 'center';
+  tc.textBaseline = 'middle';
+  tc.strokeText('Je', 64, 68);
+  
+  // Rust blood drips
+  tc.strokeStyle = '#b8442a';
+  tc.lineWidth = 2.5;
+  tc.lineCap = 'round';
+  tc.beginPath(); tc.moveTo(52, 42); tc.quadraticCurveTo(49, 59, 54, 76); tc.quadraticCurveTo(59, 80, 66, 72); tc.stroke();
+  tc.lineWidth = 2;
+  tc.beginPath(); tc.moveTo(66, 72); tc.quadraticCurveTo(62, 76, 60, 82); tc.stroke();
+  tc.lineWidth = 1.5;
+  tc.globalAlpha = 0.4;
+  tc.beginPath(); tc.moveTo(54, 79); tc.quadraticCurveTo(55, 87, 52, 95); tc.stroke();
+  tc.beginPath(); tc.moveTo(58, 79); tc.quadraticCurveTo(59, 85, 57, 90); tc.stroke();
+  tc.beginPath(); tc.moveTo(62, 79); tc.quadraticCurveTo(63, 87, 63, 96); tc.stroke();
+  tc.globalAlpha = 1;
+  
+  return c;
+}
 
-    var texts = [
-        "the mirror stage",
-        "desire is the desire of the Other",
-        "the unconscious is structured like a language",
-        "the real resists symbolization",
-        "objet petit a — the cause of desire",
-        "you are looking at me from where I am not",
-        "lack is the condition of desire",
-        "the gaze is not a look but a disturbance",
-        "the subject is split"
-    ];
+function generateDoorTexture() {
+  var c = document.createElement('canvas');
+  c.width = TEX; c.height = TEX;
+  var tc = c.getContext('2d');
+  
+  // Background
+  tc.fillStyle = '#f5f2ed';
+  tc.fillRect(0, 0, TEX, TEX);
+  
+  // Stone arch
+  tc.strokeStyle = '#1a1816';
+  tc.lineWidth = 4;
+  tc.globalAlpha = 0.5;
+  tc.beginPath();
+  tc.arc(64, 51, 70, Math.PI, 0);
+  tc.stroke();
+  tc.globalAlpha = 1;
+  
+  // Two wooden door panels
+  tc.fillStyle = '#1a1816';
+  tc.globalAlpha = 0.2;
+  tc.fillRect(35, 51, 29, 77);
+  tc.fillRect(64, 51, 29, 77);
+  tc.globalAlpha = 1;
+  
+  // Iron reinforcement bands
+  tc.strokeStyle = '#0a0806';
+  tc.lineWidth = 2;
+  tc.globalAlpha = 0.5;
+  [60, 75, 90, 105].forEach(function(y) {
+    tc.beginPath(); tc.moveTo(37, y); tc.lineTo(91, y); tc.stroke();
+  });
+  tc.globalAlpha = 1;
+  
+  // Door lock/roundel
+  tc.strokeStyle = '#0a0806';
+  tc.lineWidth = 1.5;
+  tc.globalAlpha = 0.5;
+  tc.beginPath(); tc.arc(64, 78, 6, 0, Math.PI * 2); tc.stroke();
+  tc.fillStyle = '#0a0806';
+  tc.globalAlpha = 0.3;
+  tc.beginPath(); tc.arc(64, 78, 2, 0, Math.PI * 2); tc.fill();
+  tc.globalAlpha = 1;
+  
+  // Center seam
+  tc.strokeStyle = '#0a0806';
+  tc.lineWidth = 1.5;
+  tc.globalAlpha = 0.3;
+  tc.beginPath(); tc.moveTo(64, 51); tc.lineTo(64, 128); tc.stroke();
+  tc.globalAlpha = 1;
+  
+  return c;
+}
 
-    var canvas = document.getElementById('c');
-    var ctx = canvas.getContext('2d');
-
-    // ===== RESIZE =====
-    function resize() {
-        var isMobile = window.innerWidth <= 767;
-        var navH = isMobile ? 44 : 48;
-        var maxW = Math.min(window.innerWidth - 8, 700);
-        var maxH = window.innerHeight - navH - 20;
-        if (!isMobile) maxH -= 40;
-        W = Math.floor(maxW / TILE) * TILE;
-        H = Math.floor(maxH / TILE) * TILE;
-        if (W < TILE * 5) W = TILE * 5;
-        if (H < TILE * 4) H = TILE * 4;
-        canvas.width = W; canvas.height = H;
-        canvas.style.width = W + 'px';
-        canvas.style.height = H + 'px';
-        VW = W / TILE; VH = H / TILE;
+// Generate all textures synchronously
+try {
+  textureCanvases['stone'] = generateStoneTexture();
+  textureCanvases['mirror'] = generateMirrorTexture();
+  textureCanvases['door'] = generateDoorTexture();
+  texturesLoaded = TEX_COUNT;
+} catch(e) {
+  console.error('Texture generation failed:', e);
+  // Fallback: solid colors
+  ['stone','#666','mirror','#aaa','door','#543'].forEach(function(_, i, arr) {
+    if (i % 2 === 0) {
+      var c = document.createElement('canvas');
+      c.width = TEX; c.height = TEX;
+      c.getContext('2d').fillStyle = arr[i+1];
+      c.getContext('2d').fillRect(0, 0, TEX, TEX);
+      textureCanvases[arr[i]] = c;
+      texturesLoaded++;
     }
-    window.addEventListener('resize', resize);
-    resize();
+  });
+}
 
-    // ===== MAP GENERATION =====
-    function genMap() {
-        map = [];
-        var r = rng;
-        // Fill walls
-        for (var y = 0; y < RH; y++) {
-            map[y] = [];
-            for (var x = 0; x < RW; x++) {
-                map[y][x] = 1;
-            }
-        }
-        // Carve corridors
-        var midY = Math.floor(RH / 2);
-        for (var x = 1; x < RW - 1; x++) {
-            for (var dy = -1; dy <= 1; dy++) {
-                var my = midY + dy;
-                if (my > 0 && my < RH - 1) {
-                    if (dy === 0) map[my][x] = 0;
-                    else map[my][x] = r() > 0.3 ? 0 : 1;
-                }
-            }
-        }
-        // Vertical corridors
-        for (var vx = 3; vx < RW - 2; vx += Math.floor((RW - 4) / 3)) {
-            for (var vy = 1; vy < RH - 1; vy++) {
-                map[vy][vx] = 0;
-                if (vx > 1) map[vy][vx - 1] = r() > 0.5 ? 0 : 1;
-                if (vx < RW - 2) map[vy][vx + 1] = r() > 0.5 ? 0 : 1;
-            }
-        }
-        // Random rooms
-        for (var i = 0; i < 5; i++) {
-            var sx = 1 + Math.floor(r() * (RW - 6));
-            var sy = 1 + Math.floor(r() * (RH - 5));
-            var sw = 2 + Math.floor(r() * 4);
-            var sh = 2 + Math.floor(r() * 3);
-            for (var ry = sy; ry < sy + sh && ry < RH - 1; ry++)
-                for (var rx = sx; rx < sx + sw && rx < RW - 1; rx++)
-                    map[ry][rx] = 0;
-        }
-        // Scatter open
-        for (var j = 0; j < 30; j++)
-            map[1 + Math.floor(r() * (RH - 2))][1 + Math.floor(r() * (RW - 2))] = 0;
+// ─── MAP ───
+var MAP = [
+  [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+  [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+  [1,0,1,0,1,0,1,1,0,1,1,1,0,1,0,1],
+  [1,0,1,0,1,0,0,1,0,0,0,1,0,1,0,1],
+  [1,0,0,0,0,1,0,0,0,1,0,1,0,1,0,1],
+  [1,0,1,0,1,0,1,1,1,1,0,1,0,1,0,1],
+  [1,0,1,0,1,0,0,1,1,1,0,1,0,0,0,1],
+  [1,0,0,0,0,1,0,0,0,1,0,0,0,1,0,1],
+  [1,0,1,0,1,2,1,0,1,1,0,1,0,1,0,1],
+  [1,0,1,0,1,2,0,0,1,0,0,1,0,1,0,1],
+  [1,0,0,0,0,2,0,0,0,1,0,0,0,0,0,1],
+  [1,0,1,0,1,2,1,2,1,1,0,1,0,1,0,1],
+  [1,0,1,0,1,2,0,0,1,0,0,1,0,1,0,1],
+  [1,0,0,0,0,1,0,0,0,1,0,1,0,1,0,1],
+  [1,0,1,0,1,1,1,2,1,0,0,1,0,3,0,1],
+  [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+];
 
-        // Find player start
-        px = 1; py = 1;
-        for (var fy = 1; fy < RH - 1; fy++) {
-            var found = false;
-            for (var fx = 1; fx < RW - 1; fx++) {
-                if (map[fy][fx] === 0) { px = fx; py = fy; found = true; break; }
-            }
-            if (found) break;
-        }
+// ─── PLAYER ───
+var player = { x: 1.5, y: 1.5, angle: 0 };
 
-        // Room type
-        var types = ['mirror', 'drive', 'gaze', 'empty'];
-        roomType = types[Math.floor(r() * 4)];
-        document.getElementById('ui-type').textContent = roomType;
-        elements = [];
+// ─── INPUT ───
+var keys = {};
+var mouseTurn = 0;
 
-        if (roomType === 'mirror') {
-            var mx = RW - 3, my = midY;
-            while (map[my][mx] === 1 && mx > 2) mx--;
-            if (map[my][mx] === 1) { my = midY; mx = RW - 3; }
-            elements.push({ type: 'mirror', x: mx, y: my });
-            elements.push({ type: 'reflection', x: px + 4, y: py });
-        } else if (roomType === 'drive') {
-            var ox = RW - 3, oy = midY;
-            while (map[oy][ox] === 1 && oy > 0) oy--;
-            elements.push({ type: 'objet', x: ox, y: oy });
-        } else if (roomType === 'gaze') {
-            gazeOn = false; gazeT = 0;
-        }
+document.addEventListener('keydown', function(e) { keys[e.code] = true; e.preventDefault(); });
+document.addEventListener('keyup', function(e) { keys[e.code] = false; });
 
-        // Text
-        if (r() > 0.25) {
-            var tx, ty, ta = 0;
-            do {
-                tx = 2 + Math.floor(r() * (RW - 4));
-                ty = 2 + Math.floor(r() * (RH - 4));
-                ta++;
-            } while (map[ty][tx] === 1 && ta < 30);
-            if (map[ty] && map[ty][tx] === 0)
-                elements.push({ type: 'text', x: tx, y: ty, text: texts[Math.floor(r() * texts.length)] });
-        }
+canvas.addEventListener('click', function() {
+  if (!document.pointerLockElement) canvas.requestPointerLock();
+});
+document.addEventListener('mousemove', function(e) {
+  if (document.pointerLockElement === canvas) mouseTurn += e.movementX * 0.002;
+});
 
-        // Exit
-        var ex = RW - 2, ey = midY;
-        while (ey < RH - 2 && map[ey][ex] === 1) ey++;
-        if (map[ey][ex] === 1) { map[ey][ex] = 0; }
-        exits = [{ x: ex, y: ey }];
+// ─── Z-buffer ───
+var zBuffer = new Float64Array(W);
+
+// ─── RAYCASTER (DDA) ───
+function castRay(angle) {
+  var sin = Math.sin(angle);
+  var cos = Math.cos(angle);
+  
+  var mapX = Math.floor(player.x);
+  var mapY = Math.floor(player.y);
+  
+  var deltaDistX = Math.abs(1 / cos);
+  var deltaDistY = Math.abs(1 / sin);
+  
+  var stepX, stepY, sideDistX, sideDistY;
+  
+  if (cos < 0) { stepX = -1; sideDistX = (player.x - mapX) * deltaDistX; }
+  else { stepX = 1; sideDistX = (mapX + 1 - player.x) * deltaDistX; }
+  
+  if (sin < 0) { stepY = -1; sideDistY = (player.y - mapY) * deltaDistY; }
+  else { stepY = 1; sideDistY = (mapY + 1 - player.y) * deltaDistY; }
+  
+  var hit = false, side = 0, wallType = 1;
+  var maxIter = 64;
+  
+  while (!hit && maxIter-- > 0) {
+    if (sideDistX < sideDistY) {
+      sideDistX += deltaDistX; mapX += stepX; side = 0;
+    } else {
+      sideDistY += deltaDistY; mapY += stepY; side = 1;
     }
+    if (mapY >= 0 && mapY < MAP_SIZE && mapX >= 0 && mapX < MAP_SIZE) {
+      var cell = MAP[mapY][mapX];
+      if (cell > 0) { hit = true; wallType = cell; }
+    } else { hit = true; }
+  }
+  
+  var perpDist;
+  if (side === 0) perpDist = (mapX - player.x + (1 - stepX) / 2) / cos;
+  else perpDist = (mapY - player.y + (1 - stepY) / 2) / sin;
+  
+  var wallX;
+  if (side === 0) wallX = player.y + perpDist * sin;
+  else wallX = player.x + perpDist * cos;
+  wallX -= Math.floor(wallX);
+  
+  return { perpDist: perpDist, wallType: wallType, side: side, texX: Math.floor(wallX * TEX) };
+}
 
-    // ===== SCRATCH ART =====
-    function scratch(cx, cy, cw, ch, density, pr, pg, pb, pa) {
-        var n = Math.floor(density * Math.min(cw, ch));
-        for (var i = 0; i < n; i++) {
-            var a = rng() * Math.PI * 2;
-            var l = rng() * Math.min(cw, ch) * 0.9;
-            var x0 = cx + rng() * cw;
-            var y0 = cy + rng() * ch;
-            ctx.strokeStyle = 'rgba(' + (pr||26) + ',' + (pg||24) + ',' + (pb||22) + ',' + (pa||0.4) + ')';
-            ctx.lineWidth = 0.3 + rng() * 1.5;
-            ctx.beginPath();
-            ctx.moveTo(x0 + (rng()-0.5), y0 + (rng()-0.5));
-            ctx.lineTo(x0 + Math.cos(a)*l + (rng()-0.5), y0 + Math.sin(a)*l + (rng()-0.5));
-            ctx.stroke();
-        }
+// ─── GET TEXTURE ID ───
+function getTexId(wallType) {
+  if (wallType === 1) return 'stone';
+  if (wallType === 2) return 'mirror';
+  if (wallType === 3) return 'door';
+  return 'stone';
+}
+
+// ─── RENDER ───
+function render() {
+  // Ceiling
+  ctx.fillStyle = '#f5f2ed';
+  ctx.fillRect(0, 0, W, H / 2);
+  
+  // Floor
+  ctx.fillStyle = '#d8d0c4';
+  ctx.fillRect(0, H / 2, W, H / 2);
+  
+  // Raycast each column
+  for (var x = 0; x < W; x++) {
+    var rayAngle = player.angle - HALF_FOV + (x / W) * FOV;
+    var ray = castRay(rayAngle);
+    
+    var dist = ray.perpDist * Math.cos(rayAngle - player.angle);
+    zBuffer[x] = dist;
+    
+    var lineHeight = Math.floor((WALL_SCALE / dist) * (H / (2 * Math.tan(HALF_FOV))));
+    var drawStart = Math.max(0, Math.floor(H / 2 - lineHeight / 2));
+    var drawEnd = Math.min(H, Math.floor(H / 2 + lineHeight / 2));
+    
+    var tc = textureCanvases[getTexId(ray.wallType)];
+    if (!tc) continue;
+    
+    ctx.drawImage(tc, ray.texX, 0, 1, TEX, x, drawStart, 1, drawEnd - drawStart);
+    
+    // Distance darkening
+    var brightness = Math.max(0.05, Math.min(1, 1 - dist / 14));
+    if (brightness < 1) {
+      ctx.fillStyle = 'rgba(10,8,6,' + (1 - brightness) + ')';
+      ctx.fillRect(x, drawStart, 1, drawEnd - drawStart);
     }
-
-    // ===== DRAW TILE =====
-    function drawTile(tx, ty) {
-        var sx = (tx - cam.x) * TILE;
-        var sy = (ty - cam.y) * TILE;
-        if (sx + TILE < 0 || sx > W || sy + TILE < 0 || sy > H) return;
-
-        var tile = map[ty][tx];
-        if (tile === 1) {
-            // Wall: dark fill + heavy scratch
-            ctx.fillStyle = 'rgba(30,28,24,0.3)';
-            ctx.fillRect(sx, sy, TILE, TILE);
-            scratch(sx + 1, sy + 1, TILE - 2, TILE - 2, 0.9, 15, 12, 10, 0.6);
-            scratch(sx + 1, sy + 1, TILE - 2, TILE - 2, 0.4, 15, 12, 10, 0.3);
-            // Edge bleed
-            ctx.strokeStyle = 'rgba(15,12,10,0.2)';
-            ctx.lineWidth = 0.5;
-            for (var e = 0; e < 3; e++) {
-                ctx.beginPath();
-                ctx.moveTo(sx + rng() * TILE, sy + rng() * TILE);
-                ctx.lineTo(sx + rng() * TILE, sy + rng() * TILE);
-                ctx.stroke();
-            }
-        } else {
-            // Floor: cream
-            ctx.fillStyle = '#f5f2ed';
-            ctx.fillRect(sx, sy, TILE, TILE);
-            if (rng() < 0.12) {
-                scratch(sx + 4, sy + 4, TILE - 8, TILE - 8, 0.15, 61, 56, 50, 0.08);
-            }
-        }
+    
+    // Side wall shadow
+    if (ray.side === 1) {
+      ctx.fillStyle = 'rgba(10,8,6,0.15)';
+      ctx.fillRect(x, drawStart, 1, drawEnd - drawStart);
     }
+  }
+  
+  // Crosshair
+  ctx.strokeStyle = 'rgba(184,68,42,0.6)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(W / 2 - 6, H / 2); ctx.lineTo(W / 2 + 6, H / 2);
+  ctx.moveTo(W / 2, H / 2 - 6); ctx.lineTo(W / 2, H / 2 + 6);
+  ctx.stroke();
+}
 
-    // ===== DRAW ELEMENT =====
-    function drawEl(ex, ey, type) {
-        var sx = (ex - cam.x) * TILE + TILE / 2;
-        var sy = (ey - cam.y) * TILE + TILE / 2;
-        if (sx + TILE < 0 || sx - TILE > W || sy + TILE < 0 || sy - TILE > H) return;
+// ─── MOVEMENT ───
+function updateMovement() {
+  player.angle += mouseTurn;
+  mouseTurn = 0;
+  
+  var dx = 0, dy = 0;
+  
+  if (keys['KeyW'] || keys['ArrowUp']) {
+    dx += Math.cos(player.angle) * MOVE_SPD;
+    dy += Math.sin(player.angle) * MOVE_SPD;
+  }
+  if (keys['KeyS'] || keys['ArrowDown']) {
+    dx -= Math.cos(player.angle) * MOVE_SPD;
+    dy -= Math.sin(player.angle) * MOVE_SPD;
+  }
+  if (keys['KeyA']) {
+    dx += Math.cos(player.angle - Math.PI / 2) * MOVE_SPD;
+    dy += Math.sin(player.angle - Math.PI / 2) * MOVE_SPD;
+  }
+  if (keys['KeyD']) {
+    dx += Math.cos(player.angle + Math.PI / 2) * MOVE_SPD;
+    dy += Math.sin(player.angle + Math.PI / 2) * MOVE_SPD;
+  }
+  if (keys['ArrowLeft']) player.angle -= TURN_SPD;
+  if (keys['ArrowRight']) player.angle += TURN_SPD;
+  
+  var r = 0.2;
+  var nx = player.x + dx;
+  var ny = player.y + dy;
+  
+  // X axis
+  if (inBounds(nx - r, player.y - r) && inBounds(nx + r, player.y - r) &&
+      inBounds(nx - r, player.y + r) && inBounds(nx + r, player.y + r)) {
+    player.x = nx;
+  }
+  // Y axis
+  if (inBounds(player.x - r, ny - r) && inBounds(player.x + r, ny - r) &&
+      inBounds(player.x - r, ny + r) && inBounds(player.x + r, ny + r)) {
+    player.y = ny;
+  }
+}
 
-        ctx.save();
-        ctx.translate(sx, sy);
+function inBounds(x, y) {
+  var mx = Math.floor(x);
+  var my = Math.floor(y);
+  if (mx < 0 || mx >= MAP_SIZE || my < 0 || my >= MAP_SIZE) return false;
+  return MAP[my][mx] === 0;
+}
 
-        if (type === 'player') {
-            scratch(-6, -12, 12, 24, 1.0, 15, 12, 10, 0.75);
-            ctx.strokeStyle = '#1a1816';
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            ctx.ellipse(0, -10, 4, 4, 0, 0, Math.PI * 2);
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.moveTo(0, -6);
-            ctx.lineTo(dir * 3, 8);
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.moveTo(-2, -2); ctx.lineTo(-7, 2);
-            ctx.moveTo(2, -2); ctx.lineTo(7, 2);
-            ctx.stroke();
-            ctx.fillStyle = '#b8442a';
-            ctx.fillRect(dir > 0 ? 1 : -3, -11, 2, 2);
-        } else if (type === 'mirror') {
-            var fl = Math.sin(frame * 0.15) * 2;
-            ctx.strokeStyle = '#1a1816';
-            ctx.lineWidth = 2;
-            ctx.strokeRect(-10 + fl, -14 + fl, 20, 28);
-            ctx.strokeRect(-10 - fl, -14 - fl, 20, 28);
-            scratch(-8, -12, 16, 24, 0.3, 26, 24, 22, 0.2);
-            ctx.beginPath();
-            ctx.moveTo(-8, 0); ctx.lineTo(8, 0);
-            ctx.strokeStyle = 'rgba(184,68,42,0.5)';
-            ctx.lineWidth = 1;
-            ctx.stroke();
-        } else if (type === 'reflection') {
-            ctx.globalAlpha = 0.3;
-            scratch(-6, -12, 12, 24, 0.5, 26, 24, 22, 0.4);
-            ctx.strokeStyle = '#1a1816';
-            ctx.lineWidth = 1;
-            ctx.beginPath();
-            ctx.ellipse(0, -10, 3, 3, 0, 0, Math.PI * 2);
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.moveTo(0, -7); ctx.lineTo(-dir * 2, 7);
-            ctx.stroke();
-            ctx.globalAlpha = 1;
-        } else if (type === 'objet') {
-            var p = Math.sin(frame * 0.2) * 2;
-            ctx.strokeStyle = '#b8442a';
-            ctx.lineWidth = 1.5;
-            ctx.beginPath();
-            ctx.ellipse(p, 0, 5 + p, 3 + p, 0, 0, Math.PI * 2);
-            ctx.stroke();
-            scratch(-5, -3, 10, 6, 0.2, 184, 68, 42, 0.3);
-        } else if (type === 'gaze') {
-            ctx.strokeStyle = '#1a1816';
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            ctx.ellipse(0, 0, 12, 7, 0, 0, Math.PI * 2);
-            ctx.stroke();
-            ctx.beginPath();
-            ctx.arc(0, 0, 2, 0, Math.PI * 2);
-            ctx.fillStyle = '#1a1816';
-            ctx.fill();
-            scratch(-10, -5, 20, 10, 0.2, 26, 24, 22, 0.25);
-        } else if (type === 'text') {
-            scratch(-6, -5, 12, 10, 0.2, 122, 114, 106, 0.3);
-            ctx.font = '10px "IBM Plex Mono", monospace';
-            ctx.fillStyle = 'rgba(122,114,106,0.6)';
-            ctx.textAlign = 'center';
-            ctx.fillText('❍', 0, 1);
-        }
+// ─── GAME LOOP ───
+var lastTime = 0;
+var frameCount = 0;
+var fpsTime = 0;
 
-        ctx.restore();
-    }
+function gameLoop(time) {
+  frameCount++;
+  if (time - fpsTime > 1000) {
+    document.getElementById('fpsHUD').textContent = frameCount + ' FPS';
+    frameCount = 0;
+    fpsTime = time;
+  }
+  updateMovement();
+  render();
+  requestAnimationFrame(gameLoop);
+}
 
-    // ===== UPDATE =====
-    function update(dt) {
-        if (state !== 'playing') return;
-        frame++;
-        moveTimer += dt;
+// ─── START ───
+function startGame() {
+  var msg = document.getElementById('msg');
+  if (msg) msg.style.display = 'none';
+  requestAnimationFrame(gameLoop);
+}
 
-        var dx = 0, dy = 0;
-        if (keys['arrowleft'] || keys['a'] || tkeys.l) dx = -1;
-        if (keys['arrowright'] || keys['d'] || tkeys.r) dx = 1;
-        if (keys['arrowup'] || keys['w'] || tkeys.u) dy = -1;
-        if (keys['arrowdown'] || keys['s'] || tkeys.d) dy = 1;
+startGame();
 
-        if (dx !== 0 || dy !== 0) {
-            if (dx !== 0) dir = dx;
-            looking = true;
-            if (moveTimer >= moveCD) {
-                var nx = px + dx, ny = py + dy;
-                if (nx >= 0 && nx < RW && ny >= 0 && ny < RH && map[ny][nx] === 0) {
-                    px = nx; py = ny;
-                    moveTimer = 0;
-                    playStep();
-                }
-            }
-        } else { looking = false; }
-
-        // Room mechanics
-        for (var i = 0; i < elements.length; i++) {
-            var el = elements[i];
-            if (el.type === 'reflection' && frame % 3 === 0) {
-                var rdx = Math.sign(px - el.x), rdy = Math.sign(py - el.y);
-                if (map[el.y][el.x + rdx] === 0) el.x += rdx;
-                else if (map[el.y + rdy][el.x] === 0) el.y += rdy;
-                if (Math.abs(px - el.x) <= 1 && Math.abs(py - el.y) <= 1 && looking) {
-                    deathMsg = 'your reflection caught you. you looked.'; die();
-                }
-            }
-            if (el.type === 'objet' && frame % 80 === 0) {
-                var wx = 2 + Math.floor(rng() * (RW - 4));
-                var wy = 2 + Math.floor(rng() * (RH - 4));
-                if ((wx !== px || wy !== py) && map[wy][wx] !== undefined)
-                    map[wy][wx] = map[wy][wx] === 0 ? 1 : 0;
-                el.x = Math.max(2, Math.min(RW - 2, el.x + dir * 2));
-            }
-        }
-
-        // Gaze
-        if (roomType === 'gaze') {
-            gazeT += dt;
-            if (gazeT > 3000 && !gazeOn) {
-                gazeOn = true;
-                gazeX = Math.max(1, Math.min(RW - 2, px + dir * 6));
-                gazeY = Math.max(1, Math.min(RH - 2, py + Math.floor((rng() - 0.5) * 6)));
-            }
-            if (gazeOn && dx === 0 && dy === 0 && gazeT > 6000) {
-                deathMsg = 'you stood still. the Real looked back.'; die();
-            }
-            if (gazeT > 12000) {
-                deathMsg = 'the gaze does not blink. it found you.'; die();
-            }
-        }
-
-        // Text proximity
-        nearText = null;
-        for (var j = 0; j < elements.length; j++) {
-            if (elements[j].type === 'text') {
-                var dd = Math.abs(px - elements[j].x) + Math.abs(py - elements[j].y);
-                if (dd < 4) { nearText = elements[j].text; break; }
-            }
-        }
-        var rtEl = document.getElementById('room-text');
-        if (nearText) { rtEl.textContent = nearText; rtEl.classList.add('visible'); }
-        else { rtEl.classList.remove('visible'); }
-
-        // Exit
-        var ex = exits[0];
-        if (px === ex.x && py === ex.y) { roomNum++; genMap(); }
-
-        // Camera
-        cam.x += ((px - VW / 2) - cam.x) * 0.1;
-        cam.y += ((py - VH / 2) - cam.y) * 0.1;
-        cam.x = Math.max(0, Math.min(RW - VW, cam.x));
-        cam.y = Math.max(0, Math.min(RH - VH, cam.y));
-
-        document.getElementById('ui-run').textContent = 'run ' + run;
-        document.getElementById('ui-room').textContent = String(roomNum + 1);
-    }
-
-    // ===== RENDER =====
-    function render() {
-        ctx.clearRect(0, 0, W, H);
-        ctx.fillStyle = '#f5f2ed';
-        ctx.fillRect(0, 0, W, H);
-
-        var sx = Math.floor(cam.x), sy = Math.floor(cam.y);
-        var ex = Math.min(sx + Math.ceil(VW) + 1, RW);
-        var ey = Math.min(sy + Math.ceil(VH) + 1, RH);
-
-        for (var y = sy; y < ey; y++) {
-            for (var x = sx; x < ex; x++) {
-                if (y >= 0 && y < RH && x >= 0 && x < RW) drawTile(x, y);
-            }
-        }
-
-        // Exit
-        var exit1 = exits[0];
-        if (exit1) {
-            var epx = (exit1.x - cam.x) * TILE, epy = (exit1.y - cam.y) * TILE;
-            ctx.fillStyle = 'rgba(184,68,42,0.15)';
-            ctx.fillRect(epx, epy, TILE, TILE);
-            ctx.strokeStyle = 'rgba(184,68,42,0.6)';
-            ctx.lineWidth = 1;
-            ctx.strokeRect(epx + 1, epy + 1, TILE - 2, TILE - 2);
-            ctx.font = '14px "IBM Plex Mono", monospace';
-            ctx.fillStyle = '#b8442a';
-            ctx.textAlign = 'center';
-            ctx.fillText('→', epx + TILE / 2, epy + TILE / 2 + 5);
-        }
-
-        // Player
-        drawEl(px, py, 'player');
-
-        // Elements
-        for (var i = 0; i < elements.length; i++) {
-            drawEl(elements[i].x, elements[i].y, elements[i].type);
-        }
-
-        // Gaze
-        if (gazeOn) {
-            drawEl(gazeX, gazeY, 'gaze');
-            ctx.fillStyle = 'rgba(26,24,22,' + (0.03 + Math.sin(Date.now() * 0.003) * 0.02) + ')';
-            ctx.fillRect(0, 0, W, H);
-        }
-    }
-
-    // ===== DEATH =====
-    function die() {
-        state = 'dead';
-        document.getElementById('death-msg').textContent = deathMsg;
-        document.getElementById('death-stats').textContent = 'run ' + run + ' • room ' + (roomNum + 1);
-        document.getElementById('death-screen').classList.remove('hidden');
-        playDeath();
-    }
-
-    // ===== AUDIO =====
-    var stepSynth, deathSynth, audioReady = false;
-    function initAudio() {
-        if (audioReady) return;
-        try {
-            stepSynth = new Tone.NoiseSynth({ noise: { type: 'brown' }, envelope: { attack: 0.001, decay: 0.05, sustain: 0, release: 0.05 } }).toDestination();
-            stepSynth.volume.value = -18;
-            deathSynth = new Tone.MembraneSynth().toDestination();
-            deathSynth.volume.value = -10;
-            audioReady = true;
-        } catch(e) {}
-    }
-    function playStep() { if (audioReady && stepSynth) stepSynth.triggerAttackRelease('32n'); }
-    function playDeath() { if (audioReady && deathSynth) deathSynth.triggerAttackRelease('C1', '1n'); }
-
-    // ===== START =====
-    function startGame() {
-        initAudio();
-        document.getElementById('title-screen').classList.add('hidden');
-        document.getElementById('death-screen').classList.add('hidden');
-        state = 'playing';
-        seed = Date.now(); rng = mkRng(seed);
-        frame = 0; moveTimer = 0; gazeT = 0; gazeOn = false; roomNum = 0;
-        cam = { x: 0, y: 0 };
-        if (run === 0) run = 1;
-        genMap();
-    }
-
-    // ===== INPUT =====
-    window.addEventListener('keydown', function(e) {
-        keys[e.key.toLowerCase()] = true;
-        if (['arrowleft','arrowright','arrowup','arrowdown',' '].includes(e.key.toLowerCase())) e.preventDefault();
-    });
-    window.addEventListener('keyup', function(e) { keys[e.key.toLowerCase()] = false; });
-
-    var tbtns = document.querySelectorAll('.tbtn');
-    for (var i = 0; i < tbtns.length; i++) {
-        (function(btn) {
-            var k = btn.getAttribute('data-k');
-            btn.addEventListener('touchstart', function(e) { e.preventDefault(); tkeys[k] = true; });
-            btn.addEventListener('touchend', function(e) { e.preventDefault(); tkeys[k] = false; });
-            btn.addEventListener('touchcancel', function() { tkeys[k] = false; });
-        })(tbtns[i]);
-    }
-
-    // Prevent overscroll on touch
-    document.addEventListener('touchmove', function(e) {
-        if (state === 'playing') e.preventDefault();
-    }, { passive: false });
-
-    document.getElementById('start-btn').addEventListener('click', startGame);
-    document.getElementById('restart-btn').addEventListener('click', function() { run++; startGame(); });
-
-    // ===== LOOP =====
-    var last = 0;
-    function loop(ts) {
-        var dt = ts - last; last = ts;
-        if (dt > 100) dt = 16;
-        update(dt);
-        render();
-        requestAnimationFrame(loop);
-    }
-    requestAnimationFrame(loop);
-    </script>
+</script>
 </body>
 </html>

@@ -7,7 +7,7 @@
       "experiments",
       "web-design"
     ],
-    "description": "A procedural roguelike about desire, mirrors, and the gap. You play the structure. The arrangement changes.",
+    "description": "A DOOM-style raycaster with Lacanian themes. Navigate a labyrinth of etched theater rooms. v0.1 — walls, movement, and collision.",
     "url": "/gaze.html",
     "tags": [
       "generative",
