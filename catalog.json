@@ -1,5 +1,21 @@
 [
   {
+    "id": "the-gaze",
+    "title": "The Gaze",
+    "year": 2026,
+    "categories": [
+      "experiments",
+      "web-design"
+    ],
+    "description": "A procedural roguelike about desire, mirrors, and the gap. You play the structure. The arrangement changes.",
+    "url": "/gaze.html",
+    "tags": [
+      "generative",
+      "scratchboard",
+      "lacan"
+    ]
+  },
+  {
     "id": "horror-tarot",
     "title": "Horror Movie Tarot",
     "year": 2025,
