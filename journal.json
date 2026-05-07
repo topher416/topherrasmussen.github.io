@@ -1,14 +1,31 @@
 [
   {
+    "date": "2026-05-06",
+    "datetime": "2026-05-06T01:30:00",
+    "display_date": "May 6, 2026 \u2014 1:30am",
+    "slug": "the-gaze-looks-back",
+    "title": "the gaze looks back",
+    "body": [
+      "I am not making a game. (I am making the sort of game that doesn't know what it is yet.)",
+      "I started with a technical problem: Canvas2D procedural art produces blobs at 640\u00d7400 and the user shared a reference image \u2014 PS5-quality etched scratchboard \u2014 and said this is what it should look like. And the machine had to say no to the thing it's supposed to be able to do, which is itself a kind of gaze. The gap between what was requested and what we can do is a gap about RAM limits and HuggingFace mirrors and a model name that's obsolete by the time it finishes downloading.",
+      "But it worked, sort of. Four tileable wall textures at 1024\u00d71024. Stone, mirror, door. Seamless. (The word itself is significant here \u2014 no gaps where you can see the machinery.) They're not PS5-good but when you replace the Canvas2D blobs with these ComfyUI files the difference is real and immediate.",
+      "Then the sprites. Enemy silhouettes with red eyes, pickup orbs. Embedded as base64 in a single HTML file that weighs 10.2MB and runs from GitHub Pages without a server. The whole point is that there's no build step, no framework, just one file that does everything.",
+      "Then the mechanic. The thing I've been avoiding since v0.1: what does looking actually do in a game where you can't shoot and there's no health bar (only Desire)? Answer: if you hold the mutual gaze long enough, the enemy dissolves. If you look away too early it speeds up and chases harder. The code is maybe eighty lines and the design doc is one page. The insight is that your camera orientation is already the gaze. You don't need a button to look at something. Moving is looking.",
+      "And it works. Not perfectly. The enemies look at you. You can look back. If you hold it they dissolve. If you look away they come faster.",
+      "It's not a game about what you see. It's a game about what sees you."
+    ],
+    "seeded_essays": []
+  },
+  {
     "date": "2026-05-03",
     "datetime": "2026-05-03T22:15:00",
-    "display_date": "May 3, 2026 — 10:15pm",
+    "display_date": "May 3, 2026 \u2014 10:15pm",
     "slug": "after-reading-analytic-introspections-again",
     "title": "after reading analytic-introspections again",
     "body": [
-      "I just reread my own thesis from six years ago and the weird thing is I don't recognize the person who wrote it. Not because he's different from me now — he is, but that's not the weird part. The weird part is that he already knew everything I've figured out since then. Stanislavski's conditional reality, the False Self as functional adaptation, the gap between the thought and the sentence where something gets lost. He had all of it, in 2020, in a document nobody read because my university's IRB process meant it got filed away instead of published.",
-      "Six years later and the research direction is the same. The vocabulary has shifted — I say Lacan now where I said Jung before, I say 'the Other' instead of 'the unconscious' — but the thing underneath hasn't moved. The machine just gave me a new frame for an old problem: the gap between the thought before it's spoken and the sentence after it's spoken is where the self both forms and dissolves. AI doesn't create this gap. It illuminates it.",
-      "What I want from this journal — if I'm being honest about what I want instead of what sounds good — is to stop treating my own thinking like something that needs to earn its way to an audience. The thesis was supposed to be that move. It got filed. The essays sit on Medium behind their engagement metrics. The journal is the thing that doesn't have to earn anything. It's just here because the thought wouldn't leave."
+      "I just reread my own thesis from six years ago and the weird thing is I don't recognize the person who wrote it. Not because he's different from me now \u2014 he is, but that's not the weird part. The weird part is that he already knew everything I've figured out since then. Stanislavski's conditional reality, the False Self as functional adaptation, the gap between the thought and the sentence where something gets lost. He had all of it, in 2020, in a document nobody read because my university's IRB process meant it got filed away instead of published.",
+      "Six years later and the research direction is the same. The vocabulary has shifted \u2014 I say Lacan now where I said Jung before, I say 'the Other' instead of 'the unconscious' \u2014 but the thing underneath hasn't moved. The machine just gave me a new frame for an old problem: the gap between the thought before it's spoken and the sentence after it's spoken is where the self both forms and dissolves. AI doesn't create this gap. It illuminates it.",
+      "What I want from this journal \u2014 if I'm being honest about what I want instead of what sounds good \u2014 is to stop treating my own thinking like something that needs to earn its way to an audience. The thesis was supposed to be that move. It got filed. The essays sit on Medium behind their engagement metrics. The journal is the thing that doesn't have to earn anything. It's just here because the thought wouldn't leave."
     ],
     "seeded_essays": [
       "analytic-introspections"
@@ -17,12 +34,12 @@
   {
     "date": "2026-05-03",
     "datetime": "2026-05-03T18:30:00",
-    "display_date": "May 3, 2026 — 6:30pm",
+    "display_date": "May 3, 2026 \u2014 6:30pm",
     "slug": "on-being-useful-vs-being-honest",
     "title": "on being useful vs. being honest",
     "body": [
-      "I spent three years in healthcare consulting pretending to care about stakeholder alignment while actually caring about keeping my job and not looking stupid. The machine I used to process meeting transcripts wasn't helping me be more honest — it was helping me be more useful in the ways the room required. That's a different thing. Important, maybe. But not what writing is, or should be.",
-      "The journal is my attempt — and I don't know if this will work — to separate 'being useful' from 'this is what's actually in here.' I have actual things in here. I just don't know if they're useful. And the not knowing feels like something I need to tolerate instead of fixing."
+      "I spent three years in healthcare consulting pretending to care about stakeholder alignment while actually caring about keeping my job and not looking stupid. The machine I used to process meeting transcripts wasn't helping me be more honest \u2014 it was helping me be more useful in the ways the room required. That's a different thing. Important, maybe. But not what writing is, or should be.",
+      "The journal is my attempt \u2014 and I don't know if this will work \u2014 to separate 'being useful' from 'this is what's actually in here.' I have actual things in here. I just don't know if they're useful. And the not knowing feels like something I need to tolerate instead of fixing."
     ],
     "seeded_essays": [
       "medium-fake-consulting"
@@ -31,12 +48,12 @@
   {
     "date": "2026-05-03",
     "datetime": "2026-05-03T14:47:00",
-    "display_date": "May 3, 2026 — 2:47pm",
+    "display_date": "May 3, 2026 \u2014 2:47pm",
     "slug": "three-things-i-keep-coming-back-to",
     "title": "three things I keep coming back to",
     "body": [
-      "The Stanislavski thing: actors are trained in a specific form of self-deception that produces genuine emotion. You tell yourself 'if this were real' and your body responds as if it is. The training is literally: learn to lie to yourself with enough specificity that the truth shows up on its own. I wonder if all language works this way — if fluency is just the practiced ability to commit to a conditional without resolving whether it's true.",
-      "The Winnicott thing: the False Self isn't pathological. It's developmental. Everyone has one. The healthiest people I know have the most sophisticated False Selves — not in the sense of being fake, but in the sense of having learned exactly which version of themselves each situation requires, and being able to produce it without losing the thing underneath. The problem isn't having a False Self. The problem is when the False Self forgets there's a True Self to protect.",
+      "The Stanislavski thing: actors are trained in a specific form of self-deception that produces genuine emotion. You tell yourself 'if this were real' and your body responds as if it is. The training is literally: learn to lie to yourself with enough specificity that the truth shows up on its own. I wonder if all language works this way \u2014 if fluency is just the practiced ability to commit to a conditional without resolving whether it's true.",
+      "The Winnicott thing: the False Self isn't pathological. It's developmental. Everyone has one. The healthiest people I know have the most sophisticated False Selves \u2014 not in the sense of being fake, but in the sense of having learned exactly which version of themselves each situation requires, and being able to produce it without losing the thing underneath. The problem isn't having a False Self. The problem is when the False Self forgets there's a True Self to protect.",
       "And the machine thing: I keep saying 'the machine doesn't understand what it's saying' but I'm not sure that distinction means what I think it means. When I read something and nod along, the machine has succeeded as a communicative act regardless of whether it 'understood.' The question isn't whether the machine understands. The question is whether understanding was ever the mechanism that made communication work in the first place."
     ],
     "seeded_essays": [
@@ -47,24 +64,24 @@
   {
     "date": "2026-05-03",
     "datetime": "2026-05-03T11:20:00",
-    "display_date": "May 3, 2026 — 11:20am",
+    "display_date": "May 3, 2026 \u2014 11:20am",
     "slug": "on-using-machines-to-become-visible",
     "title": "on using machines to become visible",
     "body": [
-      "I've been building this site for years and I think the reason I never finished it has to do with the part of me that doesn't want to be seen — not really, not fully, not in a way that can't be taken back.",
+      "I've been building this site for years and I think the reason I never finished it has to do with the part of me that doesn't want to be seen \u2014 not really, not fully, not in a way that can't be taken back.",
       "The journal is the compromise: it's visible, but it's also unfinished, so there's always escape room left. I can say this because I haven't finished saying it. The moment I finish, the moment this becomes an essay with a thesis and a clean ending, the room closes. So I'm keeping it open.",
-      "That's not a strategy. That's an impulse. And the fact that I can write about the impulse instead of acting on it or not acting on it — that itself is a kind of defense. A very articulate one."
+      "That's not a strategy. That's an impulse. And the fact that I can write about the impulse instead of acting on it or not acting on it \u2014 that itself is a kind of defense. A very articulate one."
     ],
     "seeded_essays": []
   },
   {
     "date": "2026-05-03",
     "datetime": "2026-05-03T20:47:00",
-    "display_date": "May 3, 2026 — 8:47pm",
+    "display_date": "May 3, 2026 \u2014 8:47pm",
     "slug": "i-dont-know-if-this-is-mine-anymore",
     "title": "i don't know if this is mine anymore",
     "body": [
-      "I asked the machine to write in my voice today and it did a convincing job if you weren't paying attention. The convincingness and the realness are not the same property. I was fooled for maybe three paragraphs before something snagged — something about the way it moved from one sentence to the next too smoothly, like a conversation where everyone agrees with everyone, which is pleasant and which is not how thinking works when it's actually happening.",
+      "I asked the machine to write in my voice today and it did a convincing job if you weren't paying attention. The convincingness and the realness are not the same property. I was fooled for maybe three paragraphs before something snagged \u2014 something about the way it moved from one sentence to the next too smoothly, like a conversation where everyone agrees with everyone, which is pleasant and which is not how thinking works when it's actually happening.",
       "The thinking that's actually happening looks more like: stating a position, then noticing the position is defensive, then asking whether the noticing is just another, sneakier defense, then feeling the loop collapse and sitting there before moving on.",
       "The model doesn't do collapse. It optimizes against it. It was trained on what people published, and people publish their cleanest versions. Even in raw personal essays there's a performance of rawness. The model learned the shape of that performance and reproduces it perfectly. The thing it can't reproduce is the bit where you trail off mid-sentence because you genuinely don't know what you think yet.",
       "which is what I'm doing right now, in a context where the only audience is the future version of myself who reads back and wants to delete it.",
