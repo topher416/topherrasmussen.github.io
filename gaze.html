@@ -37,9 +37,12 @@ canvas {
 #joystickKnob { position: absolute; top: 50%; left: 50%; width: 25%; aspect-ratio: 1; max-width: 40px; max-height: 40px; background: rgba(184,68,42,0.4); border: 1px solid rgba(184,68,42,0.5); border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; z-index: 12; }
 #deathOverlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(10,8,6,0); pointer-events: auto; z-index: 20; display: none; align-items: center; justify-content: center; flex-direction: column; gap: 16px; font-family: "Courier New", monospace; color: #f5f2ed; text-align: center; text-shadow: 0 0 20px #0a0806; }
 #deathOverlay.visible { display: flex; background: rgba(10,8,6,0.85); }
+#errorOverlay { position: fixed; top: 0; left: 0; right: 0; max-height: 50%; overflow: auto; background: rgba(80,0,0,0.92); color: #ffdcdc; font-family: "Courier New", monospace; font-size: 12px; line-height: 1.4; padding: 12px 16px; z-index: 100; display: none; white-space: pre-wrap; word-break: break-word; border-bottom: 2px solid #ff5050; }
+#errorOverlay.visible { display: block; }
 </style>
 </head>
 <body>
+<div id="errorOverlay"></div>
 <canvas id="c"></canvas>
 <div id="touchLeft" class="touch-zone"></div>
 <div id="touchRight" class="touch-zone"></div>
@@ -49,7 +52,7 @@ canvas {
   <h1>THE GAZE</h1>
   <p class="subtitle">"What sees you, sees itself seeing."</p>
   <p class="tap">Tap to enter</p>
-  <p class="version">v0.4 — the gaze mechanic</p>
+  <p class="version">v0.5.1 — eye-pair gaze mechanic</p>
 </div>
 <div id="hud">
   <span style="color:#b8442a">DESIRE</span>
@@ -60,8 +63,25 @@ canvas {
 
 <script>
 // ═══════════════════════════════════════════════════════════
-//  THE GAZE v0.2.1 — etched textures, no weapon
+//  THE GAZE v0.5.1 — eye-pair gaze mechanic
 // ═══════════════════════════════════════════════════════════
+
+// On-page error surface — so "black screen" failures show what threw,
+// even on mobile where DevTools is hard to reach.
+(function(){
+  var overlay = document.getElementById("errorOverlay");
+  function show(msg){
+    if(!overlay) return;
+    overlay.textContent = (overlay.textContent ? overlay.textContent + "\n\n" : "") + msg;
+    overlay.classList.add("visible");
+  }
+  window.addEventListener("error", function(e){
+    show("ERROR: " + (e.message || e.error) + "\n  at " + (e.filename||"?") + ":" + (e.lineno||"?") + ":" + (e.colno||"?"));
+  });
+  window.addEventListener("unhandledrejection", function(e){
+    show("UNHANDLED PROMISE: " + (e.reason && e.reason.message ? e.reason.message : e.reason));
+  });
+})();
 
 var W = 640, H = 400;
 var TEX = 256;  // high-res textures for etching detail
@@ -71,6 +91,8 @@ var HALF_FOV = FOV / 2;
 var MOVE_SPD = 0.04;
 var TURN_SPD = 0.03;
 var WALL_SCALE = 1.2;
+var PLAYER_FOV = Math.PI / 3;
+var GAZE_THRESHOLD = 120;
 
 var canvas = document.getElementById("c");
 var ctx = canvas.getContext("2d", { alpha: false });
@@ -356,94 +378,6 @@ function genEnemyDead() {
   tc.globalAlpha = 1;
   return c;
 }
-// ─── DYNAMIC EYE SPRITE: pair of eyes with tracking pupils ───
-// Shared canvas reused every frame to avoid allocation
-var _eyeCanvas = null, _eyeCtx = null;
-
-function getEnemyEyeCanvas(pupilOffsetX, pupilOffsetY, browAngle) {
-  if(!_eyeCanvas) {
-    _eyeCanvas = document.createElement("canvas");
-    _eyeCanvas.width = 128; _eyeCanvas.height = 96;
-    _eyeCtx = _eyeCanvas.getContext("2d");
-  }
-  var c = _eyeCanvas, tc = _eyeCtx;
-  tc.clearRect(0, 0, 128, 96);
-  
-  // === PAIR OF EYES ===
-  var eyePositions = [
-    {cx: 40, cy: 48},  // left eye
-    {cx: 88, cy: 48},  // right eye
-  ];
-  
-  for(var i = 0; i < eyePositions.length; i++) {
-    var ex = eyePositions[i].cx, ey = eyePositions[i].cy;
-    
-    // Eye white (sclera) — off-white etched
-    tc.fillStyle = "rgba(200,195,185,0.9)";
-    tc.beginPath();
-    tc.ellipse(ex, ey, 16, 10, 0, 0, Math.PI*2);
-    tc.fill();
-    
-    // Etching outline
-    tc.strokeStyle = "rgba(180,170,150,0.5)";
-    tc.lineWidth = 1;
-    tc.beginPath();
-    tc.ellipse(ex, ey, 16, 10, 0, 0, Math.PI*2);
-    tc.stroke();
-    
-    // Iris — rust-red (sigil color)
-    tc.fillStyle = "#b8442a";
-    tc.beginPath();
-    tc.arc(ex + pupilOffsetX * 3, ey + pupilOffsetY * 3, 7, 0, Math.PI*2);
-    tc.fill();
-    
-    // Pupil — black, tracks player
-    tc.fillStyle = "#0a0806";
-    tc.beginPath();
-    tc.arc(ex + pupilOffsetX * 3, ey + pupilOffsetY * 3, 3.5, 0, Math.PI*2);
-    tc.fill();
-    
-    // Specular highlight (wet eye glow)
-    tc.fillStyle = "rgba(245,242,237,0.6)";
-    tc.beginPath();
-    tc.arc(ex + pupilOffsetX * 3 - 1.5, ey + pupilOffsetY * 3 - 1.5, 1.2, 0, Math.PI*2);
-    tc.fill();
-    
-    // === EYEBROW ===
-    tc.strokeStyle = "rgba(180,170,150,0.7)";
-    tc.lineWidth = 2.5;
-    tc.lineCap = "round";
-    tc.beginPath();
-    // Default: flat. browAngle shifts it up/down and tilts
-    // browAngle < 0: angry furrow, > 0: worried raise
-    var browY = ey - 14 - browAngle * 2;
-    var browTilt = browAngle * 0.15;
-    if(i === 0) {
-      // left brow: inner higher when browAngle > 0
-      tc.moveTo(ex - 18, browY + browTilt * 8);
-      tc.quadraticCurveTo(ex, browY - browTilt * 4, ex + 18, browY - browTilt * 4);
-    } else {
-      // right brow: mirror tilt
-      tc.moveTo(ex - 18, browY - browTilt * 4);
-      tc.quadraticCurveTo(ex, browY - browTilt * 4, ex + 18, browY + browTilt * 8);
-    }
-    tc.stroke();
-  }
-  
-  // Subtle bridge between eyes
-  tc.strokeStyle = "rgba(160,150,130,0.15)";
-  tc.lineWidth = 0.5;
-  for(var yy = 38; yy < 60; yy += 2) {
-    tc.beginPath();
-    tc.moveTo(56, yy);
-    tc.lineTo(72, yy);
-    tc.stroke();
-  }
-  
-  return c;
-}
-
-
 
 // ─── PICKUP: Desire orb ───
 function genPickup() {
@@ -822,63 +756,6 @@ function renderSprites(){
       ctx.drawImage(tex,tX,0,1,H2,stripe,drawY,1,spriteH);
       ctx.globalAlpha=1;
     }
-    // — DYNAMIC EYE OVERLAY for living enemies —
-
-    if(sp.type==="enemy"&&!sp.dead){
-      
-      // Compute pupil tracking angle (enemy looking at player)
-
-      var toPlayerAngle=Math.atan2(player.y-sp.y,player.x-sp.x);
-
-      // Convert to screen-relative offset (pupil tracks toward player in head space)
-
-      var headAngle=toPlayerAngle-sp.angle;
-
-      var pupilX=Math.sin(headAngle)*10;
-
-            var pupilY=Math.cos(headAngle)*6-6;
-
-      
-      // Eyebrow position based on gaze state
-
-      var browRaise=0;
-
-            if(sp.gazeState==="noticed"||sp.gazeState==="watching")browRaise=8;
-      else if(sp.gazeState==="dissolving")browRaise=-12+(sp.dissolveFrames||0)*0.3;
-      else if(sp.gazeState==="chase_faster")browRaise=-4;
-
-      
-      // Draw eye overlay strips
-
-            var eyeTex=genEnemyEyes(pupilX,pupilY,browRaise,sp.dissolveFrames||0);
-
-      
-// Eye region in sprite coords: head area roughly x=80..180, y=15..80 of 256x320 sprite\n
-      var eyeSpriteX_start=80,eyeSpriteX_end=180;
-      var eyeSpriteY_start=15,eyeSpriteY_end=80;
-      var eyeSpriteW=eyeSpriteX_end-eyeSpriteX_start; // 100
-      var eyeSpriteH=eyeSpriteY_end-eyeSpriteY_start; // 65
-      
-      // Map to screen
-      var eyeScreenX_start=Math.floor(startS+(eyeSpriteX_start/W2)*(endS-startS));
-      var eyeScreenX_end=Math.floor(startS+(eyeSpriteX_end/W2)*(endS-startS));
-      var eyeDrawY=drawY+Math.floor((eyeSpriteY_start/H2)*spriteH);
-      var eyeSpriteH_screen=Math.floor((eyeSpriteH/H2)*spriteH);
-      var eyeTexW=eyeTex.width,eyeTexH=eyeTex.height;
-      
-      for(var stripe=eyeScreenX_start;stripe<eyeScreenX_end;stripe++){
-        if(stripe<0||stripe>=W)continue;
-        if(relY>ZBuffer[stripe])continue;
-        var tX=Math.floor(((stripe-eyeScreenX_start)/(eyeScreenX_end-eyeScreenX_start))*eyeTexW);
-        if(tX<0||tX>=eyeTexW)continue;
-        var a=1;
-        if(dist>10)a*=Math.max(0.2,1-(dist-10)/6);
-        if(sp.gazeState==="dissolving") a*=Math.max(0.1,1-(sp.dissolveFrames||0)/60);
-        ctx.globalAlpha=a;
-        ctx.drawImage(eyeTex,tX,0,1,eyeTexH,stripe,eyeDrawY,1,eyeSpriteH_screen);
-        ctx.globalAlpha=1;
-      }
-
     // — DYNAMIC EYE OVERLAY: pairs of eyes with pupil tracking —
     if(sp.type==="enemy"&&!sp.dead){
       // Compute pupil tracking offset (enemy is looking at player)
@@ -887,7 +764,7 @@ function renderSprites(){
       var headAngle=toPlayerAngle;
       var pupilOffX=Math.sin(headAngle)*6;
       var pupilOffY=Math.cos(headAngle)*4;
-      
+
       // Eyebrow position from gaze state machine
       var browRaise=0;
       var gs=sp.gazeState||"idle";
@@ -895,22 +772,22 @@ function renderSprites(){
       else if(gs==="dissolving") browRaise=-14+((sp.dissolveFrames||0)/60)*14;
       else if(gs==="chase"||gs==="chase_faster") browRaise=-6;
       else browRaise=0;
-      
+
       // Generate dynamic eye texture (lazy canvas reused)
       var eyeTex=genDynamicEyes(pupilOffX,pupilOffY,browRaise,sp.dissolveFrames||0);
-      
+
       // Eye region in sprite coords: head is roughly center-top of 256x320 sprite
       // Eyes are in texture region: x=80..176, y=24..74 (centered on head in blank-face sprite)
       var eyeTexW=256, eyeTexH=90;
-      var eyeSpriteX1=80, eyeSpriteX2=176;  // eye region in sprite pixels
-      var eyeSpriteY1=24;                      // Y offset of eye region in sprite
-      
+      var eyeSpriteX1=80, eyeSpriteX2=176;
+      var eyeSpriteY1=24;
+
       // Map to screen space using same projection math
       var eyeScreenW=Math.floor((eyeSpriteX2-eyeSpriteX1)/eyeTexW*spriteW);
       var eyeScreenH=Math.floor(eyeTexH/eyeTexW*spriteW);
       var eyeScreenX=Math.floor(screenX-eyeScreenW/2);
       var eyeScreenY=drawY+Math.floor(eyeSpriteY1/H2*spriteH);
-      
+
       // Render eye overlay as 1-pixel vertical strips (same as body)
       for(var stripe=eyeScreenX;stripe<eyeScreenX+eyeScreenW;stripe++){
         if(stripe<0||stripe>=W)continue;
@@ -924,94 +801,6 @@ function renderSprites(){
         ctx.drawImage(eyeTex,tX,0,1,eyeTexH,stripe,eyeScreenY,1,eyeScreenH);
         ctx.globalAlpha=1;
       }
-    
-// Eye overlay for enemies — pairs of eyes with pupil tracking
-
-    if(sp.type==="enemy") {
-
-      
-// Compute pupil offset from enemy position to player position
-
-      var eToPX = player.x - sp.x;
-
-      var eToPY = player.y - sp.y;
-
-      var eDist = Math.sqrt(eToPX*eToPX + eToPY*eToPY) || 1;
-
-      var eAngle = Math.atan2(eToPY, eToPX);
-
-      
-// Normalize to [-1,1] range for pupil offset
-
-      var pupilX = Math.cos(eAngle - player.angle) * 0.6;
-
-      var pupilY = Math.sin(eAngle - player.angle) * 0.4;
-
-      
-// Eyebrow: angle based on gaze state
-
-      var browVal = 0;
-
-      if(sp.gazeState==="noticed") browVal = 0.5;  // slight raise
-
-      else if(sp.gazeState==="watching") browVal = 1.0;  // full raise (you're watching me)
-
-      else if(sp.gazeState==="dissolving") browVal = -0.8;  // furrow/fear
-
-      else if(sp.gazeState==="chase_faster") browVal = -0.5;  // aggressive
-
-      
-// Get dynamic eye canvas
-
-      var eyeCvs = getEnemyEyeCanvas(pupilX, pupilY, browVal);
-
-      
-// Render eye overlay as strips at the HEAD position of the sprite
-
-      // Head is roughly the top 30% of the sprite
-
-      var eyeSpriteW = 128, eyeSpriteH = 96;
-
-      var headScale = 0.35;  // eye region is top ~35% of full sprite
-
-      var eyeScreenW = Math.floor(spriteW * headScale);
-
-      var eyeScreenH = Math.floor(spriteH * headScale * (eyeSpriteH/96));
-
-      var eyeStartX = Math.floor(screenX - eyeScreenW/2);
-
-      var eyeEndX = eyeStartX + eyeScreenW;
-
-      var eyeDrawY = Math.floor(H/2 - spriteH/2);  // top of sprite = head area
-
-      
-      for(var es=eyeStartX; es<eyeEndX; es++) {
-
-        if(es<0 || es>=W) continue;
-
-        if(relY > ZBuffer[stripe]) continue;
-
-        var etx = Math.floor(((es-eyeStartX)/eyeScreenW)*eyeSpriteW);
-
-        if(etx<0 || etx>=eyeSpriteW) continue;
-
-        var eyeAlpha = 1;
-
-        if(dist>10) eyeAlpha *= Math.max(0.2, 1-(dist-10)/6);
-
-        ctx.globalAlpha = eyeAlpha;
-
-        ctx.drawImage(eyeCvs, etx, 0, 1, eyeSpriteH, es, eyeDrawY, 1, eyeScreenH);
-
-        ctx.globalAlpha = 1;
-
-      }
-
-    }
-
-
-    }
-
     }
     
     // — END EYE OVERLAY —
