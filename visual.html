@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visual — Topher Rasmussen</title>
-    <meta name="description" content="Visual art — scratchboard, slowed-down video, and other visual work.">
-<link rel="canonical" href="https://topherrasmussen.com/visual.html">
-    <meta property="og:title" content="Visual — Topher Rasmussen">
-    <meta property="og:description" content="Visual art — scratchboard, slowed-down video, and other visual work.">
+    <title>Visual Art — Scratchboard Portraits | Topher Rasmussen</title>
+    <meta name="description" content="Hand-drawn scratchboard portraits — Kurt Vonnegut, Allen Ginsberg, Audrey Hepburn, Picasso, and more. High-contrast scratchboard art.">
+    <link rel="canonical" href="https://topherrasmussen.com/visual.html">
+    <meta property="og:title" content="Visual Art — Scratchboard Portraits | Topher Rasmussen">
+    <meta property="og:description" content="Hand-drawn scratchboard portraits — Kurt Vonnegut, Allen Ginsberg, Audrey Hepburn, Picasso, and more. High-contrast scratchboard art.">
     <meta property="og:url" content="https://topherrasmussen.com/visual.html">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,6 +15,161 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,700&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/site.css">
     <link rel="alternate" type="application/rss+xml" title="Topher Rasmussen — Writing &amp; Journal" href="/feed.xml">
+    <style>
+        /* Visual gallery styles */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 16px;
+            padding: 16px 0;
+        }
+        .gallery-thumb {
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            position: relative;
+        }
+        .gallery-thumb:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 8px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            color: #fff;
+            font-size: 13px;
+            font-family: 'Public Sans', sans-serif;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        .gallery-thumb:hover .gallery-overlay {
+            opacity: 1;
+        }
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.92);
+            z-index: 10000;
+            cursor: pointer;
+        }
+        .lightbox.active {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 10002;
+            background: none;
+            border: none;
+            padding: 8px;
+            font-family: inherit;
+            line-height: 1;
+        }
+        .lightbox-image {
+            max-width: 90%;
+            max-height: 70vh;
+            border-radius: 4px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            cursor: default;
+        }
+        .lightbox-meta {
+            color: #ccc;
+            font-family: 'Public Sans', sans-serif;
+            text-align: center;
+            margin-top: 12px;
+            max-width: 500px;
+            cursor: default;
+        }
+        .lightbox-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+            margin: 0 0 3px;
+        }
+        .lightbox-medium {
+            font-size: 12px;
+            color: #888;
+            margin: 0 0 3px;
+        }
+        .lightbox-desc {
+            font-size: 13px;
+            line-height: 1.5;
+            color: #aaa;
+        }
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #fff;
+            font-size: 32px;
+            cursor: pointer;
+            z-index: 10002;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease;
+        }
+        .lightbox-nav:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        .lightbox-prev {
+            left: 10px;
+        }
+        .lightbox-next {
+            right: 10px;
+        }
+        .lightbox-counter {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #666;
+            font-size: 12px;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+        @media (max-width: 600px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+            .lightbox-nav {
+                width: 32px;
+                height: 32px;
+                font-size: 24px;
+            }
+            .lightbox-prev { left: 5px; }
+            .lightbox-next { right: 5px; }
+        }
+    </style>
 </head>
 <body>
     <nav class="room-nav">
@@ -31,11 +186,10 @@
     <main class="room">
         <header class="room__header">
             <h1 class="room__title">Visual</h1>
-            <p class="room__subtitle">Scratchboard, slowed-down video, and other visual work.</p>
+            <p class="room__subtitle">Scratchboard portraits — hand-drawn, high contrast, carved into black ground.</p>
         </header>
-        <div class="room-placeholder">
-            <p class="room-placeholder__text">This room is being assembled.</p>
-        </div>
+
+        <div class="gallery-grid" id="room-entries"></div>
     </main>
 
     <footer class="room-footer">
@@ -43,6 +197,114 @@
             Visitor count: <span class="counter-display">00000000</span>
         </div>
     </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="visual-lightbox">
+        <button class="lightbox-close" id="lightbox-close">&times;</button>
+        <button class="lightbox-nav lightbox-prev" id="lightbox-prev">&#8249;</button>
+        <button class="lightbox-nav lightbox-next" id="lightbox-next">&#8250;</button>
+        <img class="lightbox-image" id="lightbox-img" src="" alt="">
+        <div class="lightbox-meta">
+            <h3 class="lightbox-title" id="lightbox-title"></h3>
+            <p class="lightbox-medium" id="lightbox-medium"></p>
+            <p class="lightbox-desc" id="lightbox-desc"></p>
+        </div>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+    </div>
+
+    <script src="/room.js"></script>
+    <script>
+    (function() {
+        var entries = [];
+        var currentIndex = 0;
+        var lightbox = document.getElementById('visual-lightbox');
+        var lightboxImg = document.getElementById('lightbox-img');
+        var lightboxTitle = document.getElementById('lightbox-title');
+        var lightboxMedium = document.getElementById('lightbox-medium');
+        var lightboxDesc = document.getElementById('lightbox-desc');
+        var lightboxCounter = document.getElementById('lightbox-counter');
+
+        function openLightbox(index) {
+            currentIndex = index;
+            updateLightbox();
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function updateLightbox() {
+            var entry = entries[currentIndex];
+            lightboxImg.src = entry.image;
+            lightboxImg.alt = entry.title;
+            lightboxTitle.textContent = entry.title;
+            lightboxMedium.textContent = 'Scratchboard' + (entry.year ? ' · ' + entry.year : '');
+            lightboxDesc.textContent = entry.description || '';
+            lightboxCounter.textContent = '[' + (currentIndex + 1) + '/' + entries.length + ']';
+        }
+
+        function navigate(dir) {
+            currentIndex = (currentIndex + dir + entries.length) % entries.length;
+            updateLightbox();
+        }
+
+        function buildGrid() {
+            var container = document.getElementById('room-entries');
+            container.innerHTML = '';
+            entries.forEach(function(entry, index) {
+                var div = document.createElement('div');
+                div.className = 'gallery-thumb';
+                div.setAttribute('role', 'button');
+                div.setAttribute('tabindex', '0');
+                div.setAttribute('aria-label', 'View ' + (entry.title || 'image'));
+                var img = document.createElement('img');
+                img.src = entry.image;
+                img.alt = entry.title || '';
+                img.loading = 'lazy';
+                var overlay = document.createElement('div');
+                overlay.className = 'gallery-overlay';
+                overlay.textContent = entry.title || '';
+                div.appendChild(img);
+                div.appendChild(overlay);
+                div.addEventListener('click', function() { openLightbox(index); });
+                div.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        openLightbox(index);
+                    }
+                });
+                container.appendChild(div);
+            });
+        }
+
+        initRoom('visual', function(data) {
+            entries = data;
+            buildGrid();
+        });
+
+        document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+        document.getElementById('lightbox-prev').addEventListener('click', function(e) {
+            e.stopPropagation();
+            navigate(-1);
+        });
+        document.getElementById('lightbox-next').addEventListener('click', function(e) {
+            e.stopPropagation();
+            navigate(1);
+        });
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox || e.target.classList.contains('lightbox-meta')) closeLightbox();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (!lightbox.classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') navigate(-1);
+            if (e.key === 'ArrowRight') navigate(1);
+        });
+    })();
+    </script>
 
     <script>
     window.displayCount = function (count) {

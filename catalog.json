@@ -1360,8 +1360,98 @@
     "categories": [
       "experiments"
     ],
-    "description": "Founding documents for a Chicago theater company \u2014 memoranda, storefront research, founder's syllabus, workshop guides.",
+    "description": "Founding documents for a Chicago theater company — memoranda, storefront research, founder's syllabus, workshop guides.",
     "url": "https://github.com/topher416/theatre-company",
+    "status": "live"
+  },
+  {
+    "id": "vonnegut-smoking",
+    "title": "Kurt Vonnegut (Smoking)",
+    "year": 2026,
+    "categories": ["visual-art"],
+    "medium": "Scratchboard",
+    "description": "A portrait of Kurt Vonnegut rendered in dense scratchboard cross-hatching. The wild curls of hair, thick mustache, and cigarette smoke weave into the background. Vonnegut's own characteristic autograph — the swirling self-portrait doodle-signature he was famous for — appears in the upper left.",
+    "image": "/images/visual/vonnegut-smoking.jpg",
+    "status": "live"
+  },
+  {
+    "id": "vonnegut-glasses",
+    "title": "Kurt Vonnegut (Glasses)",
+    "year": 2026,
+    "categories": ["visual-art"],
+    "medium": "Scratchboard",
+    "description": "A tighter, close-cropped portrait of Vonnegut wearing his round wire-frame spectacles. The cross-hatching is even denser here — hundreds of fine scratched lines building up the texture in his face, the glint in the lens frames. His mouth is slightly open, caught mid-sentence.",
+    "image": "/images/visual/vonnegut-glasses.jpg",
+    "status": "live"
+  },
+  {
+    "id": "ginsberg",
+    "title": "Allen Ginsberg",
+    "year": 2026,
+    "categories": ["visual-art"],
+    "medium": "Scratchboard",
+    "description": "A high-contrast scratchboard portrait of the Beat poet — thick round wire-rimmed glasses, pointed goatee beard. The hair is intensely kinetic, jagged scratching that looks electric. The expression is visceral: mouth open, one eye wide, caught in the act of reading or performing.",
+    "image": "/images/visual/ginsberg.jpg",
+    "status": "live"
+  },
+  {
+    "id": "hepburn",
+    "title": "Audrey Hepburn",
+    "year": 2026,
+    "categories": ["visual-art"],
+    "medium": "Scratchboard",
+    "description": "Scratchboard portrait of Hepburn — bouffant hair, pearl earrings, the iconic Breakfast at Tiffany's silhouette. The scratching builds up through dense parallel strokes that give the skin a luminous quality against the dark ground.",
+    "image": "/images/visual/hepburn.jpg",
+    "status": "live"
+  },
+  {
+    "id": "hepburn-dark",
+    "title": "Audrey Hepburn (Dark Study)",
+    "year": 2026,
+    "categories": ["visual-art"],
+    "medium": "Scratchboard",
+    "description": "A second treatment of Hepburn — this time rendered almost entirely in shadow with only the eyes and cheekbones highlighted. A study in negative space: what you don't see carries the weight.",
+    "image": "/images/visual/hepburn-dark.jpg",
+    "status": "live"
+  },
+  {
+    "id": "picasso",
+    "title": "Pablo Picasso",
+    "year": 2026,
+    "categories": ["visual-art"],
+    "medium": "Scratchboard",
+    "description": "A face broken into geometric planes — Cubist fragmentation in scratchboard. The portrait is of the master of fragmentation himself. Multiple perspectives at once, rendered through aggressive cross-hatching that fractures the face into shards of light.",
+    "image": "/images/visual/picasso.jpg",
+    "status": "live"
+  },
+  {
+    "id": "emma-stone",
+    "title": "Emma Stone",
+    "year": 2026,
+    "categories": ["visual-art"],
+    "medium": "Scratchboard",
+    "description": "A charcoal and scratchboard hybrid sketch — shaggy shoulder-length blonde hair, crooked mischievous smile. The expression has that particular Stone quality: wry, self-aware, caught between a laugh and a question.",
+    "image": "/images/visual/emma-stone.jpg",
+    "status": "live"
+  },
+  {
+    "id": "hunter-s-thompson",
+    "title": "Hunter S. Thompson",
+    "year": 2026,
+    "categories": ["visual-art"],
+    "medium": "Scratchboard",
+    "description": "The Gonzo point — double-finger gesture, fedora, thick rimless glasses, manic grin. Thompson caught mid-tirade, finger jabbing, teeth showing. The kind of portrait that feels like it might reach through the wall.",
+    "image": "/images/visual/hunter-s-thompson.jpg",
+    "status": "live"
+  },
+  {
+    "id": "sackerson",
+    "title": "Sackerson",
+    "year": 2026,
+    "categories": ["visual-art"],
+    "medium": "Scratchboard",
+    "description": "\"SACKERSON\" — the famous bear-baiting bear from Bankside, referenced in The Merry Wives of Windsor and The Winter's Tale. A bear in a suit, grinning, chest emblazoned with his name. A deep-cut piece of theatrical lore.",
+    "image": "/images/visual/sackerson.jpg",
     "status": "live"
   }
 ]
