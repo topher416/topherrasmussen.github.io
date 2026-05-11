@@ -16,158 +16,179 @@
     <link rel="stylesheet" href="/site.css">
     <link rel="alternate" type="application/rss+xml" title="Topher Rasmussen — Writing &amp; Journal" href="/feed.xml">
     <style>
-        /* Visual gallery styles */
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 16px;
-            padding: 16px 0;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            padding: 24px 0;
         }
         .gallery-thumb {
             aspect-ratio: 1;
             overflow: hidden;
             border-radius: 6px;
             cursor: pointer;
+            border: 1px solid var(--line, #ddd7d1);
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             position: relative;
         }
         .gallery-thumb:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-sm);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
         }
         .gallery-thumb img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
+            filter: contrast(1.05) brightness(0.98);
         }
-        .gallery-overlay {
+        .gallery-thumb__title {
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 8px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            padding: 16px 10px 8px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.75));
             color: #fff;
-            font-size: 13px;
-            font-family: 'Public Sans', sans-serif;
+            font-family: 'Newsreader', serif;
+            font-size: 14px;
+            font-weight: 500;
             opacity: 0;
-            transition: opacity 0.2s ease;
+            transition: opacity 0.25s ease;
         }
-        .gallery-thumb:hover .gallery-overlay {
+        .gallery-thumb:hover .gallery-thumb__title {
             opacity: 1;
         }
-        /* Lightbox */
-        .lightbox {
+        @keyframes galleryFadeIn {
+            from { opacity: 0; transform: scale(0.85); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .lb--overlay {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.92);
+            inset: 0;
+            background: rgba(0,0,0,0.94);
             z-index: 10000;
-            cursor: pointer;
         }
-        .lightbox.active {
+        .lb--overlay.active {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
-        .lightbox-close {
+        .lb--overlay.active .lb__inner {
+            animation: galleryFadeIn 0.25s ease forwards;
+        }
+        .lb__inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 560px;
+            max-height: 90vh;
+            padding: 20px;
+        }
+        .lb__close {
+            display: none;
             position: absolute;
             top: 16px;
-            right: 20px;
+            right: 24px;
             color: #fff;
-            font-size: 24px;
+            font-size: 30px;
             cursor: pointer;
-            z-index: 10002;
             background: none;
             border: none;
-            padding: 8px;
-            font-family: inherit;
-            line-height: 1;
+            padding: 6px 12px;
+            font-family: 'Newsreader', serif;
         }
-        .lightbox-image {
-            max-width: 90%;
+        .lb__close:hover { color: var(--accent, #b8442a); }
+        .lb__image {
+            max-width: 100%;
             max-height: 70vh;
-            border-radius: 4px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            cursor: default;
+            border-radius: 2px;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.25);
         }
-        .lightbox-meta {
-            color: #ccc;
-            font-family: 'Public Sans', sans-serif;
+        .lb__caption {
             text-align: center;
-            margin-top: 12px;
-            max-width: 500px;
-            cursor: default;
+            margin-top: 16px;
         }
-        .lightbox-title {
-            font-size: 18px;
-            font-weight: 600;
+        .lb__title {
+            font-family: 'Newsreader', serif;
+            font-size: 20px;
+            font-weight: 700;
             color: #fff;
-            margin: 0 0 3px;
+            margin: 0 0 4px;
         }
-        .lightbox-medium {
+        .lb__meta {
+            font-family: 'IBM Plex Mono', monospace;
             font-size: 12px;
             color: #888;
-            margin: 0 0 3px;
+            margin: 0 0 8px;
         }
-        .lightbox-desc {
-            font-size: 13px;
-            line-height: 1.5;
-            color: #aaa;
+        .lb__desc {
+            font-family: 'Public Sans', sans-serif;
+            font-size: 14px;
+            line-height: 1.55;
+            color: #bbb;
         }
-        .lightbox-nav {
+        .lb__nav {
             position: absolute;
             top: 50%;
-            transform: translateY(-50%);
+            transform: translateY(-55%);
             color: #fff;
-            font-size: 32px;
+            font-size: 44px;
             cursor: pointer;
-            z-index: 10002;
-            background: rgba(255,255,255,0.1);
-            border: none;
+            background: none;
+            border: 1px solid rgba(255,255,255,0.15);
             border-radius: 50%;
-            width: 42px;
-            height: 42px;
+            width: 52px;
+            height: 52px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background 0.2s ease;
+            transition: background 0.2s ease, border-color 0.2s ease;
+            font-family: 'Newsreader', serif;
+            line-height: 1;
         }
-        .lightbox-nav:hover {
-            background: rgba(255,255,255,0.2);
-        }
-        .lightbox-prev {
-            left: 10px;
-        }
-        .lightbox-next {
-            right: 10px;
-        }
-        .lightbox-counter {
+        .lb__nav:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.3); }
+        .lb__prev { left: 14px; }
+        .lb__next { right: 14px; }
+        .lb__counter {
             position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #666;
-            font-size: 12px;
-            font-family: 'IBM Plex Mono', monospace;
+            bottom: 12px;
+            display: flex;
+            gap: 6px;
+        }
+        .lb__dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+        .lb__dot.active {
+            background: #fff;
+            transform: scale(1.3);
         }
         @media (max-width: 600px) {
             .gallery-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 8px;
+                gap: 10px;
+                padding: 12px 0;
             }
-            .lightbox-nav {
-                width: 32px;
-                height: 32px;
-                font-size: 24px;
+            .lb__nav {
+                width: 38px;
+                height: 38px;
+                font-size: 30px;
             }
-            .lightbox-prev { left: 5px; }
-            .lightbox-next { right: 5px; }
+            .lb__prev { left: 6px; }
+            .lb__next { right: 6px; }
+            .gallery-thumb__title {
+                font-size: 12px;
+                padding: 12px 6px 6px;
+            }
         }
     </style>
 </head>
@@ -189,7 +210,7 @@
             <p class="room__subtitle">Scratchboard portraits — hand-drawn, high contrast, carved into black ground.</p>
         </header>
 
-        <div class="gallery-grid" id="room-entries"></div>
+        <div class="gallery-grid" id="gallery-grid"></div>
     </main>
 
     <footer class="room-footer">
@@ -199,109 +220,178 @@
     </footer>
 
     <!-- Lightbox -->
-    <div class="lightbox" id="visual-lightbox">
-        <button class="lightbox-close" id="lightbox-close">&times;</button>
-        <button class="lightbox-nav lightbox-prev" id="lightbox-prev">&#8249;</button>
-        <button class="lightbox-nav lightbox-next" id="lightbox-next">&#8250;</button>
-        <img class="lightbox-image" id="lightbox-img" src="" alt="">
-        <div class="lightbox-meta">
-            <h3 class="lightbox-title" id="lightbox-title"></h3>
-            <p class="lightbox-medium" id="lightbox-medium"></p>
-            <p class="lightbox-desc" id="lightbox-desc"></p>
+    <div class="lb--overlay" id="lb-overlay">
+        <button class="lb__close" id="lb-close">&times;</button>
+        <button class="lb__nav lb__prev" id="lb-prev">&#8249;</button>
+        <button class="lb__nav lb__next" id="lb-next">&#8250;</button>
+        <div class="lb__inner">
+            <img class="lb__image" id="lb-img" src="" alt="">
+            <div class="lb__caption">
+                <h3 class="lb__title" id="lb-title"></h3>
+                <p class="lb__meta" id="lb-meta"></p>
+                <p class="lb__desc" id="lb-desc"></p>
+            </div>
         </div>
-        <div class="lightbox-counter" id="lightbox-counter"></div>
+        <div class="lb__counter" id="lb-dots"></div>
     </div>
 
-    <script src="/room.js"></script>
     <script>
-    (function() {
-        var entries = [];
+    (function () {
+        var entries = [
+            {
+                id: 'vonnegut-smoking',
+                title: 'Kurt Vonnegut (Smoking)',
+                year: 2026,
+                medium: 'Scratchboard',
+                description: 'A portrait of Kurt Vonnegut rendered in dense scratchboard cross-hatching. The wild curls of hair, thick mustache, and cigarette smoke weave into the background. Vonnegut\'s own characteristic autograph — the swirling self-portrait doodle-signature he was famous for — appears in the upper left.',
+                image: '/images/visual/vonnegut-smoking.jpg'
+            },
+            {
+                id: 'vonnegut-glasses',
+                title: 'Kurt Vonnegut (Glasses)',
+                year: 2026,
+                medium: 'Scratchboard',
+                description: 'A tighter, close-cropped portrait of Vonnegut wearing his round wire-frame spectacles. The cross-hatching is even denser here — hundreds of fine scratched lines building up the texture in his face, the glint in the lens frames. His mouth is slightly open, caught mid-sentence.',
+                image: '/images/visual/vonnegut-glasses.jpg'
+            },
+            {
+                id: 'ginsberg',
+                title: 'Allen Ginsberg',
+                year: 2026,
+                medium: 'Scratchboard',
+                description: 'A high-contrast scratchboard portrait of the Beat poet — thick round wire-rimmed glasses, pointed goatee beard. The hair is intensely kinetic, jagged scratching that looks electric. The expression is visceral: mouth open, one eye wide, caught in the act of reading or performing.',
+                image: '/images/visual/ginsberg.jpg'
+            },
+            {
+                id: 'hepburn',
+                title: 'Audrey Hepburn',
+                year: 2026,
+                medium: 'Scratchboard',
+                description: 'Scratchboard portrait of Hepburn — bouffant hair, pearl earrings, the iconic Breakfast at Tiffany\'s silhouette. The scratching builds up through dense parallel strokes that give the skin a luminous quality against the dark ground.',
+                image: '/images/visual/hepburn.jpg'
+            },
+            {
+                id: 'hepburn-dark',
+                title: 'Audrey Hepburn (Dark Study)',
+                year: 2026,
+                medium: 'Scratchboard',
+                description: 'A second treatment of Hepburn — this time rendered almost entirely in shadow with only the eyes and cheekbones highlighted. A study in negative space: what you don\'t see carries the weight.',
+                image: '/images/visual/hepburn-dark.jpg'
+            },
+            {
+                id: 'picasso',
+                title: 'Pablo Picasso',
+                year: 2026,
+                medium: 'Scratchboard',
+                description: 'A face broken into geometric planes — Cubist fragmentation in scratchboard. The portrait is of the master of fragmentation himself. Multiple perspectives at once, rendered through aggressive cross-hatching that fractures the face into shards of light.',
+                image: '/images/visual/picasso.jpg'
+            },
+            {
+                id: 'emma-stone',
+                title: 'Emma Stone',
+                year: 2026,
+                medium: 'Scratchboard',
+                description: 'A charcoal and scratchboard hybrid sketch — shaggy shoulder-length blonde hair, crooked mischievous smile. The expression has that particular Stone quality: wry, self-aware, caught between a laugh and a question.',
+                image: '/images/visual/emma-stone.jpg'
+            },
+            {
+                id: 'hunter-s-thompson',
+                title: 'Hunter S. Thompson',
+                year: 2026,
+                medium: 'Scratchboard',
+                description: 'The Gonzo point — double-finger gesture, fedora, thick rimless glasses, manic grin. Thompson caught mid-tirade, finger jabbing, teeth showing. The kind of portrait that feels like it might reach through the wall.',
+                image: '/images/visual/hunter-s-thompson.jpg'
+            },
+            {
+                id: 'sackerson',
+                title: 'Sackerson',
+                year: 2026,
+                medium: 'Scratchboard',
+                description: '"SACKERSON" — the famous bear-baiting bear from Bankside, referenced in The Merry Wives of Windsor and The Winter\'s Tale. A bear in a suit, grinning, chest emblazoned with his name. A deep-cut piece of theatrical lore.',
+                image: '/images/visual/sackerson.jpg'
+            }
+        ];
+
         var currentIndex = 0;
-        var lightbox = document.getElementById('visual-lightbox');
-        var lightboxImg = document.getElementById('lightbox-img');
-        var lightboxTitle = document.getElementById('lightbox-title');
-        var lightboxMedium = document.getElementById('lightbox-medium');
-        var lightboxDesc = document.getElementById('lightbox-desc');
-        var lightboxCounter = document.getElementById('lightbox-counter');
+        var lb = document.getElementById('lb-overlay');
+        var lbImg = document.getElementById('lb-img');
+        var lbTitle = document.getElementById('lb-title');
+        var lbMeta = document.getElementById('lb-meta');
+        var lbDesc = document.getElementById('lb-desc');
+        var lbDots = document.getElementById('lb-dots');
 
-        function openLightbox(index) {
+        function openLb(index) {
             currentIndex = index;
-            updateLightbox();
-            lightbox.classList.add('active');
+            updateLb();
+            lb.classList.add('active');
             document.body.style.overflow = 'hidden';
+            buildDots();
         }
 
-        function closeLightbox() {
-            lightbox.classList.remove('active');
+        function closeLb() {
+            lb.classList.remove('active');
             document.body.style.overflow = '';
+            lbDots.innerHTML = '';
         }
 
-        function updateLightbox() {
-            var entry = entries[currentIndex];
-            lightboxImg.src = entry.image;
-            lightboxImg.alt = entry.title;
-            lightboxTitle.textContent = entry.title;
-            lightboxMedium.textContent = 'Scratchboard' + (entry.year ? ' · ' + entry.year : '');
-            lightboxDesc.textContent = entry.description || '';
-            lightboxCounter.textContent = '[' + (currentIndex + 1) + '/' + entries.length + ']';
+        function updateLb() {
+            var e = entries[currentIndex];
+            lbImg.src = e.image;
+            lbImg.alt = e.title;
+            lbTitle.textContent = e.title;
+            lbMeta.textContent = e.medium + ', ' + e.year;
+            lbDesc.textContent = e.description;
         }
 
-        function navigate(dir) {
-            currentIndex = (currentIndex + dir + entries.length) % entries.length;
-            updateLightbox();
-        }
-
-        function buildGrid() {
-            var container = document.getElementById('room-entries');
-            container.innerHTML = '';
-            entries.forEach(function(entry, index) {
-                var div = document.createElement('div');
-                div.className = 'gallery-thumb';
-                div.setAttribute('role', 'button');
-                div.setAttribute('tabindex', '0');
-                div.setAttribute('aria-label', 'View ' + (entry.title || 'image'));
-                var img = document.createElement('img');
-                img.src = entry.image;
-                img.alt = entry.title || '';
-                img.loading = 'lazy';
-                var overlay = document.createElement('div');
-                overlay.className = 'gallery-overlay';
-                overlay.textContent = entry.title || '';
-                div.appendChild(img);
-                div.appendChild(overlay);
-                div.addEventListener('click', function() { openLightbox(index); });
-                div.addEventListener('keydown', function(e) {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        openLightbox(index);
-                    }
-                });
-                container.appendChild(div);
+        function buildDots() {
+            lbDots.innerHTML = '';
+            entries.forEach(function (_, i) {
+                var dot = document.createElement('button');
+                dot.className = 'lb__dot' + (i === currentIndex ? ' active' : '');
+                dot.setAttribute('aria-label', 'Go to ' + entries[i].title);
+                dot.addEventListener('click', function (ev) { ev.stopPropagation(); currentIndex = i; updateLb(); buildDots(); });
+                lbDots.appendChild(dot);
             });
         }
 
-        initRoom('visual', function(data) {
-            entries = data;
-            buildGrid();
+        function nav(dir) {
+            currentIndex = (currentIndex + dir + entries.length) % entries.length;
+            updateLb();
+            buildDots();
+        }
+
+        var grid = document.getElementById('gallery-grid');
+        entries.forEach(function (entry, idx) {
+            var div = document.createElement('div');
+            div.className = 'gallery-thumb';
+            div.setAttribute('tabindex', '0');
+            div.setAttribute('role', 'button');
+            div.setAttribute('aria-label', 'View ' + entry.title);
+            var img = document.createElement('img');
+            img.src = entry.image;
+            img.alt = entry.title;
+            img.loading = 'lazy';
+            var label = document.createElement('div');
+            label.className = 'gallery-thumb__title';
+            label.textContent = entry.title;
+            div.appendChild(img);
+            div.appendChild(label);
+            div.addEventListener('click', function () { openLb(idx); });
+            div.addEventListener('keydown', function (ev) {
+                if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); openLb(idx); }
+            });
+            grid.appendChild(div);
         });
 
-        document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
-        document.getElementById('lightbox-prev').addEventListener('click', function(e) {
-            e.stopPropagation();
-            navigate(-1);
-        });
-        document.getElementById('lightbox-next').addEventListener('click', function(e) {
-            e.stopPropagation();
-            navigate(1);
-        });
-        lightbox.addEventListener('click', function(e) {
-            if (e.target === lightbox || e.target.classList.contains('lightbox-meta')) closeLightbox();
-        });
-        document.addEventListener('keydown', function(e) {
-            if (!lightbox.classList.contains('active')) return;
-            if (e.key === 'Escape') closeLightbox();
-            if (e.key === 'ArrowLeft') navigate(-1);
-            if (e.key === 'ArrowRight') navigate(1);
+        document.getElementById('lb-close').addEventListener('click', closeLb);
+        document.getElementById('lb-prev').addEventListener('click', function (ev) { ev.stopPropagation(); nav(-1); });
+        document.getElementById('lb-next').addEventListener('click', function (ev) { ev.stopPropagation(); nav(1); });
+        lb.addEventListener('click', function (ev) { if (ev.target === lb || ev.target.classList.contains('lb__inner')) closeLb(); });
+        document.addEventListener('keydown', function (ev) {
+            if (!lb.classList.contains('active')) return;
+            if (ev.key === 'Escape') closeLb();
+            if (ev.key === 'ArrowLeft') nav(-1);
+            if (ev.key === 'ArrowRight') nav(1);
         });
     })();
     </script>
