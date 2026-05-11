@@ -397,6 +397,8 @@ try {
   spriteTex.enemyPain = genEnemyPain();
   spriteTex.enemyDead = genEnemyDead();
 } catch(e) { console.error("Texture gen failed:", e); }
+// Wait for all textures to load
+Promise.all(texturePromises).then(function() { texturesReady = true; });
 
 // ─── MAP ───
 var MAP = [
@@ -797,6 +799,13 @@ var titleEl=document.getElementById("titleScreen");
 function enterGame(){
   initAudio();
   if(titleEl&&titleEl.style.display!=="none"){
+    if(!texturesReady){
+      titleEl.innerHTML='<h1>THE GAZE</h1><p>Loading assets...</p>';
+      Promise.all(texturePromises).then(function(){
+        texturesReady=true; enterGame();
+      });
+      return;
+    }
     titleEl.style.transition="opacity 0.5s";titleEl.style.opacity="0";
     setTimeout(function(){if(titleEl)titleEl.style.display="none";},500);
     gameState="playing";
