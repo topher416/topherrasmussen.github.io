@@ -52,7 +52,7 @@ canvas {
   <h1>THE GAZE</h1>
   <p class="subtitle">"What sees you, sees itself seeing."</p>
   <p class="tap">Tap to enter</p>
-  <p class="version">v0.5.1 — eye-pair gaze mechanic</p>
+  <p class="version">v0.6 — Doppelganger duel (Phase 1)</p>
 </div>
 <div id="hud">
   <span style="color:#b8442a">DESIRE</span>
@@ -63,7 +63,7 @@ canvas {
 
 <script>
 // ═══════════════════════════════════════════════════════════
-//  THE GAZE v0.5.1 — eye-pair gaze mechanic
+//  THE GAZE v0.6 — Doppelganger duel (Phase 1 of two-rule redesign)
 // ═══════════════════════════════════════════════════════════
 
 // On-page error surface — so "black screen" failures show what threw,
@@ -85,7 +85,6 @@ canvas {
 
 var W = 640, H = 400;
 var TEX = 256;  // high-res textures for etching detail
-var MAP_SIZE = 16;
 var FOV = Math.PI / 3;
 var HALF_FOV = FOV / 2;
 var MOVE_SPD = 0.04;
@@ -510,41 +509,40 @@ function genDynamicEyes(pupilOffX, pupilOffY, browRaise, dissolveProgress) {
   return c;
 }
 
-// ─── MAP ───
-var MAP = [
-  [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-  [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
-  [1,0,1,0,1,0,1,1,0,1,1,1,0,1,0,1],
-  [1,0,1,0,1,0,0,1,0,0,0,1,0,1,0,1],
-  [1,0,0,0,0,1,0,0,0,1,0,1,0,1,0,1],
-  [1,0,1,0,1,0,1,1,1,1,0,1,0,1,0,1],
-  [1,0,1,0,1,0,0,1,1,1,0,1,0,0,0,1],
-  [1,0,0,0,0,1,0,0,0,1,0,0,0,1,0,1],
-  [1,0,1,0,1,2,1,0,1,1,0,1,0,1,0,1],
-  [1,0,1,0,1,2,0,0,1,0,0,1,0,1,0,1],
-  [1,0,0,0,0,2,0,0,0,1,0,0,0,0,0,1],
-  [1,0,1,0,1,2,1,2,1,1,0,1,0,1,0,1],
-  [1,0,1,0,1,2,0,0,1,0,0,1,0,1,0,1],
-  [1,0,0,0,0,1,0,0,0,1,0,1,0,1,0,1],
-  [1,0,1,0,1,1,1,2,1,0,0,1,0,3,0,1],
-  [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-];
+// ─── PRNG (mulberry32) — seeded so runs are reproducible from run.seed ───
+function mulberry32(seed) {
+  return function() {
+    var t = (seed += 0x6D2B79F5);
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+var rng = Math.random; // replaced per-run by mulberry32
 
-var player = { x: 1.5, y: 1.5, angle: 0 };
+// ─── RUN + ROOM STATE ───
+var run = {
+  seed: 0,
+  chain: [],
+  roomIndex: 0,
+  startTime: 0,
+  deaths: 0
+};
 
-var sprites = [
-  { type:"enemy", x:3.5, y:3.5, hp:3, pain:0, dead:false, deadFrames:0, speed:0.015 },
-  { type:"enemy", x:7.5, y:2.5, hp:3, pain:0, dead:false, deadFrames:0, speed:0.015 },
-  { type:"enemy", x:2.5, y:7.5, hp:3, pain:0, dead:false, deadFrames:0, speed:0.015 },
-  { type:"enemy", x:10.5, y:6.5, hp:3, pain:0, dead:false, deadFrames:0, speed:0.015 },
-  { type:"enemy", x:5.5, y:10.5, hp:3, pain:0, dead:false, deadFrames:0, speed:0.015 },
-  { type:"enemy", x:12.5, y:12.5, hp:3, pain:0, dead:false, deadFrames:0, speed:0.015 },
-  { type:"enemy", x:8.5, y:13.5, hp:3, pain:0, dead:false, deadFrames:0, speed:0.015 },
-  { type:"pickup", x:5.5, y:5.5 },
-  { type:"pickup", x:13.5, y:3.5 },
-  { type:"pickup", x:9.5, y:9.5 },
-  { type:"pickup", x:1.5, y:12.5 },
-];
+var room = {
+  type: null,
+  map: null,
+  mapSize: 0,
+  exitDoor: null,
+  complete: false,
+  startTime: 0,
+  enemy: null
+};
+
+var player = { x: 1.5, y: 1.5, angle: 0, gazeFrames: 0 };
+
+// Track player deltas frame-to-frame for Doppelganger's lag-mirror AI.
+var _playerPrevX = 0, _playerPrevY = 0, _playerPrevAngle = 0;
 
 var gameState = "title";
 var desire = 100;
@@ -659,8 +657,8 @@ function castRay(angle){
   while(!hit&&maxIter-->0){
     if(sideDistX<sideDistY){sideDistX+=deltaDistX;mapX+=stepX;side=0;}
     else{sideDistY+=deltaDistY;mapY+=stepY;side=1;}
-    if(mapY>=0&&mapY<MAP_SIZE&&mapX>=0&&mapX<MAP_SIZE){
-      var cell=MAP[mapY][mapX];
+    if(mapY>=0&&mapY<room.mapSize&&mapX>=0&&mapX<room.mapSize){
+      var cell=room.map[mapY][mapX];
       if(cell>0){hit=true;wallType=cell;}
     }else{hit=true;}
   }
@@ -702,109 +700,73 @@ function render(){
 
 // ─── RENDER SPRITES ───
 function renderSprites(){
-  var visible=[];
-  for(var i=0;i<sprites.length;i++){
-    var sp=sprites[i];
-    if(sp.pickedUp)continue;
-    if(sp.type==="enemy"&&sp.deadFrames>60)continue;
-    var dx=sp.x-player.x,dy=sp.y-player.y;
-    var dist=Math.sqrt(dx*dx+dy*dy);
-    if(dist<0.3)continue;
-    visible.push({sp:sp,dist:dist,dx:dx,dy:dy});
+  if(!room||!room.enemy)return;
+  var sp=room.enemy;
+  if(sp.dissolveFrames>60)return;
+
+  var dx=sp.x-player.x, dy=sp.y-player.y;
+  var dist=Math.hypot(dx,dy);
+  if(dist<0.3)return;
+  // relX = lateral offset, relY = depth (forward distance). The original code had these
+  // swapped, which only worked for sprites that were never axis-aligned with the player's
+  // facing direction. Doppelganger spawns ARE axis-aligned, so we use the correct projection.
+  var relX=-dx*Math.sin(player.angle)+dy*Math.cos(player.angle);
+  var relY=dx*Math.cos(player.angle)+dy*Math.sin(player.angle);
+  if(relY<=0.1)return;
+
+  var screenX=Math.floor((W/2)*(1+relX/relY));
+  var spriteH=Math.floor(Math.abs(H/relY)*WALL_SCALE);
+  var spriteW=Math.floor(spriteH*(256/320));
+  if(spriteW<1)return;
+  var drawY=Math.floor(H/2-spriteH/2);
+  var startS=Math.floor(-spriteW/2+screenX), endS=Math.floor(spriteW/2+screenX);
+  var tex=spriteTex["enemy"];
+  if(!tex)return;
+  var W2=256, H2=320;
+
+  // Body strips (billboarded).
+  for(var stripe=startS;stripe<endS;stripe++){
+    if(stripe<0||stripe>=W)continue;
+    if(relY>ZBuffer[stripe])continue;
+    var tX=Math.floor(((stripe-startS)/(endS-startS))*W2);
+    if(tX<0||tX>=W2)continue;
+    var alpha=1;
+    if(sp.dissolving)alpha=Math.max(0.1,1-sp.dissolveFrames/60);
+    if(dist>10)alpha*=Math.max(0.2,1-(dist-10)/6);
+    ctx.globalAlpha=alpha;
+    ctx.drawImage(tex,tX,0,1,H2,stripe,drawY,1,spriteH);
+    ctx.globalAlpha=1;
   }
-  visible.sort(function(a,b){return b.dist-a.dist;});
-  for(var v=0;v<visible.length;v++){
-    var item=visible[v],sp=item.sp,dist=item.dist;
-    var dx=item.dx,dy=item.dy;
-    var relX=dx*Math.cos(player.angle)+dy*Math.sin(player.angle);
-    var relY=-dx*Math.sin(player.angle)+dy*Math.cos(player.angle);
-    if(relY<=0.1)continue;
-    var screenX=Math.floor((W/2)*(1+relX/relY));
-    var spriteH,spriteW,texKey;
-    if(sp.type==="enemy"){
-      spriteH=Math.floor(Math.abs(H/relY)*WALL_SCALE);
-      spriteW=Math.floor(spriteH*(256/320));
-      if(sp.dead){texKey="enemyDead";spriteH=Math.floor(spriteH*0.25);}
 
-      else if(sp.pain>0){texKey="enemyPain";}
-
-      else{texKey="enemy";}
-    }else{
-      texKey="pickup";
-      spriteH=Math.floor(Math.abs(H/relY)*WALL_SCALE*0.5);
-      spriteW=spriteH;
-    }
-    if(spriteW<1)continue;
-    var drawY=Math.floor(H/2-spriteH/2);
-    if(sp.type==="enemy"&&sp.dead)drawY=H-Math.floor(spriteH*0.6);
-    if(sp.type!=="enemy"){drawY+=Math.sin(Date.now()*0.005+sp.x*10)*4;}
-    var startS=Math.floor(-spriteW/2+screenX),endS=Math.floor(spriteW/2+screenX);
-    var tex=spriteTex[texKey];
-    if(!tex)continue;
-    var W2=256,H2=(texKey==="pickup"?128:320);
-    if(texKey==="enemyPain")H2=320;
-    if(texKey==="enemyDead")H2=320;
-    for(var stripe=startS;stripe<endS;stripe++){
-      if(stripe<0||stripe>=W)continue;
-      if(relY>ZBuffer[stripe])continue;
-      var tX=Math.floor(((stripe-startS)/(endS-startS))*W2);
-      if(tX<0||tX>=W2)continue;
-      var alpha=1;
-      if(sp.type==="enemy"&&sp.dead)alpha=Math.max(0.1,1-sp.deadFrames/60);
-      if(dist>10)alpha*=Math.max(0.2,1-(dist-10)/6);
-      ctx.globalAlpha=alpha;
-      ctx.drawImage(tex,tX,0,1,H2,stripe,drawY,1,spriteH);
-      ctx.globalAlpha=1;
-    }
-    // — DYNAMIC EYE OVERLAY: pairs of eyes with pupil tracking —
-    if(sp.type==="enemy"&&!sp.dead){
-      // Compute pupil tracking offset (enemy is looking at player)
-      var ex=sp.x, ey=sp.y;
-      var toPlayerAngle=Math.atan2(player.y-ey,player.x-ex);
-      var headAngle=toPlayerAngle;
-      var pupilOffX=Math.sin(headAngle)*6;
-      var pupilOffY=Math.cos(headAngle)*4;
-
-      // Eyebrow position from gaze state machine
-      var browRaise=0;
-      var gs=sp.gazeState||"idle";
-      if(gs==="noticed"||gs==="watching") browRaise=8;
-      else if(gs==="dissolving") browRaise=-14+((sp.dissolveFrames||0)/60)*14;
-      else if(gs==="chase"||gs==="chase_faster") browRaise=-6;
-      else browRaise=0;
-
-      // Generate dynamic eye texture (lazy canvas reused)
-      var eyeTex=genDynamicEyes(pupilOffX,pupilOffY,browRaise,sp.dissolveFrames||0);
-
-      // Eye region in sprite coords: head is roughly center-top of 256x320 sprite
-      // Eyes are in texture region: x=80..176, y=24..74 (centered on head in blank-face sprite)
-      var eyeTexW=256, eyeTexH=90;
-      var eyeSpriteX1=80, eyeSpriteX2=176;
-      var eyeSpriteY1=24;
-
-      // Map to screen space using same projection math
-      var eyeScreenW=Math.floor((eyeSpriteX2-eyeSpriteX1)/eyeTexW*spriteW);
-      var eyeScreenH=Math.floor(eyeTexH/eyeTexW*spriteW);
-      var eyeScreenX=Math.floor(screenX-eyeScreenW/2);
-      var eyeScreenY=drawY+Math.floor(eyeSpriteY1/H2*spriteH);
-
-      // Render eye overlay as 1-pixel vertical strips (same as body)
-      for(var stripe=eyeScreenX;stripe<eyeScreenX+eyeScreenW;stripe++){
-        if(stripe<0||stripe>=W)continue;
-        if(relY>ZBuffer[stripe])continue;
-        var tX=Math.floor(((stripe-eyeScreenX)/eyeScreenW)*eyeTexW);
-        if(tX<0||tX>=eyeTexW)continue;
-        var ea=1;
-        if(dist>10) ea*=Math.max(0.2,1-(dist-10)/6);
-        if(gs==="dissolving") ea*=Math.max(0.1,1-(sp.dissolveFrames||0)/60);
-        ctx.globalAlpha=ea;
-        ctx.drawImage(eyeTex,tX,0,1,eyeTexH,stripe,eyeScreenY,1,eyeScreenH);
-        ctx.globalAlpha=1;
-      }
-    }
-    
-    // — END EYE OVERLAY —
-
+  // Dynamic eye overlay — pupils track player, brows reflect gazeState.
+  var toPlayerAngle=Math.atan2(player.y-sp.y,player.x-sp.x);
+  var headAngle=toPlayerAngle;
+  var pupilOffX=Math.sin(headAngle)*6;
+  var pupilOffY=Math.cos(headAngle)*4;
+  var gs=sp.gazeState||"idle";
+  var browRaise=0;
+  if(gs==="noticed"||gs==="watching") browRaise=8;
+  else if(gs==="dissolving") browRaise=-14+((sp.dissolveFrames||0)/60)*14;
+  else browRaise=0;
+  var eyeTex=genDynamicEyes(pupilOffX,pupilOffY,browRaise,sp.dissolveFrames||0);
+  var eyeTexW=256, eyeTexH=90;
+  var eyeSpriteX1=80, eyeSpriteX2=176;
+  var eyeSpriteY1=24;
+  var eyeScreenW=Math.floor((eyeSpriteX2-eyeSpriteX1)/eyeTexW*spriteW);
+  var eyeScreenH=Math.floor(eyeTexH/eyeTexW*spriteW);
+  var eyeScreenX=Math.floor(screenX-eyeScreenW/2);
+  var eyeScreenY=drawY+Math.floor(eyeSpriteY1/H2*spriteH);
+  for(var s2=eyeScreenX;s2<eyeScreenX+eyeScreenW;s2++){
+    if(s2<0||s2>=W)continue;
+    if(relY>ZBuffer[s2])continue;
+    var tX2=Math.floor(((s2-eyeScreenX)/eyeScreenW)*eyeTexW);
+    if(tX2<0||tX2>=eyeTexW)continue;
+    var ea=1;
+    if(dist>10) ea*=Math.max(0.2,1-(dist-10)/6);
+    if(gs==="dissolving") ea*=Math.max(0.1,1-(sp.dissolveFrames||0)/60);
+    ctx.globalAlpha=ea;
+    ctx.drawImage(eyeTex,tX2,0,1,eyeTexH,s2,eyeScreenY,1,eyeScreenH);
+    ctx.globalAlpha=1;
   }
 }
 // ─── MOVEMENT ───
@@ -830,106 +792,148 @@ function updateMovement(){
 }
 
 function inBounds(x,y){
+  if(!room.map)return false;
   var mx=Math.floor(x),my=Math.floor(y);
-  if(mx<0||mx>=MAP_SIZE||my<0||my>=MAP_SIZE)return false;
-  return MAP[my][mx]===0;
+  if(mx<0||mx>=room.mapSize||my<0||my>=room.mapSize)return false;
+  return room.map[my][mx]===0;
 }
 
-// ─── UPDATE SPRITES ───
-function updateSprites(){
-  mutualGaze = false;
-  mutualGazeTimer = 0;
-  
-  for(var i=0;i<sprites.length;i++){
-    var sp=sprites[i];
-    if(sp.type==="enemy"){
-      if(sp.dead){sp.deadFrames++;continue;}
-      if(sp.pain>0){sp.pain--;continue;}
-      
-      // Enemy faces player when alive
-      var toPlayer = Math.atan2(player.y - sp.y, player.x - sp.x);
-      sp.angle = toPlayer;
-      
-      var ex=player.x-sp.x, ey=player.y-sp.y;
-      var edist=Math.sqrt(ex*ex+ey*ey);
-      if(edist<10&&edist>0.8){
-        // Check if player is looking at this enemy (within PLAYER_FOV)
-        var angleToEnemy = Math.atan2(ey, ex);
-        var angleDiff = angleToEnemy - player.angle;
-        // Normalize angle
-        while(angleDiff > Math.PI) angleDiff -= 2*Math.PI;
-        while(angleDiff < -Math.PI) angleDiff += 2*Math.PI;
-        var isPlayerLooking = Math.abs(angleDiff) < PLAYER_FOV/2;
-        
-        // Enemy always faces player, so if player looks at enemy, it's mutual gaze
-        if(isPlayerLooking && edist < 8){
-          mutualGaze = true;
-          
-          // Phase 1: Noticing (enemy stops, player gets feedback)
-          if(sp.gazeState === "idle" || sp.gazeState === "chase"){
-            sp.gazeState = "noticed";
-            sp.gazeTimer = 0;
-          }
-          // Phase 2: Sustained mutual gaze
-          if(sp.gazeState === "noticed" || sp.gazeState === "watching"){
-            sp.gazeTimer++;
-            if(sp.gazeState === "noticed" && sp.gazeTimer > 30){
-              sp.gazeState = "watching";
-            }
-            if(sp.gazeState === "watching" && sp.gazeTimer >= GAZE_THRESHOLD){
-              // Phase 3: Recognition/dissolution
-              sp.gazeState = "dissolving";
-              desire = Math.min(100, desire + 15);
-            }
-          }
-          // Phase 4: Dissolving (slow dissolve over 60 frames)
-          if(sp.gazeState === "dissolving"){
-            sp.dissolveFrames = (sp.dissolveFrames || 0) + 1;
-            if(sp.dissolveFrames >= 60){
-              sp.deadFrames = 0; // triggers existing dead animation
-              sp.dead = true;
-            }
-          }
-        } else {
-          // Player looked away or out of range
-          if(sp.gazeState === "watching" && !(sp.gazeState === "dissolving")){
-            // Breaking sustained gaze → enemy speeds up and pursues
-            sp.speed = 0.018;
-            sp.gazeState = "chase_faster";
-          } else if(sp.gazeState === "noticed") {
-            sp.speed = 0.018;
-            sp.gazeState = "chase_faster";
-          }
-          // Resume chasing if not dissolving
-          if(sp.gazeState === "idle" || sp.gazeState === "noticed" || sp.gazeState === "watching" || sp.gazeState === "chase_faster"){
-            sp.gazeTimer = 0;
-          }
-        }
-        
-        // Normal chase behavior (only if not in gaze states)
-        if(sp.gazeState === "idle" || sp.gazeState === "chase" || sp.gazeState === "chase_faster"){
-          var nx=sp.x+(ex/edist)*sp.speed, ny=sp.y+(ey/edist)*sp.speed;
-          var imx=Math.floor(nx), imy=Math.floor(ny);
-          if(imx>=0&&imx<MAP_SIZE&&imy>=0&&imy<MAP_SIZE&&MAP[imy][imx]===0){
-            sp.x=nx; sp.y=ny;
-          }
-        }
-        
-        // Contact with player drains Desire
-        if(edist<1.0){
-          drainRate = sp.gazeState === "chase_faster" ? 0.5 : 0.3;
-          desire -= drainRate;
-          if(desire<0) desire=0;
-        }
-      }
+// Line-of-sight check: are all points between (x1,y1) and (x2,y2) walkable?
+function isLOSClear(x1,y1,x2,y2){
+  var steps=Math.ceil(Math.hypot(x2-x1,y2-y1)*4); // 4 samples per tile
+  for(var i=1;i<steps;i++){
+    var t=i/steps;
+    var x=x1+(x2-x1)*t, y=y1+(y2-y1)*t;
+    if(!inBounds(x,y))return false;
+  }
+  return true;
+}
+
+// ─── ROOM GENERATORS ───
+function generateDoppelgangerRoom(difficulty, rng){
+  var size=12;
+  var map=[];
+  for(var y=0;y<size;y++){
+    map[y]=[];
+    for(var x=0;x<size;x++){
+      map[y][x]=(x===0||y===0||x===size-1||y===size-1)?2:0; // border = mirror walls (telegraph)
     }
-    if(sp.type==="pickup" && !sp.pickedUp){
-      var px=player.x-sp.x, py=player.y-sp.y;
-      if(Math.sqrt(px*px+py*py)<0.6){
-        sp.pickedUp=true;
-        desire=Math.min(100, desire+10);
-      }
-    }
+  }
+  // Mirror-symmetric pillar pairs (2-4 pairs based on difficulty). Avoid the central
+  // spawn row so the player has a clean initial sightline to the enemy.
+  var axis=size/2;
+  var midY=Math.floor(size/2);
+  var pillarCount=2+Math.floor(difficulty*2); // 2..4
+  for(var p=0;p<pillarCount;p++){
+    var py=2+Math.floor(rng()*(size-4));
+    if(py===midY)py=py+1<size-1?py+1:py-1; // shift off the spawn row
+    var px=2+Math.floor(rng()*(axis-2));
+    map[py][px]=1;
+    map[py][size-1-px]=1;
+  }
+  var lag=12-Math.floor(difficulty*4);          // 12 → 8 frames
+  var winThresh=90+Math.floor(difficulty*30);   // 90 → 120 frames
+
+  // Player on left, enemy mirrored on right. Player spawns facing SOUTH (perpendicular
+  // to the enemy axis) so they have to turn ~90° to engage — no auto-win.
+  var midY=size/2;
+  player.x=1.5; player.y=midY; player.angle=Math.PI/2;
+  _playerPrevX=player.x; _playerPrevY=player.y; _playerPrevAngle=player.angle;
+  player.gazeFrames=0;
+
+  room.type="doppelganger";
+  room.map=map;
+  room.mapSize=size;
+  room.exitDoor=null;
+  room.complete=false;
+  room.startTime=performance.now();
+  room.enemy={
+    kind:"doppelganger",
+    x:size-1.5, y:midY, angle:Math.PI,
+    gazeFrames:0, dissolveFrames:0, dissolving:false,
+    mirrorAxisX:axis, inputBuffer:[],
+    mirrorLag:lag, gazeWinThreshold:winThresh,
+    gazeState:"idle"
+  };
+}
+
+// ─── ROOM UPDATE DISPATCH ───
+function updateRoom(){
+  if(!room||!room.type)return;
+  if(room.type==="doppelganger")updateDoppelganger();
+}
+
+function updateDoppelganger(){
+  var e=room.enemy;
+  if(!e)return;
+  if(e.dissolving){
+    e.dissolveFrames++;
+    if(e.dissolveFrames>=60)room.complete=true;
+    return;
+  }
+
+  // 1) Capture player position deltas this frame (rotation deltas not used — enemy tracks player position directly).
+  var dpx=player.x-_playerPrevX;
+  var dpy=player.y-_playerPrevY;
+  _playerPrevX=player.x; _playerPrevY=player.y; _playerPrevAngle=player.angle;
+
+  // 2) Push into enemy's input buffer. Apply delayed deltas mirrored across vertical axis.
+  //    Movement mirrors with lag; rotation does NOT mirror — enemy always faces the player.
+  //    (Perfect angular mirror created geometric paradoxes that locked out the duel.)
+  e.inputBuffer.push({dx:dpx,dy:dpy});
+  if(e.inputBuffer.length>e.mirrorLag){
+    var d=e.inputBuffer.shift();
+    var nx=e.x-d.dx; // mirrored across vertical axis (sign of dx flipped)
+    var ny=e.y+d.dy;
+    var r=0.2;
+    if(inBounds(nx-r,e.y-r)&&inBounds(nx+r,e.y-r)&&inBounds(nx-r,e.y+r)&&inBounds(nx+r,e.y+r))e.x=nx;
+    if(inBounds(e.x-r,ny-r)&&inBounds(e.x+r,ny-r)&&inBounds(e.x-r,ny+r)&&inBounds(e.x+r,ny+r))e.y=ny;
+  }
+  // Enemy always faces the player (it's locked onto you — it's your doppelganger).
+  e.angle=Math.atan2(player.y-e.y,player.x-e.x);
+
+  // 3) Mutual gaze check.
+  var toEX=e.x-player.x, toEY=e.y-player.y;
+  var distEP=Math.hypot(toEX,toEY);
+  var angToE=Math.atan2(toEY,toEX);
+  var pDiff=angToE-player.angle;
+  while(pDiff>Math.PI)pDiff-=2*Math.PI;
+  while(pDiff<-Math.PI)pDiff+=2*Math.PI;
+  var playerSeesEnemy=Math.abs(pDiff)<PLAYER_FOV/2;
+
+  var angToP=Math.atan2(-toEY,-toEX);
+  var eDiff=angToP-e.angle;
+  while(eDiff>Math.PI)eDiff-=2*Math.PI;
+  while(eDiff<-Math.PI)eDiff+=2*Math.PI;
+  var enemySeesPlayer=Math.abs(eDiff)<PLAYER_FOV/2;
+
+  var losClear=isLOSClear(player.x,player.y,e.x,e.y);
+  var mutualGaze=playerSeesEnemy&&enemySeesPlayer&&losClear&&distEP<10;
+
+  if(mutualGaze){
+    player.gazeFrames++;
+    // Enemy counter starts after lag deadband — gives player a structural head start.
+    if(player.gazeFrames>e.mirrorLag)e.gazeFrames++;
+    e.gazeState=player.gazeFrames>30?"watching":"noticed";
+  }else{
+    player.gazeFrames=0;
+    e.gazeFrames=0;
+    e.gazeState="idle";
+  }
+
+  // 4) Win / lose resolution.
+  if(player.gazeFrames>=e.gazeWinThreshold){
+    e.dissolving=true;
+    e.gazeState="dissolving";
+    e.dissolveFrames=0;
+  }
+  if(e.gazeFrames>=e.gazeWinThreshold){
+    desire=0; // mirror beat you to the gaze — instant loss
+  }
+  // Contact drain (touching enemy hurts).
+  if(distEP<0.8){
+    desire-=0.8;
+    if(desire<0)desire=0;
   }
 }
 
@@ -943,15 +947,24 @@ function updateHUD(){
 function gameLoop(time){
   if(gameState==="playing"){
     updateMovement();
-    updateSprites();
+    updateRoom();
     updateHUD();
     var moving=(touchMoveX!==0||touchMoveY!==0||keys["KeyW"]||keys["KeyS"]||keys["KeyA"]||keys["KeyD"]);
     if(moving){footstepTimer++;if(footstepTimer>15){playFootstep();footstepTimer=0;}}
     render();
     renderSprites();
     if(desire<=0){gameState="dead";showDeathScreen();}
+    else if(room.complete){gameState="won";showWinScreen();}
   }
   requestAnimationFrame(gameLoop);
+}
+
+// ─── ROOM ENTRY ───
+function startDoppelgangerRoom(difficulty){
+  rng=mulberry32((run.seed||Date.now())+run.roomIndex*1000);
+  generateDoppelgangerRoom(difficulty,rng);
+  desire=100;
+  gameState="playing";
 }
 
 // ─── TITLE SCREEN ───
@@ -968,7 +981,10 @@ function enterGame(){
     }
     titleEl.style.transition="opacity 0.5s";titleEl.style.opacity="0";
     setTimeout(function(){if(titleEl)titleEl.style.display="none";},500);
-    gameState="playing";
+    run.seed=Date.now();
+    run.startTime=performance.now();
+    run.roomIndex=0;
+    startDoppelgangerRoom(0.3);
   }
 }
 
@@ -978,22 +994,32 @@ titleEl.addEventListener("touchstart",function(e){e.preventDefault();enterGame()
 // ─── DEATH SCREEN ───
 function showDeathScreen(){
   var o=document.getElementById("deathOverlay");
-  o.innerHTML="<div style='font-size:32px'>THE GAZE LOOKS BACK</div><div style='font-size:14px;color:#555;margin-top:16px'>Tap to re-enter</div>";
+  o.innerHTML="<div style='font-size:32px'>THE MIRROR HELD YOUR GAZE</div><div style='font-size:14px;color:#555;margin-top:16px'>Tap to try again</div>";
   o.classList.add("visible");
   var restart=function(){
     o.removeEventListener("click",restart);o.removeEventListener("touchstart",restart);
     o.classList.remove("visible");
-    player.x=1.5;player.y=1.5;player.angle=0;
-    desire=100;
-    for(var i=0;i<sprites.length;i++){
-      var s=sprites[i];
-      if(s.type==="enemy"){s.hp=3;s.pain=0;s.dead=false;s.deadFrames=0;}
-      if(s.type==="pickup"){s.pickedUp=false;}
-    }
-    gameState="playing";
+    run.deaths++;
+    run.roomIndex=0;
+    startDoppelgangerRoom(0.3);
   };
   o.addEventListener("click",restart,{once:true});
   o.addEventListener("touchstart",function(e){e.preventDefault();restart(e);},{once:true});
+}
+
+// ─── WIN SCREEN (Phase 1 placeholder — restarts on tap with harder room) ───
+function showWinScreen(){
+  var o=document.getElementById("deathOverlay");
+  o.innerHTML="<div style='font-size:32px;color:#b8442a'>DISSOLVED</div><div style='font-size:14px;color:#888;margin-top:16px'>Tap for a new room</div>";
+  o.classList.add("visible");
+  var nextRoom=function(){
+    o.removeEventListener("click",nextRoom);o.removeEventListener("touchstart",nextRoom);
+    o.classList.remove("visible");
+    run.roomIndex++;
+    startDoppelgangerRoom(Math.min(1.0,0.3+run.roomIndex*0.15));
+  };
+  o.addEventListener("click",nextRoom,{once:true});
+  o.addEventListener("touchstart",function(e){e.preventDefault();nextRoom(e);},{once:true});
 }
 
 requestAnimationFrame(gameLoop);
