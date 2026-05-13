@@ -39,6 +39,23 @@ canvas {
 #deathOverlay.visible { display: flex; background: rgba(10,8,6,0.85); }
 #errorOverlay { position: fixed; top: 0; left: 0; right: 0; max-height: 50%; overflow: auto; background: rgba(80,0,0,0.92); color: #ffdcdc; font-family: "Courier New", monospace; font-size: 12px; line-height: 1.4; padding: 12px 16px; z-index: 100; display: none; white-space: pre-wrap; word-break: break-word; border-bottom: 2px solid #ff5050; }
 #errorOverlay.visible { display: block; }
+#gazeButton {
+  position: absolute; bottom: 56px; left: 50%; transform: translateX(-50%);
+  width: 84px; height: 84px; border-radius: 50%;
+  background: rgba(184, 68, 42, 0.18);
+  border: 2px solid rgba(184, 68, 42, 0.55);
+  z-index: 13; pointer-events: auto;
+  display: flex; align-items: center; justify-content: center;
+  font-family: "Courier New", monospace; color: #f5f2ed; font-size: 11px;
+  letter-spacing: 1.5px;
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
+  transition: background 0.08s, border-color 0.08s, transform 0.05s;
+}
+#gazeButton.active {
+  background: rgba(184, 68, 42, 0.65);
+  border-color: rgba(184, 68, 42, 1);
+  transform: translateX(-50%) scale(0.95);
+}
 </style>
 </head>
 <body>
@@ -47,12 +64,13 @@ canvas {
 <div id="touchLeft" class="touch-zone"></div>
 <div id="touchRight" class="touch-zone"></div>
 <div id="joystickBase"><div id="joystickKnob"></div></div>
+<div id="gazeButton">GAZE</div>
 <div id="deathOverlay"></div>
 <div id="titleScreen">
   <h1>THE GAZE</h1>
   <p class="subtitle">"What sees you, sees itself seeing."</p>
   <p class="tap">Tap to enter</p>
-  <p class="version">v0.6 — Doppelganger duel (Phase 1)</p>
+  <p class="version">v0.6.1 — Doppelganger duel: hold SPACE to gaze</p>
 </div>
 <div id="hud">
   <span style="color:#b8442a">DESIRE</span>
@@ -63,7 +81,8 @@ canvas {
 
 <script>
 // ═══════════════════════════════════════════════════════════
-//  THE GAZE v0.6 — Doppelganger duel (Phase 1 of two-rule redesign)
+//  THE GAZE v0.6.1 — Doppelganger duel (Phase 1 of two-rule redesign)
+//  Hold SPACE (desktop) or the GAZE button (mobile) to engage.
 // ═══════════════════════════════════════════════════════════
 
 // On-page error surface — so "black screen" failures show what threw,
@@ -566,8 +585,25 @@ async function initAudio() {
 function playFootstep() { if(audioReady && window._footSynth) window._footSynth.triggerAttackRelease("8n"); }
 
 var keys = {}, mouseTurn = 0;
-document.addEventListener("keydown", function(e) { keys[e.code] = true; e.preventDefault(); });
-document.addEventListener("keyup", function(e) { keys[e.code] = false; });
+var isGazing = false;
+var gazeBtnEl = null;
+function setGazing(v){
+  isGazing = v;
+  if(!gazeBtnEl)gazeBtnEl=document.getElementById("gazeButton");
+  if(gazeBtnEl){
+    if(v)gazeBtnEl.classList.add("active");
+    else gazeBtnEl.classList.remove("active");
+  }
+}
+document.addEventListener("keydown", function(e) {
+  keys[e.code] = true;
+  if(e.code==="Space"){ setGazing(true); e.preventDefault(); }
+  else { e.preventDefault(); }
+});
+document.addEventListener("keyup", function(e) {
+  keys[e.code] = false;
+  if(e.code==="Space") setGazing(false);
+});
 canvas.addEventListener("click", function() { if(!document.pointerLockElement) canvas.requestPointerLock(); });
 document.addEventListener("mousemove", function(e) { if(document.pointerLockElement===canvas) mouseTurn += e.movementX*0.002; });
 
@@ -639,6 +675,20 @@ function clearT(isLeft){return function(e){
 
 addTouch(touchLeftEl,true);
 addTouch(touchRightEl,false);
+
+// Gaze button — hold to gaze (touch + mouse).
+(function(){
+  var btn=document.getElementById("gazeButton");
+  if(!btn)return;
+  var onDown=function(e){e.preventDefault();e.stopPropagation();setGazing(true);};
+  var onUp=function(e){e.preventDefault();e.stopPropagation();setGazing(false);};
+  btn.addEventListener("touchstart",onDown,{passive:false});
+  btn.addEventListener("touchend",onUp,{passive:false});
+  btn.addEventListener("touchcancel",onUp,{passive:false});
+  btn.addEventListener("mousedown",onDown);
+  btn.addEventListener("mouseup",onUp);
+  btn.addEventListener("mouseleave",onUp);
+})();
 
 // ─── Z-BUFFER ───
 var ZBuffer = new Float64Array(W);
@@ -911,11 +961,18 @@ function updateDoppelganger(){
   var mutualGaze=playerSeesEnemy&&enemySeesPlayer&&losClear&&distEP<10;
 
   if(mutualGaze){
-    player.gazeFrames++;
-    // Enemy counter starts after lag deadband — gives player a structural head start.
-    if(player.gazeFrames>e.mirrorLag)e.gazeFrames++;
-    e.gazeState=player.gazeFrames>30?"watching":"noticed";
+    if(isGazing){
+      // Active gaze — counters tick. Enemy counter starts after lag deadband.
+      player.gazeFrames++;
+      if(player.gazeFrames>e.mirrorLag)e.gazeFrames++;
+      e.gazeState=player.gazeFrames>30?"watching":"noticed";
+    }else{
+      // Geometric conditions met but player isn't committing — counters paused, eyes
+      // shift to "noticed" (alert but not engaged).
+      e.gazeState="noticed";
+    }
   }else{
+    // Mutual gaze broken — counters reset, enemy relaxes.
     player.gazeFrames=0;
     e.gazeFrames=0;
     e.gazeState="idle";
@@ -930,9 +987,10 @@ function updateDoppelganger(){
   if(e.gazeFrames>=e.gazeWinThreshold){
     desire=0; // mirror beat you to the gaze — instant loss
   }
-  // Contact drain (touching enemy hurts).
-  if(distEP<0.8){
-    desire-=0.8;
+  // Soft contact drain — touching the mirror is uncomfortable but not a forced loss.
+  // 0.2/frame at 60fps = 12/sec, so 100 desire lasts ~8s of continuous contact.
+  if(distEP<0.6){
+    desire-=0.2;
     if(desire<0)desire=0;
   }
 }
@@ -941,6 +999,22 @@ function updateDoppelganger(){
 function updateHUD(){
   var db=document.getElementById("desireBar");
   if(db)db.style.width=desire+"%";
+  var hm=document.getElementById("hudMsg");
+  if(hm && room && room.enemy){
+    var thresh=room.enemy.gazeWinThreshold||90;
+    if(isGazing && player.gazeFrames>0){
+      hm.textContent="GAZE  "+player.gazeFrames+" / "+thresh;
+      hm.style.color="#b8442a";
+    }else if(isGazing){
+      hm.textContent="GAZE (searching)";
+      hm.style.color="#888";
+    }else{
+      hm.textContent="HOLD SPACE TO GAZE";
+      hm.style.color="#666";
+    }
+  }else if(hm){
+    hm.textContent="";
+  }
 }
 
 // ─── GAME LOOP ───
