@@ -56,6 +56,16 @@ canvas {
   border-color: rgba(184, 68, 42, 1);
   transform: translateX(-50%) scale(0.95);
 }
+#gazeVignette {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 40px;
+  pointer-events: none; z-index: 8; opacity: 0;
+  background: radial-gradient(ellipse at center,
+    transparent 35%,
+    rgba(184, 68, 42, 0.08) 70%,
+    rgba(184, 68, 42, 0.32) 100%);
+  transition: opacity 0.18s ease-out;
+}
+#gazeVignette.active { opacity: 1; }
 </style>
 </head>
 <body>
@@ -64,13 +74,14 @@ canvas {
 <div id="touchLeft" class="touch-zone"></div>
 <div id="touchRight" class="touch-zone"></div>
 <div id="joystickBase"><div id="joystickKnob"></div></div>
+<div id="gazeVignette"></div>
 <div id="gazeButton">GAZE</div>
 <div id="deathOverlay"></div>
 <div id="titleScreen">
   <h1>THE GAZE</h1>
   <p class="subtitle">"What sees you, sees itself seeing."</p>
   <p class="tap">Tap to enter</p>
-  <p class="version">v0.6.1 — Doppelganger duel: hold SPACE to gaze</p>
+  <p class="version">v0.6.2 — Doppelganger duel: aim, hold SPACE, dissolve</p>
 </div>
 <div id="hud">
   <span style="color:#b8442a">DESIRE</span>
@@ -81,8 +92,10 @@ canvas {
 
 <script>
 // ═══════════════════════════════════════════════════════════
-//  THE GAZE v0.6.1 — Doppelganger duel (Phase 1 of two-rule redesign)
-//  Hold SPACE (desktop) or the GAZE button (mobile) to engage.
+//  THE GAZE v0.6.2 — Doppelganger duel (Phase 1 of two-rule redesign)
+//  Hold SPACE (desktop) or the GAZE button (mobile) to engage. Reticle
+//  shows state: gray=idle, yellow=enemy in sights, red=duel in progress
+//  with progress ring filling clockwise.
 // ═══════════════════════════════════════════════════════════
 
 // On-page error surface — so "black screen" failures show what threw,
@@ -587,12 +600,18 @@ function playFootstep() { if(audioReady && window._footSynth) window._footSynth.
 var keys = {}, mouseTurn = 0;
 var isGazing = false;
 var gazeBtnEl = null;
+var gazeVignetteEl = null;
 function setGazing(v){
   isGazing = v;
   if(!gazeBtnEl)gazeBtnEl=document.getElementById("gazeButton");
+  if(!gazeVignetteEl)gazeVignetteEl=document.getElementById("gazeVignette");
   if(gazeBtnEl){
     if(v)gazeBtnEl.classList.add("active");
     else gazeBtnEl.classList.remove("active");
+  }
+  if(gazeVignetteEl){
+    if(v)gazeVignetteEl.classList.add("active");
+    else gazeVignetteEl.classList.remove("active");
   }
 }
 document.addEventListener("keydown", function(e) {
@@ -819,6 +838,60 @@ function renderSprites(){
     ctx.globalAlpha=1;
   }
 }
+
+// ─── RETICLE ───
+// State-coloured crosshair + progress ring during gaze duel.
+function drawReticle(){
+  if(gameState!=="playing")return;
+  var cx=W/2, cy=H/2;
+  var state="idle"; // idle | aiming | gazing
+  var progress=0;
+  if(room&&room.enemy&&!room.enemy.dissolving){
+    var sp=room.enemy;
+    var dxE=sp.x-player.x, dyE=sp.y-player.y;
+    var distEP=Math.hypot(dxE,dyE);
+    var angToE=Math.atan2(dyE,dxE);
+    var pDiff=angToE-player.angle;
+    while(pDiff>Math.PI)pDiff-=2*Math.PI;
+    while(pDiff<-Math.PI)pDiff+=2*Math.PI;
+    var playerSeesEnemy=Math.abs(pDiff)<PLAYER_FOV/2;
+    var losClear=playerSeesEnemy&&isLOSClear(player.x,player.y,sp.x,sp.y);
+    if(playerSeesEnemy&&losClear&&distEP<10){
+      state=isGazing?"gazing":"aiming";
+      progress=player.gazeFrames/(sp.gazeWinThreshold||180);
+    }
+  }
+  var color=state==="gazing"?"#b8442a":state==="aiming"?"#c9a472":"#5a5550";
+  ctx.save();
+  ctx.strokeStyle=color;
+  ctx.lineWidth=1.5;
+  // Cross with center gap.
+  var s=7;
+  ctx.beginPath();
+  ctx.moveTo(cx-s,cy); ctx.lineTo(cx-2,cy);
+  ctx.moveTo(cx+2,cy); ctx.lineTo(cx+s,cy);
+  ctx.moveTo(cx,cy-s); ctx.lineTo(cx,cy-2);
+  ctx.moveTo(cx,cy+2); ctx.lineTo(cx,cy+s);
+  ctx.stroke();
+  // Progress ring fills clockwise from 12 o'clock during the duel.
+  if(state==="gazing"&&progress>0){
+    ctx.strokeStyle="#b8442a";
+    ctx.lineWidth=2;
+    ctx.beginPath();
+    ctx.arc(cx,cy,15,-Math.PI/2,-Math.PI/2+Math.min(progress,1)*2*Math.PI);
+    ctx.stroke();
+  }
+  // Faint backing ring when aiming (telegraphs that the ring will fill).
+  if(state==="aiming"){
+    ctx.strokeStyle="rgba(201,164,114,0.25)";
+    ctx.lineWidth=1;
+    ctx.beginPath();
+    ctx.arc(cx,cy,15,0,Math.PI*2);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
 // ─── MOVEMENT ───
 function updateMovement(){
   player.angle+=mouseTurn+touchLookX;
@@ -881,8 +954,8 @@ function generateDoppelgangerRoom(difficulty, rng){
     map[py][px]=1;
     map[py][size-1-px]=1;
   }
-  var lag=12-Math.floor(difficulty*4);          // 12 → 8 frames
-  var winThresh=90+Math.floor(difficulty*30);   // 90 → 120 frames
+  var lag=18-Math.floor(difficulty*6);          // ~300ms head start at easy → 200ms at hard
+  var winThresh=180+Math.floor(difficulty*60);  // 3s easy → 4s hard (matches brainstorm pacing)
 
   // Player on left, enemy mirrored on right. Player spawns facing SOUTH (perpendicular
   // to the enemy axis) so they have to turn ~90° to engage — no auto-win.
@@ -1027,6 +1100,7 @@ function gameLoop(time){
     if(moving){footstepTimer++;if(footstepTimer>15){playFootstep();footstepTimer=0;}}
     render();
     renderSprites();
+    drawReticle();
     if(desire<=0){gameState="dead";showDeathScreen();}
     else if(room.complete){gameState="won";showWinScreen();}
   }
