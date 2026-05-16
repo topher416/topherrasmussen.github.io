@@ -459,9 +459,9 @@
     ],
     "links": [
       {
-        "url": "https://saltlakeactingcompany.com",
-        "type": "company",
-        "source": "SLAC"
+        "url": "https://www.theutahreview.com/?s=salt+lake+acting+company",
+        "type": "search_results",
+        "source": "The Utah Review"
       },
       {
         "url": "https://www.theutahreview.com/?s=elephant+piggie+salt+lake+acting",
@@ -553,9 +553,9 @@
         "source": "The Utah Review"
       },
       {
-        "url": "https://saltlakeactingcompany.com",
-        "type": "company",
-        "source": "SLAC"
+        "url": "https://www.theutahreview.com/?s=salt+lake+acting+company",
+        "type": "search_results",
+        "source": "The Utah Review"
       }
     ]
   },
@@ -601,9 +601,9 @@
     ],
     "links": [
       {
-        "url": "https://www.evacarlstonacademy.com",
+        "url": "https://www.facebook.com/EvaCarlstonAcademy/",
         "type": "company",
-        "source": "Eva Carlston Academy"
+        "source": "FB"
       }
     ]
   },
@@ -746,9 +746,9 @@
         "source": "Front Row Reviewers"
       },
       {
-        "url": "https://thestingandhoney.org",
-        "type": "company",
-        "source": "Sting & Honey"
+        "url": "https://utahtheatrebloggers.com/?s=sting+honey",
+        "type": "search_results",
+        "source": "UTBA"
       }
     ]
   },
@@ -1036,9 +1036,9 @@
     ],
     "links": [
       {
-        "url": "https://www.larktheater.org",
-        "type": "company",
-        "source": "The Lark"
+        "url": "https://www.theutahreview.com/?s=harbur+gate+lark",
+        "type": "search_results",
+        "source": "The Utah Review"
       }
     ]
   },
@@ -1188,12 +1188,7 @@
     ],
     "links": [
       {
-        "url": "https://www.kcactf.org",
-        "type": "company",
-        "source": "KCACTF Region 8"
-      },
-      {
-        "url": "https://utahtheatrebloggers.com/?s=irene+ryan+KCACTF",
+        "url": "https://utahtheatrebloggers.com/?s=irene+ryan+2015",
         "type": "search_results",
         "source": "UTBA"
       }
@@ -1248,9 +1243,9 @@
         "source": "UTBA"
       },
       {
-        "url": "https://thestingandhoney.org",
-        "type": "company",
-        "source": "Sting & Honey"
+        "url": "https://utahtheatrebloggers.com/?s=sting+honey",
+        "type": "search_results",
+        "source": "UTBA"
       }
     ]
   },
@@ -1370,12 +1365,7 @@
     ],
     "links": [
       {
-        "url": "https://www.kcactf.org",
-        "type": "company",
-        "source": "KCACTF Region 8"
-      },
-      {
-        "url": "https://utahtheatrebloggers.com/?s=irene+ryan+UVU",
+        "url": "https://utahtheatrebloggers.com/?s=irene+ryan+2014",
         "type": "search_results",
         "source": "UTBA"
       }
@@ -1751,11 +1741,6 @@
         "url": "https://utahtheatrebloggers.com/?s=sting+honey",
         "type": "search_results",
         "source": "UTBA"
-      },
-      {
-        "url": "https://thestingandhoney.org",
-        "type": "company",
-        "source": "Sting & Honey"
       }
     ]
   },
