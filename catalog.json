@@ -439,8 +439,8 @@
     "links": [
       {
         "url": "https://www.theutahreview.com/two-worthy-utah-premieres-salt-lake-acting-companys-egress-pygmalion-theatre-companys-bella-bella/",
-        "type": "review",
-        "source": "The Utah Review"
+        "source": "The Utah Review",
+        "type": "review"
       }
     ]
   },
@@ -457,18 +457,7 @@
       "directing",
       "salt-lake-acting-company"
     ],
-    "links": [
-      {
-        "url": "https://www.theutahreview.com/?s=salt+lake+acting+company",
-        "type": "search_results",
-        "source": "The Utah Review"
-      },
-      {
-        "url": "https://www.theutahreview.com/?s=elephant+piggie+salt+lake+acting",
-        "type": "search_results",
-        "source": "The Utah Review"
-      }
-    ]
+    "links": []
   },
   {
     "id": "slac-happy-marriage",
@@ -483,13 +472,7 @@
       "acting",
       "salt-lake-acting-company"
     ],
-    "links": [
-      {
-        "url": "https://www.theutahreview.com/?s=transcend+happy+marriage+salt+lake+acting",
-        "type": "search_results",
-        "source": "The Utah Review"
-      }
-    ]
+    "links": []
   },
   {
     "id": "slac-costco",
@@ -504,13 +487,7 @@
       "directing",
       "salt-lake-acting-company"
     ],
-    "links": [
-      {
-        "url": "https://www.theutahreview.com/?s=costco+salt+lake+acting",
-        "type": "search_results",
-        "source": "The Utah Review"
-      }
-    ]
+    "links": []
   },
   {
     "id": "slac-latter-days",
@@ -527,9 +504,9 @@
     ],
     "links": [
       {
-        "url": "https://www.theutahreview.com/?s=latter+days+salt+lake+acting",
-        "type": "search_results",
-        "source": "The Utah Review"
+        "url": "https://utahtheatrebloggers.com/31896/these-latter-er-latter-days-at-salt-lake-acting-company",
+        "source": "UTBA",
+        "type": "review"
       }
     ]
   },
@@ -548,14 +525,19 @@
     ],
     "links": [
       {
-        "url": "https://www.theutahreview.com/?s=saturday+voyeur",
-        "type": "search_results",
-        "source": "The Utah Review"
+        "url": "https://utahtheatrebloggers.com/29916/vote-for-saturdays-voyeur-2019",
+        "source": "UTBA",
+        "type": "review"
       },
       {
-        "url": "https://www.theutahreview.com/?s=salt+lake+acting+company",
-        "type": "search_results",
-        "source": "The Utah Review"
+        "url": "https://utahtheatrebloggers.com/27257/choose-saturdays-voyeur-2018-for-some-catharsis",
+        "source": "UTBA",
+        "type": "review"
+      },
+      {
+        "url": "https://utahtheatrebloggers.com/24619/experience-the-balm-of-gilead-of-slacs-saturdays-voyeur",
+        "source": "UTBA",
+        "type": "review"
       }
     ]
   },
@@ -573,18 +555,7 @@
       "plan-b-theatre",
       "reading"
     ],
-    "links": [
-      {
-        "url": "https://www.theutahreview.com/tag/borderlands/",
-        "type": "tag_archive",
-        "source": "The Utah Review"
-      },
-      {
-        "url": "https://planbtheatre.org",
-        "type": "company",
-        "source": "Plan-B Theatre"
-      }
-    ]
+    "links": []
   },
   {
     "id": "eva-carlston-teaching",
@@ -599,13 +570,7 @@
       "teaching",
       "eva-carlston-academy"
     ],
-    "links": [
-      {
-        "url": "https://www.facebook.com/EvaCarlstonAcademy/",
-        "type": "company",
-        "source": "FB"
-      }
-    ]
+    "links": []
   },
   {
     "id": "slac-fun-home",
@@ -623,14 +588,9 @@
     ],
     "links": [
       {
-        "url": "https://frontrowreviewers.com/?s=fun+home+salt+lake+acting",
-        "type": "search_results",
-        "source": "Front Row Reviewers"
-      },
-      {
-        "url": "https://www.theutahreview.com/?s=fun+home+salt+lake+acting",
-        "type": "search_results",
-        "source": "The Utah Review"
+        "url": "https://utahtheatrebloggers.com/26835/come-to-the-fun-home-at-slac",
+        "source": "UTBA",
+        "type": "review"
       }
     ]
   },
@@ -648,13 +608,7 @@
       "salt-lake-acting-company",
       "new-play-development"
     ],
-    "links": [
-      {
-        "url": "https://www.theutahreview.com/?s=sparks+fly+upward+salt+lake+acting",
-        "type": "search_results",
-        "source": "The Utah Review"
-      }
-    ]
+    "links": []
   },
   {
     "id": "slac-sounding-grab-them",
@@ -671,13 +625,7 @@
       "new-play-development",
       "international"
     ],
-    "links": [
-      {
-        "url": "https://www.theutahreview.com/?s=grab+them+salt+lake+acting",
-        "type": "search_results",
-        "source": "The Utah Review"
-      }
-    ]
+    "links": []
   },
   {
     "id": "slac-harbur-gate",
@@ -692,13 +640,7 @@
       "acting",
       "salt-lake-acting-company"
     ],
-    "links": [
-      {
-        "url": "https://www.theutahreview.com/?s=harbur+gate+salt+lake+acting",
-        "type": "search_results",
-        "source": "The Utah Review"
-      }
-    ]
+    "links": []
   },
   {
     "id": "planb-ice-front",
@@ -716,13 +658,13 @@
     "links": [
       {
         "url": "https://www.theutahreview.com/magnificent-ensemble-acting-cements-plan-b-theatres-ice-front-standout-production/",
-        "type": "review",
-        "source": "The Utah Review"
+        "source": "The Utah Review",
+        "type": "review"
       },
       {
         "url": "https://www.theutahreview.com/moral-dilemma-collaboration-accommodation-ignites-upcoming-plan-b-theatres-premiere-eric-samuelsens-ice-front/",
-        "type": "preview",
-        "source": "The Utah Review"
+        "source": "The Utah Review",
+        "type": "preview"
       }
     ]
   },
@@ -739,18 +681,7 @@
       "acting",
       "sting-and-honey"
     ],
-    "links": [
-      {
-        "url": "https://frontrowreviewers.com/?s=desire+under+the+elms+sting+honey",
-        "type": "search_results",
-        "source": "Front Row Reviewers"
-      },
-      {
-        "url": "https://utahtheatrebloggers.com/?s=sting+honey",
-        "type": "search_results",
-        "source": "UTBA"
-      }
-    ]
+    "links": []
   },
   {
     "id": "planb-lab-awful-men",
@@ -766,13 +697,7 @@
       "plan-b-theatre",
       "new-play-development"
     ],
-    "links": [
-      {
-        "url": "https://www.theutahreview.com/?s=two+awful+men+plan-b",
-        "type": "search_results",
-        "source": "The Utah Review"
-      }
-    ]
+    "links": []
   },
   {
     "id": "planb-lab-art-class",
@@ -790,9 +715,9 @@
     ],
     "links": [
       {
-        "url": "https://www.theutahreview.com/?s=art+class+plan-b",
-        "type": "search_results",
-        "source": "The Utah Review"
+        "url": "https://utahtheatrebloggers.com/514361/art-class-revisits-a-utah-conflict-with-strong-performances",
+        "source": "UTBA",
+        "type": "review"
       }
     ]
   },
@@ -812,8 +737,8 @@
     "links": [
       {
         "url": "https://utahtheatrebloggers.com/24558/unmet-potential-in-riot-acts-poor-bastard",
-        "type": "review",
-        "source": "UTBA"
+        "source": "UTBA",
+        "type": "review"
       }
     ]
   },
@@ -830,13 +755,7 @@
       "directing",
       "avrec-art-house"
     ],
-    "links": [
-      {
-        "url": "https://utahtheatrebloggers.com/?s=melancholy+play",
-        "type": "search_results",
-        "source": "UTBA"
-      }
-    ]
+    "links": []
   },
   {
     "id": "grassroots-revengers-tragedy",
@@ -854,8 +773,8 @@
     "links": [
       {
         "url": "https://utahtheatrebloggers.com/24356/blood-bellicosity-bile-and-bawd-become-the-revengers-tragedy",
-        "type": "review",
-        "source": "UTBA"
+        "source": "UTBA",
+        "type": "review"
       }
     ]
   },
@@ -875,13 +794,8 @@
     "links": [
       {
         "url": "https://utahtheatrebloggers.com/23419/strong-cast-buoys-grassrootss-antony-cleopatra",
-        "type": "review",
-        "source": "UTBA"
-      },
-      {
-        "url": "https://grassroots-shakespeare.com",
-        "type": "company",
-        "source": "Grassroots Shakespeare"
+        "source": "UTBA",
+        "type": "review"
       }
     ]
   },
@@ -901,8 +815,8 @@
     "links": [
       {
         "url": "https://utahtheatrebloggers.com/23519/accessible-shakespeare-in-the-grassroots-twelfth-night",
-        "type": "review",
-        "source": "UTBA"
+        "source": "UTBA",
+        "type": "review"
       }
     ]
   },
@@ -921,9 +835,9 @@
     ],
     "links": [
       {
-        "url": "https://utahtheatrebloggers.com/?s=romeo+juliet+grassroots",
-        "type": "search_results",
-        "source": "UTBA"
+        "url": "https://utahtheatrebloggers.com/20580/grassroots-shakespeare-freshen-up-romeo-and-juliet",
+        "source": "UTBA",
+        "type": "review"
       }
     ]
   },
@@ -943,8 +857,8 @@
     "links": [
       {
         "url": "https://utahtheatrebloggers.com/23848/seeing-the-worst-thing-ive-ever-done-was-one-of-the-best-things-ive-ever-done",
-        "type": "review",
-        "source": "UTBA"
+        "source": "UTBA",
+        "type": "review"
       }
     ]
   },
@@ -965,13 +879,8 @@
     "links": [
       {
         "url": "https://utahtheatrebloggers.com/23850/hamlet-and-ophelia-go-swimming-treads-water",
-        "type": "review",
-        "source": "UTBA"
-      },
-      {
-        "url": "https://www.greatsaltlakefringe.org",
-        "type": "company",
-        "source": "Great Salt Lake Fringe"
+        "source": "UTBA",
+        "type": "review"
       }
     ]
   },
@@ -989,13 +898,7 @@
       "salt-lake-acting-company",
       "new-play-development"
     ],
-    "links": [
-      {
-        "url": "https://www.theutahreview.com/?s=laura+and+the+sea+salt+lake+acting",
-        "type": "search_results",
-        "source": "The Utah Review"
-      }
-    ]
+    "links": []
   },
   {
     "id": "slac-sounding-laura-sea",
@@ -1011,13 +914,7 @@
       "salt-lake-acting-company",
       "new-play-development"
     ],
-    "links": [
-      {
-        "url": "https://www.theutahreview.com/?s=laura+and+the+sea+salt+lake+acting",
-        "type": "search_results",
-        "source": "The Utah Review"
-      }
-    ]
+    "links": []
   },
   {
     "id": "lark-harbur-gate",
@@ -1034,13 +931,7 @@
       "new-play-development",
       "new-york"
     ],
-    "links": [
-      {
-        "url": "https://www.theutahreview.com/?s=harbur+gate+lark",
-        "type": "search_results",
-        "source": "The Utah Review"
-      }
-    ]
+    "links": []
   },
   {
     "id": "slac-rj-deathmatch",
@@ -1055,13 +946,7 @@
       "acting",
       "salt-lake-acting-company"
     ],
-    "links": [
-      {
-        "url": "https://www.theutahreview.com/?s=deathmatch+salt+lake+acting",
-        "type": "search_results",
-        "source": "The Utah Review"
-      }
-    ]
+    "links": []
   },
   {
     "id": "slac-lab-harbur-gate",
@@ -1077,13 +962,7 @@
       "salt-lake-acting-company",
       "new-play-development"
     ],
-    "links": [
-      {
-        "url": "https://www.theutahreview.com/?s=harbur+gate+salt+lake+acting",
-        "type": "search_results",
-        "source": "The Utah Review"
-      }
-    ]
+    "links": []
   },
   {
     "id": "slac-sounding-harbur-gate",
@@ -1099,13 +978,7 @@
       "salt-lake-acting-company",
       "new-play-development"
     ],
-    "links": [
-      {
-        "url": "https://www.theutahreview.com/?s=harbur+gate+salt+lake+acting",
-        "type": "search_results",
-        "source": "The Utah Review"
-      }
-    ]
+    "links": []
   },
   {
     "id": "slac-sounding-fermi-paradox",
@@ -1121,13 +994,7 @@
       "salt-lake-acting-company",
       "new-play-development"
     ],
-    "links": [
-      {
-        "url": "https://www.theutahreview.com/?s=fermi+paradox+salt+lake+acting",
-        "type": "search_results",
-        "source": "The Utah Review"
-      }
-    ]
+    "links": []
   },
   {
     "id": "planb-lab-floating",
@@ -1143,13 +1010,7 @@
       "plan-b-theatre",
       "new-play-development"
     ],
-    "links": [
-      {
-        "url": "https://www.theutahreview.com/?s=art+of+floating+plan-b",
-        "type": "search_results",
-        "source": "The Utah Review"
-      }
-    ]
+    "links": []
   },
   {
     "id": "planb-lab-quarter-horse",
@@ -1165,13 +1026,7 @@
       "plan-b-theatre",
       "new-play-development"
     ],
-    "links": [
-      {
-        "url": "https://www.theutahreview.com/?s=quarter+horse+plan-b",
-        "type": "search_results",
-        "source": "The Utah Review"
-      }
-    ]
+    "links": []
   },
   {
     "id": "irene-ryan-2015",
@@ -1186,13 +1041,7 @@
       "award",
       "kcactf"
     ],
-    "links": [
-      {
-        "url": "https://utahtheatrebloggers.com/?s=irene+ryan+2015",
-        "type": "search_results",
-        "source": "UTBA"
-      }
-    ]
+    "links": []
   },
   {
     "id": "uvu-next-to-normal",
@@ -1212,14 +1061,9 @@
     ],
     "links": [
       {
-        "url": "https://utahtheatrebloggers.com/?s=next+to+normal+UVU",
-        "type": "search_results",
-        "source": "UTBA"
-      },
-      {
-        "url": "https://www.uvu.edu/theatre/",
-        "type": "company",
-        "source": "UVU Theatre"
+        "url": "https://utahtheatrebloggers.com/17251/a-sincere-next-to-normal-from-uvu",
+        "source": "UTBA",
+        "type": "review"
       }
     ]
   },
@@ -1239,13 +1083,8 @@
     "links": [
       {
         "url": "https://utahtheatrebloggers.com/19499/give-an-eye-to-sting-honeys-the-private-ear",
-        "type": "review",
-        "source": "UTBA"
-      },
-      {
-        "url": "https://utahtheatrebloggers.com/?s=sting+honey",
-        "type": "search_results",
-        "source": "UTBA"
+        "source": "UTBA",
+        "type": "review"
       }
     ]
   },
@@ -1262,18 +1101,7 @@
       "acting",
       "uvu"
     ],
-    "links": [
-      {
-        "url": "https://frontrowreviewers.com/?s=Romeo+Juliet+UVU",
-        "type": "search_results",
-        "source": "Front Row Reviewers"
-      },
-      {
-        "url": "https://www.uvu.edu/theatre/",
-        "type": "company",
-        "source": "UVU Theatre"
-      }
-    ]
+    "links": []
   },
   {
     "id": "uvu-taming-shrew",
@@ -1290,14 +1118,9 @@
     ],
     "links": [
       {
-        "url": "https://utahtheatrebloggers.com/?s=taming+shrew+UVU",
-        "type": "search_results",
-        "source": "UTBA"
-      },
-      {
-        "url": "https://www.uvu.edu/theatre/",
-        "type": "company",
-        "source": "UVU Theatre"
+        "url": "https://utahtheatrebloggers.com/18409/the-taming-of-the-shrew-is-totally-rad",
+        "source": "UTBA",
+        "type": "review"
       }
     ]
   },
@@ -1315,13 +1138,7 @@
       "edinburgh-fringe",
       "international"
     ],
-    "links": [
-      {
-        "url": "https://www.edfringe.com",
-        "type": "company",
-        "source": "Edinburgh Festival Fringe"
-      }
-    ]
+    "links": []
   },
   {
     "id": "planb-lab-booksmart",
@@ -1340,13 +1157,13 @@
     "links": [
       {
         "url": "https://www.theutahreview.com/plan-b-theatres-booksmart-offers-generous-holiday-gift-socially-conscious-comedy/",
-        "type": "review",
-        "source": "The Utah Review"
+        "source": "The Utah Review",
+        "type": "review"
       },
       {
         "url": "https://www.theutahreview.com/plan-bs-25th-season-gutsy-experimental-artistically-satisfying-audiences/",
-        "type": "preview",
-        "source": "The Utah Review"
+        "source": "The Utah Review",
+        "type": "preview"
       }
     ]
   },
@@ -1363,13 +1180,7 @@
       "award",
       "kcactf"
     ],
-    "links": [
-      {
-        "url": "https://utahtheatrebloggers.com/?s=irene+ryan+2014",
-        "type": "search_results",
-        "source": "UTBA"
-      }
-    ]
+    "links": []
   },
   {
     "id": "planb-adam-steve-sea",
@@ -1384,18 +1195,7 @@
       "acting",
       "plan-b-theatre"
     ],
-    "links": [
-      {
-        "url": "https://www.theutahreview.com/tag/adam-steve-and-the-empty-sea/",
-        "type": "tag_archive",
-        "source": "The Utah Review"
-      },
-      {
-        "url": "https://planbtheatre.org",
-        "type": "company",
-        "source": "Plan-B Theatre"
-      }
-    ]
+    "links": []
   },
   {
     "id": "planb-adam-steve-fringe",
@@ -1411,13 +1211,7 @@
       "plan-b-theatre",
       "new-york"
     ],
-    "links": [
-      {
-        "url": "https://www.theutahreview.com/tag/adam-steve-and-the-empty-sea/",
-        "type": "tag_archive",
-        "source": "The Utah Review"
-      }
-    ]
+    "links": []
   },
   {
     "id": "grassroots-taming-shrew",
@@ -1434,14 +1228,9 @@
     ],
     "links": [
       {
-        "url": "https://utahtheatrebloggers.com/17432/all-male-the-taming-of-the-shrew-is-a-delight",
-        "type": "review",
-        "source": "UTBA"
-      },
-      {
-        "url": "https://grassroots-shakespeare.com",
-        "type": "company",
-        "source": "Grassroots Shakespeare"
+        "url": "https://utahtheatrebloggers.com/15483/all-male-the-taming-of-the-shrew-is-a-delight",
+        "source": "UTBA",
+        "type": "review"
       }
     ]
   },
@@ -1461,8 +1250,8 @@
     "links": [
       {
         "url": "https://utahtheatrebloggers.com/17676/grassroots-shakespeares-much-ado-is-really-something",
-        "type": "review",
-        "source": "UTBA"
+        "source": "UTBA",
+        "type": "review"
       }
     ]
   },
@@ -1480,13 +1269,7 @@
       "plan-b-theatre",
       "reading"
     ],
-    "links": [
-      {
-        "url": "https://www.theutahreview.com/?s=ghosts+plan-b",
-        "type": "search_results",
-        "source": "The Utah Review"
-      }
-    ]
+    "links": []
   },
   {
     "id": "uvu-letters-myself",
@@ -1501,13 +1284,7 @@
       "acting",
       "uvu"
     ],
-    "links": [
-      {
-        "url": "https://utahtheatrebloggers.com/?s=letters+myself+UVU",
-        "type": "search_results",
-        "source": "UTBA"
-      }
-    ]
+    "links": []
   },
   {
     "id": "slac-course-86b",
@@ -1525,9 +1302,9 @@
     ],
     "links": [
       {
-        "url": "https://www.theutahreview.com/?s=course+86b+salt+lake+acting",
-        "type": "search_results",
-        "source": "The Utah Review"
+        "url": "https://utahtheatrebloggers.com/10816/course-86b-in-the-catalog-is-more-than-just-history",
+        "source": "UTBA",
+        "type": "review"
       }
     ]
   },
@@ -1545,13 +1322,7 @@
       "plan-b-theatre",
       "reading"
     ],
-    "links": [
-      {
-        "url": "https://www.theutahreview.com/?s=mormoninchief+plan-b",
-        "type": "search_results",
-        "source": "The Utah Review"
-      }
-    ]
+    "links": []
   },
   {
     "id": "planb-sih-8",
@@ -1567,13 +1338,7 @@
       "plan-b-theatre",
       "reading"
     ],
-    "links": [
-      {
-        "url": "https://www.theutahreview.com/?s=dustin+lance+black+8+plan-b",
-        "type": "search_results",
-        "source": "The Utah Review"
-      }
-    ]
+    "links": []
   },
   {
     "id": "planb-sih-adam-steve",
@@ -1589,13 +1354,7 @@
       "plan-b-theatre",
       "reading"
     ],
-    "links": [
-      {
-        "url": "https://www.theutahreview.com/tag/adam-steve-and-the-empty-sea/",
-        "type": "tag_archive",
-        "source": "The Utah Review"
-      }
-    ]
+    "links": []
   },
   {
     "id": "uvu-waiting",
@@ -1610,18 +1369,7 @@
       "acting",
       "uvu"
     ],
-    "links": [
-      {
-        "url": "https://frontrowreviewers.com/?s=waiting+UVU",
-        "type": "search_results",
-        "source": "Front Row Reviewers"
-      },
-      {
-        "url": "https://www.uvu.edu/theatre/",
-        "type": "company",
-        "source": "UVU Theatre"
-      }
-    ]
+    "links": []
   },
   {
     "id": "planb-borderlands",
@@ -1636,18 +1384,7 @@
       "acting",
       "plan-b-theatre"
     ],
-    "links": [
-      {
-        "url": "https://www.theutahreview.com/tag/borderlands/",
-        "type": "tag_archive",
-        "source": "The Utah Review"
-      },
-      {
-        "url": "https://planbtheatre.org",
-        "type": "company",
-        "source": "Plan-B Theatre"
-      }
-    ]
+    "links": []
   },
   {
     "id": "grassroots-macbeth",
@@ -1664,14 +1401,14 @@
     ],
     "links": [
       {
-        "url": "https://utahtheatrebloggers.com/?s=macbeth+grassroots",
-        "type": "search_results",
-        "source": "UTBA"
+        "url": "https://utahtheatrebloggers.com/22202/so-fair-and-foul-a-day-at-grassrootss-macbeth",
+        "source": "UTBA",
+        "type": "review"
       },
       {
-        "url": "https://grassroots-shakespeare.com",
-        "type": "company",
-        "source": "Grassroots Shakespeare"
+        "url": "https://utahtheatrebloggers.com/7363/a-thrilling-and-hilarious-macbeth",
+        "source": "UTBA",
+        "type": "review"
       }
     ]
   },
@@ -1689,13 +1426,7 @@
       "plan-b-theatre",
       "reading"
     ],
-    "links": [
-      {
-        "url": "https://www.theutahreview.com/tag/borderlands/",
-        "type": "tag_archive",
-        "source": "The Utah Review"
-      }
-    ]
+    "links": []
   },
   {
     "id": "uvu-something-wicked",
@@ -1710,18 +1441,7 @@
       "acting",
       "uvu"
     ],
-    "links": [
-      {
-        "url": "https://frontrowreviewers.com/?s=something+wicked+UVU",
-        "type": "search_results",
-        "source": "Front Row Reviewers"
-      },
-      {
-        "url": "https://www.uvu.edu/theatre/",
-        "type": "company",
-        "source": "UVU Theatre"
-      }
-    ]
+    "links": []
   },
   {
     "id": "stinghoney-bird-dawning",
@@ -1738,9 +1458,14 @@
     ],
     "links": [
       {
-        "url": "https://utahtheatrebloggers.com/?s=sting+honey",
-        "type": "search_results",
-        "source": "UTBA"
+        "url": "https://utahtheatrebloggers.com/28704/a-fond-farewell-to-sting-honeys-this-bird-of-dawning",
+        "source": "UTBA",
+        "type": "review"
+      },
+      {
+        "url": "https://utahtheatrebloggers.com/7898/bird-of-dawning-sheds-new-light-on-the-nativity",
+        "source": "UTBA",
+        "type": "review"
       }
     ]
   },
