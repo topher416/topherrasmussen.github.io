@@ -973,11 +973,43 @@ img { display: block; max-width: 100%; }
     .entry__image { height: 180px; }
 }
 
-@media (prefers-reduced-motion: reduce) {
+    @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
         animation: none !important;
         transition: none !important;
     }
     .door:hover { transform: none; }
     .entry:hover { transform: none; }
+}
+
+/* Verification links under entries */
+.entry__links,
+.gallery-card__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
+}
+
+.entry__link,
+.gallery-card__link {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    color: var(--accent);
+    text-decoration: none;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 3px 10px;
+    background: var(--bg-raised);
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.entry__link:hover,
+.gallery-card__link:hover {
+    border-color: var(--accent);
+    background: var(--bg-card);
 }

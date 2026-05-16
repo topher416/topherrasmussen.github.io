@@ -364,6 +364,23 @@
                     html += '</blockquote>';
                 }
 
+                // Verification links
+                var entryLinks = entry.links || [];
+                if (entryLinks.length > 0) {
+                    html += '<div class="gallery-card__links">';
+                    for (var k = 0; k < entryLinks.length; k++) {
+                        var lk = entryLinks[k];
+                        var icon = '';
+                        if (lk.type === 'review') icon = '📝 ';
+                        else if (lk.type === 'company') icon = '🏢 ';
+                        else if (lk.type === 'tag_archive') icon = '🏷️ ';
+                        else if (lk.type === 'preview') icon = '👁️ ';
+                        else if (lk.type === 'search_results') icon = '🔍 ';
+                        html += '<a href="' + lk.url + '" target="_blank" rel="noopener" class="gallery-card__link">' + icon + lk.source + '</a>';
+                    }
+                    html += '</div>';
+                }
+
                 html += '</div>';
                 html += '</div>';
             });

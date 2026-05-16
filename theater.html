@@ -94,6 +94,23 @@
                     html += '<blockquote class="entry__quote">&ldquo;' + quote + '&rdquo;</blockquote>';
                 }
 
+                // Verification links
+                var links = entry.links || [];
+                if (links.length > 0) {
+                    html += '<div class="entry__links">';
+                    for (var k = 0; k < links.length; k++) {
+                        var lk = links[k];
+                        var icon = '';
+                        if (lk.type === 'review') icon = '📝 ';
+                        else if (lk.type === 'company') icon = '🏢 ';
+                        else if (lk.type === 'tag_archive') icon = '🏷️ ';
+                        else if (lk.type === 'preview') icon = '👁️ ';
+                        else if (lk.type === 'search_results') icon = '🔍 ';
+                        html += '<a href="' + lk.url + '" target="_blank" rel="noopener" class="entry__link">' + icon + lk.source + '</a>';
+                    }
+                    html += '</div>';
+                }
+
                 html += '</div>';
                 html += '</div>';
             });

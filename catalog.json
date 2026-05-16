@@ -7,7 +7,7 @@
       "experiments",
       "web-design"
     ],
-    "description": "A DOOM-style raycaster with Lacanian themes. Navigate a labyrinth of etched theater rooms. v0.1 — walls, movement, and collision.",
+    "description": "A DOOM-style raycaster with Lacanian themes. Navigate a labyrinth of etched theater rooms. v0.1 \u2014 walls, movement, and collision.",
     "url": "/gaze.html",
     "tags": [
       "generative",
@@ -435,6 +435,13 @@
     "tags": [
       "acting",
       "salt-lake-acting-company"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/two-worthy-utah-premieres-salt-lake-acting-companys-egress-pygmalion-theatre-companys-bella-bella/",
+        "type": "review",
+        "source": "The Utah Review"
+      }
     ]
   },
   {
@@ -449,6 +456,18 @@
     "tags": [
       "directing",
       "salt-lake-acting-company"
+    ],
+    "links": [
+      {
+        "url": "https://saltlakeactingcompany.com",
+        "type": "company",
+        "source": "SLAC"
+      },
+      {
+        "url": "https://www.theutahreview.com/?s=elephant+piggie+salt+lake+acting",
+        "type": "search_results",
+        "source": "The Utah Review"
+      }
     ]
   },
   {
@@ -463,6 +482,13 @@
     "tags": [
       "acting",
       "salt-lake-acting-company"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/?s=transcend+happy+marriage+salt+lake+acting",
+        "type": "search_results",
+        "source": "The Utah Review"
+      }
     ]
   },
   {
@@ -477,6 +503,13 @@
     "tags": [
       "directing",
       "salt-lake-acting-company"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/?s=costco+salt+lake+acting",
+        "type": "search_results",
+        "source": "The Utah Review"
+      }
     ]
   },
   {
@@ -491,6 +524,13 @@
     "tags": [
       "directing",
       "salt-lake-acting-company"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/?s=latter+days+salt+lake+acting",
+        "type": "search_results",
+        "source": "The Utah Review"
+      }
     ]
   },
   {
@@ -505,6 +545,18 @@
     "tags": [
       "dramaturgy",
       "salt-lake-acting-company"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/?s=saturday+voyeur",
+        "type": "search_results",
+        "source": "The Utah Review"
+      },
+      {
+        "url": "https://saltlakeactingcompany.com",
+        "type": "company",
+        "source": "SLAC"
+      }
     ]
   },
   {
@@ -520,6 +572,18 @@
       "acting",
       "plan-b-theatre",
       "reading"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/tag/borderlands/",
+        "type": "tag_archive",
+        "source": "The Utah Review"
+      },
+      {
+        "url": "https://planbtheatre.org",
+        "type": "company",
+        "source": "Plan-B Theatre"
+      }
     ]
   },
   {
@@ -534,6 +598,13 @@
     "tags": [
       "teaching",
       "eva-carlston-academy"
+    ],
+    "links": [
+      {
+        "url": "https://www.evacarlstonacademy.com",
+        "type": "company",
+        "source": "Eva Carlston Academy"
+      }
     ]
   },
   {
@@ -549,6 +620,18 @@
       "acting",
       "salt-lake-acting-company",
       "musical"
+    ],
+    "links": [
+      {
+        "url": "https://frontrowreviewers.com/?s=fun+home+salt+lake+acting",
+        "type": "search_results",
+        "source": "Front Row Reviewers"
+      },
+      {
+        "url": "https://www.theutahreview.com/?s=fun+home+salt+lake+acting",
+        "type": "search_results",
+        "source": "The Utah Review"
+      }
     ]
   },
   {
@@ -564,6 +647,13 @@
       "acting",
       "salt-lake-acting-company",
       "new-play-development"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/?s=sparks+fly+upward+salt+lake+acting",
+        "type": "search_results",
+        "source": "The Utah Review"
+      }
     ]
   },
   {
@@ -580,6 +670,13 @@
       "salt-lake-acting-company",
       "new-play-development",
       "international"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/?s=grab+them+salt+lake+acting",
+        "type": "search_results",
+        "source": "The Utah Review"
+      }
     ]
   },
   {
@@ -594,6 +691,13 @@
     "tags": [
       "acting",
       "salt-lake-acting-company"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/?s=harbur+gate+salt+lake+acting",
+        "type": "search_results",
+        "source": "The Utah Review"
+      }
     ]
   },
   {
@@ -608,6 +712,18 @@
     "tags": [
       "acting",
       "plan-b-theatre"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/magnificent-ensemble-acting-cements-plan-b-theatres-ice-front-standout-production/",
+        "type": "review",
+        "source": "The Utah Review"
+      },
+      {
+        "url": "https://www.theutahreview.com/moral-dilemma-collaboration-accommodation-ignites-upcoming-plan-b-theatres-premiere-eric-samuelsens-ice-front/",
+        "type": "preview",
+        "source": "The Utah Review"
+      }
     ]
   },
   {
@@ -622,6 +738,18 @@
     "tags": [
       "acting",
       "sting-and-honey"
+    ],
+    "links": [
+      {
+        "url": "https://frontrowreviewers.com/?s=desire+under+the+elms+sting+honey",
+        "type": "search_results",
+        "source": "Front Row Reviewers"
+      },
+      {
+        "url": "https://thestingandhoney.org",
+        "type": "company",
+        "source": "Sting & Honey"
+      }
     ]
   },
   {
@@ -637,6 +765,13 @@
       "acting",
       "plan-b-theatre",
       "new-play-development"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/?s=two+awful+men+plan-b",
+        "type": "search_results",
+        "source": "The Utah Review"
+      }
     ]
   },
   {
@@ -652,6 +787,13 @@
       "acting",
       "plan-b-theatre",
       "new-play-development"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/?s=art+class+plan-b",
+        "type": "search_results",
+        "source": "The Utah Review"
+      }
     ]
   },
   {
@@ -666,6 +808,13 @@
     "tags": [
       "producing",
       "riot-act"
+    ],
+    "links": [
+      {
+        "url": "https://utahtheatrebloggers.com/24558/unmet-potential-in-riot-acts-poor-bastard",
+        "type": "review",
+        "source": "UTBA"
+      }
     ]
   },
   {
@@ -680,6 +829,13 @@
     "tags": [
       "directing",
       "avrec-art-house"
+    ],
+    "links": [
+      {
+        "url": "https://utahtheatrebloggers.com/?s=melancholy+play",
+        "type": "search_results",
+        "source": "UTBA"
+      }
     ]
   },
   {
@@ -694,6 +850,13 @@
     "tags": [
       "acting",
       "grassroots-shakespeare"
+    ],
+    "links": [
+      {
+        "url": "https://utahtheatrebloggers.com/24356/blood-bellicosity-bile-and-bawd-become-the-revengers-tragedy",
+        "type": "review",
+        "source": "UTBA"
+      }
     ]
   },
   {
@@ -708,6 +871,18 @@
     "tags": [
       "acting",
       "grassroots-shakespeare"
+    ],
+    "links": [
+      {
+        "url": "https://utahtheatrebloggers.com/23419/strong-cast-buoys-grassrootss-antony-cleopatra",
+        "type": "review",
+        "source": "UTBA"
+      },
+      {
+        "url": "https://grassroots-shakespeare.com",
+        "type": "company",
+        "source": "Grassroots Shakespeare"
+      }
     ]
   },
   {
@@ -722,6 +897,13 @@
     "tags": [
       "acting",
       "grassroots-shakespeare"
+    ],
+    "links": [
+      {
+        "url": "https://utahtheatrebloggers.com/23519/accessible-shakespeare-in-the-grassroots-twelfth-night",
+        "type": "review",
+        "source": "UTBA"
+      }
     ]
   },
   {
@@ -736,6 +918,13 @@
     "tags": [
       "acting",
       "grassroots-shakespeare"
+    ],
+    "links": [
+      {
+        "url": "https://utahtheatrebloggers.com/?s=romeo+juliet+grassroots",
+        "type": "search_results",
+        "source": "UTBA"
+      }
     ]
   },
   {
@@ -750,6 +939,13 @@
     "tags": [
       "acting",
       "sackerson"
+    ],
+    "links": [
+      {
+        "url": "https://utahtheatrebloggers.com/23848/seeing-the-worst-thing-ive-ever-done-was-one-of-the-best-things-ive-ever-done",
+        "type": "review",
+        "source": "UTBA"
+      }
     ]
   },
   {
@@ -765,6 +961,18 @@
       "acting",
       "playwriting",
       "salt-lake-fringe"
+    ],
+    "links": [
+      {
+        "url": "https://utahtheatrebloggers.com/23850/hamlet-and-ophelia-go-swimming-treads-water",
+        "type": "review",
+        "source": "UTBA"
+      },
+      {
+        "url": "https://www.greatsaltlakefringe.org",
+        "type": "company",
+        "source": "Great Salt Lake Fringe"
+      }
     ]
   },
   {
@@ -780,6 +988,13 @@
       "acting",
       "salt-lake-acting-company",
       "new-play-development"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/?s=laura+and+the+sea+salt+lake+acting",
+        "type": "search_results",
+        "source": "The Utah Review"
+      }
     ]
   },
   {
@@ -795,6 +1010,13 @@
       "acting",
       "salt-lake-acting-company",
       "new-play-development"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/?s=laura+and+the+sea+salt+lake+acting",
+        "type": "search_results",
+        "source": "The Utah Review"
+      }
     ]
   },
   {
@@ -811,6 +1033,13 @@
       "the-lark",
       "new-play-development",
       "new-york"
+    ],
+    "links": [
+      {
+        "url": "https://www.larktheater.org",
+        "type": "company",
+        "source": "The Lark"
+      }
     ]
   },
   {
@@ -825,6 +1054,13 @@
     "tags": [
       "acting",
       "salt-lake-acting-company"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/?s=deathmatch+salt+lake+acting",
+        "type": "search_results",
+        "source": "The Utah Review"
+      }
     ]
   },
   {
@@ -840,6 +1076,13 @@
       "acting",
       "salt-lake-acting-company",
       "new-play-development"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/?s=harbur+gate+salt+lake+acting",
+        "type": "search_results",
+        "source": "The Utah Review"
+      }
     ]
   },
   {
@@ -855,6 +1098,13 @@
       "acting",
       "salt-lake-acting-company",
       "new-play-development"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/?s=harbur+gate+salt+lake+acting",
+        "type": "search_results",
+        "source": "The Utah Review"
+      }
     ]
   },
   {
@@ -870,6 +1120,13 @@
       "acting",
       "salt-lake-acting-company",
       "new-play-development"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/?s=fermi+paradox+salt+lake+acting",
+        "type": "search_results",
+        "source": "The Utah Review"
+      }
     ]
   },
   {
@@ -885,6 +1142,13 @@
       "acting",
       "plan-b-theatre",
       "new-play-development"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/?s=art+of+floating+plan-b",
+        "type": "search_results",
+        "source": "The Utah Review"
+      }
     ]
   },
   {
@@ -900,6 +1164,13 @@
       "acting",
       "plan-b-theatre",
       "new-play-development"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/?s=quarter+horse+plan-b",
+        "type": "search_results",
+        "source": "The Utah Review"
+      }
     ]
   },
   {
@@ -914,6 +1185,18 @@
     "tags": [
       "award",
       "kcactf"
+    ],
+    "links": [
+      {
+        "url": "https://www.kcactf.org",
+        "type": "company",
+        "source": "KCACTF Region 8"
+      },
+      {
+        "url": "https://utahtheatrebloggers.com/?s=irene+ryan+KCACTF",
+        "type": "search_results",
+        "source": "UTBA"
+      }
     ]
   },
   {
@@ -931,6 +1214,18 @@
       "musical",
       "award",
       "kcactf"
+    ],
+    "links": [
+      {
+        "url": "https://utahtheatrebloggers.com/?s=next+to+normal+UVU",
+        "type": "search_results",
+        "source": "UTBA"
+      },
+      {
+        "url": "https://www.uvu.edu/theatre/",
+        "type": "company",
+        "source": "UVU Theatre"
+      }
     ]
   },
   {
@@ -945,6 +1240,18 @@
     "tags": [
       "acting",
       "sting-and-honey"
+    ],
+    "links": [
+      {
+        "url": "https://utahtheatrebloggers.com/19499/give-an-eye-to-sting-honeys-the-private-ear",
+        "type": "review",
+        "source": "UTBA"
+      },
+      {
+        "url": "https://thestingandhoney.org",
+        "type": "company",
+        "source": "Sting & Honey"
+      }
     ]
   },
   {
@@ -959,6 +1266,18 @@
     "tags": [
       "acting",
       "uvu"
+    ],
+    "links": [
+      {
+        "url": "https://frontrowreviewers.com/?s=Romeo+Juliet+UVU",
+        "type": "search_results",
+        "source": "Front Row Reviewers"
+      },
+      {
+        "url": "https://www.uvu.edu/theatre/",
+        "type": "company",
+        "source": "UVU Theatre"
+      }
     ]
   },
   {
@@ -973,6 +1292,18 @@
     "tags": [
       "acting",
       "uvu"
+    ],
+    "links": [
+      {
+        "url": "https://utahtheatrebloggers.com/?s=taming+shrew+UVU",
+        "type": "search_results",
+        "source": "UTBA"
+      },
+      {
+        "url": "https://www.uvu.edu/theatre/",
+        "type": "company",
+        "source": "UVU Theatre"
+      }
     ]
   },
   {
@@ -988,6 +1319,13 @@
       "directing",
       "edinburgh-fringe",
       "international"
+    ],
+    "links": [
+      {
+        "url": "https://www.edfringe.com",
+        "type": "company",
+        "source": "Edinburgh Festival Fringe"
+      }
     ]
   },
   {
@@ -1003,6 +1341,18 @@
       "acting",
       "plan-b-theatre",
       "new-play-development"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/plan-b-theatres-booksmart-offers-generous-holiday-gift-socially-conscious-comedy/",
+        "type": "review",
+        "source": "The Utah Review"
+      },
+      {
+        "url": "https://www.theutahreview.com/plan-bs-25th-season-gutsy-experimental-artistically-satisfying-audiences/",
+        "type": "preview",
+        "source": "The Utah Review"
+      }
     ]
   },
   {
@@ -1017,6 +1367,18 @@
     "tags": [
       "award",
       "kcactf"
+    ],
+    "links": [
+      {
+        "url": "https://www.kcactf.org",
+        "type": "company",
+        "source": "KCACTF Region 8"
+      },
+      {
+        "url": "https://utahtheatrebloggers.com/?s=irene+ryan+UVU",
+        "type": "search_results",
+        "source": "UTBA"
+      }
     ]
   },
   {
@@ -1031,6 +1393,18 @@
     "tags": [
       "acting",
       "plan-b-theatre"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/tag/adam-steve-and-the-empty-sea/",
+        "type": "tag_archive",
+        "source": "The Utah Review"
+      },
+      {
+        "url": "https://planbtheatre.org",
+        "type": "company",
+        "source": "Plan-B Theatre"
+      }
     ]
   },
   {
@@ -1046,6 +1420,13 @@
       "acting",
       "plan-b-theatre",
       "new-york"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/tag/adam-steve-and-the-empty-sea/",
+        "type": "tag_archive",
+        "source": "The Utah Review"
+      }
     ]
   },
   {
@@ -1060,6 +1441,18 @@
     "tags": [
       "acting",
       "grassroots-shakespeare"
+    ],
+    "links": [
+      {
+        "url": "https://utahtheatrebloggers.com/17432/all-male-the-taming-of-the-shrew-is-a-delight",
+        "type": "review",
+        "source": "UTBA"
+      },
+      {
+        "url": "https://grassroots-shakespeare.com",
+        "type": "company",
+        "source": "Grassroots Shakespeare"
+      }
     ]
   },
   {
@@ -1074,6 +1467,13 @@
     "tags": [
       "acting",
       "grassroots-shakespeare"
+    ],
+    "links": [
+      {
+        "url": "https://utahtheatrebloggers.com/17676/grassroots-shakespeares-much-ado-is-really-something",
+        "type": "review",
+        "source": "UTBA"
+      }
     ]
   },
   {
@@ -1089,6 +1489,13 @@
       "acting",
       "plan-b-theatre",
       "reading"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/?s=ghosts+plan-b",
+        "type": "search_results",
+        "source": "The Utah Review"
+      }
     ]
   },
   {
@@ -1103,6 +1510,13 @@
     "tags": [
       "acting",
       "uvu"
+    ],
+    "links": [
+      {
+        "url": "https://utahtheatrebloggers.com/?s=letters+myself+UVU",
+        "type": "search_results",
+        "source": "UTBA"
+      }
     ]
   },
   {
@@ -1118,6 +1532,13 @@
       "acting",
       "salt-lake-acting-company",
       "award"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/?s=course+86b+salt+lake+acting",
+        "type": "search_results",
+        "source": "The Utah Review"
+      }
     ]
   },
   {
@@ -1133,6 +1554,13 @@
       "acting",
       "plan-b-theatre",
       "reading"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/?s=mormoninchief+plan-b",
+        "type": "search_results",
+        "source": "The Utah Review"
+      }
     ]
   },
   {
@@ -1148,6 +1576,13 @@
       "acting",
       "plan-b-theatre",
       "reading"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/?s=dustin+lance+black+8+plan-b",
+        "type": "search_results",
+        "source": "The Utah Review"
+      }
     ]
   },
   {
@@ -1163,6 +1598,13 @@
       "acting",
       "plan-b-theatre",
       "reading"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/tag/adam-steve-and-the-empty-sea/",
+        "type": "tag_archive",
+        "source": "The Utah Review"
+      }
     ]
   },
   {
@@ -1177,6 +1619,18 @@
     "tags": [
       "acting",
       "uvu"
+    ],
+    "links": [
+      {
+        "url": "https://frontrowreviewers.com/?s=waiting+UVU",
+        "type": "search_results",
+        "source": "Front Row Reviewers"
+      },
+      {
+        "url": "https://www.uvu.edu/theatre/",
+        "type": "company",
+        "source": "UVU Theatre"
+      }
     ]
   },
   {
@@ -1191,6 +1645,18 @@
     "tags": [
       "acting",
       "plan-b-theatre"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/tag/borderlands/",
+        "type": "tag_archive",
+        "source": "The Utah Review"
+      },
+      {
+        "url": "https://planbtheatre.org",
+        "type": "company",
+        "source": "Plan-B Theatre"
+      }
     ]
   },
   {
@@ -1205,6 +1671,18 @@
     "tags": [
       "acting",
       "grassroots-shakespeare"
+    ],
+    "links": [
+      {
+        "url": "https://utahtheatrebloggers.com/?s=macbeth+grassroots",
+        "type": "search_results",
+        "source": "UTBA"
+      },
+      {
+        "url": "https://grassroots-shakespeare.com",
+        "type": "company",
+        "source": "Grassroots Shakespeare"
+      }
     ]
   },
   {
@@ -1220,6 +1698,13 @@
       "acting",
       "plan-b-theatre",
       "reading"
+    ],
+    "links": [
+      {
+        "url": "https://www.theutahreview.com/tag/borderlands/",
+        "type": "tag_archive",
+        "source": "The Utah Review"
+      }
     ]
   },
   {
@@ -1234,6 +1719,18 @@
     "tags": [
       "acting",
       "uvu"
+    ],
+    "links": [
+      {
+        "url": "https://frontrowreviewers.com/?s=something+wicked+UVU",
+        "type": "search_results",
+        "source": "Front Row Reviewers"
+      },
+      {
+        "url": "https://www.uvu.edu/theatre/",
+        "type": "company",
+        "source": "UVU Theatre"
+      }
     ]
   },
   {
@@ -1248,6 +1745,18 @@
     "tags": [
       "acting",
       "sting-and-honey"
+    ],
+    "links": [
+      {
+        "url": "https://utahtheatrebloggers.com/?s=sting+honey",
+        "type": "search_results",
+        "source": "UTBA"
+      },
+      {
+        "url": "https://thestingandhoney.org",
+        "type": "company",
+        "source": "Sting & Honey"
+      }
     ]
   },
   {
@@ -1360,7 +1869,7 @@
     "categories": [
       "experiments"
     ],
-    "description": "Founding documents for a Chicago theater company — memoranda, storefront research, founder's syllabus, workshop guides.",
+    "description": "Founding documents for a Chicago theater company \u2014 memoranda, storefront research, founder's syllabus, workshop guides.",
     "url": "https://github.com/topher416/theatre-company",
     "status": "live"
   },
@@ -1368,9 +1877,11 @@
     "id": "vonnegut-smoking",
     "title": "Kurt Vonnegut (Smoking)",
     "year": 2026,
-    "categories": ["visual-art"],
+    "categories": [
+      "visual-art"
+    ],
     "medium": "Scratchboard",
-    "description": "A portrait of Kurt Vonnegut rendered in dense scratchboard cross-hatching. The wild curls of hair, thick mustache, and cigarette smoke weave into the background. Vonnegut's own characteristic autograph — the swirling self-portrait doodle-signature he was famous for — appears in the upper left.",
+    "description": "A portrait of Kurt Vonnegut rendered in dense scratchboard cross-hatching. The wild curls of hair, thick mustache, and cigarette smoke weave into the background. Vonnegut's own characteristic autograph \u2014 the swirling self-portrait doodle-signature he was famous for \u2014 appears in the upper left.",
     "image": "/images/visual/vonnegut-smoking.jpg",
     "status": "live"
   },
@@ -1378,9 +1889,11 @@
     "id": "vonnegut-glasses",
     "title": "Kurt Vonnegut (Glasses)",
     "year": 2026,
-    "categories": ["visual-art"],
+    "categories": [
+      "visual-art"
+    ],
     "medium": "Scratchboard",
-    "description": "A tighter, close-cropped portrait of Vonnegut wearing his round wire-frame spectacles. The cross-hatching is even denser here — hundreds of fine scratched lines building up the texture in his face, the glint in the lens frames. His mouth is slightly open, caught mid-sentence.",
+    "description": "A tighter, close-cropped portrait of Vonnegut wearing his round wire-frame spectacles. The cross-hatching is even denser here \u2014 hundreds of fine scratched lines building up the texture in his face, the glint in the lens frames. His mouth is slightly open, caught mid-sentence.",
     "image": "/images/visual/vonnegut-glasses.jpg",
     "status": "live"
   },
@@ -1388,9 +1901,11 @@
     "id": "ginsberg",
     "title": "Allen Ginsberg",
     "year": 2026,
-    "categories": ["visual-art"],
+    "categories": [
+      "visual-art"
+    ],
     "medium": "Scratchboard",
-    "description": "A high-contrast scratchboard portrait of the Beat poet — thick round wire-rimmed glasses, pointed goatee beard. The hair is intensely kinetic, jagged scratching that looks electric. The expression is visceral: mouth open, one eye wide, caught in the act of reading or performing.",
+    "description": "A high-contrast scratchboard portrait of the Beat poet \u2014 thick round wire-rimmed glasses, pointed goatee beard. The hair is intensely kinetic, jagged scratching that looks electric. The expression is visceral: mouth open, one eye wide, caught in the act of reading or performing.",
     "image": "/images/visual/ginsberg.jpg",
     "status": "live"
   },
@@ -1398,9 +1913,11 @@
     "id": "hepburn",
     "title": "Audrey Hepburn",
     "year": 2026,
-    "categories": ["visual-art"],
+    "categories": [
+      "visual-art"
+    ],
     "medium": "Scratchboard",
-    "description": "Scratchboard portrait of Hepburn — bouffant hair, pearl earrings, the iconic Breakfast at Tiffany's silhouette. The scratching builds up through dense parallel strokes that give the skin a luminous quality against the dark ground.",
+    "description": "Scratchboard portrait of Hepburn \u2014 bouffant hair, pearl earrings, the iconic Breakfast at Tiffany's silhouette. The scratching builds up through dense parallel strokes that give the skin a luminous quality against the dark ground.",
     "image": "/images/visual/hepburn.jpg",
     "status": "live"
   },
@@ -1408,9 +1925,11 @@
     "id": "hepburn-dark",
     "title": "Audrey Hepburn (Dark Study)",
     "year": 2026,
-    "categories": ["visual-art"],
+    "categories": [
+      "visual-art"
+    ],
     "medium": "Scratchboard",
-    "description": "A second treatment of Hepburn — this time rendered almost entirely in shadow with only the eyes and cheekbones highlighted. A study in negative space: what you don't see carries the weight.",
+    "description": "A second treatment of Hepburn \u2014 this time rendered almost entirely in shadow with only the eyes and cheekbones highlighted. A study in negative space: what you don't see carries the weight.",
     "image": "/images/visual/hepburn-dark.jpg",
     "status": "live"
   },
@@ -1418,9 +1937,11 @@
     "id": "picasso",
     "title": "Pablo Picasso",
     "year": 2026,
-    "categories": ["visual-art"],
+    "categories": [
+      "visual-art"
+    ],
     "medium": "Scratchboard",
-    "description": "A face broken into geometric planes — Cubist fragmentation in scratchboard. The portrait is of the master of fragmentation himself. Multiple perspectives at once, rendered through aggressive cross-hatching that fractures the face into shards of light.",
+    "description": "A face broken into geometric planes \u2014 Cubist fragmentation in scratchboard. The portrait is of the master of fragmentation himself. Multiple perspectives at once, rendered through aggressive cross-hatching that fractures the face into shards of light.",
     "image": "/images/visual/picasso.jpg",
     "status": "live"
   },
@@ -1428,9 +1949,11 @@
     "id": "emma-stone",
     "title": "Emma Stone",
     "year": 2026,
-    "categories": ["visual-art"],
+    "categories": [
+      "visual-art"
+    ],
     "medium": "Scratchboard",
-    "description": "A charcoal and scratchboard hybrid sketch — shaggy shoulder-length blonde hair, crooked mischievous smile. The expression has that particular Stone quality: wry, self-aware, caught between a laugh and a question.",
+    "description": "A charcoal and scratchboard hybrid sketch \u2014 shaggy shoulder-length blonde hair, crooked mischievous smile. The expression has that particular Stone quality: wry, self-aware, caught between a laugh and a question.",
     "image": "/images/visual/emma-stone.jpg",
     "status": "live"
   },
@@ -1438,9 +1961,11 @@
     "id": "hunter-s-thompson",
     "title": "Hunter S. Thompson",
     "year": 2026,
-    "categories": ["visual-art"],
+    "categories": [
+      "visual-art"
+    ],
     "medium": "Scratchboard",
-    "description": "The Gonzo point — double-finger gesture, fedora, thick rimless glasses, manic grin. Thompson caught mid-tirade, finger jabbing, teeth showing. The kind of portrait that feels like it might reach through the wall.",
+    "description": "The Gonzo point \u2014 double-finger gesture, fedora, thick rimless glasses, manic grin. Thompson caught mid-tirade, finger jabbing, teeth showing. The kind of portrait that feels like it might reach through the wall.",
     "image": "/images/visual/hunter-s-thompson.jpg",
     "status": "live"
   },
@@ -1448,9 +1973,11 @@
     "id": "sackerson",
     "title": "Sackerson",
     "year": 2026,
-    "categories": ["visual-art"],
+    "categories": [
+      "visual-art"
+    ],
     "medium": "Scratchboard",
-    "description": "\"SACKERSON\" — the famous bear-baiting bear from Bankside, referenced in The Merry Wives of Windsor and The Winter's Tale. A bear in a suit, grinning, chest emblazoned with his name. A deep-cut piece of theatrical lore.",
+    "description": "\"SACKERSON\" \u2014 the famous bear-baiting bear from Bankside, referenced in The Merry Wives of Windsor and The Winter's Tale. A bear in a suit, grinning, chest emblazoned with his name. A deep-cut piece of theatrical lore.",
     "image": "/images/visual/sackerson.jpg",
     "status": "live"
   }
