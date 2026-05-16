@@ -640,7 +640,13 @@
       "acting",
       "salt-lake-acting-company"
     ],
-    "links": []
+    "links": [
+      {
+        "url": "https://archive.sltrib.com/article.php?itype=CMSID&id=4942712",
+        "source": "SLTrib",
+        "type": "review"
+      }
+    ]
   },
   {
     "id": "planb-ice-front",
@@ -962,7 +968,18 @@
       "salt-lake-acting-company",
       "new-play-development"
     ],
-    "links": []
+    "links": [
+      {
+        "url": "https://utahtheatrebloggers.com/22267/harbur-gate-enters-the-lab-at-salt-lake-acting-company",
+        "source": "UTBA",
+        "type": "review"
+      },
+      {
+        "url": "https://archive.sltrib.com/article.php?itype=CMSID&id=58416272",
+        "source": "SLTrib",
+        "type": "preview"
+      }
+    ]
   },
   {
     "id": "slac-sounding-harbur-gate",
@@ -1195,7 +1212,13 @@
       "acting",
       "plan-b-theatre"
     ],
-    "links": []
+    "links": [
+      {
+        "url": "https://archive.sltrib.com/article.php?itype=CMSID&id=55743852",
+        "source": "SLTrib",
+        "type": "review"
+      }
+    ]
   },
   {
     "id": "planb-adam-steve-fringe",
@@ -1211,7 +1234,13 @@
       "plan-b-theatre",
       "new-york"
     ],
-    "links": []
+    "links": [
+      {
+        "url": "https://archive.sltrib.com/article.php?itype=CMSID&id=56317623",
+        "source": "SLTrib",
+        "type": "preview"
+      }
+    ]
   },
   {
     "id": "grassroots-taming-shrew",
@@ -1305,6 +1334,11 @@
         "url": "https://utahtheatrebloggers.com/10816/course-86b-in-the-catalog-is-more-than-just-history",
         "source": "UTBA",
         "type": "review"
+      },
+      {
+        "url": "https://archive.sltrib.com/article.php?itype=CMSID&id=53913076",
+        "source": "SLTrib",
+        "type": "review"
       }
     ]
   },
@@ -1384,7 +1418,18 @@
       "acting",
       "plan-b-theatre"
     ],
-    "links": []
+    "links": [
+      {
+        "url": "https://archive.sltrib.com/article.php?itype=CMSID&id=51543892",
+        "source": "SLTrib",
+        "type": "review"
+      },
+      {
+        "url": "https://archive.sltrib.com/article.php?itype=CMSID&id=51490644",
+        "source": "SLTrib",
+        "type": "preview"
+      }
+    ]
   },
   {
     "id": "grassroots-macbeth",
