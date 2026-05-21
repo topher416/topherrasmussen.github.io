@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>The Gaze — Debug Art Test | Topher Rasmussen</title>
+<meta name="description" content="Development debug page for The Gaze raycaster — sprite renders, texture previews, and art pipeline verification.">
+<link rel="canonical" href="https://topherrasmussen.com/gaze-debug.html">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="The Gaze — Debug Art Test | Topher Rasmussen">
+<meta property="og:description" content="Development debug page for The Gaze raycaster — sprite renders, texture previews, and art pipeline verification.">
+<meta property="og:url" content="https://topherrasmussen.com/gaze-debug.html">
+<meta property="og:type" content="website">
+<style>
+body { background: #1a1816; color: #f5f2ed; font-family: 'IBM Plex Mono', monospace; padding: 20px; }
+h1 { color: #b8442a; font-size: 14px; }
+h2 { color: #7a726a; font-size: 12px; margin-top: 20px; }
+canvas { border: 2px solid #333; display: block; margin-bottom: 10px; }
+.row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.label { color: #a89f96; font-size: 11px; }
+</style>
+</head>
+<body>
+<h1>THE GAZE — ART TEST</h1>
+<h2>Full game scene (what you should see):</h2>
+<canvas id="scene" width="672" height="392"></canvas>
+<div class="label" id="scene-info"></div>
+
+<h2>Individual sprites at 4x (scratchboard texture):</h2>
+<div class="row">
+  <div><canvas id="spr-player" width="112" height="96"></canvas><div class="label">player</div></div>
+  <div><canvas id="spr-mirror" width="112" height="96"></canvas><div class="label">mirror</div></div>
+  <div><canvas id="spr-objet" width="96" height="96"></canvas><div class="label">objet petit a</div></div>
+  <div><canvas id="spr-gaze" width="96" height="96"></canvas><div class="label">the gaze (eye)</div></div>
+  <div><canvas id="spr-reflection" width="112" height="96"></canvas><div class="label">reflection</div></div>
+</div>
+
+<h2>Wall tile + floor tile close-up:</h2>
+<div class="row">
+  <div><canvas id="spr-wall" width="112" height="112"></canvas><div class="label">wall tile (4x)</div></div>
+  <div><canvas id="spr-floor" width="112" height="112"></canvas><div class="label">floor tile (4x)</div></div>
+</div>
+
+<script>
+var TK = 12, SR = 5;
+var rng;
+function mkRng(s) { return function() { s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; }; }
+rng = mkRng(42);
+
+function scratch(cx, cy, cw, ch, d, pr, pg, pb, pa) {
+  var n = Math.floor(d * Math.min(cw, ch));
+  for (var i = 0; i < n; i++) {
+    var a = rng() * Math.PI * 2;
+    var l = rng() * Math.min(cw, ch) * 0.9;
+    var x0 = cx + rng() * cw, y0 = cy + rng() * ch;
+    ctx.strokeStyle = 'rgba(' + (pr||26) + ',' + (pg||24) + ',' + (pb||22) + ',' + (pa||0.4) + ')';
+    ctx.lineWidth = 0.3 + rng() * 1.5;
+    ctx.beginPath();
+    ctx.moveTo(x0, y0);
+    ctx.lineTo(x0 + Math.cos(a)*l, y0 + Math.sin(a)*l);
+    ctx.stroke();
+  }
+}
+
+var ctx;
+// 1) Scene
+var scene = document.getElementById('scene');
+var sctx = scene.getContext('2d');
+ctx = sctx;
+// Map
+var W = 24, H = 14;
+var map = [];
+for (var y = 0; y < H; y++) { map[y] = []; for (var x = 0; x < W; x++) map[y][x] = 1; }
+for (var x = 1; x < W-1; x++) {
+  for (var dy = -1; dy <= 1; dy++) {
+    var my = 7 + dy;
+    if (my > 0 && my < H-1) { if (dy === 0) map[my][x] = 0; else map[my][x] = rng() > 0.3 ? 0 : 1; }
+  }
+}
+for (var vx = 3; vx < W-2; vx += 7) {
+  for (var vy = 1; vy < H-1; vy++) {
+    map[vy][vx] = 0;
+    if (vx > 1) map[vy][vx-1] = rng() > 0.5 ? 0 : 1;
+    if (vx < W-2) map[vy][vx+1] = rng() > 0.5 ? 0 : 1;
+  }
+}
+for (var i = 0; i < 5; i++) {
+  var sx = 1 + Math.floor(rng() * (W-6));
+  var sy = 1 + Math.floor(rng() * (H-5));
+  var sw = 2 + Math.floor(rng() * 4), sh = 2 + Math.floor(rng() * 3);
+  for (var ry = sy; ry < sy+sh && ry < H-1; ry++)
+    for (var rx = sx; rx < sx+sw && rx < W-1; rx++) map[ry][rx] = 0;
+}
+for (var j = 0; j < 30; j++) map[1+Math.floor(rng()*(H-2))][1+Math.floor(rng()*(W-2))] = 0;
+
+// Walls and floors for stats
+var wc = 0, fc = 0;
+for (var y = 0; y < H; y++) for (var x = 0; x < W; x++) map[y][x] === 1 ? wc++ : fc++;
+document.getElementById('scene-info').textContent = 'Map: ' + W + 'x' + H + ' = ' + (W*H) + ' tiles. Walls: ' + wc + ' (' + Math.round(wc/(W*H)*100) + '%). Floor: ' + fc + ' (' + Math.round(fc/(W*H)*100) + '%).';
+
+// Clear
+sctx.fillStyle = '#f5f2ed';
+sctx.fillRect(0, 0, 672, 392);
+
+// Draw tiles
+for (var y = 0; y <= 13; y++) {
+  for (var x = 0; x < 23; x++) {
+    var px = x * TK * 3 - 12 * 3 / 2;
+    var py = y * TK * 3 - 7 * 3 / 2;
+    if (map[y][x] === 1) {
+      sctx.fillStyle = 'rgba(30,28,24,0.3)';
+      sctx.fillRect(px, py, TK*3, TK*2);
+      scratch(px, py, TK*3, TK*2, 0.7, 15, 12, 10, 0.6);
+      scratch(px, py, TK*3, TK*2, 0.3, 15, 12, 10, 0.3);
+    } else {
+      sctx.fillStyle = '#f5f2ed';
+      sctx.fillRect(px, py, TK*3, TK*2);
+      if (rng() < 0.12) scratch(px+4, py+4, TK*3-8, TK*2-8, 0.15, 61, 56, 50, 0.08);
+    }
+  }
+}
+
+// Player
+sctx.save(); sctx.translate(56 * 2 + 42, 49 * 2 + 42);
+ctx = sctx;
+scratch(-18, -36, 36, 72, 1.0, 15, 12, 10, 0.75);
+sctx.strokeStyle = '#1a1816'; sctx.lineWidth = 2.5;
+sctx.beginPath(); sctx.ellipse(0, -30, 12, 12, 0, 0, Math.PI*2); sctx.stroke();
+sctx.beginPath(); sctx.moveTo(0, -18); sctx.lineTo(9, 24); sctx.stroke();
+sctx.beginPath(); sctx.moveTo(-6, -6); sctx.lineTo(-21, 6); sctx.moveTo(6, -6); sctx.lineTo(21, 6); sctx.stroke();
+sctx.fillStyle = '#b8442a'; sctx.fillRect(4, -32, 5, 5);
+ctx.strokeStyle = 'rgba(184,68,42,0.5)'; sctx.lineWidth = 1.5;
+sctx.strokeRect(180, 70, 30, 42);
+sctx.restore();
+
+// 2) Individual sprites
+function drawPlayer(c, s) {
+  c.save(); c.translate(56, 48);
+  scratch(-24, -48, 48, 96, 1.0, 15, 12, 10, 0.75);
+  c.strokeStyle = '#1a1816'; c.lineWidth = 3;
+  c.beginPath(); c.ellipse(0, -40, 16, 16, 0, 0, Math.PI*2); c.stroke();
+  c.beginPath(); c.moveTo(0, -24); c.lineTo(12, 32); c.stroke();
+  c.beginPath(); c.moveTo(-8, -8); c.lineTo(-28, 8); c.moveTo(8, -8); c.lineTo(28, 8); c.stroke();
+  c.fillStyle = '#b8442a'; c.fillRect(8, -42, 6, 6);
+  c.restore();
+}
+function drawMirror(c, s) {
+  c.save(); c.translate(56, 48);
+  c.strokeStyle = '#1a1816'; c.lineWidth = 3;
+  c.strokeRect(-40, -56, 80, 112); c.strokeRect(-40, -56, 80, 112);
+  scratch(-32, -48, 64, 96, 0.3, 26, 24, 22, 0.2);
+  c.beginPath(); c.moveTo(-32, 0); c.lineTo(32, 0);
+  c.strokeStyle = 'rgba(184,68,42,0.5)'; c.lineWidth = 2; c.stroke();
+  c.restore();
+}
+function drawObjet(c, s) {
+  c.save(); c.translate(48, 48);
+  c.strokeStyle = '#b8442a'; c.lineWidth = 2.5;
+  c.beginPath(); c.ellipse(0, 0, 20, 12, 0, 0, Math.PI*2); c.stroke();
+  scratch(-20, -12, 40, 24, 0.2, 184, 68, 42, 0.3);
+  c.fillStyle = '#b8442a'; c.beginPath(); c.arc(0, 0, 5, 0, Math.PI*2); c.fill();
+  c.restore();
+}
+function drawGaze(c, s) {
+  c.save(); c.translate(48, 48);
+  c.strokeStyle = '#1a1816'; c.lineWidth = 3;
+  c.beginPath(); c.ellipse(0, 0, 48, 28, 0, 0, Math.PI*2); c.stroke();
+  c.fillStyle = '#1a1816'; c.beginPath(); c.arc(0, 0, 8, 0, Math.PI*2); c.fill();
+  scratch(-40, -20, 80, 40, 0.2, 26, 24, 22, 0.25);
+  c.restore();
+}
+function drawReflection(c, s) {
+  c.save(); c.translate(56, 48);
+  c.globalAlpha = 0.35;
+  scratch(-24, -48, 48, 96, 0.5, 26, 24, 22, 0.4);
+  c.strokeStyle = '#1a1816'; c.lineWidth = 2;
+  c.beginPath(); c.ellipse(0, -40, 12, 12, 0, 0, Math.PI*2); c.stroke();
+  c.beginPath(); c.moveTo(0, -28); c.lineTo(-8, 28); c.stroke();
+  c.globalAlpha = 1; c.restore();
+}
+
+var sp, sc;
+sp = document.getElementById('spr-player');
+sc = sp.getContext('2d');
+ctx = sc;
+drawPlayer(sc, 4);
+
+sp = document.getElementById('spr-mirror');
+sc = sp.getContext('2d');
+ctx = sc;
+drawMirror(sc, 4);
+
+sp = document.getElementById('spr-objet');
+sc = sp.getContext('2d');
+ctx = sc;
+drawObjet(sc, 4);
+
+sp = document.getElementById('spr-gaze');
+sc = sp.getContext('2d');
+ctx = sc;
+drawGaze(sc, 4);
+
+sp = document.getElementById('spr-reflection');
+sc = sp.getContext('2d');
+ctx = sc;
+drawReflection(sc, 4);
+
+// Wall + floor tiles
+sp = document.getElementById('spr-wall');
+sc = sp.getContext('2d');
+ctx = sc;
+sc.fillStyle = 'rgba(30,28,24,0.3)';
+sc.fillRect(0, 0, 112, 112);
+scratch(0, 0, 112, 112, 0.9, 15, 12, 10, 0.6);
+scratch(0, 0, 112, 112, 0.4, 15, 12, 10, 0.3);
+
+sp = document.getElementById('spr-floor');
+sc = sp.getContext('2d');
+ctx = sc;
+sc.fillStyle = '#f5f2ed';
+sc.fillRect(0, 0, 112, 112);
+for (var i = 0; i < 20; i++) scratch(4+Math.random()*100, 4+Math.random()*100, 8, 8, 0.15, 61, 56, 50, 0.08);
+</script>
+</body></html>
