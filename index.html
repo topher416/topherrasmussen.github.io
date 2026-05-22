@@ -84,128 +84,42 @@
             border-bottom: 1px solid var(--line-strong);
             animation: fadeSlide 0.7s ease 0.1s both;
         }
-        .featured-audio__inner {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 24px 28px;
-            align-items: start;
+        .featured-audio__play-wrap {
+            text-align: center;
+            margin-bottom: 24px;
         }
-        .featured-audio__art {
-            width: 100px;
-            height: 100px;
-            border-radius: 8px;
-            background: var(--line);
-            display: flex;
+        .featured-audio__play {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.2rem;
-            flex-shrink: 0;
+            transition: background 0.2s;
         }
-        .featured-audio__content {
-            min-width: 0;
-        }
-        .featured-audio__label {
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.6rem;
-            font-weight: 500;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 6px;
-        }
-        .featured-audio__title {
-            font-family: 'Newsreader', Georgia, serif;
-            font-size: clamp(1.4rem, 5vw, 1.9rem);
-            font-weight: 700;
-            color: var(--text-bright);
-            margin: 0 0 10px;
-            line-height: 1.2;
-        }
+        .featured-audio__play:hover { background: #9a3822; }
+        .featured-audio__play svg { width: 20px; height: 20px; display: block; }
         .featured-audio__text {
-            font-size: 0.88rem;
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: clamp(0.95rem, 2.5vw, 1.1rem);
             color: var(--text-muted);
-            line-height: 1.55;
-            margin: 0 0 20px;
+            line-height: 1.65;
+            font-style: italic;
+            margin: 0;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
         }
         .featured-audio__text a {
             color: var(--accent);
             text-decoration: underline;
             text-underline-offset: 2px;
         }
-        .featured-audio__player {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .featured-audio__play {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--accent);
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            transition: background 0.2s;
-        }
-        .featured-audio__play:hover { background: #9a3822; }
-        .featured-audio__play svg { width: 16px; height: 16px; display: block; }
-        .featured-audio__bar {
-            flex: 1;
-            min-width: 0;
-        }
-        .featured-audio__track {
-            width: 100%;
-            height: 4px;
-            -webkit-appearance: none;
-            appearance: none;
-            background: var(--line);
-            border-radius: 2px;
-            cursor: pointer;
-            outline: none;
-            margin: 0;
-        }
-        .featured-audio__track::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--accent);
-            cursor: pointer;
-            margin-top: -4px;
-        }
-        .featured-audio__track::-moz-range-thumb {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--accent);
-            cursor: pointer;
-            border: none;
-        }
-        .featured-audio__times {
-            display: flex;
-            justify-content: space-between;
-            font-family: 'IBM Plex Mono', monospace;
-            font-size: 0.6rem;
-            color: var(--text-dim);
-            margin-top: 4px;
-        }
         .featured-audio__hidden { display: none; }
-
-        @media (max-width: 600px) {
-            .featured-audio__inner {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
-            .featured-audio__art {
-                width: 60px;
-                height: 60px;
-                font-size: 1.6rem;
-            }
-        }
     </style>
     <script type="application/ld+json">
 {
@@ -235,27 +149,13 @@
 
         <!-- Featured Audio -->
         <section class="featured-audio">
-            <div class="featured-audio__inner">
-                <div class="featured-audio__art">🎵</div>
-                <div class="featured-audio__content">
-                    <div class="featured-audio__label">A cover of Future Wife</div>
-                    <h2 class="featured-audio__title">"Lullaby for the Miserable"</h2>
-                    <p class="featured-audio__text">Written by Future Wife for Young Jean Lee&rsquo;s play <a href="https://en.wikipedia.org/wiki/We%27re_Gonna_Die" target="_blank" rel="noopener noreferrer"><em>We&rsquo;re Gonna Die</em></a> (2011). The play is a series of stories about being alone in pain, shared on stage to remind the audience that no one is the only one.</p>
-                    <div class="featured-audio__player" id="audioPlayer">
-                        <button class="featured-audio__play" id="playBtn" onclick="toggleAudio()" aria-label="Play">
-                            <svg id="playIcon" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,5 19,12 7,19"/></svg>
-                            <svg id="pauseIcon" viewBox="0 0 24 24" fill="currentColor" style="display:none"><rect x="5" y="4" width="4" height="16" rx="1"/><rect x="15" y="4" width="4" height="16" rx="1"/></svg>
-                        </button>
-                        <div class="featured-audio__bar">
-                            <input type="range" class="featured-audio__track" id="progressBar" value="0" min="0" max="100" step="0.1">
-                            <div class="featured-audio__times">
-                                <span id="currentTime">0:00</span>
-                                <span id="duration">0:00</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="featured-audio__play-wrap">
+                <button class="featured-audio__play" id="playBtn" onclick="toggleAudio()" aria-label="Play">
+                    <svg id="playIcon" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,5 19,12 7,19"/></svg>
+                    <svg id="pauseIcon" viewBox="0 0 24 24" fill="currentColor" style="display:none"><rect x="5" y="4" width="4" height="16" rx="1"/><rect x="15" y="4" width="4" height="16" rx="1"/></svg>
+                </button>
             </div>
+            <p class="featured-audio__text">A cover of &ldquo;Lullaby for the Miserable&rdquo; &mdash; the song at the heart of <a href="https://en.wikipedia.org/wiki/We%27re_Gonna_Die" target="_blank" rel="noopener noreferrer"><em>Young Jean Lee&rsquo;s We&rsquo;re Gonna Die</em> (2011)</a>. In the play, Lee shares stories of isolation and heartbreak on stage with the band Future Wife, offering them as &ldquo;ordinary comforting things&rdquo; for anyone in that &ldquo;really lonely isolated place.&rdquo;</p>
             <audio class="featured-audio__hidden" id="audioEl" preload="metadata">
                 <source src="/audio/you-will-sleep-by-and-by.m4a" type="audio/mp4">
             </audio>
