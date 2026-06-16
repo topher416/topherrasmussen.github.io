@@ -62,8 +62,8 @@ body{font-family:'Newsreader',Georgia,serif;background:var(--rh-bg);color:#c8c0b
 <div class="stage-wrap"><div class="stage" id="stage"><canvas id="vizCanvas"></canvas><div class="stage-overlay"><div class="stage-overlay__title" id="vizTitle">Radiohead</div><div class="stage-overlay__sub" id="vizSub">Select an album</div></div></div></div>
 <div id="albumSections"></div>
 <div class="progress-section progress-section--hidden" id="progressSection"><div class="progress-inner"><div class="progress-skips"><button class="progress-skip" onclick="playPrev()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button></div><span class="progress-now" id="nowPlay">&#8212;</span><div class="progress-bar" id="progressWrap"><div class="progress-fill" id="progressFill"></div></div><span class="progress-time" id="progressTime">0:00 / 0:00</span><button class="progress-skip" onclick="playNext()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button></div></div>
-<audio id="audioEl" preload="metadata" style="display:none" crossorigin="anonymous"></audio>
-<div class="video-modal" id="videoModal"><div class="video-modal__inner"><button class="video-modal__close" onclick="closeVideo()">&times;</button><video id="videoPlayer" preload="metadata" crossorigin="anonymous" playsinline controls style="background:#000"></video><div class="video-modal__title" id="videoTitle"></div></div></div>
+<audio id="audioEl" preload="metadata" style="display:none"></audio>
+<div class="video-modal" id="videoModal"><div class="video-modal__inner"><button class="video-modal__close" onclick="closeVideo()">&times;</button><video id="videoPlayer" preload="metadata" playsinline controls style="background:#000"></video><div class="video-modal__title" id="videoTitle"></div></div></div>
 <script>
 var ALBUMS=[
   {n:"Pablo Honey",y:1993,c:"#D4A840",rgb:"212,168,64",bg:"#0a0905",mode:"ambient",t:["Anyone Can Play Guitar"]},
@@ -142,7 +142,7 @@ audioEl.addEventListener("play",function(){isPlaying=true;updatePS();});
 document.getElementById("progressWrap").addEventListener("click",function(e){if(audioEl.duration&&isFinite(audioEl.duration)){var r=this.getBoundingClientRect();audioEl.currentTime=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width))*audioEl.duration;}});
 
 var aCtx,analyserObj,fDataArr;
-function setupAudio(){if(!aCtx){aCtx=new(window.AudioContext||window.webkitAudioContext)();analyserObj=aCtx.createAnalyser();analyserObj.fftSize=256;analyserObj.smoothingTimeConstant=0.8;fDataArr=new Uint8Array(analyserObj.frequencyBinCount);aCtx.createMediaElementSource(audioEl).connect(analyserObj);analyserObj.connect(aCtx.destination);}if(aCtx.state==="suspended")aCtx.resume();}
+function setupAudio(){if(!aCtx){aCtx=new(window.AudioContext||window.webkitAudioContext)();try{analyserObj=aCtx.createAnalyser();analyserObj.fftSize=256;analyserObj.smoothingTimeConstant=0.8;fDataArr=new Uint8Array(analyserObj.frequencyBinCount);aCtx.createMediaElementSource(audioEl).connect(analyserObj);analyserObj.connect(aCtx.destination);}catch(e){analyserObj=null;}}if(aCtx.state==="suspended")aCtx.resume();}
 function getFreq(){return(analyserObj&&fDataArr)?(analyserObj.getByteFrequencyData(fDataArr),fDataArr):null;}
 
 (function(){
