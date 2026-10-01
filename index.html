@@ -209,9 +209,9 @@
                     <span class="more-pill__title">Research</span>
                     <span class="more-pill__desc">Lacan + AI — structured like a language</span>
                 </a>
-                <a href="/recordings.html" class="more-pill">
-                    <span class="more-pill__title">Recordings</span>
-                    <span class="more-pill__desc">Music performances and sessions</span>
+                <a href="/music.html" class="more-pill">
+                    <span class="more-pill__title">Music</span>
+                    <span class="more-pill__desc">Live sets, covers, bedroom loops</span>
                 </a>
                 <a href="/syllabi.html" class="more-pill">
                     <span class="more-pill__title">Syllabi</span>
@@ -236,12 +236,12 @@
             </div>
         </section>
 
-        <!-- Featured: Radiohead Covers Teaser -->
+        <!-- Featured: a thousand feet per second -->
         <section class="featured-video">
             <div class="featured-video__inner">
                 <div class="featured-video__header">
-                    <h2 class="featured-video__title">Radiohead &mdash; 37 Live Covers</h2>
-                    <span class="featured-video__tag">Old Town School of Folk Music</span>
+                    <h2 class="featured-video__title">a thousand feet per second</h2>
+                    <span class="featured-video__tag">Live at Montrose Saloon</span>
                 </div>
                 <div class="rh-teaser">
                     <div class="rh-teaser__bars">
@@ -261,11 +261,11 @@
                         <span style="height:42%; animation-delay:0.35s;"></span>
                         <span style="height:68%; animation-delay:0.05s;"></span>
                     </div>
-                    <p class="rh-teaser__text">9 albums, 37 recordings across Pablo Honey through A Moon Shaped Pool. The Old Town School of Folk Music Radiohead Ensemble, Chicago IL.</p>
+                    <p class="rh-teaser__text">My Radiohead cover band. Two live sets recorded at Montrose Saloon, Chicago — 19 tracks of deep cuts and singalongs. <strong>Next show: Friday, October 9 at Montrose Saloon</strong>, with Test Pattern and Three Men*. Upcoming shows announced at fmnogg.in.</p>
                 </div>
                 <div class="featured-video__caption">
                     <span class="featured-video__caption-text">Audio &amp; video available</span>
-                    <a href="/radiohead.html">Enter the collection &rarr;</a>
+                    <a href="https://fmnogg.in" target="_blank" rel="noopener noreferrer">Listen at fmnogg.in &rarr;</a>
                 </div>
             </div>
         </section>
@@ -273,14 +273,11 @@
         <footer class="homepage-footer">
             <div class="about">
                 <p class="about__text">
-                    I did theater and music, got a social work degree, and now I make websites and write long essays about psychoanalysis at unreasonable hours. I play Radiohead covers at Old Town School of Folk Music, which is somehow a real thing I do with my life.
+                    I did theater and music, got a social work degree, and now I make websites and write long essays about psychoanalysis at unreasonable hours. I play Radiohead covers in a thousand feet per second — acoustic guitar and vocals — which is somehow a real thing I do with my life.
                 </p>
                 <div class="about__links">
                     <a href="mailto:topher416@gmail.com">Email</a>
                     <a href="https://www.linkedin.com/in/topherrasmussen" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                </div>
-                <div class="counter">
-                    Visitor count: <span class="counter-display">00000000</span>
                 </div>
             </div>
         </footer>
@@ -356,16 +353,6 @@
         }
     });
 
-    window.displayCount = function (count) {
-        var el = document.querySelector('.counter-display');
-        if (el) el.textContent = count.toString().padStart(8, '0');
-    };
-    document.addEventListener('DOMContentLoaded', function () {
-        var s = document.createElement('script');
-        var t = new Date().getTime();
-        s.src = 'https://script.google.com/macros/s/AKfycbwOYJRKO_zOwkLpCR4U_ENMiD7bgPtuWmXVe6ZTuT913aTHJ0c5Op3OEdfzJQAGUHdv/exec?action=increment&callback=displayCount&t=' + t;
-        document.body.appendChild(s);
-    });
     </script>
 </body>
 </html>

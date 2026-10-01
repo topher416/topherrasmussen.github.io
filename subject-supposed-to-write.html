@@ -279,18 +279,6 @@
             margin-top: 12px;
         }
 
-        .counter-display {
-            font-family: 'Courier New', Courier, monospace;
-            font-weight: bold;
-            background-color: #000;
-            color: #0f0;
-            padding: 4px 8px;
-            display: inline-block;
-            border: 2px inset #999;
-            font-size: 0.75rem;
-            letter-spacing: 0.1em;
-        }
-
         @keyframes rainbow-border {
             0% { border-color: red; }
             14% { border-color: orange; }
@@ -300,12 +288,6 @@
             70% { border-color: indigo; }
             85% { border-color: violet; }
             100% { border-color: red; }
-        }
-
-        .counter-display {
-            animation: rainbow-border 3s linear infinite;
-            border-width: 3px !important;
-            border-style: ridge !important;
         }
 
         @media (max-width: 700px) {
@@ -382,35 +364,11 @@
     </div>
 
     <footer class="room-footer">
-        <div class="counter">
-            You are visitor number:<br>
-            <div class="counter-display">00000001</div>
-        </div>
         <p style="margin-top: 12px;"><small>I have no idea what I'm doing</small></p>
         <div class="last-updated" style="margin-top: 16px; font-size: 0.65rem;">
             Last updated: May 2025
         </div>
     </footer>
 
-    <script>
-        // Visitor counter using the same Google Apps Script endpoint
-        document.addEventListener('DOMContentLoaded', function () {
-            var s = document.createElement('script');
-            var t = new Date().getTime();
-            s.src = 'https://script.google.com/macros/s/AKfycbwOYJRKO_zOwkLpCR4U_ENMiD7bgPtuWmXVe6ZTuT913aTHJ0c5Op3OEdfzJQAGUHdv/exec?action=increment&callback=displayCount&t=' + t;
-            document.body.appendChild(s);
-        });
-
-        // Counter display callback
-        function displayCount(data) {
-            if (data && data.count !== undefined) {
-                var display = document.querySelector('.counter-display');
-                if (display) {
-                    var countStr = String(data.count).padStart(8, '0');
-                    display.textContent = countStr;
-                }
-            }
-        }
-    </script>
 </body>
 </html>

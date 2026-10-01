@@ -137,11 +137,6 @@
             color: var(--text-dim);
         }
 
-        .counter-display {
-            font-weight: 500;
-            color: var(--text-muted);
-        }
-
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
@@ -166,23 +161,6 @@
             <a href="/writing.html" class="void__pill">Writing</a>
             <a href="/" class="void__pill">Home</a>
         </nav>
-
-        <div class="void__footer">
-            Visitor count: <span class="counter-display">00000000</span>
-        </div>
     </main>
-
-    <script>
-    window.displayCount = function (count) {
-        var el = document.querySelector('.counter-display');
-        if (el) el.textContent = count.toString().padStart(8, '0');
-    };
-    document.addEventListener('DOMContentLoaded', function () {
-        var s = document.createElement('script');
-        var t = new Date().getTime();
-        s.src = 'https://script.google.com/macros/s/AKfycbwOYJRKO_zOwkLpCR4U_ENMiD7bgPtuWmXVe6ZTuT913aTHJ0c5/exec?action=increment&callback=displayCount&t=' + t;
-        document.body.appendChild(s);
-    });
-    </script>
 </body>
 </html>

@@ -76,6 +76,12 @@
             color: var(--text-muted);
             margin-bottom: 16px;
         }
+        .medium-list { display: flex; flex-direction: column; gap: 4px; }
+        .medium-item { padding: 14px 0; border-bottom: 1px solid var(--line); }
+        .medium-item__title { font-family: 'Newsreader', Georgia, serif; font-size: 1.02rem; font-weight: 500; color: var(--text-bright); text-decoration: none; }
+        .medium-item__title:hover { color: var(--accent); }
+        .medium-item__year { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; color: var(--text-dim); margin-left: 10px; }
+        .medium-item__desc { font-size: 0.88rem; color: var(--text-muted); margin: 6px 0 0 0; max-width: 62ch; }
         @media (max-width: 768px) {
             .writing-card__pdf { display: none; }
             .writing-card--has-pdf { padding-bottom: clamp(24px, 4vw, 36px); }
@@ -116,18 +122,56 @@
         </header>
         <div id="room-entries"></div>
 
-        <p style="margin-top: clamp(24px, 4vw, 40px); font-size: 0.92rem; color: var(--text-muted);">
-            <a href="/medium-essays.html" style="color: var(--accent); text-decoration: none;">
-                Complete essay archive on Medium &rarr;
-            </a>
-        </p>
-    </main>
-
-    <footer class="room-footer">
-        <div class="counter">
-            Visitor count: <span class="counter-display">00000000</span>
+        <h2 class="writing-section__heading">On Medium</h2>
+        <p class="writing-section__sub">Essays published on Medium, where Google can find them. The complete archive, collected here.</p>
+        <div class="medium-list">
+            <div class="medium-item">
+                <a href="https://medium.com/@topher416/the-pleasure-of-the-recursive-machine-on-loops-language-and-the-desire-for-meaning-1581394d1b6f" target="_blank" rel="noopener noreferrer" class="medium-item__title">The Pleasure of the Recursive Machine: On Loops, Language, and the Desire for Meaning</a>
+                <span class="medium-item__year">2025</span>
+                <p class="medium-item__desc">We return to language models not for answers but for the recursive pleasure of the exchange itself.</p>
+            </div>
+            <div class="medium-item">
+                <a href="https://medium.com/@topher416/the-willing-surrender-what-we-really-want-from-ai-162f584849ad" target="_blank" rel="noopener noreferrer" class="medium-item__title">The Willing Surrender: What We Really Want from AI</a>
+                <span class="medium-item__year">2025</span>
+                <p class="medium-item__desc">On what we actually want when we hand our thinking over to a machine — and why the surrender feels so good.</p>
+            </div>
+            <div class="medium-item">
+                <a href="https://medium.com/@topher416/the-subject-supposed-to-write-a-lacanian-analysis-of-ai-writing-assistance-8cf24e552eb8" target="_blank" rel="noopener noreferrer" class="medium-item__title">The Subject Supposed to Write: A Lacanian Analysis of AI Writing Assistance</a>
+                <span class="medium-item__year">2025</span>
+                <p class="medium-item__desc">Riffing on Lacan’s “subject supposed to know” to ask what happens when the subject supposed to write is a machine. Also hosted locally — see above.</p>
+            </div>
+            <div class="medium-item">
+                <a href="https://medium.com/@topher416/the-illusion-of-ai-therapy-a-critical-examination-of-its-state-and-limitations-143fd08e6748" target="_blank" rel="noopener noreferrer" class="medium-item__title">The Illusion of AI Therapy: A Critical Examination of Its State and Limitations</a>
+                <span class="medium-item__year">2025</span>
+                <p class="medium-item__desc">A critical examination of AI therapy — what it promises, what it actually delivers, and why the illusion of care is so convincing.</p>
+            </div>
+            <div class="medium-item">
+                <a href="https://medium.com/@topher416/do-our-tools-change-our-minds-1f3c631e8497" target="_blank" rel="noopener noreferrer" class="medium-item__title">Do Our Tools Change Our Minds?</a>
+                <span class="medium-item__year">2025</span>
+                <p class="medium-item__desc">On whether the tools we use reshape how we think — and whether that reshaping is something we chose.</p>
+            </div>
+            <div class="medium-item">
+                <a href="https://medium.com/@topher416/between-making-and-reading-a-personal-exploration-of-artificial-intelligence-263d1b984f99" target="_blank" rel="noopener noreferrer" class="medium-item__title">Between Making and Reading: A Personal Exploration of Artificial Intelligence</a>
+                <span class="medium-item__year">2025</span>
+                <p class="medium-item__desc">A personal exploration of what it means to make things and read things in an era where AI sits between the two.</p>
+            </div>
+            <div class="medium-item">
+                <a href="https://medium.com/@topher416/fragments-from-the-mirror-an-attempt-at-honest-reflection-3c6a0717a219" target="_blank" rel="noopener noreferrer" class="medium-item__title">Fragments from the Mirror: An Attempt at Honest Reflection</a>
+                <span class="medium-item__year">2025</span>
+                <p class="medium-item__desc">An attempt at honest self-reflection — the kind that resists the temptation to turn introspection into performance.</p>
+            </div>
+            <div class="medium-item">
+                <a href="https://medium.com/@topher416/on-ai-psychoanalysis-and-the-mediated-self-e1ef152f781e" target="_blank" rel="noopener noreferrer" class="medium-item__title">On AI, Psychoanalysis, and the Mediated Self</a>
+                <span class="medium-item__year">2025</span>
+                <p class="medium-item__desc">How AI exposes the fragility of our belief in unique subjectivity.</p>
+            </div>
+            <div class="medium-item">
+                <a href="https://medium.com/@topher416/on-using-ai-to-fake-my-way-through-consulting-f5a0dccb978" target="_blank" rel="noopener noreferrer" class="medium-item__title">On Using AI to Fake My Way Through Consulting</a>
+                <span class="medium-item__year">2025</span>
+                
+            </div>
         </div>
-    </footer>
+    </main>
 
     <script src="/room.js"></script>
     <script>
@@ -214,14 +258,6 @@
         }
 
         container.innerHTML = html;
-    });
-    </script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var s = document.createElement('script');
-        var t = new Date().getTime();
-        s.src = 'https://script.google.com/macros/s/AKfycbwOYJRKO_zOwkLpCR4U_ENMiD7bgPtuWmXVe6ZTuT913aTHJ0c5Op3OEdfzJQAGUHdv/exec?action=increment&callback=displayCount&t=' + t;
-        document.body.appendChild(s);
     });
     </script>
 </body>

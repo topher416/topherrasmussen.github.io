@@ -208,12 +208,7 @@
                 <p class="syllabi-card__source">Source: <a href="https://github.com/topher416/psychodynamic-sw-practice" target="_blank" rel="noopener noreferrer">github.com/topher416/psychodynamic-sw-practice →</a></p>
             </div>
 
-            <div class="syllabi-card">
-                <h3 class="syllabi-card__title"><a href="/anteroom.html">The Analytic Anteroom</a></h3>
-                <p class="syllabi-card__meta">Concept proposal · 2026</p>
-                <p class="syllabi-card__excerpt">A voice-based clinical training tool using full-duplex speech models to prepare psychotherapy trainees before their first patient hours. Not a product — a research direction exploring whether emerging voice technology can reduce the shock of first contact in clinical education. The "anteroom" as liminal space between knowledge and practice.</p>
-                <p class="syllabi-card__source">Catalog: <a href="/anteroom.html#analytic-anteroom">analytic-anteroom →</a></p>
-            </div>
+            
         </section>
 
         <!-- Acting & Pedagogy -->
@@ -247,23 +242,6 @@
 
     </main>
 
-    <footer class="room-footer">
-        <div class="counter">
-            Visitor count: <span class="counter-display">00000000</span>
-        </div>
-    </footer>
 
-    <script>
-    window.displayCount = function (count) {
-        var el = document.querySelector('.counter-display');
-        if (el) el.textContent = count.toString().padStart(8, '0');
-    };
-    document.addEventListener('DOMContentLoaded', function () {
-        var s = document.createElement('script');
-        var t = new Date().getTime();
-        s.src = 'https://script.google.com/macros/s/AKfycbwOYJRKO_zOwkLpCR4U_ENMiD7bgPtuWmXVe6ZTuT913aTHJ0c5Op3OEdfzJQAGUHdv/exec?action=increment&callback=displayCount&t=' + t;
-        document.body.appendChild(s);
-    });
-    </script>
 </body>
 </html>

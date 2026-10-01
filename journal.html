@@ -34,14 +34,10 @@
             <p class="room__subtitle">Fragments, dated. Not essays. Not posts. Just the things I sat down and couldn't leave inside a terminal.</p>
         </header>
 
+        <p class="journal-paused" style="max-width: 60ch; font-size: 0.92rem; color: var(--text-dim); border: 1px solid var(--line); padding: 12px 18px; margin-bottom: 32px;">Paused as of May 2026 &mdash; six entries, complete. If it starts up again, it starts here.</p>
+
         <div id="journal-entries"></div>
     </main>
-
-    <footer class="room-footer">
-        <div class="counter">
-            Visitor count: <span class="counter-display">00000000</span>
-        </div>
-    </footer>
 
     <script>
     (function () {
@@ -125,17 +121,5 @@
     })();
     </script>
 
-    <script>
-    window.displayCount = function (count) {
-        var el = document.querySelector('.counter-display');
-        if (el) el.textContent = count.toString().padStart(8, '0');
-    };
-    document.addEventListener('DOMContentLoaded', function () {
-        var s = document.createElement('script');
-        var t = new Date().getTime();
-        s.src = 'https://script.google.com/macros/s/AKfycbwOYJRKO_zOwkLpCR4U_ENMiD7bgPtuWmXVe6ZTuT913aTHJ0c5Op3OEdfzJQAGUHdv/exec?action=increment&callback=displayCount&t=' + t;
-        document.body.appendChild(s);
-    });
-    </script>
 </body>
 </html>

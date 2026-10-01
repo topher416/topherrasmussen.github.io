@@ -37,12 +37,6 @@
         <div id="room-entries"></div>
     </main>
 
-    <footer class="room-footer">
-        <div class="counter">
-            Visitor count: <span class="counter-display">00000000</span>
-        </div>
-    </footer>
-
     <script src="/room.js"></script>
     <script>
     initRoom('theater', function (entries) {
@@ -121,13 +115,6 @@
         container.innerHTML = html;
     });
     </script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var s = document.createElement('script');
-        var t = new Date().getTime();
-        s.src = 'https://script.google.com/macros/s/AKfycbwOYJRKO_zOwkLpCR4U_ENMiD7bgPtuWmXVe6ZTuT913aTHJ0c5Op3OEdfzJQAGUHdv/exec?action=increment&callback=displayCount&t=' + t;
-        document.body.appendChild(s);
-    });
-    </script>
+
 </body>
 </html>

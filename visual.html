@@ -213,12 +213,6 @@
         <div class="gallery-grid" id="gallery-grid"></div>
     </main>
 
-    <footer class="room-footer">
-        <div class="counter">
-            Visitor count: <span class="counter-display">00000000</span>
-        </div>
-    </footer>
-
     <!-- Lightbox -->
     <div class="lb--overlay" id="lb-overlay">
         <button class="lb__close" id="lb-close">&times;</button>
@@ -396,17 +390,6 @@
     })();
     </script>
 
-    <script>
-    window.displayCount = function (count) {
-        var el = document.querySelector('.counter-display');
-        if (el) el.textContent = count.toString().padStart(8, '0');
-    };
-    document.addEventListener('DOMContentLoaded', function () {
-        var s = document.createElement('script');
-        var t = new Date().getTime();
-        s.src = 'https://script.google.com/macros/s/AKfycbwOYJRKO_zOwkLpCR4U_ENMiD7bgPtuWmXVe6ZTuT913aTHJ0c5Op3OEdfzJQAGUHdv/exec?action=increment&callback=displayCount&t=' + t;
-        document.body.appendChild(s);
-    });
-    </script>
+
 </body>
 </html>

@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Music — Topher Rasmussen</title>
-    <meta name="description" content="Music projects — FM Noggin, Radiohead covers, lo-fi bedroom recordings, and ambient loops.">
+    <meta name="description" content="Music — a thousand feet per second (Radiohead covers, live at Montrose Saloon), the Old Town School ensemble archive, lo-fi bedroom recordings, and practice tools.">
 <link rel="canonical" href="https://topherrasmussen.com/music.html">
     <meta property="og:title" content="Music — Topher Rasmussen">
-    <meta property="og:description" content="Music projects — FM Noggin, Radiohead covers, lo-fi bedroom recordings, and ambient loops.">
+    <meta property="og:description" content="Music — a thousand feet per second (Radiohead covers, live at Montrose Saloon), the Old Town School ensemble archive, lo-fi bedroom recordings, and practice tools.">
     <meta property="og:url" content="https://topherrasmussen.com/music.html">
     <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,6 +15,95 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,700&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/site.css">
     <link rel="alternate" type="application/rss+xml" title="Topher Rasmussen — Writing &amp; Journal" href="/feed.xml">
+    <style>
+        .recordings-intro {
+            max-width: 60ch;
+            font-size: 1.05rem;
+            line-height: 1.75;
+            color: var(--text-muted);
+            margin-bottom: clamp(32px, 5vw, 48px);
+        }
+        .recordings-section__heading {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin: clamp(32px, 5vw, 48px) 0 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--line);
+        }
+        .recordings-section__sub {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            margin-top: -8px;
+        }
+        .recording-card {
+            padding: clamp(24px, 4vw, 36px);
+            border: 1px solid var(--line);
+            background: var(--bg-card);
+            margin-bottom: 20px;
+        }
+        .recording-card__title {
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: clamp(1.3rem, 1.8vw, 1.6rem);
+            font-weight: 500;
+            color: var(--text-bright);
+            margin-bottom: 10px;
+        }
+        .recording-card__description {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            max-width: 60ch;
+            margin-bottom: 16px;
+        }
+        .recording-card__link {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.74rem;
+            color: var(--text-bright);
+            text-decoration: none;
+            border: 1px solid var(--text-dim);
+            border-radius: 999px;
+            padding: 8px 16px;
+            display: inline-flex;
+            transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+        }
+        .recording-card__link:hover {
+            background: var(--text-bright);
+            color: var(--bg);
+            border-color: var(--text-bright);
+        }
+        .video-grid__title {
+            font-family: 'Newsreader', Georgia, serif;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-bright);
+            margin: 0 0 8px 0;
+        }
+        .bandcamp-embed {
+            border: 0;
+            width: 100%;
+            height: 120px;
+            margin-top: 16px;
+        }
+        .set-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 16px 0;
+        }
+        .set-list li {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            padding: 6px 0;
+            border-bottom: 1px solid var(--line);
+        }
+        .set-list li strong {
+            color: var(--text-bright);
+            font-weight: 500;
+        }
+    </style>
 </head>
 <body>
     <nav class="room-nav">
@@ -31,71 +120,80 @@
     <main class="room">
         <header class="room__header">
             <h1 class="room__title">Music</h1>
-            <p class="room__subtitle">Radiohead covers at Old Town School of Folk Music, lo-fi bedroom recordings, and tools for learning songs by ear.</p>
+            <p class="room__subtitle">Radiohead covers with a thousand feet per second, the Old Town School ensemble archive, lo-fi bedroom recordings, and tools for learning songs by ear.</p>
         </header>
-        <div id="room-entries"></div>
-    </main>
 
-    <footer class="room-footer">
-        <div class="counter">
-            Visitor count: <span class="counter-display">00000000</span>
+        <p class="recordings-intro">This isn't a polished discography. It's a record of sound that actually exists somewhere: a working cover band with two live sets under its belt, an earlier ensemble era archived in full, nine lo-fi bedroom recordings from 2015-2016 that never quite became songs, and a practice tool I built for myself that turned into something other people use.</p>
+
+        <!-- a thousand feet per second -->
+        <h2 class="recordings-section__heading">Now</h2>
+
+        <div class="recording-card">
+            <h3 class="recording-card__title">a thousand feet per second</h3>
+            <p class="recording-card__description">
+                My Radiohead cover band &mdash; I play acoustic guitar and sing. Eight people, deep cuts and singalongs, recorded live at Montrose Saloon in Chicago. The band has its own site with the full discography browser, both live sets, and upcoming shows.
+            </p>
+            <ul class="set-list">
+                <li><strong>Sep 25, 2026</strong> &mdash; Live at Montrose Saloon, 10 tracks</li>
+                <li><strong>Jul 17, 2026</strong> &mdash; Live at Montrose Saloon, 9 tracks</li>
+            </ul>
+            <a href="https://fmnogg.in" target="_blank" rel="noopener noreferrer" class="recording-card__link">Listen at fmnogg.in &rarr;</a>
         </div>
-    </footer>
 
-    <script src="/room.js"></script>
-    <script>
-    initRoom('music', function (entries) {
-        var container = document.getElementById('room-entries');
-        var html = '';
+        <!-- Old Town School ensemble archive -->
+        <h2 class="recordings-section__heading" id="radiohead-covers">Earlier: the ensemble years</h2>
+        <p class="recordings-section__sub">The Old Town School of Folk Music Radiohead Ensemble, Szold Hall, Chicago. Full-ensemble performances &mdash; 40+ minute sets, multiple songs per session. An earlier chapter, archived.</p>
 
-        entries.forEach(function (entry) {
-            html += '<div class="music-feature">';
-            html += '<h3 class="music-feature__title">' + entry.title + '</h3>';
+        <div class="recording-card">
+            <h3 class="recording-card__title">Radiohead Covers &mdash; 37 across nine albums</h3>
+            <p class="recording-card__description">Every album from Pablo Honey through A Moon Shaped Pool, recorded with the ensemble. The full interactive collection lives on its own page.</p>
+            <div class="video-grid">
+                <div>
+                    <p class="video-grid__title">Radiohead Ensemble Session 3</p>
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/hmkRxeVZ_EI?rel=0&amp;modestbranding=1&amp;playsinline=1" title="Radiohead Ensemble Session 3" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                </div>
+                <div>
+                    <p class="video-grid__title">Radiohead Ensemble Session 2</p>
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/E-yYJg4qOQs?rel=0&amp;modestbranding=1&amp;playsinline=1" title="Radiohead Ensemble Session 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                </div>
+                <div>
+                    <p class="video-grid__title">Radiohead Ensemble Session 1</p>
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/PxPT1nA3-Ns?rel=0&amp;modestbranding=1&amp;playsinline=1" title="Radiohead Ensemble Session 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+            <p style="margin-top: 16px;"><a href="/radiohead.html" class="recording-card__link">Enter the 37-cover collection &rarr;</a></p>
+        </div>
 
-            if (entry.description) {
-                html += '<p class="music-feature__description">' + entry.description + '</p>';
-            }
+        <!-- Unmastered Recordings -->
+        <h2 class="recordings-section__heading">Unmastered Recordings</h2>
+        <p class="recordings-section__sub">Nine lo-fi bedroom recordings from late 2015 through early 2016 in Salt Lake City.</p>
 
-            // Embed Bandcamp player for the album
-            if (entry.id === 'unmastered-recordings') {
-                html += '<iframe style="border: 0; width: 100%; height: 120px; margin-top: 16px;" src="https://bandcamp.com/EmbeddedPlayer/album=1996498799/size=large/bgcol=0f0d0b/linkcol=c45a3c/tracklist=false/artwork=small/transparent=true/" seamless loading="lazy"></iframe>';
-            }
+        <div class="recording-card">
+            <h3 class="recording-card__title">Unmastered Recordings of Unfinished Song Fragments / Loops That Loop Too Long</h3>
+            <p class="recording-card__description">
+                Nine lo-fi bedroom recordings made with a guitar, a loop pedal, a Fender amp, and a phone. Ambient loops, slowgaze fragments, and song sketches that never quite became songs &mdash; recorded late 2015 through early 2016 in Salt Lake City. Track titles do most of the talking.
+            </p>
+            <iframe class="bandcamp-embed" src="https://bandcamp.com/EmbeddedPlayer/album=1996498799/size=large/bgcol=0f0d0b/linkcol=c45a3c/tracklist=false/artwork=small/transparent=true/" seamless loading="lazy"></iframe>
+            <p style="margin-top: 16px;"><a href="https://topherrasmussen.bandcamp.com/album/unmastered-recordings-of-unfininshed-song-fragments-loops-that-loop-too-long" target="_blank" rel="noopener noreferrer" class="recording-card__link">Listen on Bandcamp &rarr;</a></p>
+        </div>
 
-            // Embed YouTube videos for entries with a videos array
-            if (entry.videos && entry.videos.length > 0) {
-                html += '<div class="video-grid">';
-                entry.videos.forEach(function (v, i) {
-                    var title = v.title || (entry.title + ' — Video ' + (i + 1));
-                    if (v.title) {
-                        html += '<p class="video-embed__title">' + v.title + '</p>';
-                    }
-                    html += '<div class="video-wrapper">';
-                    html += '<iframe src="https://www.youtube.com/embed/' + v.id + '?rel=0" title="' + title + '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>';
-                    html += '</div>';
-                    html += '</div>';
-                });
-                html += '</div>';
-            }
+        <!-- Practice -->
+        <h2 class="recordings-section__heading">Practice</h2>
+        <p class="recordings-section__sub">The tool I built for learning these songs.</p>
 
-            if (entry.url) {
-                var external = entry.url.indexOf('http') === 0;
-                var target = external ? ' target="_blank" rel="noopener noreferrer"' : '';
-                html += '<a href="' + entry.url + '"' + target + ' class="music-feature__link">Listen &rarr;</a>';
-            }
-
-            html += '</div>';
-        });
-
-        container.innerHTML = html;
-    });
-    </script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var s = document.createElement('script');
-        var t = new Date().getTime();
-        s.src = 'https://script.google.com/macros/s/AKfycbwOYJRKO_zOwkLpCR4U_ENMiD7bgPtuWmXVe6ZTuT913aTHJ0c5Op3OEdfzJQAGUHdv/exec?action=increment&callback=displayCount&t=' + t;
-        document.body.appendChild(s);
-    });
-    </script>
+        <div class="recording-card">
+            <h3 class="recording-card__title">FM Noggin</h3>
+            <p class="recording-card__description">
+                A practice guide for learning Radiohead covers with isolated stems, sheet music, and tempo-adjusted tracks. Powered by a custom Python pipeline that uses Demucs for AI source separation &mdash; feed it a YouTube link and it spits out individual instruments at whatever speed you need.
+            </p>
+            <a href="https://fmnogg.in" target="_blank" rel="noopener noreferrer" class="recording-card__link">Visit fmnogg.in &rarr;</a>
+        </div>
+    </main>
 </body>
 </html>

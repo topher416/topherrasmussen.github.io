@@ -268,18 +268,7 @@
                 <span class="chicago__item-tag">Research &middot; Psychoanalysis &middot; AI</span>
             </div>
 
-            <div class="chicago__item">
-                <a href="/anteroom.html" class="chicago__item-link">
-                    <div class="chicago__item-title">
-                        The Analytic Anteroom
-                        <span class="chicago__item-arrow">&rarr;</span>
-                    </div>
-                </a>
-                <p class="chicago__item-desc">
-                    A concept proposal for a voice-based clinical training tool that uses full-duplex speech models to prepare psychotherapy trainees before their first patient hours. Not a product — a research direction exploring whether emerging voice technology can reduce the shock of first contact in clinical education. Born from my social work training and the Chicago clinical scene.
-                </p>
-                <span class="chicago__item-tag">Voice AI &middot; Clinical training &middot; Concept</span>
-            </div>
+            
         </section>
 
         <hr class="chicago__divider">
@@ -287,19 +276,33 @@
         <!-- SECTION 3: The music I'm making -->
         <section class="chicago__section">
             <h2 class="chicago__section-title">The music I'm making</h2>
-            <p class="chicago__section-subtitle">Playing Radiohead covers at Old Town School of Folk Music, which is somehow a real thing I do with my life.</p>
+            <p class="chicago__section-subtitle">Playing Radiohead covers in a thousand feet per second — acoustic guitar and vocals — which is somehow a real thing I do with my life.</p>
 
             <div class="chicago__item">
-                <a href="/music.html#radiohead-covers" class="chicago__item-link">
+                <a href="https://fmnogg.in" target="_blank" rel="noopener noreferrer" class="chicago__item-link">
                     <div class="chicago__item-title">
-                        Radiohead Covers — Old Town School of Folk Music
+                        a thousand feet per second
+                        <span class="chicago__external">External</span>
                         <span class="chicago__item-arrow">&rarr;</span>
                     </div>
                 </a>
                 <p class="chicago__item-desc">
-                    Full-session Radiohead ensemble performances at Old Town School of Folk Music, Szold Hall. 40+ minute live sets — multiple songs per session. Three recorded sessions, each a different lineup of people who all decided this was a good way to spend a weeknight. The kind of community music-making that only really works in a city that still believes in showing up in person.
+                    My Radiohead cover band. Two live sets recorded at Montrose Saloon — 19 tracks of deep cuts and singalongs, with the full discography browser and upcoming shows on the band site.
                 </p>
-                <span class="chicago__item-tag">Live sessions &middot; Radiohead &middot; Ensemble</span>
+                <span class="chicago__item-tag">Live sets · Radiohead · Cover band</span>
+            </div>
+
+            <div class="chicago__item">
+                <a href="/music.html#radiohead-covers" class="chicago__item-link">
+                    <div class="chicago__item-title">
+                        Radiohead Ensemble Sessions (archive)
+                        <span class="chicago__item-arrow">&rarr;</span>
+                    </div>
+                </a>
+                <p class="chicago__item-desc">
+                    The earlier chapter — full-session Radiohead ensemble performances at Old Town School of Folk Music, Szold Hall. 40+ minute live sets, 37 covers across nine albums. The kind of community music-making that only really works in a city that still believes in showing up in person.
+                </p>
+                <span class="chicago__item-tag">Archive · Radiohead · Ensemble</span>
             </div>
 
             <div class="chicago__item">
@@ -311,7 +314,7 @@
                     </div>
                 </a>
                 <p class="chicago__item-desc">
-                    The companion practice packs for the Radiohead covers — isolated stems, tempo-adjusted tracks, and sheet music, powered by the Demucs pipeline. Built because showing up to Old Town School with sheet music but no idea how to play your part is its own genre of Chicago experience.
+                    The companion practice packs for the Radiohead covers — isolated stems, tempo-adjusted tracks, and sheet music, powered by the Demucs pipeline. Built because showing up to rehearsal with sheet music but no idea how to play your part is its own genre of Chicago experience.
                 </p>
                 <span class="chicago__item-tag">Music practice &middot; Stem separation</span>
             </div>
@@ -351,23 +354,5 @@
         </div>
     </main>
 
-    <footer class="room-footer">
-        <div class="counter">
-            Visitor count: <span class="counter-display">00000000</span>
-        </div>
-    </footer>
-
-    <script>
-    window.displayCount = function (count) {
-        var el = document.querySelector('.counter-display');
-        if (el) el.textContent = count.toString().padStart(8, '0');
-    };
-    document.addEventListener('DOMContentLoaded', function () {
-        var s = document.createElement('script');
-        var t = new Date().getTime();
-        s.src = 'https://script.google.com/macros/s/AKfycbwOYJRKO_zOwkLpCR4U_ENMiD7bgPtuWmXVe6ZTuT913aTHJ0c5Op3OEdfzJQAGUHdv/exec?action=increment&callback=displayCount&t=' + t;
-        document.body.appendChild(s);
-    });
-    </script>
 </body>
 </html>

@@ -31,12 +31,7 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <url>
-    <loc>https://topherrasmussen.com/ai101.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
+<url>
     <loc>https://topherrasmussen.com/analytic-introspections-thesis.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
@@ -56,32 +51,17 @@
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
-  <url>
-    <loc>https://topherrasmussen.com/experiments.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
+<url>
     <loc>https://topherrasmussen.com/horrortarot/</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
-  <url>
-    <loc>https://topherrasmussen.com/radiohead-invite.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
-  </url>
-  <url>
+<url>
     <loc>https://topherrasmussen.com/visual.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
-  <url>
-    <loc>https://topherrasmussen.com/anteroom.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
+<url>
     <loc>https://topherrasmussen.com/feed.xml</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -116,12 +96,7 @@
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
-  <url>
-    <loc>https://topherrasmussen.com/medium-essays.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
+<url>
     <loc>https://topherrasmussen.com/awards.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
@@ -131,12 +106,7 @@
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
-  <url>
-    <loc>https://topherrasmussen.com/recordings.html</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
+<url>
     <loc>https://topherrasmussen.com/archive.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>

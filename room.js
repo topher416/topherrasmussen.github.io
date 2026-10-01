@@ -39,11 +39,6 @@
       });
   };
 
-  window.displayCount = function (count) {
-    var el = document.querySelector('.counter-display');
-    if (el) el.textContent = count.toString().padStart(8, '0');
-  };
-
   // Group entries by year, return ordered array of { year, entries }
   window.groupByYear = function (entries) {
     var map = new Map();
